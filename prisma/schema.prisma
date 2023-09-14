@@ -1,0 +1,65 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("POSTGRES_PRISMA_URL") 
+  directUrl = env("POSTGRES_URL_NON_POOLING") 
+}
+
+model User {
+  id        		Int      @id @default(autoincrement())
+  name          String
+  email         String     	@unique
+	password  		String
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt 
+  businesses    Business[]    // Define the one-to-many relationship to the Business model
+}
+
+model Business {
+  id        Int      @id @default(autoincrement())
+  businessName  String
+  email         String
+  phone         String?
+  address       String?
+  createdAt     DateTime     @default(now()) 
+  updatedAt     DateTime     @updatedAt
+  user          User        @relation(fields: [userId], references: [id]) // Define the one-to-one relationship to the User model
+  userId        Int      
+  feedbacks     Feedback[]   // Define the one-to-many relationship to Feedback model
+}
+
+model Feedback {
+  id            Int        @id @default(autoincrement())
+  emojiService  String
+  commentService String?
+  emojiOrder    String
+  commentOrder  String?
+	business      Business   @relation(fields: [businessId], references: [id]) // Define the one-to-one relationship to Business
+  businessId    Int
+  serviceTags   ServiceTag[]     // Define the one-to-many relationship to Business
+  orderTags     OrderTag[]  	// Define the one-to-many relationship to Business
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+}
+
+model ServiceTag {
+  id        Int        @id @default(autoincrement())
+  value     String   
+  feedbacks Feedback?  @relation(fields: [feedbackId], references: [id])
+	feedbackId	Int?
+}
+
+model OrderTag {
+  id        Int        @id @default(autoincrement())
+  value     String     
+  feedbacks Feedback?  @relation(fields: [feedbackId], references: [id])
+	feedbackId	Int?
+}
+
+
