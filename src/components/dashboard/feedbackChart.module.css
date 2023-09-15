@@ -1,0 +1,22 @@
+.chart-container {
+  width: 100%;
+  max-width: 100%;
+  text-align: center;
+  border: 1px groove #f3f3f3;
+}
+
+.recharts-x-axis-label {
+  text-anchor: middle;
+  transform: translateX(0);
+}
+
+.recharts-y-axis-label {
+  text-anchor: middle;
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .chart-container {
+    height: 250px;
+  }
+}

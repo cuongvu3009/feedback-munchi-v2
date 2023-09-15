@@ -1,0 +1,63 @@
+.sidebar-top {
+}
+
+.sidebar-bottom {
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.logo {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: inherit;
+}
+
+.menu-button {
+  background-color: #333;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.sidebar-link {
+  display: block;
+  color: #000;
+  text-decoration: none;
+  padding: 10px 20px;
+  transition: background-color 0.2s ease;
+}
+
+.sidebar-link:hover {
+  background-color: #fff;
+  width: 100%;
+}
+
+.logout-button {
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.logout-button:hover {
+  background-color: #555;
+}
+
+/* Add this to Sidebar.css */
+.content {
+  margin-left: 0;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.content.shift {
+  margin-left: 250px;
+}

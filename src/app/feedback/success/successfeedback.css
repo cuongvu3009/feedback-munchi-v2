@@ -1,0 +1,10 @@
+.success {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.support {
+  text-align: center;
+}

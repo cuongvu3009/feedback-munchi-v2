@@ -1,0 +1,14 @@
+.dashboard-card {
+  height: fit-content;
+  padding: 10px;
+  width: 100%;
+  border: 1px groove #f3f3f3;
+  text-align: center;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  align-items: center;
+}
