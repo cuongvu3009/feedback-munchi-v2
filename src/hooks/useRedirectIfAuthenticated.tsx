@@ -1,5 +1,4 @@
 import { redirect } from "next/navigation";
-import { useEffect } from "react";
 import { useUser } from "@/hooks/useUser";
 
 // Custom hook to redirect to the previous page if the user is authenticated

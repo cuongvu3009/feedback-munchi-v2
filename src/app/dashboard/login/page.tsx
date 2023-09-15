@@ -4,13 +4,12 @@ import "./dashboardLogin.css";
 
 import React, { useRef, useState } from "react";
 
+import { API_BASE_URL } from "@/utils/constantAPI";
 import { User } from "@/types/auth.types";
 import axios from "axios";
 import { redirect } from "next/navigation";
 import { useAuthenticate } from "@/hooks/useAuthenticate";
 import useRedirectIfAuthenticated from "@/hooks/useRedirectIfAuthenticated";
-
-const API_BASE_URL = "https://munchi-merchant-dev-api-ydtudzlala-lz.a.run.app";
 
 interface ApiResponse {
   data: User | null; // Provide a default type of null for data

@@ -2,13 +2,13 @@
 
 import "./feedback.css";
 
+import { API_BASE_URL } from "@/utils/constantAPI";
 import Button from "@/components/shared/Button";
 import Logo from "@/components/shared/Logo";
 import RatingOrder from "@/components/feedback/RatingOrder";
 import Title from "@/components/shared/Title";
 import TradeMark from "@/components/shared/TradeMark";
 import axios from "axios";
-import { constantAPI } from "@/utils/constantAPI";
 import { useRouter } from "next/navigation";
 
 const FeedbackOrder: React.FC = () => {
@@ -18,7 +18,7 @@ const FeedbackOrder: React.FC = () => {
 
     try {
       const response = await axios.post(
-        `${constantAPI}/feedback`,
+        `${API_BASE_URL}/feedback`,
         {
           businessSlug: "sushiDaily",
           emoji_service: localStorage.getItem("emojiService"),

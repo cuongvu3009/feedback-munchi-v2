@@ -3,8 +3,8 @@
 import { Feedback, FeedbackContextProps } from "../types/feedback.types";
 import { createContext, useContext, useEffect, useState } from "react";
 
+import { API_BASE_URL } from "../utils/constantAPI";
 import axios from "axios";
-import { constantAPI } from "../utils/constantAPI";
 
 const FeedbackContext = createContext<FeedbackContextProps>({
   feedback: [],
@@ -37,7 +37,7 @@ export const FeedbackProvider = ({ children }: any) => {
     setIsLoading(true);
 
     try {
-      const response = await axios.get(`${constantAPI}/feedback`);
+      const response = await axios.get(`${API_BASE_URL}/feedback`);
       setFeedback(response.data);
       setIsLoading(false);
     } catch (error) {
