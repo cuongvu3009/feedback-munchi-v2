@@ -1,11 +1,12 @@
 import React from "react";
+import { SvgProps } from "@/types/feedback.types";
 
-const GoodSVG: React.FC = () => {
+const GoodSVG: React.FC<SvgProps> = ({ size }) => {
   return (
     <svg
-      height="512"
+      height={size}
       viewBox="0 0 64 64"
-      width="512"
+      width={size}
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
@@ -17,8 +18,8 @@ const GoodSVG: React.FC = () => {
         y1="1.304"
         y2="63.304"
       >
-        <stop offset="0" stop-color="#ffe100" />
-        <stop offset="1" stop-color="#f98900" />
+        <stop offset="0" stopColor="#ffe100" />
+        <stop offset="1" stopColor="#f98900" />
       </linearGradient>
       <linearGradient
         id="linear-gradient-2"
@@ -28,9 +29,9 @@ const GoodSVG: React.FC = () => {
         y1="52.45"
         y2="43.016"
       >
-        <stop offset="0" stop-color="#911625" />
-        <stop offset=".587" stop-color="#630f19" />
-        <stop offset="1" stop-color="#400a10" />
+        <stop offset="0" stopColor="#911625" />
+        <stop offset=".587" stopColor="#630f19" />
+        <stop offset="1" stopColor="#400a10" />
       </linearGradient>
       <linearGradient
         id="linear-gradient-3"
@@ -40,12 +41,12 @@ const GoodSVG: React.FC = () => {
         y1="42"
         y2="42"
       >
-        <stop offset="0" stop-color="#b8b4b2" />
-        <stop offset=".333" stop-color="#e6e1de" />
-        <stop offset=".5" stop-color="#fffaf6" />
-        <stop offset=".638" stop-color="#f9f5f1" />
-        <stop offset=".825" stop-color="#e8e5e3" />
-        <stop offset="1" stop-color="#d1d1d1" />
+        <stop offset="0" stopColor="#b8b4b2" />
+        <stop offset=".333" stopColor="#e6e1de" />
+        <stop offset=".5" stopColor="#fffaf6" />
+        <stop offset=".638" stopColor="#f9f5f1" />
+        <stop offset=".825" stopColor="#e8e5e3" />
+        <stop offset="1" stopColor="#d1d1d1" />
       </linearGradient>
       <linearGradient
         id="linear-gradient-4"
@@ -55,9 +56,9 @@ const GoodSVG: React.FC = () => {
         y1="39.712"
         y2="46.21"
       >
-        <stop offset="0" stop-color="#ababab" stop-opacity=".5" />
-        <stop offset=".541" stop-color="#c1c1c1" stop-opacity=".216" />
-        <stop offset="1" stop-color="#d1d1d1" stop-opacity="0" />
+        <stop offset="0" stopColor="#ababab" stopOpacity=".5" />
+        <stop offset=".541" stopColor="#c1c1c1" stopOpacity=".216" />
+        <stop offset="1" stopColor="#d1d1d1" stopOpacity="0" />
       </linearGradient>
       <linearGradient
         id="linear-gradient-5"
@@ -67,10 +68,10 @@ const GoodSVG: React.FC = () => {
         y1="29.725"
         y2="20.193"
       >
-        <stop offset=".005" stop-color="#414d4d" />
-        <stop offset=".206" stop-color="#3a4545" />
-        <stop offset=".522" stop-color="#272e2e" />
-        <stop offset=".914" stop-color="#080909" />
+        <stop offset=".005" stopColor="#414d4d" />
+        <stop offset=".206" stopColor="#3a4545" />
+        <stop offset=".522" stopColor="#272e2e" />
+        <stop offset=".914" stopColor="#080909" />
         <stop offset="1" />
       </linearGradient>
       <linearGradient

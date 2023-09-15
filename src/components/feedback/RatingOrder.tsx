@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 
+import AwesomeSVG from "@/utils/emoji-svg/AwesomeSVG";
+import BadSVG from "@/utils/emoji-svg/BadSVG";
 import Emoji from "../shared/Emoji";
 import FeedbackComment from "./FeedbackComment";
 import FeedbackTags from "./FeedbackTags";
+import GoodSVG from "@/utils/emoji-svg/GoodSVG";
+import OkeySVG from "@/utils/emoji-svg/OkeySVG";
+import TerribleSVG from "@/utils/emoji-svg/TerribleSVG";
 import { ratingOptions } from "../../utils/ratingOptions";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
@@ -20,29 +25,40 @@ const RatingOrder: React.FC = () => {
   return (
     <>
       <ul className="rating">
-        {ratingOptions.map((option, index) => (
-          <li key={`rating-${index + 1}`}>
-            <input
-              type="radio"
-              id={option.value}
-              name="rating"
-              value={option.value}
-              onChange={handleEmojiChange}
-              checked={emojiOrder === option.value}
-              disabled={emojiOrder === option.value}
-            />
-            <label
-              htmlFor={option.value}
-              className={
-                emojiOrder === option.value
-                  ? "selected-button"
-                  : "unselected-button"
-              }
-            >
-              <Emoji symbol={option.symbol} label={option.label} size={35} />
-            </label>
-          </li>
-        ))}
+        {ratingOptions.map((option, index) => {
+          // Map each option to its corresponding SVG component
+          const EmojiComponent = {
+            terrible: <TerribleSVG size={50} />,
+            bad: <BadSVG size={50} />,
+            okey: <OkeySVG size={50} />,
+            good: <GoodSVG size={50} />,
+            awesome: <AwesomeSVG size={50} />,
+          }[option.value];
+
+          return (
+            <li key={`rating-${index + 1}`}>
+              <input
+                type="radio"
+                id={option.value}
+                name="rating"
+                value={option.value}
+                onChange={handleEmojiChange}
+                checked={emojiOrder === option.value}
+                disabled={emojiOrder === option.value}
+              />
+              <label
+                htmlFor={option.value}
+                className={
+                  emojiOrder === option.value
+                    ? "selected-button"
+                    : "unselected-button"
+                }
+              >
+                {EmojiComponent}
+              </label>
+            </li>
+          );
+        })}
       </ul>
 
       {emojiOrder !== null && (

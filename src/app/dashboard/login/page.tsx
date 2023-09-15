@@ -1,13 +1,12 @@
 "use client";
 
-import "./dashboardLogin.css";
-
 import React, { useRef, useState } from "react";
 
 import { API_BASE_URL } from "@/utils/constantAPI";
 import { User } from "@/types/auth.types";
 import axios from "axios";
 import { redirect } from "next/navigation";
+import styles from "./dashboardLogin.module.css";
 import { useAuthenticate } from "@/hooks/useAuthenticate";
 import useRedirectIfAuthenticated from "@/hooks/useRedirectIfAuthenticated";
 
@@ -54,32 +53,36 @@ const Login = () => {
   };
 
   return (
-    <div className="container">
+    <div className={styles.container}>
       <h2>Dashboard Manager</h2>
-      <form className="login-form" onSubmit={handleLogin}>
-        <label className="label">Email</label>
+      <form className={`${styles["login-form"]}`} onSubmit={handleLogin}>
+        <label className={styles.label}>Email</label>
         <input
-          className="input"
+          className={styles.input}
           type="email"
           placeholder="your-email@email.com"
           ref={emailRef}
           required
         />
-        <label className="label">Password</label>
+        <label className={styles.label}>Password</label>
         <input
-          className="input"
+          className={styles.input}
           type="password"
           placeholder="your password here..."
           ref={passwordRef}
           required
         />
-        <button className="button" type="submit" disabled={response.loading}>
+        <button
+          className={styles.button}
+          type="submit"
+          disabled={response.loading}
+        >
           {response.loading ? "Logging in..." : "Login"}
         </button>
         {response.error && (
-          <p className="error">Login failed. Please try again.</p>
+          <p className={styles.error}>Login failed. Please try again.</p>
         )}
-        {response.data && <p className="success">Login successful!</p>}
+        {response.data && <p className={styles.success}>Login successful!</p>}
       </form>
     </div>
   );

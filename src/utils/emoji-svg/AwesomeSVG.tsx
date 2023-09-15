@@ -1,11 +1,12 @@
 import React from "react";
+import { SvgProps } from "@/types/feedback.types";
 
-const AwesomeSVG: React.FC = () => {
+const AwesomeSVG: React.FC<SvgProps> = ({ size }) => {
   return (
     <svg
-      height="512"
+      height={size}
       viewBox="0 0 64 64"
-      width="512"
+      width={size}
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
@@ -17,8 +18,8 @@ const AwesomeSVG: React.FC = () => {
         y1="1.304"
         y2="63.304"
       >
-        <stop offset="0" stop-color="#ffe100" />
-        <stop offset="1" stop-color="#f98900" />
+        <stop offset="0" stopColor="#ffe100" />
+        <stop offset="1" stopColor="#f98900" />
       </linearGradient>
       <linearGradient
         id="linear-gradient-2"
@@ -28,13 +29,13 @@ const AwesomeSVG: React.FC = () => {
         y1="41.001"
         y2="41.001"
       >
-        <stop offset="0" stop-color="#b8b4b2" />
-        <stop offset=".143" stop-color="#d0ccc9" />
-        <stop offset=".374" stop-color="#f2edea" />
-        <stop offset=".5" stop-color="#fffaf6" />
-        <stop offset=".638" stop-color="#f9f5f1" />
-        <stop offset=".825" stop-color="#e8e5e3" />
-        <stop offset="1" stop-color="#d1d1d1" />
+        <stop offset="0" stopColor="#b8b4b2" />
+        <stop offset=".143" stopColor="#d0ccc9" />
+        <stop offset=".374" stopColor="#f2edea" />
+        <stop offset=".5" stopColor="#fffaf6" />
+        <stop offset=".638" stopColor="#f9f5f1" />
+        <stop offset=".825" stopColor="#e8e5e3" />
+        <stop offset="1" stopColor="#d1d1d1" />
       </linearGradient>
       <linearGradient
         id="linear-gradient-3"
@@ -44,8 +45,8 @@ const AwesomeSVG: React.FC = () => {
         y1="53.275"
         y2="37.041"
       >
-        <stop offset="0" stop-color="#69101b" />
-        <stop offset=".427" stop-color="#400a10" />
+        <stop offset="0" stopColor="#69101b" />
+        <stop offset=".427" stopColor="#400a10" />
       </linearGradient>
       <linearGradient
         id="linear-gradient-4"
@@ -63,9 +64,9 @@ const AwesomeSVG: React.FC = () => {
         y1="38.163"
         y2="44.885"
       >
-        <stop offset="0" stop-color="#ababab" stop-opacity=".5" />
-        <stop offset=".541" stop-color="#c1c1c1" stop-opacity=".216" />
-        <stop offset="1" stop-color="#d1d1d1" stop-opacity="0" />
+        <stop offset="0" stopColor="#ababab" stopOpacity=".5" />
+        <stop offset=".541" stopColor="#c1c1c1" stopOpacity=".216" />
+        <stop offset="1" stopColor="#d1d1d1" stopOpacity="0" />
       </linearGradient>
       <linearGradient
         id="linear-gradient-6"
@@ -75,13 +76,13 @@ const AwesomeSVG: React.FC = () => {
         y1="9.211"
         y2="32.611"
       >
-        <stop offset="0" stop-color="#ff5f6f" />
-        <stop offset=".346" stop-color="#ff2d44" />
-        <stop offset=".722" stop-color="#d41e32" />
-        <stop offset=".853" stop-color="#d61f33" />
-        <stop offset=".918" stop-color="#de2337" />
-        <stop offset=".968" stop-color="#eb293e" />
-        <stop offset="1" stop-color="#f82f44" />
+        <stop offset="0" stopColor="#ff5f6f" />
+        <stop offset=".346" stopColor="#ff2d44" />
+        <stop offset=".722" stopColor="#d41e32" />
+        <stop offset=".853" stopColor="#d61f33" />
+        <stop offset=".918" stopColor="#de2337" />
+        <stop offset=".968" stopColor="#eb293e" />
+        <stop offset="1" stopColor="#f82f44" />
       </linearGradient>
       <linearGradient
         id="linear-gradient-7"
@@ -91,9 +92,9 @@ const AwesomeSVG: React.FC = () => {
         y1="8.9"
         y2="17.703"
       >
-        <stop offset="0" stop-color="#ff8a95" />
-        <stop offset=".66" stop-color="#ff495d" />
-        <stop offset="1" stop-color="#ff2d44" />
+        <stop offset="0" stopColor="#ff8a95" />
+        <stop offset=".66" stopColor="#ff495d" />
+        <stop offset="1" stopColor="#ff2d44" />
       </linearGradient>
       <linearGradient
         id="linear-gradient-8"
@@ -103,10 +104,10 @@ const AwesomeSVG: React.FC = () => {
         y1="16.73"
         y2="21.884"
       >
-        <stop offset="0" stop-color="#ff5f5f" />
-        <stop offset=".283" stop-color="#ff565a" />
-        <stop offset=".746" stop-color="#ff3d4d" />
-        <stop offset="1" stop-color="#ff2d44" />
+        <stop offset="0" stopColor="#ff5f5f" />
+        <stop offset=".283" stopColor="#ff565a" />
+        <stop offset=".746" stopColor="#ff3d4d" />
+        <stop offset="1" stopColor="#ff2d44" />
       </linearGradient>
       <linearGradient
         id="linear-gradient-9"

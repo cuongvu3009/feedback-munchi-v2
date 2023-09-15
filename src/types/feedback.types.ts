@@ -31,3 +31,7 @@ export interface PaymentButtonProps {
   paymentLink: string;
   btnVersion: string;
 }
+
+export interface SvgProps {
+  size: number;
+}

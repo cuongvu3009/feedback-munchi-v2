@@ -1,78 +1,16 @@
-const TerribleSVG: React.FC = () => {
+import React from "react";
+import SVGDefs from "./SVGDefs";
+import { SvgProps } from "@/types/feedback.types";
+
+const TerribleSVG: React.FC<SvgProps> = ({ size }) => {
   return (
     <svg
-      height="512"
+      height={size}
       viewBox="0 0 64 64"
-      width="512"
+      width={size}
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
-      <linearGradient
-        id="linear-gradient"
-        gradientUnits="userSpaceOnUse"
-        x1="32"
-        x2="32"
-        y1="1.304"
-        y2="63.304"
-      >
-        <stop offset="0" stopColor="#ff3d3d" stopOpacity="1" />
-        <stop offset=".307" stopColor="#db2a28" stopOpacity="1" />
-        <stop offset=".771" stopColor="#a90f0b" stopOpacity="1" />
-        <stop offset="1" stopColor="#960500" stopOpacity="1" />
-      </linearGradient>
-      <linearGradient
-        id="linear-gradient-2"
-        gradientUnits="userSpaceOnUse"
-        x1="32"
-        x2="32"
-        y1="49.094"
-        y2="44.273"
-      >
-        <stop offset=".005" stopColor="#414d4d" stopOpacity="1" />
-        <stop offset=".136" stopColor="#353f3f" stopOpacity="1" />
-        <stop offset=".501" stopColor="#181d1d" stopOpacity="1" />
-        <stop offset=".802" stopColor="#060808" stopOpacity="1" />
-        <stop offset="1" />
-      </linearGradient>
-      <linearGradient
-        id="linear-gradient-3"
-        gradientUnits="userSpaceOnUse"
-        x1="43"
-        x2="43"
-        y1="34.075"
-        y2="26.102"
-      >
-        <stop offset=".005" stopColor="#414d4d" stopOpacity="1" />
-        <stop offset=".206" stopColor="#3a4545" stopOpacity="1" />
-        <stop offset=".522" stopColor="#272e2e" stopOpacity="1" />
-        <stop offset=".914" stopColor="#080909" stopOpacity="1" />
-        <stop offset="1" />
-      </linearGradient>
-      <linearGradient
-        id="linear-gradient-4"
-        x1="51.325"
-        x2="39.597"
-        xlinkHref="#linear-gradient-2"
-        y1="21.295"
-        y2="27.679"
-      />
-      <linearGradient
-        id="linear-gradient-5"
-        gradientTransform="matrix(-1 0 0 1 36 0)"
-        x1="23.325"
-        x2="11.597"
-        xlinkHref="#linear-gradient-2"
-        y1="21.295"
-        y2="27.679"
-      />
-      <linearGradient
-        id="linear-gradient-6"
-        x1="21"
-        x2="21"
-        xlinkHref="#linear-gradient-3"
-        y1="34.019"
-        y2="26.216"
-      />
       <g id="_19-Pouting_Face" data-name="19-Pouting Face">
         <path
           d="m32 63c-27.7 0-31.038-24-31-30v-2c-.038-6 3.3-30 31-30 27.7 0 31.038 24 31 30v2c.038 6-3.3 30-31 30z"

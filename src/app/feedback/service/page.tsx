@@ -1,6 +1,6 @@
 "use client";
 
-import "./feedback.css";
+import "../feedback.css";
 
 import Button from "@/components/shared/Button";
 import Logo from "@/components/shared/Logo";

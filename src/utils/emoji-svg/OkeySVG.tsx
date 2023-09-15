@@ -1,11 +1,12 @@
 import React from "react";
+import { SvgProps } from "@/types/feedback.types";
 
-const OkeySVG: React.FC = () => {
+const OkeySVG: React.FC<SvgProps> = ({ size }) => {
   return (
     <svg
-      height="512"
+      height={size}
       viewBox="0 0 64 64"
-      width="512"
+      width={size}
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
@@ -17,8 +18,8 @@ const OkeySVG: React.FC = () => {
         y1="1.304"
         y2="63.304"
       >
-        <stop offset="0" stop-color="#ffe100" />
-        <stop offset="1" stop-color="#f98900" />
+        <stop offset="0" stopColor="#ffe100" />
+        <stop offset="1" stopColor="#f98900" />
       </linearGradient>
       <linearGradient
         id="linear-gradient-2"
@@ -28,10 +29,10 @@ const OkeySVG: React.FC = () => {
         y1="29.725"
         y2="20.193"
       >
-        <stop offset=".005" stop-color="#414d4d" />
-        <stop offset=".206" stop-color="#3a4545" />
-        <stop offset=".522" stop-color="#272e2e" />
-        <stop offset=".914" stop-color="#080909" />
+        <stop offset=".005" stopColor="#414d4d" />
+        <stop offset=".206" stopColor="#3a4545" />
+        <stop offset=".522" stopColor="#272e2e" />
+        <stop offset=".914" stopColor="#080909" />
         <stop offset="1" />
       </linearGradient>
       <linearGradient
@@ -50,11 +51,11 @@ const OkeySVG: React.FC = () => {
         y1="48.287"
         y2="40.333"
       >
-        <stop offset="0" stop-color="#803f02" />
-        <stop offset=".174" stop-color="#6d3602" />
-        <stop offset=".515" stop-color="#4d2601" />
-        <stop offset=".802" stop-color="#3a1c01" />
-        <stop offset="1" stop-color="#331901" />
+        <stop offset="0" stopColor="#803f02" />
+        <stop offset=".174" stopColor="#6d3602" />
+        <stop offset=".515" stopColor="#4d2601" />
+        <stop offset=".802" stopColor="#3a1c01" />
+        <stop offset="1" stopColor="#331901" />
       </linearGradient>
       <g id="_06-Slightly_Smiling_Face" data-name="06-Slightly Smiling Face">
         <path

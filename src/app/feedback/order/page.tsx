@@ -1,6 +1,6 @@
 "use client";
 
-import "./feedback.css";
+import "../feedback.css";
 
 import { API_BASE_URL } from "@/utils/constantAPI";
 import Button from "@/components/shared/Button";
