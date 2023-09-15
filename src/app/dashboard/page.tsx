@@ -1,8 +1,8 @@
 import "./dashboard.css";
 
-import DashboardInfo from "@/components/dashboard/DashboardInfo";
+import DashboardInfo from "@/components/dashboard/info/DashboardInfo";
 import React from "react";
-import Sidebar from "@/components/dashboard/Sidebar";
+import Sidebar from "@/components/dashboard/sidebar/Sidebar";
 
 const Dashboard = () => {
   return (

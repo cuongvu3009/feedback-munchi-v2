@@ -109,7 +109,7 @@ const DashboardScore: React.FC<DashboardScoreProps> = ({ type, data }) => {
       <div className={`${styles["dashboard-answers"]}`}>
         {Object.entries(responseCounts).map(([response, count]) => (
           <div className={`${styles["flex-between"]}`} key={response}>
-            <p>Answered "{getEmojiLabel(response)}" </p>
+            <p>Answered &quot;{getEmojiLabel(response)}&quot;</p>
             <p>{count}</p>
           </div>
         ))}

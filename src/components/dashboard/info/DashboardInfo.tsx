@@ -1,10 +1,10 @@
 "use client";
 
-import DashboardResponses from "@/components/dashboard/DashboardResponses";
-import DashboardScore from "@/components/dashboard/DashboardScore";
-import FeedbackChart from "@/components/dashboard/FeedbackChart";
+import DashboardResponses from "@/components/dashboard/responses/DashboardResponses";
+import DashboardScore from "@/components/dashboard/score/DashboardScore";
+import FeedbackChart from "@/components/dashboard/chart/FeedbackChart";
 import React from "react";
-import { data } from "./data";
+import { data } from "../data";
 import styles from "./dashboardInfo.module.css";
 
 const DashboardInfo = () => {

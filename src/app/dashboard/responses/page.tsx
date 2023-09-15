@@ -1,4 +1,4 @@
-import Sidebar from "@/components/dashboard/Sidebar";
+import Sidebar from "@/components/dashboard/sidebar/Sidebar";
 import { data } from "@/components/dashboard/data";
 import moment from "moment";
 import styles from "./responses.module.css";
