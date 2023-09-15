@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import Emoji from "../shared/Emoji";
 import FeedbackComment from "./FeedbackComment";
-import TagsOrder from "./TagsOrder";
+import FeedbackTags from "./FeedbackTags";
 import { ratingOptions } from "../../utils/ratingOptions";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
@@ -29,7 +29,7 @@ const RatingOrder: React.FC = () => {
               value={option.value}
               onChange={handleEmojiChange}
               checked={emojiOrder === option.value}
-              disabled={emojiOrder !== null}
+              disabled={emojiOrder === option.value}
             />
             <label
               htmlFor={option.value}
@@ -47,8 +47,8 @@ const RatingOrder: React.FC = () => {
 
       {emojiOrder !== null && (
         <>
-          <TagsOrder emojiOrder={emojiOrder} />
-          <FeedbackComment storageKey="commentOrder" />
+          <FeedbackTags storageKey="tagsOrder" emojiOrder={emojiOrder} />
+          <FeedbackComment storageKey="commentOrder" emojiOrder={emojiOrder} />
         </>
       )}
     </>

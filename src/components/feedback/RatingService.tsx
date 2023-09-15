@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import Emoji from "../shared/Emoji";
 import FeedbackComment from "./FeedbackComment";
-import TagsService from "./TagsService";
+import FeedbackTags from "./FeedbackTags";
 import { ratingOptions } from "../../utils/ratingOptions";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
@@ -29,7 +29,7 @@ const RatingService: React.FC = () => {
               value={option.value}
               onChange={handleEmojiChange}
               checked={emojiService === option.value}
-              disabled={emojiService !== null}
+              disabled={emojiService === option.value}
             />
             <label
               htmlFor={option.value}
@@ -47,8 +47,11 @@ const RatingService: React.FC = () => {
 
       {emojiService !== null && (
         <>
-          <TagsService emojiService={emojiService} />
-          <FeedbackComment storageKey="commentService" />
+          <FeedbackTags storageKey="tagsService" emojiService={emojiService} />
+          <FeedbackComment
+            storageKey="commentService"
+            emojiService={emojiService}
+          />
         </>
       )}
     </>

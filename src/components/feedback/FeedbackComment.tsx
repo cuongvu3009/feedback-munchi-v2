@@ -5,10 +5,16 @@ import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 interface CommentProps {
   storageKey: "commentService" | "commentOrder";
+  emojiService?: string | null;
+  emojiOrder?: string | null;
 }
 
-const FeedbackComment: React.FC<CommentProps> = ({ storageKey }) => {
-  const { getItem, setItem } = useLocalStorage();
+const FeedbackComment: React.FC<CommentProps> = ({
+  storageKey,
+  emojiService,
+  emojiOrder,
+}) => {
+  const { getItem, setItem, removeItem } = useLocalStorage();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const commentInputRef = useRef<HTMLInputElement>(null);
@@ -30,6 +36,11 @@ const FeedbackComment: React.FC<CommentProps> = ({ storageKey }) => {
       commentInputRef.current.value = storedComment;
     }
   }, [storageKey]);
+
+  useEffect(() => {
+    removeItem(storageKey);
+    setIsFormSubmitted(false);
+  }, [emojiService, emojiOrder]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
