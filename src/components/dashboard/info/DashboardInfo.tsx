@@ -9,7 +9,7 @@ import styles from "./dashboardInfo.module.css";
 
 const DashboardInfo = () => {
   return (
-    <div className="dashboard-info">
+    <div className={`${styles["dashboard-info"]}`}>
       <div className={`${styles["dashboard-content"]}`}>
         <DashboardScore type="order" data={data} />
         <DashboardScore type="service" data={data} />

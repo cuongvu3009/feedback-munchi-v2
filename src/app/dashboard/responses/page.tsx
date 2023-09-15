@@ -1,9 +1,13 @@
+"use client";
+
 import Sidebar from "@/components/dashboard/sidebar/Sidebar";
 import { data } from "@/components/dashboard/data";
 import moment from "moment";
 import styles from "./responses.module.css";
+import useProtectedPage from "@/hooks/useProtectedPage";
 
 const Responses = () => {
+  useProtectedPage();
   const getEmojiLabel = (emoji: string) => {
     switch (emoji) {
       case "terrible":

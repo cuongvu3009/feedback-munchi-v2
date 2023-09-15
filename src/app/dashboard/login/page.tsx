@@ -1,10 +1,14 @@
+"use client";
+
 import "./dashboardLogin.css";
 
 import React, { useRef, useState } from "react";
 
 import { User } from "@/types/auth.types";
 import axios from "axios";
+import { redirect } from "next/navigation";
 import { useAuthenticate } from "@/hooks/useAuthenticate";
+import useRedirectIfAuthenticated from "@/hooks/useRedirectIfAuthenticated";
 
 const API_BASE_URL = "https://munchi-merchant-dev-api-ydtudzlala-lz.a.run.app";
 
@@ -14,7 +18,8 @@ interface ApiResponse {
   error: Error | null;
 }
 
-function App() {
+const Login = () => {
+  useRedirectIfAuthenticated();
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const { login } = useAuthenticate();
@@ -42,6 +47,7 @@ function App() {
 
         login(result.data);
         setResponse({ data: result.data, loading: false, error: null });
+        redirect("/dashboard");
       } catch (error: any) {
         setResponse({ data: null, loading: false, error });
       }
@@ -78,6 +84,6 @@ function App() {
       </form>
     </div>
   );
-}
+};
 
-export default App;
+export default Login;

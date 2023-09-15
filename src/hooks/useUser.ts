@@ -1,3 +1,5 @@
+"use client";
+
 import { User } from "../types/auth.types";
 import { useAuthContext } from "../context/AuthContext";
 import { useLocalStorage } from "./useLocalStorage";

@@ -1,3 +1,12 @@
+.sidebar {
+  max-width: fit-content;
+  padding: 20px;
+  height: 100vh;
+  background-color: #e8eaee;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 .sidebar-top {
 }
 

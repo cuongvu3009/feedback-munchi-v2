@@ -31,6 +31,18 @@ button {
   background-color: inherit;
 }
 
+body {
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+/* Make images responsive */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 .mobile {
   width: 430px;
   height: 700px;
@@ -43,18 +55,6 @@ button {
 .title {
   padding: 5px;
   text-align: center;
-}
-
-body {
-  font-size: 16px;
-  margin: 0;
-  padding: 0;
-}
-
-/* Make images responsive */
-img {
-  max-width: 100%;
-  height: auto;
 }
 
 .munchi-logo {

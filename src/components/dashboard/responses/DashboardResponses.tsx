@@ -39,7 +39,10 @@ const DashboardResponses = () => {
 
       {data.slice(0, feedbackLimit).map((item) => {
         return (
-          <div className={`${styles["flex-between"]}`} key={item.emoji_service}>
+          <div
+            className={`${styles["flex-between"]}`}
+            key={item._id + item.emoji_service}
+          >
             <p>{getEmojiLabel(item.emoji_service)}</p>
             <p>{moment(item.createdAt).fromNow()}</p>
           </div>
