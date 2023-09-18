@@ -26,7 +26,7 @@ const Responses = () => {
   };
 
   return (
-    <div className="dashboard">
+    <div className="">
       <Sidebar />
       <div className={`${styles["dashboard-card"]}`}>
         <h3>Responses</h3>
