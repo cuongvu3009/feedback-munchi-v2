@@ -1,7 +1,5 @@
 "use client";
 
-import "../feedback.css";
-
 import { API_BASE_URL } from "@/utils/constantAPI";
 import Button from "@/components/shared/Button";
 import Logo from "@/components/shared/Logo";
@@ -9,6 +7,7 @@ import RatingOrder from "@/components/feedback/RatingOrder";
 import Title from "@/components/shared/Title";
 import TradeMark from "@/components/shared/TradeMark";
 import axios from "axios";
+import styles from "./feedbackOrder.module.css";
 import { useRouter } from "next/navigation";
 
 const FeedbackOrder: React.FC = () => {
@@ -43,36 +42,38 @@ const FeedbackOrder: React.FC = () => {
     const keysToRemove = [
       "emojiService",
       "commentService",
-      "serviceTags",
+      "tagsService",
       "emojiOrder",
       "commentOrder",
-      "orderTags",
+      "tagsOrder",
     ];
     keysToRemove.forEach((key) => localStorage.removeItem(key));
   }
 
   return (
-    <div className="feedback mobile">
-      <Title />
+    <div className="mobile">
+      <div className={`${styles["feedback"]}`}>
+        <Title />
 
-      <div className="feedback-wrapper">
-        <Logo />
-        <div className="feedback-container">
-          <div className="feedback-description">
-            <h3>How was your order?</h3>
-            <p>Your feedback helps us improve our products.</p>
+        <div className={`${styles["feedback-wrapper"]}`}>
+          <Logo />
+          <div className={`${styles["feedback-container"]}`}>
+            <div className={`${styles["feedback-description"]}`}>
+              <h3>How was your order?</h3>
+              <p>Your feedback helps us improve our products.</p>
+            </div>
           </div>
         </div>
-      </div>
-      <RatingOrder />
+        <RatingOrder />
 
-      <div className="navigation">
-        <Button
-          onClick={handleClick}
-          version="full"
-          btnText="Submit feedback"
-        />
-        <TradeMark />
+        <div className="navigation">
+          <Button
+            onClick={handleClick}
+            version="full"
+            btnText="Submit feedback"
+          />
+          <TradeMark />
+        </div>
       </div>
     </div>
   );

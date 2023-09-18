@@ -1,3 +1,5 @@
+import "./feedback.css";
+
 import React, { useState } from "react";
 
 import AwesomeSVG from "@/utils/emoji-svg/AwesomeSVG";

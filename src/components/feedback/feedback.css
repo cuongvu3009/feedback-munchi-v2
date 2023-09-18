@@ -1,15 +1,3 @@
-.feedback {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  border: 1.5px groove #f3f3f3;
-}
-
-.feedback-wrapper {
-  padding-top: 20px;
-}
-
 .logo-container {
   display: flex;
   flex-direction: column;
@@ -27,16 +15,6 @@
 
 .restaurant-name {
   font-weight: bold;
-}
-
-.feedback-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.feedback-description {
-  text-align: center;
-  margin: 20px;
 }
 
 .tags-container {
@@ -123,6 +101,7 @@
 }
 
 input[type="radio"]:disabled + label.unselected-button {
+  color: #9999;
   color: #9999;
   cursor: not-allowed;
 }

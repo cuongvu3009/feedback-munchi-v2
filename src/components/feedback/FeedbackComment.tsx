@@ -1,3 +1,5 @@
+import "./feedback.css";
+
 import React, { useEffect, useRef, useState } from "react";
 
 import Button from "../shared/Button";

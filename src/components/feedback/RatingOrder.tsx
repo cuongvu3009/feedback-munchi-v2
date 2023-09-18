@@ -1,8 +1,9 @@
+import "./feedback.css";
+
 import React, { useState } from "react";
 
 import AwesomeSVG from "@/utils/emoji-svg/AwesomeSVG";
 import BadSVG from "@/utils/emoji-svg/BadSVG";
-import Emoji from "../shared/Emoji";
 import FeedbackComment from "./FeedbackComment";
 import FeedbackTags from "./FeedbackTags";
 import GoodSVG from "@/utils/emoji-svg/GoodSVG";

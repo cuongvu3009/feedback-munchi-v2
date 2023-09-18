@@ -1,0 +1,29 @@
+.feedback {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.feedback-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.feedback-description {
+  text-align: center;
+  margin: 20px;
+}
+
+.feedback-wrapper {
+  padding-top: 20px;
+}
+
+.mobile {
+  width: 430px;
+  height: 700px;
+  margin: 50px auto;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
