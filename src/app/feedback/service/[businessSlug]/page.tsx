@@ -8,12 +8,16 @@ import TradeMark from "@/components/shared/TradeMark";
 import styles from "./feedbackService.module.css";
 import { useRouter } from "next/navigation";
 
-const FeedbackService: React.FC = () => {
+export default function FeedbackService({
+  params,
+}: {
+  params: { businessSlug: string };
+}) {
   const router = useRouter();
 
   function handleClick(e: any): void {
     e.preventDefault();
-    router.push("/feedback/order");
+    router.push(`/feedback/order/${params.businessSlug}`);
   }
 
   return (
@@ -39,6 +43,4 @@ const FeedbackService: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default FeedbackService;
+}

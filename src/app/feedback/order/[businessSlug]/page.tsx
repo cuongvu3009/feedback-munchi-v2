@@ -8,7 +8,11 @@ import TradeMark from "@/components/shared/TradeMark";
 import styles from "./feedbackOrder.module.css";
 import { useRouter } from "next/navigation";
 
-const FeedbackOrder: React.FC = () => {
+export default function FeedbackOrder({
+  params,
+}: {
+  params: { businessSlug: string };
+}) {
   const router = useRouter();
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
@@ -16,7 +20,7 @@ const FeedbackOrder: React.FC = () => {
 
     try {
       const body = {
-        businessSlug: "sushiDaily test",
+        businessSlug: params.businessSlug,
         emojiService: localStorage.getItem("emojiService"),
         commentService: localStorage.getItem("commentService"),
         serviceTags: localStorage.getItem("serviceTags"),
@@ -30,7 +34,6 @@ const FeedbackOrder: React.FC = () => {
         body: JSON.stringify(body),
       });
 
-      console.log(result);
       if (result) {
         const keysToRemove = [
           "emojiService",
@@ -75,6 +78,4 @@ const FeedbackOrder: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default FeedbackOrder;
+}
