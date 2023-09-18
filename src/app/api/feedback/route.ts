@@ -1,6 +1,4 @@
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import prisma from "@/lib/prisma";
 
 export async function POST(req: Request, res: Response) {
   const {
@@ -54,6 +52,6 @@ export async function POST(req: Request, res: Response) {
     return Response.json("Feedback created");
   } catch (error) {
     console.error("Error creating feedback:", error);
-    return Response.json("Error creating feedback" + error);
+    return Response.json(error);
   }
 }
