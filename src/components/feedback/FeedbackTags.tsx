@@ -7,7 +7,7 @@ import { tagsQuestion } from "../../utils/tagsQuestion";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 interface FeedbackTagsProps {
-  storageKey: "tagsService" | "tagsOrder";
+  storageKey: "serviceTags" | "orderTags";
   emojiService?: string | null;
   emojiOrder?: string | null;
 }
@@ -22,9 +22,9 @@ const FeedbackTags: React.FC<FeedbackTagsProps> = ({
 
   // Function to map emojiOrder to tags
   const getTagsForEmoji = () => {
-    if (storageKey === "tagsService" && emojiService) {
+    if (storageKey === "serviceTags" && emojiService) {
       return defaultTags[emojiService] || [];
-    } else if (storageKey === "tagsOrder" && emojiOrder) {
+    } else if (storageKey === "orderTags" && emojiOrder) {
       return defaultTags[emojiOrder] || [];
     } else {
       return [];

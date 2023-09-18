@@ -64,7 +64,7 @@ const RatingOrder: React.FC = () => {
 
       {emojiOrder !== null && (
         <>
-          <FeedbackTags storageKey="tagsOrder" emojiOrder={emojiOrder} />
+          <FeedbackTags storageKey="orderTags" emojiOrder={emojiOrder} />
           <FeedbackComment storageKey="commentOrder" emojiOrder={emojiOrder} />
         </>
       )}

@@ -1,54 +1,52 @@
 "use client";
 
-import { API_BASE_URL } from "@/utils/constantAPI";
 import Button from "@/components/shared/Button";
 import Logo from "@/components/shared/Logo";
 import RatingOrder from "@/components/feedback/RatingOrder";
 import Title from "@/components/shared/Title";
 import TradeMark from "@/components/shared/TradeMark";
-import axios from "axios";
 import styles from "./feedbackOrder.module.css";
 import { useRouter } from "next/navigation";
 
 const FeedbackOrder: React.FC = () => {
   const router = useRouter();
-  async function handleClick(e: any): Promise<void> {
+
+  const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        `${API_BASE_URL}/feedback`,
-        {
-          businessSlug: "sushiDaily",
-          emoji_service: localStorage.getItem("emojiService"),
-          comment_service: localStorage.getItem("commentService"),
-          tags_service: localStorage.getItem("serviceTags"),
-          emoji_order: localStorage.getItem("emojiOrder"),
-          comment_order: localStorage.getItem("commentOrder"),
-          tags_order: localStorage.getItem("orderTags"),
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      router.push("/feedback/success");
-      console.log(response);
-    } catch (error) {
-      console.error("There was an error sending the data", error);
-    }
+      const body = {
+        businessSlug: "sushiDaily test",
+        emojiService: localStorage.getItem("emojiService"),
+        commentService: localStorage.getItem("commentService"),
+        serviceTags: localStorage.getItem("serviceTags"),
+        emojiOrder: localStorage.getItem("emojiOrder"),
+        commentOrder: localStorage.getItem("commentOrder"),
+        orderTags: localStorage.getItem("orderTags"),
+      };
+      const result = await fetch(`/api/feedback`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
 
-    const keysToRemove = [
-      "emojiService",
-      "commentService",
-      "tagsService",
-      "emojiOrder",
-      "commentOrder",
-      "tagsOrder",
-    ];
-    keysToRemove.forEach((key) => localStorage.removeItem(key));
-  }
+      console.log(result);
+      if (result) {
+        const keysToRemove = [
+          "emojiService",
+          "commentService",
+          "serviceTags",
+          "emojiOrder",
+          "commentOrder",
+          "orderTags",
+        ];
+        await keysToRemove.forEach((key) => localStorage.removeItem(key));
+      }
+      await router.push("/feedback/success");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="mobile">
@@ -68,7 +66,7 @@ const FeedbackOrder: React.FC = () => {
 
         <div className="navigation">
           <Button
-            onClick={handleClick}
+            onClick={handleSubmit}
             version="full"
             btnText="Submit feedback"
           />

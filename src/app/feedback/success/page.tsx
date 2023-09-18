@@ -13,13 +13,15 @@ import { getLinkByTip } from "@/utils/getStripeLinkByTipAmount";
 import router from "next/router";
 import { tipOptions } from "@/utils/tipOptions";
 import { useContext } from "react";
+import { useRouter } from "next/navigation";
 
 const SuccessFeedback = () => {
-  const { selectedTip, setSelectedTip } = useContext(FeedbackContext);
+  const { router } = useRouter();
+  // const { selectedTip, setSelectedTip } = useContext(FeedbackContext);
 
-  const handleChange = (e: any) => {
-    setSelectedTip(+e.target.value);
-  };
+  // const handleChange = (e: any) => {
+  //   setSelectedTip(+e.target.value);
+  // };
 
   return (
     <div className="mobile">
@@ -46,7 +48,7 @@ const SuccessFeedback = () => {
                 id={option.symbol}
                 name="tip"
                 value={option.value}
-                onChange={handleChange}
+                // onChange={handleChange}
               />
               <label htmlFor={option.symbol}>
                 <Emoji symbol={option.symbol} label={option.symbol} size={25} />
@@ -60,7 +62,7 @@ const SuccessFeedback = () => {
       </div>
 
       <div className="navigation">
-        {selectedTip ? (
+        {/* {selectedTip ? (
           <PaymentButton
             btnVersion="full"
             btnText="Give tip"
@@ -68,7 +70,7 @@ const SuccessFeedback = () => {
           />
         ) : (
           <Button isDisabled={true} version="full" btnText="Give tip" />
-        )}
+        )} */}
         <Button
           version="normal"
           btnText="No, thank you"

@@ -28,9 +28,9 @@ export const FeedbackProvider = ({ children }: any) => {
   const [feedback, setFeedback] = useState<Feedback[]>([]);
   const [selectedTip, setSelectedTip] = useState<number | undefined>(undefined);
 
-  useEffect(() => {
-    fetchFeedback();
-  }, []);
+  // useEffect(() => {
+  //   fetchFeedback();
+  // }, []);
 
   // Fetch feedback
   const fetchFeedback = async () => {

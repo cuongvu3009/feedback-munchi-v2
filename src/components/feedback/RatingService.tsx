@@ -64,7 +64,7 @@ const RatingService: React.FC = () => {
 
       {emojiService !== null && (
         <>
-          <FeedbackTags storageKey="tagsService" emojiService={emojiService} />
+          <FeedbackTags storageKey="serviceTags" emojiService={emojiService} />
           <FeedbackComment
             storageKey="commentService"
             emojiService={emojiService}
