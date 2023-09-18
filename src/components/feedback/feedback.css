@@ -86,6 +86,13 @@
   transition: 0.3s;
 }
 
+.emoji-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
 .rating li label {
   display: flex; /* Use flexbox */
   justify-content: center; /* Center horizontally */

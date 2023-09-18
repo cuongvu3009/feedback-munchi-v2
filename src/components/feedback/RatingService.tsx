@@ -9,6 +9,7 @@ import FeedbackTags from "./FeedbackTags";
 import GoodSVG from "@/utils/emoji-svg/GoodSVG";
 import OkeySVG from "@/utils/emoji-svg/OkeySVG";
 import TerribleSVG from "@/utils/emoji-svg/TerribleSVG";
+import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 import { ratingOptions } from "../../utils/ratingOptions";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
@@ -37,27 +38,31 @@ const RatingService: React.FC = () => {
           }[option.value];
 
           return (
-            <li key={`rating-${index + 1}`}>
-              <input
-                type="radio"
-                id={option.value}
-                name="rating"
-                value={option.value}
-                onChange={handleEmojiChange}
-                checked={emojiService === option.value}
-                disabled={emojiService === option.value}
-              />
-              <label
-                htmlFor={option.value}
-                className={
-                  emojiService === option.value
-                    ? "selected-button"
-                    : "unselected-button"
-                }
-              >
-                {EmojiComponent} {/* Render the corresponding SVG component */}
-              </label>
-            </li>
+            <div className="emoji-wrapper" key={`rating-${index + 1}`}>
+              <li key={`rating-${index + 1}`}>
+                <input
+                  type="radio"
+                  id={option.value}
+                  name="rating"
+                  value={option.value}
+                  onChange={handleEmojiChange}
+                  checked={emojiService === option.value}
+                  disabled={emojiService === option.value}
+                />
+                <label
+                  htmlFor={option.value}
+                  className={
+                    emojiService === option.value
+                      ? "selected-button"
+                      : "unselected-button"
+                  }
+                >
+                  {EmojiComponent}{" "}
+                  {/* Render the corresponding SVG component */}
+                </label>
+              </li>
+              <h3>{capitalizeFirstLetter(option.value)}</h3>
+            </div>
           );
         })}
       </ul>
