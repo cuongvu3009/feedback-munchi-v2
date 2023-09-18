@@ -29,7 +29,9 @@ export default function FeedbackService({
           <Logo />
           <div className={`${styles["feedback-container"]}`}>
             <div className={`${styles["feedback-description"]}`}>
-              <h3>How was your experience?</h3>
+              <h3>
+                <b>How was your experience?</b>
+              </h3>
               <p>Your feedback helps us improve our service.</p>
             </div>
           </div>

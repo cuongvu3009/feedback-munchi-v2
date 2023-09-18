@@ -35,17 +35,35 @@ export default function FeedbackOrder({
       });
 
       if (result) {
-        const keysToRemove = [
-          "emojiService",
-          "commentService",
-          "serviceTags",
-          "emojiOrder",
-          "commentOrder",
-          "orderTags",
-        ];
-        await keysToRemove.forEach((key) => localStorage.removeItem(key));
+        if (
+          localStorage.getItem("emojiService") !== "terrible".trim() &&
+          localStorage.getItem("emojiService") !== "bad".trim() &&
+          localStorage.getItem("emojiOrder") !== "terrible".trim() &&
+          localStorage.getItem("emojiOrder") !== "bad".trim()
+        ) {
+          router.push("/feedback/success");
+          const keysToRemove = [
+            "emojiService",
+            "commentService",
+            "serviceTags",
+            "emojiOrder",
+            "commentOrder",
+            "orderTags",
+          ];
+          await keysToRemove.forEach((key) => localStorage.removeItem(key));
+        } else {
+          router.push(`/feedback/end/${params.businessSlug}`);
+          const keysToRemove = [
+            "emojiService",
+            "commentService",
+            "serviceTags",
+            "emojiOrder",
+            "commentOrder",
+            "orderTags",
+          ];
+          await keysToRemove.forEach((key) => localStorage.removeItem(key));
+        }
       }
-      await router.push("/feedback/success");
     } catch (error) {
       console.error(error);
     }
@@ -60,7 +78,9 @@ export default function FeedbackOrder({
           <Logo />
           <div className={`${styles["feedback-container"]}`}>
             <div className={`${styles["feedback-description"]}`}>
-              <h3>How was your order?</h3>
+              <h3>
+                <b>How was your order?</b>
+              </h3>
               <p>Your feedback helps us improve our products.</p>
             </div>
           </div>

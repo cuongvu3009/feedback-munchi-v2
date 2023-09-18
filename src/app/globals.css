@@ -46,6 +46,8 @@ img {
 .title {
   padding: 5px;
   text-align: center;
+  font-weight: 800;
+  font-size: 30px;
 }
 
 .munchi-logo {
@@ -96,6 +98,9 @@ img {
 }
 
 .btn-full {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 15px;
   width: 90%;
   margin: 0 auto;
