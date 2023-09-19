@@ -1,6 +1,5 @@
 "use client";
 
-import { GrLogout } from "react-icons/gr";
 import Image from "next/image";
 import Link from "next/link";
 import LogoutBtn from "@/components/shared/LogoutBtn";
@@ -9,26 +8,33 @@ import React from "react";
 import TradeMark from "../../shared/TradeMark";
 import styles from "./sidebar.module.css";
 
-const Sidebar: React.FC = () => {
+interface SidebarProps {
+  businessSlug: number | string;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ businessSlug }) => {
   return (
     <div className={styles.sidebar}>
       <div className={`${styles["sidebar-top"]}`}>
         <div className={`${styles["logo-container"]}`}>
-          {/* <div className={`${styles["logo"]}`}></div> */}
+          <div className={`${styles["logo"]}`}></div>
           <Image src={Momotoko} alt="Momotoko" className={styles.logo} />
           <h3>Momotoko</h3>
         </div>
-        <Link href="/dashboard" className={`${styles["sidebar-link"]}`}>
+        <Link
+          href={`/dashboard/${businessSlug}`}
+          className={`${styles["sidebar-link"]}`}
+        >
           Dashboard
         </Link>
         <Link
-          href="/dashboard/responses"
+          href={`/dashboard/${businessSlug}/responses`}
           className={`${styles["sidebar-link"]}`}
         >
           Responses
         </Link>
         <Link
-          href="/dashboard/settings"
+          href={`/dashboard/${businessSlug}/settings`}
           className={`${styles["sidebar-link"]}`}
         >
           Settings

@@ -6,7 +6,11 @@ import moment from "moment";
 import styles from "./responses.module.css";
 import useProtectedPage from "@/hooks/useProtectedPage";
 
-const Responses = () => {
+const Responses = ({
+  params,
+}: {
+  params: { businessSlug: number | string };
+}) => {
   useProtectedPage();
   const getEmojiLabel = (emoji: string) => {
     switch (emoji) {
@@ -27,7 +31,7 @@ const Responses = () => {
 
   return (
     <div className="">
-      <Sidebar />
+      <Sidebar businessSlug={params.businessSlug} />
       <div className={`${styles["dashboard-card"]}`}>
         <h3>Responses</h3>
 

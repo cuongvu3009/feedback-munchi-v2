@@ -5,11 +5,15 @@ import Sidebar from "@/components/dashboard/sidebar/Sidebar";
 import styles from "./settings.module.css";
 import useProtectedPage from "@/hooks/useProtectedPage";
 
-const Settings = () => {
+const Settings = ({
+  params,
+}: {
+  params: { businessSlug: number | string };
+}) => {
   useProtectedPage();
   return (
     <div className="">
-      <Sidebar />
+      <Sidebar businessSlug={params.businessSlug} />
       <div className={`${styles["dashboard-card"]}`}>
         <h3>settings</h3>
       </div>{" "}

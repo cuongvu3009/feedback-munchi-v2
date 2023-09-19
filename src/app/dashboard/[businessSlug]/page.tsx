@@ -6,13 +6,17 @@ import Sidebar from "@/components/dashboard/sidebar/Sidebar";
 import styles from "./dashboard.module.css";
 import useProtectedPage from "@/hooks/useProtectedPage";
 
-const Dashboard = () => {
+const Dashboard = ({
+  params,
+}: {
+  params: { businessSlug: number | string };
+}) => {
   useProtectedPage();
 
   return (
     <div className={styles.dashboard}>
-      <Sidebar />
-      <DashboardInfo />
+      <Sidebar businessSlug={params.businessSlug} />
+      <DashboardInfo businessSlug={params.businessSlug} />
     </div>
   );
 };

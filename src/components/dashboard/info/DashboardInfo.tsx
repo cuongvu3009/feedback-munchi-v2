@@ -7,7 +7,10 @@ import React from "react";
 import { data } from "../data";
 import styles from "./dashboardInfo.module.css";
 
-const DashboardInfo = () => {
+interface DashboardProps {
+  businessSlug: string | number;
+}
+const DashboardInfo: React.FC<DashboardProps> = ({ businessSlug }) => {
   return (
     <div className={`${styles["dashboard-info"]}`}>
       <div className={`${styles["dashboard-content"]}`}>

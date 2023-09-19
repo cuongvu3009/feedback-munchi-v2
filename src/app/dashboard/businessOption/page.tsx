@@ -21,7 +21,7 @@ const Page = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [businesses, setBusinesses] = useState<BusinessProps[]>([]);
   const [selectedBusiness, setSelectedBusiness] = useState<number | null>(null); // Track selected business
-  const { getItem } = useLocalStorage();
+  const { getItem, setItem } = useLocalStorage();
   const router = useRouter();
 
   useEffect(() => {
@@ -42,6 +42,7 @@ const Page = () => {
           }
         );
         setBusinesses(response.data.result.businesses);
+
         setIsLoading(false);
       } catch (error) {
         console.error("There was an error fetching data", error);
@@ -56,6 +57,7 @@ const Page = () => {
     event.preventDefault();
 
     if (selectedBusiness !== null) {
+      setItem("businessId", JSON.stringify(selectedBusiness));
       router.push(`/dashboard/${selectedBusiness}`);
     }
   };
