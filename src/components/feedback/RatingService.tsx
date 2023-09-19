@@ -57,11 +57,13 @@ const RatingService: React.FC = () => {
                       : "unselected-button"
                   }
                 >
-                  {EmojiComponent}{" "}
+                  {EmojiComponent}
                   {/* Render the corresponding SVG component */}
                 </label>
               </li>
-              <h3>{capitalizeFirstLetter(option.value)}</h3>
+              <h3 className="emoji-text">
+                {capitalizeFirstLetter(option.value)}
+              </h3>
             </div>
           );
         })}

@@ -79,7 +79,7 @@ const FeedbackComment: React.FC<CommentProps> = ({
       {isPopupOpen && (
         <div className="popup">
           <form className="popup-container" onSubmit={handleSubmit}>
-            <h3>Add a comment for the restaurant</h3>
+            <h3 className="popup-comment">Add a comment for the restaurant</h3>
             <input
               type="text"
               placeholder="Your comment here..."

@@ -2,8 +2,8 @@ import "./feedback.css";
 
 import React, { useEffect, useState } from "react";
 
-import { defaultTags } from "../../utils/defaultTags";
-import { tagsQuestion } from "../../utils/tagsQuestion";
+import { defaultTags } from "@/utils/defaultTags";
+import { tagsQuestion } from "@/utils/tagsQuestion";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 interface FeedbackTagsProps {
@@ -53,12 +53,17 @@ const FeedbackTags: React.FC<FeedbackTagsProps> = ({
 
   return (
     <div className="tags">
-      {tagsQuestion[storageKey] && (
+      {tagsQuestion[emojiService as string] && (
         <div>
-          <h4>{tagsQuestion[storageKey]["question_1"]}</h4>
-          <p>{tagsQuestion[storageKey]["question_2"]}</p>
+          <h3 className="question">
+            <b>{tagsQuestion[emojiService as string]["question_1"]}</b>
+          </h3>
+          <p className="text">
+            {tagsQuestion[emojiService as string]["question_2"]}
+          </p>
         </div>
       )}
+
       <div className="tags-container">
         {mappedTags.map((tag, index) => (
           <li key={index}>

@@ -23,16 +23,20 @@ export default function FeedbackService({
   return (
     <div className="mobile">
       <div className={`${styles["feedback"]}`}>
-        <Title />
+        <div className={styles.header}>
+          <Title />
+        </div>
 
         <div className={`${styles["feedback-wrapper"]}`}>
           <Logo />
           <div className={`${styles["feedback-container"]}`}>
             <div className={`${styles["feedback-description"]}`}>
-              <h3>
+              <h3 className={styles.question}>
                 <b>How was your experience?</b>
               </h3>
-              <p>Your feedback helps us improve our service.</p>
+              <p className={styles.text}>
+                Your feedback helps us improve our service.
+              </p>
             </div>
           </div>
         </div>

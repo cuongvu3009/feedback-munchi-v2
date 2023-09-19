@@ -46,8 +46,8 @@ img {
 .title {
   padding: 5px;
   text-align: center;
-  font-weight: 800;
-  font-size: 30px;
+  font-weight: 500;
+  font-size: 24px;
 }
 
 .munchi-logo {
@@ -90,10 +90,13 @@ img {
 .btn-primary {
   background-color: #ff3637;
   color: #fff;
+  width: 100%;
+  border-radius: 50px;
+  font-weight: bold;
 }
 
 .btn-secondary {
-  background-color: #ffeded;
+  /* background-color: #ffeded; */
   color: #ff3637;
 }
 
@@ -101,10 +104,10 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 15px;
+  padding: 25px 0;
   width: 90%;
   margin: 0 auto;
-  border-radius: 20px;
+  border-radius: 50px;
   background-color: #ff3637;
   border: none;
   color: #fff;
@@ -149,8 +152,8 @@ img {
 }
 
 .card {
-  padding: 8px;
-  border-radius: 15px;
+  padding: 8px 16px;
+  border-radius: 50px;
   cursor: pointer;
 }
 
@@ -159,6 +162,7 @@ img {
   color: #ff3637;
   border: 1px solid #ff3637;
   width: fit-content;
+  font-weight: normal;
 }
 
 .selected-card-tags,

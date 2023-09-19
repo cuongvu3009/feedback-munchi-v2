@@ -12,6 +12,13 @@
   height: 100px;
   border-radius: 50%;
 }
+.question {
+  font-size: 19px;
+  font-weight: 500;
+}
+.text {
+  font-size: 16px;
+}
 
 .munchi-logo {
   display: flex;
@@ -21,6 +28,14 @@
 
 .restaurant-name {
   font-weight: bold;
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+.emoji-text {
+  font-size: 14px;
+  text-align: center;
+  margin: 4px;
 }
 
 .tags-container {
@@ -42,9 +57,9 @@
 
 .tags-container label {
   display: inline-block;
-  padding: 5px 10px;
+  padding: 5px 15px;
   border: none;
-  border-radius: 14px;
+  border-radius: 50px;
   cursor: pointer;
 }
 
@@ -61,6 +76,10 @@
 .form-submitted {
   background-color: red;
   color: white;
+}
+
+.popup-comment {
+  font-weight: bold;
 }
 
 .unselected-button {
@@ -81,7 +100,8 @@
   justify-content: space-around;
   align-items: center;
   padding: 0;
-  margin: 20px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .rating li {

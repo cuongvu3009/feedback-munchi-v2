@@ -61,7 +61,6 @@ const Page = () => {
       router.push(`/dashboard/${selectedBusiness}`);
     }
   };
-  console.log(selectedBusiness);
 
   return (
     <div className={styles.container}>
