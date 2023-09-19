@@ -36,7 +36,7 @@ const Login = () => {
       try {
         const result = await axios({
           method: "POST",
-          url: `${API_BASE_URL}/auth/signin`,
+          url: `${API_BASE_URL}/auth/`,
           data: {
             email,
             password,
@@ -44,8 +44,8 @@ const Login = () => {
         });
 
         login(result.data);
-        setResponse({ data: result.data, loading: false, error: null });
-        redirect("/dashboard");
+        setResponse({ data: result.data.result, loading: false, error: null });
+        // redirect("/dashboard");
       } catch (error: any) {
         setResponse({ data: null, loading: false, error });
       }
