@@ -97,13 +97,9 @@ export const useFeedbackContext = () => {
 
 export const FeedbackProvider = ({ children }: any) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
   const [feedback, setFeedback] = useState<Feedback[]>([]);
   const [selectedTip, setSelectedTip] = useState<number | undefined>(undefined);
-  const { getItem } = useLocalStorage();
-
-  useEffect(() => {
-    fetchBusinesses();
-  }, []);
 
   // Fetch feedback
   const fetchFeedback = async () => {
@@ -112,29 +108,6 @@ export const FeedbackProvider = ({ children }: any) => {
     try {
       const response = await axios.get(`${API_BASE_URL}/feedback`);
       setFeedback(response.data);
-      setIsLoading(false);
-    } catch (error) {
-      console.error("There was an error fetching data", error);
-      setIsLoading(false);
-    }
-  };
-
-  const fetchBusinesses = async () => {
-    setIsLoading(true);
-    const storedUser = getItem("user");
-    const user = JSON.parse(storedUser as string);
-    const userId = user.result.id;
-    const access_token = user.result.session.access_token;
-    try {
-      const response = await axios.get(
-        `${API_BASE_URL}/users/${userId}?params=businesses`,
-        {
-          headers: {
-            Authorization: `Bearer ${access_token}`,
-          },
-        }
-      );
-      console.log(response);
       setIsLoading(false);
     } catch (error) {
       console.error("There was an error fetching data", error);

@@ -7,7 +7,7 @@ const useRedirectIfAuthenticated = () => {
 
   if (user) {
     // Redirect to the previous page using the Next.js router
-    return redirect("/dashboard");
+    return redirect("/dashboard/businessOption");
   }
 };
 

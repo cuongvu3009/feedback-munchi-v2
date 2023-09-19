@@ -3,6 +3,7 @@
 import React, { useRef, useState } from "react";
 
 import { API_BASE_URL } from "@/utils/constantAPI";
+import TradeMark from "@/components/shared/TradeMark";
 import { User } from "@/types/auth.types";
 import axios from "axios";
 import { redirect } from "next/navigation";
@@ -45,7 +46,7 @@ const Login = () => {
 
         login(result.data);
         setResponse({ data: result.data.result, loading: false, error: null });
-        // redirect("/dashboard");
+        redirect("/dashboard/businessOption");
       } catch (error: any) {
         setResponse({ data: null, loading: false, error });
       }
@@ -84,6 +85,7 @@ const Login = () => {
         )}
         {response.data && <p className={styles.success}>Login successful!</p>}
       </form>
+      <TradeMark />
     </div>
   );
 };
