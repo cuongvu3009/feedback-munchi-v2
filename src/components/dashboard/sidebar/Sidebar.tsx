@@ -4,7 +4,6 @@ import { BusinessProps } from "@/types/dashboard.types";
 import Image from "next/image";
 import Link from "next/link";
 import LogoutBtn from "@/components/shared/LogoutBtn";
-import Momotoko from "../../assets/MomotokoLogo.png";
 import React from "react";
 import TradeMark from "../../shared/TradeMark";
 import styles from "./sidebar.module.css";
@@ -25,7 +24,7 @@ const Sidebar: React.FC<SidebarProps> = ({ business }) => {
             src={business.logo}
             width={60}
             height={60}
-            alt="Momotoko"
+            alt={business.name}
             className={styles.logo}
           />
           <h3>{business.name}</h3>

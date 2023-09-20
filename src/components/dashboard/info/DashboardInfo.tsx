@@ -1,18 +1,20 @@
-"use client";
+import { Feedback, FeedbackContextProps } from "@/types/feedback.types";
 
 import { BusinessProps } from "@/types/dashboard.types";
 import DashboardResponses from "@/components/dashboard/responses/DashboardResponses";
 import DashboardScore from "@/components/dashboard/score/DashboardScore";
 import FeedbackChart from "@/components/dashboard/chart/FeedbackChart";
 import React from "react";
+import axios from "axios";
 import { data } from "../data";
 import styles from "./dashboardInfo.module.css";
 
 interface DashboardProps {
-  business: BusinessProps;
+  feedbacks: Feedback[];
 }
 
-const DashboardInfo: React.FC<DashboardProps> = ({ business }) => {
+const DashboardInfo: React.FC<DashboardProps> = ({ feedbacks }) => {
+  console.log(feedbacks);
   return (
     <div className={`${styles["dashboard-info"]}`}>
       <div className={`${styles["dashboard-content"]}`}>

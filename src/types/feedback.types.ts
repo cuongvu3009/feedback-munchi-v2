@@ -1,8 +1,13 @@
 export interface Feedback {
   id?: string;
   createdAt?: Date | string;
-  emoji: any;
-  comment: string;
+  emojiService: string;
+  emojiOrder: string;
+  commentService: string;
+  commentOrder: string;
+  businessSlug: string;
+  serviceTags: string[];
+  orderTags: string[];
 }
 
 export interface FeedbackContextProps {

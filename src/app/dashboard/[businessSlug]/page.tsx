@@ -2,44 +2,37 @@
 
 import React, { useEffect, useState } from "react";
 
-import { API_BASE_URL } from "@/utils/constantAPI";
 import DashboardInfo from "@/components/dashboard/info/DashboardInfo";
 import Sidebar from "@/components/dashboard/sidebar/Sidebar";
-import axios from "axios";
+import { getBusiness } from "@/lib/getBusiness";
+import { getFeedbackData } from "@/lib/getFeedbackData";
 import styles from "./dashboard.module.css";
 import useProtectedPage from "@/hooks/useProtectedPage";
 
-const Dashboard = ({
+export const Dashboard = ({
   params,
 }: {
   params: { businessSlug: number | string };
 }) => {
   useProtectedPage();
-  const [business, setBusiness] = useState<any | undefined>(undefined);
-  const [isLoading, setIsLoading] = useState(false);
+
+  const [business, setBusiness] = useState(null);
+  const [feedbacks, setFeedbacks] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    const user = JSON.parse(storedUser!);
-    const access_token = user.result.session.access_token;
-
     const fetchData = async () => {
-      setIsLoading(true);
       try {
-        const response = await axios.get(
-          `${API_BASE_URL}/business/${params.businessSlug}?mode=dashboard`,
-          {
-            headers: {
-              Authorization: `Bearer ${access_token}`,
-            },
-          }
-        );
-        const businessesData = response.data.result;
-        setBusiness(businessesData);
+        const businessData = await getBusiness(params.businessSlug);
+        setBusiness(businessData);
+
+        const feedbacksData = await getFeedbackData(businessData.slug);
+        setFeedbacks(feedbacksData);
+
         setIsLoading(false);
       } catch (error) {
         console.error("There was an error fetching data", error);
-        setBusiness({}); // Set to an empty array on error
+        setBusiness(null);
         setIsLoading(false);
       }
     };
@@ -49,10 +42,12 @@ const Dashboard = ({
 
   return (
     <div className={styles.dashboard}>
-      {business ? (
+      {isLoading ? (
+        <p>Loading</p>
+      ) : business ? (
         <>
           <Sidebar business={business} />
-          <DashboardInfo business={business} />
+          <DashboardInfo feedbacks={feedbacks} />
         </>
       ) : (
         <p>Loading</p>
