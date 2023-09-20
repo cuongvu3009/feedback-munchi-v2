@@ -1,5 +1,6 @@
 "use client";
 
+import { BusinessProps } from "@/types/dashboard.types";
 import DashboardResponses from "@/components/dashboard/responses/DashboardResponses";
 import DashboardScore from "@/components/dashboard/score/DashboardScore";
 import FeedbackChart from "@/components/dashboard/chart/FeedbackChart";
@@ -8,9 +9,10 @@ import { data } from "../data";
 import styles from "./dashboardInfo.module.css";
 
 interface DashboardProps {
-  businessSlug: string | number;
+  business: BusinessProps;
 }
-const DashboardInfo: React.FC<DashboardProps> = ({ businessSlug }) => {
+
+const DashboardInfo: React.FC<DashboardProps> = ({ business }) => {
   return (
     <div className={`${styles["dashboard-info"]}`}>
       <div className={`${styles["dashboard-content"]}`}>

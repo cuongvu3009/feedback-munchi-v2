@@ -1,5 +1,6 @@
 "use client";
 
+import { BusinessProps } from "@/types/dashboard.types";
 import Image from "next/image";
 import Link from "next/link";
 import LogoutBtn from "@/components/shared/LogoutBtn";
@@ -9,32 +10,40 @@ import TradeMark from "../../shared/TradeMark";
 import styles from "./sidebar.module.css";
 
 interface SidebarProps {
-  businessSlug: number | string;
+  business: BusinessProps;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ businessSlug }) => {
+const Sidebar: React.FC<SidebarProps> = ({ business }) => {
+  if (!business) {
+    return "loading...";
+  }
   return (
     <div className={styles.sidebar}>
       <div className={`${styles["sidebar-top"]}`}>
         <div className={`${styles["logo-container"]}`}>
-          <div className={`${styles["logo"]}`}></div>
-          <Image src={Momotoko} alt="Momotoko" className={styles.logo} />
-          <h3>Momotoko</h3>
+          <Image
+            src={business.logo}
+            width={60}
+            height={60}
+            alt="Momotoko"
+            className={styles.logo}
+          />
+          <h3>{business.name}</h3>
         </div>
         <Link
-          href={`/dashboard/${businessSlug}`}
+          href={`/dashboard/${business.id}`}
           className={`${styles["sidebar-link"]}`}
         >
           Dashboard
         </Link>
         <Link
-          href={`/dashboard/${businessSlug}/responses`}
+          href={`/dashboard/${business.id}/responses`}
           className={`${styles["sidebar-link"]}`}
         >
           Responses
         </Link>
         <Link
-          href={`/dashboard/${businessSlug}/settings`}
+          href={`/dashboard/${business.id}/settings`}
           className={`${styles["sidebar-link"]}`}
         >
           Settings

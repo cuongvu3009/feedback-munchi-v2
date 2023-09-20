@@ -1,11 +1,12 @@
 .sidebar {
-  max-width: fit-content;
-  padding: 20px;
+  width: 250px;
+  padding: 10px;
   height: 100vh;
   background-color: #e8eaee;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
 }
 .sidebar-top {
 }
@@ -20,8 +21,6 @@
 }
 
 .logo {
-  width: 30px;
-  height: 30px;
   border-radius: 50%;
   background-color: inherit;
 }
