@@ -82,6 +82,15 @@
   font-weight: bold;
 }
 
+.popup-container > input::placeholder {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  border: 1px solid black;
+  width: 100%;
+  height: 100%;
+}
+
 .unselected-button {
   opacity: 0.5;
   transition: opacity 0.3s ease;
@@ -131,6 +140,46 @@
   border-radius: 50%;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s; /* Apply transitions */
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 20px;
+  width: 90%;
+}
+
+.popup h2 {
+  margin: 0;
+  padding-bottom: 10px;
+}
+
+.popup input {
+  display: block;
+  border: none;
+  width: 100%;
+  height: 100px;
+}
+
+.popup button {
+  padding: 5px 10px;
+  margin-right: 5px;
 }
 
 input[type="radio"]:disabled + label.unselected-button {
