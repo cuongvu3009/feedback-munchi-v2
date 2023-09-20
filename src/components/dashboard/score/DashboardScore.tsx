@@ -1,17 +1,10 @@
+import { Feedback } from "@/types/feedback.types";
 import React from "react";
 import styles from "./dashboardScore.module.css";
 
 interface DashboardScoreProps {
   type: "service" | "order";
-  data: DataPoint[];
-}
-
-interface DataPoint {
-  _id: string;
-  businessSlug: string;
-  emoji_service: string;
-  emoji_order: string;
-  createdAt: string;
+  data: Feedback[];
 }
 
 const mapEmojiToScore = (emoji: string, type: "service" | "order"): number => {
@@ -31,15 +24,12 @@ const mapEmojiToScore = (emoji: string, type: "service" | "order"): number => {
   }
 };
 
-const calculateAverageScore = (
-  data: DataPoint[],
-  type: "service" | "order"
-) => {
+const calculateAverageScore = (data: Feedback[], type: "service" | "order") => {
   let totalScore = 0;
   let totalCount = 0;
 
   data.forEach((entry) => {
-    const emoji = type === "service" ? entry.emoji_service : entry.emoji_order;
+    const emoji = type === "service" ? entry.emojiService : entry.emojiOrder;
     const score = mapEmojiToScore(emoji, type); // Implement your mapping function
 
     totalScore += score;
@@ -54,13 +44,13 @@ const calculateAverageScore = (
 };
 
 const calculateResponseCounts = (
-  data: DataPoint[],
+  data: Feedback[],
   type: "service" | "order"
 ) => {
   const responseCounts: { [response: string]: number } = {};
 
   data.forEach((entry) => {
-    const emoji = type === "service" ? entry.emoji_service : entry.emoji_order;
+    const emoji = type === "service" ? entry.emojiService : entry.emojiOrder;
     if (emoji in responseCounts) {
       responseCounts[emoji]++;
     } else {

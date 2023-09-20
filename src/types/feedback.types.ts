@@ -1,6 +1,6 @@
 export interface Feedback {
   id?: string;
-  createdAt?: Date | string;
+  createdAt: string;
   emojiService: string;
   emojiOrder: string;
   commentService: string;

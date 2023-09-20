@@ -8,16 +8,10 @@ import {
   YAxis,
 } from "recharts";
 
-interface DataPoint {
-  _id: string;
-  businessSlug: string;
-  emoji_service: string;
-  emoji_order: string;
-  createdAt: string;
-}
+import { Feedback } from "@/types/feedback.types";
 
 interface LineChartProps {
-  data: DataPoint[];
+  data: Feedback[];
   type: "service" | "order";
 }
 
@@ -62,31 +56,33 @@ const formatAverageScore = (value: number): string => {
 const LineChartComponent: React.FC<LineChartProps> = ({ data, type }) => {
   // Group data by date and calculate average score based on the 'type'
   const chartData: ChartData = data.reduce((acc, entry) => {
-    const date = formatDate(entry.createdAt);
+    const date = formatDate(entry.createdAt as string);
     if (!acc[date]) {
       acc[date] = { date, totalScore: 0, count: 0 };
     }
     const score =
       type === "service"
-        ? mapEmojiToScore(entry.emoji_service, type)
-        : mapEmojiToScore(entry.emoji_order, type);
+        ? mapEmojiToScore(entry.emojiService, type)
+        : mapEmojiToScore(entry.emojiOrder, type);
     acc[date].totalScore += score;
     acc[date].count += 1;
     return acc;
   }, {} as ChartData);
 
-  // Convert grouped data into an array
-  const finalChartData = Object.values(chartData).map((entry) => ({
-    date: entry.date,
-    averageScore: entry.totalScore / entry.count,
-  }));
+  // Convert grouped data into an array and sort it by date
+  const finalChartData = Object.values(chartData)
+    .map((entry) => ({
+      date: entry.date,
+      averageScore: entry.totalScore / entry.count,
+    }))
+    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
   return (
     <ResponsiveContainer width="100%" height={300}>
       <LineChart data={finalChartData}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="date" />
-        <YAxis domain={[1, 5]} ticks={[1, 2, 3, 4, 5]} />{" "}
+        <YAxis domain={[1, 5]} ticks={[1, 2, 3, 4, 5]} />
         {/* Adjust the domain and ticks */}
         <Tooltip formatter={(value: number) => formatAverageScore(value)} />
         <Line type="monotone" dataKey="averageScore" stroke="#8884d8" />
