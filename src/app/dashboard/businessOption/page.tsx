@@ -6,7 +6,7 @@ import LogoutBtn from "@/components/shared/LogoutBtn";
 import TradeMark from "@/components/shared/TradeMark";
 import getUserBusiness from "@/utils/getUserBusinesses";
 import styles from "./businessOption.module.css";
-import { useAuthContext } from "@/context/AuthContext";
+import { useBusinessContext } from "@/context/BusinessContext";
 import { useRouter } from "next/navigation";
 
 interface BusinessProps {
@@ -18,13 +18,7 @@ const Page = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedBusiness, setSelectedBusiness] = useState<number | null>(null);
   const router = useRouter();
-  const { userIsLoggedIn } = useAuthContext();
-
-  useEffect(() => {
-    userIsLoggedIn
-      ? router.push("/dashboard/businessOption")
-      : router.push("/dashboard/login");
-  });
+  const { setBusinessId } = useBusinessContext();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -50,13 +44,17 @@ const Page = () => {
     fetchData();
   }, []);
 
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedBusiness(Number(event.target.value));
+    setBusinessId(Number(event.target.value));
+  };
   return (
     <div className={styles.container}>
       <h2>Choose business</h2>
       <form className={`${styles["choose"]}`} onSubmit={handleSubmit}>
         <select
           className={styles.select}
-          onChange={(e) => setSelectedBusiness(Number(e.target.value))}
+          onChange={handleChange}
           value={selectedBusiness || ""}
         >
           <option value="">Select a business</option>

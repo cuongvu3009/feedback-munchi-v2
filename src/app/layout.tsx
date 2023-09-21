@@ -1,11 +1,11 @@
 import "./globals.css";
 
 import { AuthProvider } from "@/context/AuthContext";
+import { DM_Sans } from "next/font/google";
 import { FeedbackProvider } from "@/context/FeedbackContext";
-import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 
-const inter = Inter({ subsets: ["latin"] });
+const sans = DM_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={sans.className}>
         <FeedbackProvider>
           <AuthProvider>{children}</AuthProvider>
         </FeedbackProvider>

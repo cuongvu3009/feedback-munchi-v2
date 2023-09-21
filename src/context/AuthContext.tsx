@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  AuthContextType,
-  AuthProviderProps,
-  User,
-  UserAPIProps,
-} from "../types/auth.types";
+import { AuthContextType, AuthProviderProps, User } from "../types/auth.types";
 // AuthContext.tsx
 import React, { createContext, useContext, useState } from "react";
 

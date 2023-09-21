@@ -22,8 +22,8 @@ export default function Layout({
   const [isLoading, setIsLoading] = useState(false);
   const { setItem } = useLocalStorage();
 
-  const router = useRouter();
   const { userIsLoggedIn } = useAuthContext();
+  const router = useRouter();
 
   useEffect(() => {
     // checks if the user is authenticated

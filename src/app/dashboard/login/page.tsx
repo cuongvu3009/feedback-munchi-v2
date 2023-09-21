@@ -1,16 +1,13 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 
 import { API_BASE_URL } from "@/utils/constantAPI";
 import TradeMark from "@/components/shared/TradeMark";
 import { User } from "@/types/auth.types";
 import axios from "axios";
-import { redirect } from "next/navigation";
 import styles from "./dashboardLogin.module.css";
-import { useAuthContext } from "@/context/AuthContext";
 import { useAuthenticate } from "@/hooks/useAuthenticate";
-import { useRouter } from "next/navigation";
 
 interface ApiResponse {
   data: User | null; // Provide a default type of null for data
@@ -26,14 +23,6 @@ const Login = () => {
     data: null,
     loading: false,
     error: null,
-  });
-  const { userIsLoggedIn } = useAuthContext();
-  const router = useRouter();
-
-  useEffect(() => {
-    userIsLoggedIn
-      ? router.push("/dashboard/businessOption")
-      : router.push("/dashboard/login");
   });
 
   const handleLogin = async (e: React.FormEvent) => {
