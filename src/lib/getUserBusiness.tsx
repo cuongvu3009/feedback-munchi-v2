@@ -9,8 +9,8 @@ async function fetchUserBusinesses() {
   }
   try {
     const user = JSON.parse(storedUser);
-    const userId = user.result.id;
-    const access_token = user.result.session.access_token;
+    const userId = user.id;
+    const access_token = user.session.access_token;
 
     const response = await axios.get(
       `${API_BASE_URL}/users/${userId}?params=businesses`,

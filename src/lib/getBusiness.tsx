@@ -4,7 +4,7 @@ import axios from "axios";
 export async function getBusiness(businessSlug: string | number) {
   const storedUser = localStorage.getItem("user");
   const user = JSON.parse(storedUser!);
-  const access_token = user.result.session.access_token;
+  const access_token = user.session.access_token;
 
   try {
     const response = await axios.get(
