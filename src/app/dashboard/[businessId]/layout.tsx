@@ -3,10 +3,10 @@
 import React, { useEffect, useState } from "react";
 
 import { BusinessProps } from "@/types/dashboard.types";
-import DashboardPage from "./info/page";
 import Sidebar from "@/components/dashboard/sidebar/Sidebar";
 import { getBusiness } from "@/lib/getBusiness";
 import styles from "./dashboard.module.css";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 export default function Layout({
   children,
@@ -17,6 +17,7 @@ export default function Layout({
 }) {
   const [business, setBusiness] = useState<BusinessProps | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const { setItem } = useLocalStorage();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,6 +26,7 @@ export default function Layout({
         const businessData = await getBusiness(params.businessId);
         setBusiness(businessData);
 
+        setItem("business", JSON.stringify(businessData));
         setIsLoading(false);
       } catch (error) {
         console.error("There was an error fetching data", error);
