@@ -24,7 +24,7 @@ const Page = () => {
     event.preventDefault();
 
     if (selectedBusiness !== null) {
-      router.push(`/dashboard/${selectedBusiness}`);
+      router.push(`/dashboard/${selectedBusiness}/info`);
     }
   };
 

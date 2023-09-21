@@ -9,7 +9,6 @@ const Settings = ({ params }: { params: { businessId: number } }) => {
   useProtectedPage();
   return (
     <div className="">
-      <Sidebar businessId={params.businessId} />
       <div className={`${styles["dashboard-card"]}`}>
         <h3>settings</h3>
       </div>{" "}

@@ -27,7 +27,6 @@ const Responses = ({ params }: { params: { businessId: number } }) => {
 
   return (
     <div className="">
-      <Sidebar businessId={params.businessId} />
       <div className={`${styles["dashboard-card"]}`}>
         <h3>Responses</h3>
 

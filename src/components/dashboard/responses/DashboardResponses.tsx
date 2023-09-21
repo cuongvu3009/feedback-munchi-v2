@@ -48,7 +48,7 @@ const DashboardResponses: React.FC<DashboardResponseProps> = ({
         return (
           <div
             className={`${styles["flex-between"]}`}
-            key={item.id + item.emojiService + item.createdAt}
+            key={item.id + item.businessSlug + item.createdAt}
           >
             <p>{getEmojiLabel(item.emojiService)}</p>
             <p>{moment(item.createdAt).fromNow()}</p>

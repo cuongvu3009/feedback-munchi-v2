@@ -2,28 +2,28 @@
 
 import React, { useEffect, useState } from "react";
 
-import DashboardInfo from "@/components/dashboard/info/DashboardInfo";
+import { BusinessProps } from "@/types/dashboard.types";
+import DashboardPage from "./info/page";
 import Sidebar from "@/components/dashboard/sidebar/Sidebar";
 import { getBusiness } from "@/lib/getBusiness";
-import { getFeedbackData } from "@/lib/getFeedbackData";
 import styles from "./dashboard.module.css";
-import useProtectedPage from "@/hooks/useProtectedPage";
 
-export const Dashboard = ({ params }: { params: { businessId: number } }) => {
-  useProtectedPage();
-
-  const [business, setBusiness] = useState(null);
-  const [feedbacks, setFeedbacks] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+export default function Layout({
+  children,
+  params,
+}: {
+  children: React.ReactNode;
+  params: { businessId: number };
+}) {
+  const [business, setBusiness] = useState<BusinessProps | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       try {
         const businessData = await getBusiness(params.businessId);
         setBusiness(businessData);
-
-        const feedbacksData = await getFeedbackData(businessData.slug);
-        setFeedbacks(feedbacksData);
 
         setIsLoading(false);
       } catch (error) {
@@ -37,19 +37,17 @@ export const Dashboard = ({ params }: { params: { businessId: number } }) => {
   }, [params.businessId]);
 
   return (
-    <div className={styles.dashboard}>
+    <>
       {isLoading ? (
         <p>Loading</p>
       ) : business ? (
-        <>
+        <div className={styles.dashboard}>
           <Sidebar business={business} />
-          <DashboardInfo feedbacks={feedbacks} businessId={params.businessId}/>
-        </>
+          <>{children}</>
+        </div>
       ) : (
-        <p>Loading</p>
+        <p>Loading....</p>
       )}
-    </div>
+    </>
   );
-};
-
-export default Dashboard;
+}
