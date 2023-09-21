@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-
-import DashboardInfo from "@/components/dashboard/info/DashboardInfo";
-import { getBusiness } from "@/lib/getBusiness";
-import { getFeedbackData } from "@/lib/getFeedbackData";
-import { useLocalStorage } from "@/hooks/useLocalStorage";
+import DashboardResponses from "@/components/dashboard/responses/DashboardResponses";
+import DashboardScore from "@/components/dashboard/score/DashboardScore";
+import FeedbackChart from "@/components/dashboard/chart/FeedbackChart";
+import React from "react";
+import styles from "./dashboardInfo.module.css";
+import { useFeedbackContext } from "@/context/FeedbackContext";
 import useProtectedPage from "@/hooks/useProtectedPage";
 
 export const DashboardPage = ({
@@ -15,34 +15,30 @@ export const DashboardPage = ({
 }) => {
   useProtectedPage();
 
-  const [feedbacks, setFeedbacks] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const { getItem } = useLocalStorage();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      try {
-        const storedBusiness = await getItem("business");
-        const businessData = JSON.parse(storedBusiness!);
-        const feedbacksData = await getFeedbackData(businessData?.slug);
-        setFeedbacks(feedbacksData);
-
-        setIsLoading(false);
-      } catch (error) {
-        console.error("There was an error fetching data", error);
-
-        setIsLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
+  const { isLoading, feedbacks } = useFeedbackContext();
   return (
     <>
       {!isLoading ? (
-        <DashboardInfo feedbacks={feedbacks} businessId={params.businessId} />
+        <div className={`${styles["dashboard-info"]}`}>
+          <div className={`${styles["dashboard-content"]}`}>
+            <DashboardScore type="order" data={feedbacks} />
+            <DashboardScore type="service" data={feedbacks} />
+            <DashboardResponses
+              data={feedbacks}
+              businessId={params.businessId}
+            />
+          </div>
+          <div className={`${styles["dashboard-chart"]}`}>
+            <div className={`${styles["chart"]}`}>
+              <h4>Service feedback</h4>
+              <FeedbackChart data={feedbacks} type="service" />
+            </div>
+            <h4>Order feedback</h4>
+            <div className={`${styles["chart"]}`}>
+              <FeedbackChart data={feedbacks} type="order" />
+            </div>
+          </div>
+        </div>
       ) : (
         "Loading..."
       )}

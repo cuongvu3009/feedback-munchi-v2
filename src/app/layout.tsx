@@ -4,7 +4,6 @@ import { AuthProvider } from "@/context/AuthContext";
 import { FeedbackProvider } from "@/context/FeedbackContext";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
-import { SidebarProvider } from "@/context/SidebarContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,9 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <FeedbackProvider>
-          <SidebarProvider>
-            <AuthProvider>{children}</AuthProvider>
-          </SidebarProvider>
+          <AuthProvider>{children}</AuthProvider>
         </FeedbackProvider>
       </body>
     </html>

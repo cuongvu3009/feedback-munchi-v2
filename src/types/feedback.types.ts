@@ -11,10 +11,11 @@ export interface Feedback {
 }
 
 export interface FeedbackContextProps {
-  feedback: Feedback[];
+  feedbacks: Feedback[];
   isLoading: boolean;
   selectedTip: number | undefined;
   setSelectedTip: (value: number) => void;
+  setFeedbacks: (value: Feedback[]) => void;
 }
 
 export interface ButtonProps {

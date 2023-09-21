@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 
 import { BusinessProps } from "@/types/dashboard.types";
 import Sidebar from "@/components/dashboard/sidebar/Sidebar";
+import { SidebarProvider } from "@/context/SidebarContext";
 import { getBusiness } from "@/lib/getBusiness";
 import styles from "./dashboard.module.css";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
@@ -39,7 +40,7 @@ export default function Layout({
   }, [params.businessId]);
 
   return (
-    <>
+    <SidebarProvider>
       {isLoading ? (
         <p>Loading</p>
       ) : business ? (
@@ -50,6 +51,6 @@ export default function Layout({
       ) : (
         <p>Loading....</p>
       )}
-    </>
+    </SidebarProvider>
   );
 }
