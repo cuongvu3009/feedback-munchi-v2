@@ -27,7 +27,7 @@ export default function DashboardLayout({
     } else {
       router.push("/dashboard/login");
     }
-  }, [userIsLoggedIn, businessId]);
+  }, [userIsLoggedIn, businessId, router]);
 
   return <BusinessProvider>{children}</BusinessProvider>;
 }

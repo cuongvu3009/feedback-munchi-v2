@@ -1,6 +1,7 @@
 "use client";
 
 import { BusinessProps } from "@/types/dashboard.types";
+import ChangeBusinessBtn from "@/components/shared/ChangeBusinessBtn";
 import Image from "next/image";
 import Link from "next/link";
 import LogoutBtn from "@/components/shared/LogoutBtn";
@@ -51,6 +52,7 @@ const Sidebar: React.FC<SidebarProps> = ({ business }) => {
       </div>
 
       <div className={`${styles["sidebar-bottom"]}`}>
+        <ChangeBusinessBtn />
         <LogoutBtn />
         <TradeMark />
       </div>

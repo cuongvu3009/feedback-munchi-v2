@@ -9,7 +9,6 @@ import { getBusiness } from "@/utils/getOneBusiness";
 import styles from "./dashboard.module.css";
 import { useAuthContext } from "@/context/AuthContext";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
-import { useRouter } from "next/navigation";
 
 export default function Layout({
   children,
@@ -21,19 +20,14 @@ export default function Layout({
   const [business, setBusiness] = useState<BusinessProps | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const { setItem } = useLocalStorage();
-
   const { userIsLoggedIn } = useAuthContext();
-  const router = useRouter();
-
-  useEffect(() => {
-    // checks if the user is authenticated
-    userIsLoggedIn
-      ? router.push(`/dashboard/${params.businessId}/info`)
-      : router.push("/dashboard/login");
-  }, []);
-
   useEffect(() => {
     const fetchData = async () => {
+      // No fetching if no business
+      if (!userIsLoggedIn) {
+        return;
+      }
+
       setIsLoading(true);
       try {
         const businessData = await getBusiness(params.businessId);
