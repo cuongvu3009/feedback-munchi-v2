@@ -43,8 +43,7 @@ const Login = () => {
             password,
           },
         });
-
-        login(result.data);
+        login(result.data.result);
         setResponse({ data: result.data.result, loading: false, error: null });
         redirect("/dashboard/businessOption");
       } catch (error: any) {

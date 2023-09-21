@@ -12,7 +12,7 @@ import useProtectedPage from "@/hooks/useProtectedPage";
 export const Dashboard = ({
   params,
 }: {
-  params: { businessSlug: number | string };
+  params: { businessId: number | string };
 }) => {
   useProtectedPage();
 
@@ -23,7 +23,7 @@ export const Dashboard = ({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const businessData = await getBusiness(params.businessSlug);
+        const businessData = await getBusiness(params.businessId);
         setBusiness(businessData);
 
         const feedbacksData = await getFeedbackData(businessData.slug);
@@ -38,7 +38,7 @@ export const Dashboard = ({
     };
 
     fetchData();
-  }, [params.businessSlug]);
+  }, [params.businessId]);
 
   return (
     <div className={styles.dashboard}>

@@ -9,7 +9,8 @@ import TradeMark from "../../shared/TradeMark";
 import styles from "./sidebar.module.css";
 
 interface SidebarProps {
-  business: BusinessProps;
+  business?: BusinessProps;
+  businessId?: number;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ business }) => {

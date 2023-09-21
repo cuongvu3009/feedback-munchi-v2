@@ -1,6 +1,11 @@
 "use client";
 
-import { AuthContextType, AuthProviderProps, User } from "../types/auth.types";
+import {
+  AuthContextType,
+  AuthProviderProps,
+  User,
+  UserAPIProps,
+} from "../types/auth.types";
 // AuthContext.tsx
 import React, { createContext, useContext, useState } from "react";
 
@@ -16,7 +21,7 @@ export const useAuthContext = () => {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
-  const userIsLoggedIn = !!user;
+  const userIsLoggedIn = !!user?.session.access_token;
 
   return (
     <AuthContext.Provider value={{ user, setUser, userIsLoggedIn }}>
