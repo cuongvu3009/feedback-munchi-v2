@@ -9,11 +9,7 @@ import { getFeedbackData } from "@/lib/getFeedbackData";
 import styles from "./dashboard.module.css";
 import useProtectedPage from "@/hooks/useProtectedPage";
 
-export const Dashboard = ({
-  params,
-}: {
-  params: { businessId: number | string };
-}) => {
+export const Dashboard = ({ params }: { params: { businessId: number } }) => {
   useProtectedPage();
 
   const [business, setBusiness] = useState(null);
@@ -47,7 +43,7 @@ export const Dashboard = ({
       ) : business ? (
         <>
           <Sidebar business={business} />
-          <DashboardInfo feedbacks={feedbacks} />
+          <DashboardInfo feedbacks={feedbacks} businessId={params.businessId}/>
         </>
       ) : (
         <p>Loading</p>

@@ -1,19 +1,26 @@
 "use client";
 
 import Button from "@/components/shared/Button";
+import { Feedback } from "@/types/feedback.types";
 import React from "react";
-import { data } from "@/components/dashboard/data";
 import moment from "moment";
 import styles from "./dashboardResponses.module.css";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const DashboardResponses = () => {
+interface DashboardResponseProps {
+  data: Feedback[];
+  businessId: number;
+}
+const DashboardResponses: React.FC<DashboardResponseProps> = ({
+  data,
+  businessId,
+}) => {
   const [feedbackLimit, setFeedbackLimit] = useState<number>(7);
   const router = useRouter();
 
   const handleBtnClick = () => {
-    router.push("/dashboard/responses");
+    router.push(`/dashboard/${businessId}/responses`);
   };
 
   const getEmojiLabel = (emoji: string) => {
@@ -41,9 +48,9 @@ const DashboardResponses = () => {
         return (
           <div
             className={`${styles["flex-between"]}`}
-            key={item._id + item.emoji_service}
+            key={item.id + item.emojiService + item.createdAt}
           >
-            <p>{getEmojiLabel(item.emoji_service)}</p>
+            <p>{getEmojiLabel(item.emojiService)}</p>
             <p>{moment(item.createdAt).fromNow()}</p>
           </div>
         );

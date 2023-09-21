@@ -9,16 +9,16 @@ import styles from "./dashboardInfo.module.css";
 
 interface DashboardProps {
   feedbacks: Feedback[];
+  businessId: number;
 }
 
-const DashboardInfo: React.FC<DashboardProps> = ({ feedbacks }) => {
-  console.log(feedbacks);
+const DashboardInfo: React.FC<DashboardProps> = ({ feedbacks, businessId }) => {
   return (
     <div className={`${styles["dashboard-info"]}`}>
       <div className={`${styles["dashboard-content"]}`}>
         <DashboardScore type="order" data={feedbacks} />
         <DashboardScore type="service" data={feedbacks} />
-        <DashboardResponses />
+        <DashboardResponses data={feedbacks} businessId={businessId} />
       </div>
       <div className={`${styles["dashboard-chart"]}`}>
         <div className={`${styles["chart"]}`}>
