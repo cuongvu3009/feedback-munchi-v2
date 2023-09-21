@@ -1,11 +1,13 @@
 "use client";
 
+import React, { useEffect, useState } from "react";
+
 import DashboardResponses from "@/components/dashboard/responses/DashboardResponses";
 import DashboardScore from "@/components/dashboard/score/DashboardScore";
 import FeedbackChart from "@/components/dashboard/chart/FeedbackChart";
-import React from "react";
+import { getFeedbackData } from "@/utils/getFeedbackData";
 import styles from "./dashboardInfo.module.css";
-import { useFeedbackContext } from "@/context/FeedbackContext";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 import useProtectedPage from "@/hooks/useProtectedPage";
 
 export const DashboardPage = ({
@@ -15,7 +17,29 @@ export const DashboardPage = ({
 }) => {
   useProtectedPage();
 
-  const { isLoading, feedbacks } = useFeedbackContext();
+  const [feedbacks, setFeedbacks] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const { getItem } = useLocalStorage();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const storedBusiness = await getItem("business");
+        const businessData = JSON.parse(storedBusiness!);
+        const feedbacksData = await getFeedbackData(businessData?.slug);
+        setFeedbacks(feedbacksData);
+
+        setIsLoading(false);
+      } catch (error) {
+        console.error("There was an error fetching data", error);
+
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <>

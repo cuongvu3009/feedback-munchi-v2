@@ -26,7 +26,6 @@ export default function Layout({
       try {
         const businessData = await getBusiness(params.businessId);
         setBusiness(businessData);
-
         setItem("business", JSON.stringify(businessData));
         setIsLoading(false);
       } catch (error) {

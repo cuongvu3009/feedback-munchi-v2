@@ -10,14 +10,6 @@ export interface Feedback {
   orderTags: string[];
 }
 
-export interface FeedbackContextProps {
-  feedbacks: Feedback[];
-  isLoading: boolean;
-  selectedTip: number | undefined;
-  setSelectedTip: (value: number) => void;
-  setFeedbacks: (value: Feedback[]) => void;
-}
-
 export interface ButtonProps {
   version?: "primary" | "secondary" | "full" | "normal";
   type?: "submit" | "button" | "reset";
