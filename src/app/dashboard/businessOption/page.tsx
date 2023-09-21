@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 
 import LogoutBtn from "@/components/shared/LogoutBtn";
 import TradeMark from "@/components/shared/TradeMark";
-import fetchUserBusinesses from "@/lib/getUserBusiness";
+import getUserBusiness from "@/utils/getUserBusinesses";
 import styles from "./businessOption.module.css";
 import useProtectedPage from "@/hooks/useProtectedPage";
 import { useRouter } from "next/navigation";
@@ -33,7 +33,7 @@ const Page = () => {
       setIsLoading(true);
 
       try {
-        const businessesData = await fetchUserBusinesses();
+        const businessesData = await getUserBusiness();
         setBusinesses(businessesData);
         setIsLoading(false);
       } catch (error) {

@@ -1,7 +1,7 @@
 import { API_BASE_URL } from "@/utils/constantAPI";
 import axios from "axios";
 
-async function fetchUserBusinesses() {
+async function getUserBusinesses() {
   const storedUser = localStorage.getItem("user");
 
   if (!storedUser) {
@@ -28,4 +28,4 @@ async function fetchUserBusinesses() {
   }
 }
 
-export default fetchUserBusinesses;
+export default getUserBusinesses;

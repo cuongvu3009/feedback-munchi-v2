@@ -3,9 +3,7 @@
 import { Feedback, FeedbackContextProps } from "../types/feedback.types";
 import { createContext, useContext, useEffect, useState } from "react";
 
-import { API_BASE_URL } from "../utils/constantAPI";
-import axios from "axios";
-import { getFeedbackData } from "@/lib/getFeedbackData";
+import { getFeedbackData } from "@/utils/getFeedbackData";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 const FeedbackContext = createContext<FeedbackContextProps>({
@@ -41,7 +39,7 @@ export const FeedbackProvider = ({ children }: any) => {
       try {
         const storedBusiness = await getItem("business");
         const businessData = JSON.parse(storedBusiness!);
-        const feedbacksData = await getFeedbackData(businessData?.slug);
+        const feedbacksData = await getFeedbackData(businessData?.slug); // Call the hook directly
 
         setFeedbacks(feedbacksData);
         setIsLoading(false);
@@ -68,5 +66,3 @@ export const FeedbackProvider = ({ children }: any) => {
     </FeedbackContext.Provider>
   );
 };
-
-export default FeedbackContext;

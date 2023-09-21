@@ -16,6 +16,7 @@ export const DashboardPage = ({
   useProtectedPage();
 
   const { isLoading, feedbacks } = useFeedbackContext();
+
   return (
     <>
       {!isLoading ? (
