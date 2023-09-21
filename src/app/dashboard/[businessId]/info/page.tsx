@@ -8,15 +8,12 @@ import FeedbackChart from "@/components/dashboard/chart/FeedbackChart";
 import { getFeedbackData } from "@/utils/getFeedbackData";
 import styles from "./dashboardInfo.module.css";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
-import useProtectedPage from "@/hooks/useProtectedPage";
 
 export const DashboardPage = ({
   params,
 }: {
   params: { businessId: number };
 }) => {
-  useProtectedPage();
-
   const [feedbacks, setFeedbacks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const { getItem } = useLocalStorage();

@@ -1,12 +1,15 @@
 import { GrLogout } from "react-icons/gr";
 import React from "react";
 import { useAuthenticate } from "@/hooks/useAuthenticate";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 const LogoutBtn = () => {
   const { logout } = useAuthenticate();
+  const { removeItem } = useLocalStorage();
 
   const handleLogout = () => {
     logout();
+    removeItem("business");
   };
 
   const buttonStyles = {

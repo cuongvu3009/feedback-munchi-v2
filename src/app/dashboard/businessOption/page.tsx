@@ -6,7 +6,7 @@ import LogoutBtn from "@/components/shared/LogoutBtn";
 import TradeMark from "@/components/shared/TradeMark";
 import getUserBusiness from "@/utils/getUserBusinesses";
 import styles from "./businessOption.module.css";
-import useProtectedPage from "@/hooks/useProtectedPage";
+import { useAuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 
 interface BusinessProps {
@@ -14,11 +14,17 @@ interface BusinessProps {
   name: string;
 }
 const Page = () => {
-  useProtectedPage();
   const [businesses, setBusinesses] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedBusiness, setSelectedBusiness] = useState<number | null>(null);
   const router = useRouter();
+  const { userIsLoggedIn } = useAuthContext();
+
+  useEffect(() => {
+    userIsLoggedIn
+      ? router.push("/dashboard/businessOption")
+      : router.push("/dashboard/login");
+  });
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

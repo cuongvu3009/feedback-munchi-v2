@@ -2,10 +2,8 @@
 
 import moment from "moment";
 import styles from "./responses.module.css";
-import useProtectedPage from "@/hooks/useProtectedPage";
 
 const Responses = ({ params }: { params: { businessId: number } }) => {
-  useProtectedPage();
   const getEmojiLabel = (emoji: string) => {
     switch (emoji) {
       case "terrible":

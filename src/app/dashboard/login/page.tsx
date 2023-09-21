@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { API_BASE_URL } from "@/utils/constantAPI";
 import TradeMark from "@/components/shared/TradeMark";
@@ -8,8 +8,9 @@ import { User } from "@/types/auth.types";
 import axios from "axios";
 import { redirect } from "next/navigation";
 import styles from "./dashboardLogin.module.css";
+import { useAuthContext } from "@/context/AuthContext";
 import { useAuthenticate } from "@/hooks/useAuthenticate";
-import useRedirectIfAuthenticated from "@/hooks/useRedirectIfAuthenticated";
+import { useRouter } from "next/navigation";
 
 interface ApiResponse {
   data: User | null; // Provide a default type of null for data
@@ -18,7 +19,6 @@ interface ApiResponse {
 }
 
 const Login = () => {
-  useRedirectIfAuthenticated();
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const { login } = useAuthenticate();
@@ -26,6 +26,14 @@ const Login = () => {
     data: null,
     loading: false,
     error: null,
+  });
+  const { userIsLoggedIn } = useAuthContext();
+  const router = useRouter();
+
+  useEffect(() => {
+    userIsLoggedIn
+      ? router.push("/dashboard/businessOption")
+      : router.push("/dashboard/login");
   });
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -45,7 +53,6 @@ const Login = () => {
         });
         login(result.data.result);
         setResponse({ data: result.data.result, loading: false, error: null });
-        redirect("/dashboard/businessOption");
       } catch (error: any) {
         setResponse({ data: null, loading: false, error });
       }
