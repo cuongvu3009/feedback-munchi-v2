@@ -1,4 +1,4 @@
-import { PiKeyReturnBold } from "react-icons/pi";
+import { IoMdReturnLeft } from "react-icons/io";
 import React from "react";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useRouter } from "next/navigation";
@@ -30,7 +30,7 @@ const ChangeBusinessBtn = () => {
         style={buttonStyles}
         onClick={handleChangeBusiness}
       >
-        <PiKeyReturnBold />
+        <IoMdReturnLeft />
         Return
       </button>
     </>
