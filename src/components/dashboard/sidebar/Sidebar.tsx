@@ -31,7 +31,7 @@ const Sidebar: React.FC<SidebarProps> = ({ business }) => {
           <h3>{business.name}</h3>
         </div>
         <Link
-          href={`/dashboard/${business.id}`}
+          href={`/dashboard/${business.id}/info`}
           className={`${styles["sidebar-link"]}`}
         >
           Dashboard
