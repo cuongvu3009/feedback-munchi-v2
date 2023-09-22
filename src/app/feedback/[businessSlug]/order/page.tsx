@@ -3,8 +3,6 @@
 import Button from "@/components/shared/Button";
 import Logo from "@/components/shared/Logo";
 import RatingOrder from "@/components/feedback/RatingOrder";
-import Title from "@/components/shared/Title";
-import TradeMark from "@/components/shared/TradeMark";
 import styles from "./feedbackOrder.module.css";
 import { useRouter } from "next/navigation";
 
@@ -70,32 +68,24 @@ export default function FeedbackOrder({
   };
 
   return (
-    <div className="mobile">
-      <div className={`${styles["feedback"]}`}>
-        <Title />
-
-        <div className={`${styles["feedback-wrapper"]}`}>
-          <Logo />
-          <div className={`${styles["feedback-container"]}`}>
-            <div className={`${styles["feedback-description"]}`}>
-              <h3>
-                <b>How was your order?</b>
-              </h3>
-              <p>Your feedback helps us improve our products.</p>
-            </div>
-          </div>
-        </div>
-        <RatingOrder />
-
-        <div className="navigation">
-          <Button
-            onClick={handleSubmit}
-            version="full"
-            btnText="Submit feedback"
-          />
-          <TradeMark />
+    <>
+      <div className={`${styles["feedback-container"]}`}>
+        <div className={`${styles["feedback-description"]}`}>
+          <h3>
+            <b>How was your order?</b>
+          </h3>
+          <p>Your feedback helps us improve our products.</p>
         </div>
       </div>
-    </div>
+      <RatingOrder />
+
+      {/* <div className="navigation">
+        <Button
+          onClick={handleSubmit}
+          version="full"
+          btnText="Submit feedback"
+        />
+      </div> */}
+    </>
   );
 }

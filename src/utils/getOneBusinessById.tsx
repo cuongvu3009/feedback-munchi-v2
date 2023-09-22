@@ -3,7 +3,9 @@ import axios from "axios";
 
 export async function getBusinessById(businessId: number) {
   try {
-    const response = await axios.get(`${API_BASE_URL}/business/${businessId}`);
+    const response = await axios.get(
+      `${API_BASE_URL}/business/${businessId}?params=logo,slug,name`
+    );
     const businessesData = response.data.result;
     return businessesData;
   } catch (error) {

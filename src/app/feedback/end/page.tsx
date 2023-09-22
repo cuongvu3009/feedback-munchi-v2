@@ -4,16 +4,12 @@ import "./endfeedback.css";
 
 import Button from "@/components/shared/Button";
 import { PiHeartStraightLight } from "react-icons/pi";
-import Title from "@/components/shared/Title";
-import TradeMark from "@/components/shared/TradeMark";
 import { useRouter } from "next/navigation";
 
 const EndFeedBack = ({ params }: { params: { businessSlug: string } }) => {
   const router = useRouter();
   return (
-    <div className="mobile">
-      <Title />
-
+    <>
       <div className="end-feedback">
         <PiHeartStraightLight size={100} />
         <h3>Thank you!</h3>
@@ -28,9 +24,8 @@ const EndFeedBack = ({ params }: { params: { businessSlug: string } }) => {
             router.push(`/feedback/service/${params.businessSlug}`)
           }
         />
-        <TradeMark />
       </div>
-    </div>
+    </>
   );
 };
 

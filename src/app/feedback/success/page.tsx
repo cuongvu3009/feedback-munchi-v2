@@ -7,8 +7,6 @@ import Emoji from "@/components/shared/Emoji";
 import FeedbackContext from "@/context/FeedbackContext";
 import { GrStatusGood } from "react-icons/gr";
 import PaymentButton from "@/components/shared/PaymentButton";
-import Title from "@/components/shared/Title";
-import TradeMark from "@/components/shared/TradeMark";
 import { getLinkByTip } from "@/utils/getStripeLinkByTipAmount";
 import { tipOptions } from "@/utils/tipOptions";
 import { useContext } from "react";
@@ -23,8 +21,7 @@ const SuccessFeedback = () => {
   };
 
   return (
-    <div className="mobile">
-      <Title />
+    <>
       <div className="success">
         <GrStatusGood size={100} />
         <h3>
@@ -75,9 +72,8 @@ const SuccessFeedback = () => {
           btnText="No, thank you"
           onClick={() => router.push("/feedback/service")}
         />
-        <TradeMark />
       </div>
-    </div>
+    </>
   );
 };
 
