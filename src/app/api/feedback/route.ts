@@ -3,55 +3,42 @@ import prisma from "@/lib/prisma";
 export async function POST(req: Request, res: Response) {
   const {
     businessSlug,
-    emojiService,
-    commentService,
-    serviceTags,
-    emojiOrder,
-    commentOrder,
-    orderTags,
+    score,
+    comment,
+    tags, // array of string
+    type, // Use 'type' to classify if 'Service' or 'Order'
   } = await req.json();
 
   try {
-    // Create the feedback entry without serviceTags and orderTags
-    const addFeedback = await prisma.feedback.create({
+    // Validate required fields
+    if (
+      score === undefined ||
+      businessSlug === undefined ||
+      type === undefined
+    ) {
+      return Response.json({ error: "Missing required fields" });
+    }
+
+    // Validate score and typeId
+    if (score < 1 || score > 5 || type < 1 || type > 2) {
+      return Response.json({ error: "Invalid score or typeId" });
+    }
+
+    const response = await prisma.feedback.create({
       data: {
         businessSlug,
-        commentService,
-        emojiService,
-        emojiOrder,
-        commentOrder,
+        score,
+        comment,
+        tags,
+        type,
       },
     });
 
-    // Create ServiceTag records and associate them with the feedback entry
-    const feedbackId = addFeedback.id;
-    // Create ServiceTag and OrderTag records concurrently and associate them with the feedback entry
-    await Promise.all([
-      prisma.serviceTag.create({
-        data: {
-          value: serviceTags,
-          feedbacks: {
-            connect: {
-              id: feedbackId,
-            },
-          },
-        },
-      }),
-      prisma.orderTag.create({
-        data: {
-          value: orderTags,
-          feedbacks: {
-            connect: {
-              id: feedbackId,
-            },
-          },
-        },
-      }),
-    ]);
-
-    return Response.json("Feedback created");
+    return Response.json(response); // Return the created feedback
   } catch (error) {
     console.error("Error creating feedback:", error);
     return Response.json(error);
+  } finally {
+    await prisma.$disconnect(); // Disconnect from the Prisma client
   }
 }
