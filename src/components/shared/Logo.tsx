@@ -1,5 +1,5 @@
 import Image from "next/image";
-import MomotokoLogo from "../assets/MomotokoLogo.png";
+import MomotokoLogo from "../assets/Momotoko.png";
 
 const Logo = () => {
   return (

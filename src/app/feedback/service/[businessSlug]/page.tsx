@@ -6,9 +6,7 @@ import RatingService from "@/components/feedback/RatingService";
 import Title from "@/components/shared/Title";
 import TradeMark from "@/components/shared/TradeMark";
 import styles from "./feedbackService.module.css";
-import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 
 export default function FeedbackService({
   params,
