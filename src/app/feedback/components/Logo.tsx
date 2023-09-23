@@ -1,7 +1,6 @@
 // Logo.tsx
 
 import Image from "next/image";
-import MomotokoLogo from "../assets/Momotoko.png";
 
 interface Restaurant {
   id: number;

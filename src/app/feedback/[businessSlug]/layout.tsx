@@ -1,12 +1,12 @@
 "use client";
 
+import "./feedback.css";
+
 import { useEffect, useState } from "react";
 
-import RestaurantLogo from "@/components/shared/Logo";
+import RestaurantLogo from "@/app/feedback/components/Logo";
 import Title from "@/components/shared/Title";
-import TradeMark from "@/components/shared/TradeMark";
 import { getBusinessBySlug } from "@/lib/getOneBusinessBySlug";
-import styles from "./feedback.module.css";
 
 interface Restaurant {
   id: number;
@@ -59,20 +59,10 @@ export default function FeedbackLayout({
     return "feedback is loading...";
   } else {
     return (
-      <div className="mobile">
-        <div className={`${styles["feedback"]}`}>
-          <Title />
-          <div className={`${styles["feedback-wrapper"]}`}>
-            {/* condition to prevent error Restaurant can be null */}
-            {restaurant && <RestaurantLogo restaurant={restaurant} />}
-          </div>
-          {children}
-
-          <div className="navigation">
-            {/* <Button onClick={handleClick} version="full" btnText="Next" /> */}
-            <TradeMark />
-          </div>
-        </div>
+      <div className="feedback-wrapper">
+        {/* condition to prevent error Restaurant can be null */}
+        {restaurant && <RestaurantLogo restaurant={restaurant} />}
+        {children}
       </div>
     );
   }

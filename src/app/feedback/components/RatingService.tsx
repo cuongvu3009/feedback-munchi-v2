@@ -1,5 +1,3 @@
-import "./feedback.css";
-
 import React, { useState } from "react";
 
 import AwesomeSVG from "@/utils/emoji-svg/AwesomeSVG";
@@ -10,7 +8,7 @@ import GoodSVG from "@/utils/emoji-svg/GoodSVG";
 import OkeySVG from "@/utils/emoji-svg/OkeySVG";
 import TerribleSVG from "@/utils/emoji-svg/TerribleSVG";
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
-import { ratingOptions } from "../../utils/ratingOptions";
+import { ratingOptions } from "../../../utils/ratingOptions";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 const RatingService: React.FC = () => {

@@ -16,15 +16,15 @@ const EndFeedBack = ({ params }: { params: { businessSlug: string } }) => {
         <p>You make us feel very special.</p>
       </div>
 
-      <div className="navigation">
+      {/* <div className="navigation">
         <Button
           version="full"
           btnText="Submit another feedback"
           onClick={() =>
-            router.push(`/feedback/service/${params.businessSlug}`)
+            router.push(`/feedback/${params.businessSlug}/service/`)
           }
         />
-      </div>
+      </div> */}
     </>
   );
 };

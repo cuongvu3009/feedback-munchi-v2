@@ -43,13 +43,6 @@ img {
   height: auto;
 }
 
-.title {
-  padding: 5px;
-  text-align: center;
-  font-weight: 500;
-  font-size: 24px;
-}
-
 .munchi-logo {
   width: 80px;
   height: auto;
@@ -57,26 +50,6 @@ img {
   color: #ff3637;
   font-weight: bold;
   font-size: 20px;
-}
-
-.mobile {
-  width: 430px;
-  height: 700px;
-  margin: 50px auto;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-}
-
-.flex {
-  display: flex;
-}
-.navigation {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: auto;
 }
 
 .btn {
@@ -188,10 +161,6 @@ img {
 
 /* Media query for small screen */
 @media (max-width: 768px) {
-  .mobile {
-    width: 100%;
-    border: none;
-  }
   .checkout-form {
     max-width: 90%;
     padding: 20px 10px;

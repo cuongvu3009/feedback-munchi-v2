@@ -1,5 +1,3 @@
-import "./feedback.css";
-
 import React, { useEffect, useState } from "react";
 
 import { defaultTags } from "@/utils/defaultTags";

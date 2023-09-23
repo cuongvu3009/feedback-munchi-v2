@@ -1,8 +1,8 @@
 "use client";
 
 import Button from "@/components/shared/Button";
-import Logo from "@/components/shared/Logo";
-import RatingOrder from "@/components/feedback/RatingOrder";
+import RatingOrder from "@/app/feedback/components/RatingOrder";
+import TradeMark from "@/components/shared/TradeMark";
 import styles from "./feedbackOrder.module.css";
 import { useRouter } from "next/navigation";
 
@@ -50,7 +50,7 @@ export default function FeedbackOrder({
           ];
           await keysToRemove.forEach((key) => localStorage.removeItem(key));
         } else {
-          router.push(`/feedback/end/${params.businessSlug}`);
+          router.push(`/feedback//end/`);
           const keysToRemove = [
             "emojiService",
             "commentService",
@@ -69,23 +69,24 @@ export default function FeedbackOrder({
 
   return (
     <>
-      <div className={`${styles["feedback-container"]}`}>
+      <div className="feedback">
         <div className={`${styles["feedback-description"]}`}>
           <h3>
             <b>How was your order?</b>
           </h3>
           <p>Your feedback helps us improve our products.</p>
         </div>
+        <RatingOrder />
       </div>
-      <RatingOrder />
 
-      {/* <div className="navigation">
+      <div className="navigation">
         <Button
           onClick={handleSubmit}
           version="full"
           btnText="Submit feedback"
         />
-      </div> */}
+        <TradeMark />
+      </div>
     </>
   );
 }

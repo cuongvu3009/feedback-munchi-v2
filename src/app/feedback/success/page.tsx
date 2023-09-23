@@ -12,7 +12,7 @@ import { tipOptions } from "@/utils/tipOptions";
 import { useContext } from "react";
 import { useRouter } from "next/navigation";
 
-const SuccessFeedback = () => {
+const SuccessFeedback = ({ params }: { params: { businessSlug: string } }) => {
   const router = useRouter();
   const { selectedTip, setSelectedTip } = useContext(FeedbackContext);
 
@@ -70,7 +70,7 @@ const SuccessFeedback = () => {
         <Button
           version="normal"
           btnText="No, thank you"
-          onClick={() => router.push("/feedback/service")}
+          onClick={() => router.push(`/feedback/end`)}
         />
       </div>
     </>

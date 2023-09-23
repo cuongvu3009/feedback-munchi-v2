@@ -1,8 +1,8 @@
 "use client";
 
 import Button from "@/components/shared/Button";
-import Logo from "@/components/shared/Logo";
-import RatingService from "@/components/feedback/RatingService";
+import RatingService from "@/app/feedback/components/RatingService";
+import TradeMark from "@/components/shared/TradeMark";
 import styles from "./feedbackService.module.css";
 import { useRouter } from "next/navigation";
 
@@ -15,12 +15,12 @@ export default function FeedbackService({
 
   function handleClick(e: any): void {
     e.preventDefault();
-    router.push(`/feedback/order/${params.businessSlug}`);
+    router.push(`/feedback/${params.businessSlug}/order/`);
   }
 
   return (
     <>
-      <div className={`${styles["feedback-container"]}`}>
+      <div className="feedback">
         <div className={`${styles["feedback-description"]}`}>
           <h3 className={styles.question}>
             <b>How was your experience?</b>
@@ -32,9 +32,10 @@ export default function FeedbackService({
         <RatingService />
       </div>
 
-      {/* <div className="navigation">
+      <div className="navigation">
         <Button onClick={handleClick} version="full" btnText="Next" />
-      </div> */}
+        <TradeMark />
+      </div>
     </>
   );
 }
