@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { BusinessProps } from "@/types/dashboard.types";
 import Sidebar from "@/components/dashboard/sidebar/Sidebar";
 import { SidebarProvider } from "@/context/SidebarContext";
-import { getBusinessById } from "@/utils/getOneBusinessById";
+import { getBusinessById } from "@/lib/getOneBusinessById";
 import styles from "./dashboard.module.css";
 import { useAuthContext } from "@/context/AuthContext";
 import { useLocalStorage } from "@/hooks/useLocalStorage";

@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import DashboardResponses from "@/components/dashboard/responses/DashboardResponses";
 import DashboardScore from "@/components/dashboard/score/DashboardScore";
 import FeedbackChart from "@/components/dashboard/chart/FeedbackChart";
-import { getFeedbackData } from "@/utils/getFeedbackData";
+import { getFeedbackData } from "@/lib/getFeedbackData";
 import styles from "./dashboardInfo.module.css";
 import { useBusinessContext } from "@/context/BusinessContext";
 import { useLocalStorage } from "@/hooks/useLocalStorage";

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import RestaurantLogo from "@/components/shared/Logo";
 import Title from "@/components/shared/Title";
 import TradeMark from "@/components/shared/TradeMark";
-import { getBusinessBySlug } from "@/utils/getOneBusinessBySlug";
+import { getBusinessBySlug } from "@/lib/getOneBusinessBySlug";
 import styles from "./feedback.module.css";
 
 interface Restaurant {

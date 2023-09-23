@@ -7,7 +7,7 @@ import Emoji from "@/components/shared/Emoji";
 import FeedbackContext from "@/context/FeedbackContext";
 import { GrStatusGood } from "react-icons/gr";
 import PaymentButton from "@/components/shared/PaymentButton";
-import { getLinkByTip } from "@/utils/getStripeLinkByTipAmount";
+import { getLinkByTip } from "@/lib/getStripeLinkByTipAmount";
 import { tipOptions } from "@/utils/tipOptions";
 import { useContext } from "react";
 import { useRouter } from "next/navigation";
