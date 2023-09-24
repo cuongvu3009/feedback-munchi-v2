@@ -110,19 +110,6 @@
   color: white;
 }
 
-.popup-comment {
-  font-weight: bold;
-}
-
-.popup-container > input::placeholder {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  border: 1px solid black;
-  width: 100%;
-  height: 100%;
-}
-
 .unselected-button {
   opacity: 0.5;
   transition: opacity 0.3s ease;
@@ -194,7 +181,11 @@
   background-color: #fff;
   padding: 20px;
   border-radius: 20px;
-  width: 90%;
+  width: 400px;
+}
+
+.popup-comment {
+  font-weight: bold;
 }
 
 .popup h2 {
@@ -203,7 +194,6 @@
 }
 
 .popup input {
-  display: block;
   border: none;
   width: 100%;
   height: 100px;
@@ -232,4 +222,10 @@ input[type="radio"]:disabled + label.unselected-button {
 [type="radio"]:checked ~ label {
   background: #fff;
   color: #ff6a95;
+}
+
+@media (max-width: 768px) {
+  .popup-container {
+    width: 100%;
+  }
 }
