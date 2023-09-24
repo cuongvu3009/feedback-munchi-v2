@@ -5,6 +5,7 @@ import "./feedback.css";
 import { useEffect, useState } from "react";
 
 import RestaurantLogo from "@/app/feedback/components/Logo";
+import Spinner from "@/components/shared/Spinner";
 import { getBusinessBySlug } from "@/lib/getOneBusinessBySlug";
 
 interface Restaurant {
@@ -54,15 +55,18 @@ export default function FeedbackLayout({
     fetchData();
   }, [params.businessSlug]);
 
-  if (isLoading && !restaurant) {
-    return "feedback is loading...";
-  } else {
+  if (isLoading || !restaurant) {
     return (
       <div className="feedback-wrapper">
-        {/* condition to prevent error Restaurant can be null */}
-        {restaurant && <RestaurantLogo restaurant={restaurant} />}
-        {children}
+        <Spinner />
       </div>
     );
   }
+  return (
+    <div className="feedback-wrapper">
+      {/* condition to prevent error Restaurant can be null */}
+      {restaurant && <RestaurantLogo restaurant={restaurant} />}
+      {children}
+    </div>
+  );
 }

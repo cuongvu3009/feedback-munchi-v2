@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import DashboardResponses from "@/components/dashboard/responses/DashboardResponses";
 import DashboardScore from "@/components/dashboard/score/DashboardScore";
 import FeedbackChart from "@/components/dashboard/chart/FeedbackChart";
+import Spinner from "@/components/shared/Spinner";
 import { getFeedbackData } from "@/lib/getFeedbackData";
 import styles from "./dashboardInfo.module.css";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
@@ -62,7 +63,7 @@ export const DashboardPage = ({
           </div>
         </div>
       ) : (
-        "Loading..."
+        <Spinner />
       )}
     </>
   );

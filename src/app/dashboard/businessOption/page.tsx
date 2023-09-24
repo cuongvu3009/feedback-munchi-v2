@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 
 import LogoutBtn from "@/components/shared/LogoutBtn";
+import Spinner from "@/components/shared/Spinner";
 import TradeMark from "@/app/feedback/components/TradeMark";
 import getUserBusiness from "@/lib/getUserBusinesses";
 import styles from "./businessOption.module.css";
@@ -72,7 +73,7 @@ const Page = () => {
             isLoading || selectedBusiness === null || selectedBusiness == 0
           }
         >
-          {isLoading ? "Loading..." : "Go To Dashboard"}
+          {isLoading ? <Spinner /> : "Go To Dashboard"}
         </button>
         <LogoutBtn />
         <TradeMark />
