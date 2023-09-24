@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { defaultTags } from "@/utils/defaultTags";
 import { tagsQuestion } from "@/utils/tagsQuestion";
-import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 interface TagsProps {
   emoji?: string | null;

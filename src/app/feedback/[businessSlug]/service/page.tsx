@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 
 import Button from "@/components/shared/Button";
 import RatingService from "@/app/feedback/components/RatingService";
+import Spinner from "@/components/shared/Spinner";
 import TradeMark from "@/app/feedback/components/TradeMark";
 import styles from "./feedbackService.module.css";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
@@ -16,9 +17,11 @@ export default function FeedbackService({
 }) {
   const router = useRouter();
   const { getItem, removeItem, setItem } = useLocalStorage();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = useCallback(async () => {
     try {
+      setIsLoading(true);
       const body = {
         businessSlug: params.businessSlug,
         emoji: getItem("emoji"),
@@ -41,11 +44,18 @@ export default function FeedbackService({
 
         const keysToRemove = ["emoji", "comment", "type", "tags"];
         keysToRemove.forEach((key) => removeItem(key));
+
+        setIsLoading(false);
       }
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
     }
   }, [params.businessSlug, getItem, removeItem, setItem, router]);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <>

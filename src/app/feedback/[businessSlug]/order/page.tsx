@@ -1,10 +1,12 @@
 "use client";
 
+import { useCallback, useState } from "react";
+
 import Button from "@/components/shared/Button";
 import RatingOrder from "@/app/feedback/components/RatingOrder";
+import Spinner from "@/components/shared/Spinner";
 import TradeMark from "@/app/feedback/components/TradeMark";
 import styles from "./feedbackOrder.module.css";
-import { useCallback } from "react";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useRouter } from "next/navigation";
 
@@ -14,10 +16,12 @@ export default function FeedbackOrder({
   params: { businessSlug: string };
 }) {
   const router = useRouter();
-  const { getItem, removeItem, setItem } = useLocalStorage();
+  const { getItem, removeItem } = useLocalStorage();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = useCallback(async () => {
     try {
+      setIsLoading(true);
       const body = {
         businessSlug: params.businessSlug,
         emoji: getItem("emoji"),
@@ -45,13 +49,25 @@ export default function FeedbackOrder({
           router.push(`/feedback/end`);
         }
 
-        const keysToRemove = ["emoji", "comment", "type", "tags"];
+        const keysToRemove = [
+          "emoji",
+          "comment",
+          "type",
+          "tags",
+          "positiveFeedbackService",
+        ];
         keysToRemove.forEach((key) => removeItem(key));
+        setIsLoading(false);
       }
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
     }
   }, [params.businessSlug, getItem, removeItem, router]);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <>

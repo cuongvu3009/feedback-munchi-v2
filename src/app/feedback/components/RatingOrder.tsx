@@ -2,10 +2,10 @@ import React, { useState } from "react";
 
 import AwesomeSVG from "@/utils/emoji-svg/AwesomeSVG";
 import BadSVG from "@/utils/emoji-svg/BadSVG";
-import FeedbackComment from "./FeedbackComment";
-import FeedbackTags from "./FeedbackTags";
+import Comment from "./Comment";
 import GoodSVG from "@/utils/emoji-svg/GoodSVG";
 import OkeySVG from "@/utils/emoji-svg/OkeySVG";
+import Tags from "./Tags";
 import TerribleSVG from "@/utils/emoji-svg/TerribleSVG";
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 import { ratingOptions } from "../../../utils/ratingOptions";
@@ -67,8 +67,8 @@ const RatingOrder: React.FC = () => {
 
       {emojiOrder !== null && (
         <>
-          <FeedbackTags storageKey="orderTags" emojiOrder={emojiOrder} />
-          <FeedbackComment storageKey="commentOrder" emojiOrder={emojiOrder} />
+          <Tags emoji={emojiOrder} />
+          <Comment emoji={emojiOrder} />
         </>
       )}
     </>

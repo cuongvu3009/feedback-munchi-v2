@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import Button from "../../../components/shared/Button";
+import Button from "@/components/shared/Button";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 interface CommentProps {
