@@ -2,13 +2,15 @@ import React, { useState } from "react";
 
 import AwesomeSVG from "@/utils/emoji-svg/AwesomeSVG";
 import BadSVG from "@/utils/emoji-svg/BadSVG";
+import Comment from "@/app/feedback/components/Comment";
 import FeedbackComment from "./FeedbackComment";
 import FeedbackTags from "./FeedbackTags";
 import GoodSVG from "@/utils/emoji-svg/GoodSVG";
 import OkeySVG from "@/utils/emoji-svg/OkeySVG";
+import Tags from "./Tags";
 import TerribleSVG from "@/utils/emoji-svg/TerribleSVG";
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
-import { ratingOptions } from "../../../utils/ratingOptions";
+import { ratingOptions } from "@/utils/ratingOptions";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 const RatingService: React.FC = () => {
@@ -19,7 +21,8 @@ const RatingService: React.FC = () => {
   const handleEmojiChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newEmoji = e.target.value;
     setEmojiService(newEmoji);
-    setItem("emojiService", newEmoji);
+    setItem("emoji", newEmoji);
+    setItem("type", "SERVICE");
   };
 
   return (
@@ -69,11 +72,9 @@ const RatingService: React.FC = () => {
 
       {emojiService !== null && (
         <>
-          <FeedbackTags storageKey="serviceTags" emojiService={emojiService} />
-          <FeedbackComment
-            storageKey="commentService"
-            emojiService={emojiService}
-          />
+          {/* <FeedbackTags storageKey="serviceTags" emojiService={emojiService} /> */}
+          <Tags emoji={emojiService} />
+          <Comment emoji={emojiService} />
         </>
       )}
     </>

@@ -4,7 +4,7 @@ CREATE TYPE "Type" AS ENUM ('SERVICE', 'ORDER');
 -- CreateTable
 CREATE TABLE "Feedback" (
     "id" SERIAL NOT NULL,
-    "score" INTEGER NOT NULL,
+    "emoji" TEXT NOT NULL,
     "businessSlug" TEXT NOT NULL,
     "comment" TEXT,
     "tags" TEXT,

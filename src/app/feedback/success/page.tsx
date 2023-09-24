@@ -7,6 +7,7 @@ import Emoji from "@/components/shared/Emoji";
 import FeedbackContext from "@/context/FeedbackContext";
 import { GrStatusGood } from "react-icons/gr";
 import PaymentButton from "@/components/shared/PaymentButton";
+import TradeMark from "@/app/feedback/components/TradeMark";
 import { getLinkByTip } from "@/lib/getStripeLinkByTipAmount";
 import { tipOptions } from "@/utils/tipOptions";
 import { useContext } from "react";
@@ -72,6 +73,7 @@ const SuccessFeedback = ({ params }: { params: { businessSlug: string } }) => {
           btnText="No, thank you"
           onClick={() => router.push(`/feedback/end`)}
         />
+        <TradeMark />
       </div>
     </>
   );

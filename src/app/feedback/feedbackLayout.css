@@ -8,6 +8,28 @@
   text-align: center;
 }
 
+.navigation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.munchi-logo {
+  display: flex; /* Use flexbox to align items horizontally */
+  align-items: center; /* Vertically center items */
+  justify-content: center;
+  margin: 20px;
+}
+
+.munchi-logo p {
+  margin-right: 5px; /* Add some spacing between the text and the image */
+}
+.munchi-logo img {
+  width: 80px;
+  height: auto;
+  margin-bottom: 2px;
+}
 @media (max-width: 768px) {
   .mobile {
     width: 100%;

@@ -5,7 +5,6 @@ import "./feedback.css";
 import { useEffect, useState } from "react";
 
 import RestaurantLogo from "@/app/feedback/components/Logo";
-import Title from "@/components/shared/Title";
 import { getBusinessBySlug } from "@/lib/getOneBusinessBySlug";
 
 interface Restaurant {

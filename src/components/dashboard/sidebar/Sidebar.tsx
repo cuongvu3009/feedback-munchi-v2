@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import LogoutBtn from "@/components/shared/LogoutBtn";
 import React from "react";
-import TradeMark from "../../shared/TradeMark";
+import TradeMark from "../../../app/feedback/components/TradeMark";
 import styles from "./sidebar.module.css";
 
 interface SidebarProps {

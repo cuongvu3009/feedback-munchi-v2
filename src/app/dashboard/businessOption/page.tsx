@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 
 import LogoutBtn from "@/components/shared/LogoutBtn";
-import TradeMark from "@/components/shared/TradeMark";
+import TradeMark from "@/app/feedback/components/TradeMark";
 import getUserBusiness from "@/lib/getUserBusinesses";
 import styles from "./businessOption.module.css";
 import { useBusinessContext } from "@/context/BusinessContext";

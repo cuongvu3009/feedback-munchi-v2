@@ -2,8 +2,10 @@
 
 import Button from "@/components/shared/Button";
 import RatingOrder from "@/app/feedback/components/RatingOrder";
-import TradeMark from "@/components/shared/TradeMark";
+import TradeMark from "@/app/feedback/components/TradeMark";
 import styles from "./feedbackOrder.module.css";
+import { useCallback } from "react";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useRouter } from "next/navigation";
 
 export default function FeedbackOrder({
@@ -12,19 +14,16 @@ export default function FeedbackOrder({
   params: { businessSlug: string };
 }) {
   const router = useRouter();
+  const { getItem, removeItem, setItem } = useLocalStorage();
 
-  const handleSubmit = async (e: React.SyntheticEvent) => {
-    e.preventDefault();
-
+  const handleSubmit = useCallback(async () => {
     try {
       const body = {
         businessSlug: params.businessSlug,
-        emojiService: localStorage.getItem("emojiService"),
-        commentService: localStorage.getItem("commentService"),
-        serviceTags: localStorage.getItem("serviceTags"),
-        emojiOrder: localStorage.getItem("emojiOrder"),
-        commentOrder: localStorage.getItem("commentOrder"),
-        orderTags: localStorage.getItem("orderTags"),
+        emoji: getItem("emoji"),
+        comment: getItem("comment"),
+        type: getItem("type"),
+        tags: getItem("tags"),
       };
       const result = await fetch(`/api/feedback`, {
         method: "POST",
@@ -33,39 +32,26 @@ export default function FeedbackOrder({
       });
 
       if (result) {
+        const isPositiveFeedbackOrder =
+          getItem("emoji") !== "terrible" && getItem("emoji") !== "bad";
+
+        const positiveFeedbackService = getItem("positiveFeedbackService");
         if (
-          localStorage.getItem("emojiService") !== "terrible".trim() &&
-          localStorage.getItem("emojiService") !== "bad".trim() &&
-          localStorage.getItem("emojiOrder") !== "terrible".trim() &&
-          localStorage.getItem("emojiOrder") !== "bad".trim()
+          isPositiveFeedbackOrder === true &&
+          positiveFeedbackService == "true"
         ) {
-          router.push("/feedback/success");
-          const keysToRemove = [
-            "emojiService",
-            "commentService",
-            "serviceTags",
-            "emojiOrder",
-            "commentOrder",
-            "orderTags",
-          ];
-          await keysToRemove.forEach((key) => localStorage.removeItem(key));
+          router.push(`/feedback/success`);
         } else {
-          router.push(`/feedback//end/`);
-          const keysToRemove = [
-            "emojiService",
-            "commentService",
-            "serviceTags",
-            "emojiOrder",
-            "commentOrder",
-            "orderTags",
-          ];
-          await keysToRemove.forEach((key) => localStorage.removeItem(key));
+          router.push(`/feedback/end`);
         }
+
+        const keysToRemove = ["emoji", "comment", "type", "tags"];
+        keysToRemove.forEach((key) => removeItem(key));
       }
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
-  };
+  }, [params.businessSlug, getItem, removeItem, router]);
 
   return (
     <>

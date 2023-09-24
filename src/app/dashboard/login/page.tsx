@@ -3,7 +3,7 @@
 import React, { useRef, useState } from "react";
 
 import { API_BASE_URL } from "@/utils/constantAPI";
-import TradeMark from "@/components/shared/TradeMark";
+import TradeMark from "@/app/feedback/components/TradeMark";
 import { User } from "@/types/auth.types";
 import axios from "axios";
 import styles from "./dashboardLogin.module.css";

@@ -19,7 +19,8 @@ const RatingOrder: React.FC = () => {
   const handleEmojiChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newEmoji = e.target.value;
     setEmojiOrder(newEmoji);
-    setItem("emojiOrder", newEmoji);
+    setItem("emoji", newEmoji);
+    setItem("type", "ORDER");
   };
 
   return (

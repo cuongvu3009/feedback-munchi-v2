@@ -14,7 +14,7 @@ datasource db {
 // Define your Feedback model
 model Feedback {
   id           Int        @id @default(autoincrement())
-  score        Int        //	range 1-5
+  emoji        String        
   businessSlug String
   comment      String?
   tags         String?
