@@ -18,7 +18,6 @@ export default function DashboardLayout({
   useEffect(() => {
     // Check if localStorage is available before using it
     if (typeof window !== "undefined") {
-      console.log("client");
       const storedBusinessId = localStorage.getItem("businessId");
 
       if (storedBusinessId) {

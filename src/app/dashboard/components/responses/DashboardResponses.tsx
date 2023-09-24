@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 interface DashboardResponseProps {
-  data: Feedback[];
+  data: Feedback[] | undefined;
   businessId: number;
 }
 const DashboardResponses: React.FC<DashboardResponseProps> = ({
@@ -40,17 +40,20 @@ const DashboardResponses: React.FC<DashboardResponseProps> = ({
     }
   };
 
+  // Check if data is defined and an array before using slice
+  const slicedData = data ? data.slice(0, feedbackLimit) : [];
+
   return (
     <div className={`${styles["dashboard-card"]}`}>
       <h3>Responses</h3>
 
-      {data.slice(0, feedbackLimit).map((item) => {
+      {slicedData.slice(0, feedbackLimit).map((item) => {
         return (
           <div
             className={`${styles["flex-between"]}`}
             key={item.id + item.businessSlug + item.createdAt}
           >
-            <p>{getEmojiLabel(item.emojiService)}</p>
+            <p>{getEmojiLabel(item.emoji)}</p>
             <p>{moment(item.createdAt).fromNow()}</p>
           </div>
         );

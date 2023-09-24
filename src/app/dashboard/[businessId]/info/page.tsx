@@ -2,20 +2,27 @@
 
 import React, { useEffect, useState } from "react";
 
-import DashboardResponses from "@/components/dashboard/responses/DashboardResponses";
-import DashboardScore from "@/components/dashboard/score/DashboardScore";
-import FeedbackChart from "@/components/dashboard/chart/FeedbackChart";
+import DashboardResponses from "@/app/dashboard/components/responses/DashboardResponses";
+import DashboardScore from "../../components/score/DashboardScore";
+import { Feedback } from "@/types/feedback.types";
+import FeedbackChart from "@/app/dashboard/components/chart/FeedbackChart";
 import Spinner from "@/components/shared/Spinner";
 import { getFeedbackData } from "@/lib/getFeedbackData";
 import styles from "./dashboardInfo.module.css";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
+interface FeedbackReturn {
+  serviceFeedback: Feedback[];
+  orderFeedback: Feedback[];
+}
 export const DashboardPage = ({
   params,
 }: {
   params: { businessId: number };
 }) => {
-  const [feedbacks, setFeedbacks] = useState([]);
+  const [feedbacks, setFeedbacks] = useState<FeedbackReturn | undefined>(
+    undefined
+  );
   const [isLoading, setIsLoading] = useState(false);
   const { getItem } = useLocalStorage();
 
@@ -44,21 +51,26 @@ export const DashboardPage = ({
       {!isLoading ? (
         <div className={`${styles["dashboard-info"]}`}>
           <div className={`${styles["dashboard-content"]}`}>
-            <DashboardScore type="order" data={feedbacks} />
-            <DashboardScore type="service" data={feedbacks} />
+            <DashboardScore data={feedbacks?.serviceFeedback!} />
+            <DashboardScore data={feedbacks?.orderFeedback!} />
             <DashboardResponses
-              data={feedbacks}
+              data={feedbacks?.serviceFeedback!.concat(
+                feedbacks?.orderFeedback!
+              )}
               businessId={params.businessId}
             />
           </div>
           <div className={`${styles["dashboard-chart"]}`}>
             <div className={`${styles["chart"]}`}>
               <h4>Service feedback</h4>
-              <FeedbackChart data={feedbacks} type="service" />
+              <FeedbackChart
+                data={feedbacks?.serviceFeedback!}
+                type="service"
+              />
             </div>
             <h4>Order feedback</h4>
             <div className={`${styles["chart"]}`}>
-              <FeedbackChart data={feedbacks} type="order" />
+              <FeedbackChart data={feedbacks?.orderFeedback!} type="order" />
             </div>
           </div>
         </div>

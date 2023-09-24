@@ -5,16 +5,26 @@ export async function GET(
   { params }: { params: { businessSlug: any } }
 ) {
   const businessSlug = params.businessSlug;
+
   try {
-    const feedbacks = await prisma.feedback.findMany({
+    const serviceFeedback = await prisma.feedback.findMany({
       where: {
         businessSlug,
-      },
-      orderBy: {
-        createdAt: "desc",
+        type: "SERVICE",
       },
     });
-    return Response.json(feedbacks);
+
+    const orderFeedback = await prisma.feedback.findMany({
+      where: {
+        businessSlug,
+        type: "ORDER",
+      },
+    });
+
+    return Response.json({
+      serviceFeedback,
+      orderFeedback,
+    });
   } catch (error) {
     console.error("Error get feedbacks:", error);
     return Response.json(error);

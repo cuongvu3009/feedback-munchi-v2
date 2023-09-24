@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 
 import { BusinessProps } from "@/types/dashboard.types";
-import Sidebar from "@/components/dashboard/sidebar/Sidebar";
+import Sidebar from "@/app/dashboard/components/sidebar/Sidebar";
 import { SidebarProvider } from "@/context/SidebarContext";
 import Spinner from "@/components/shared/Spinner";
 import { getBusinessById } from "@/lib/getOneBusinessById";

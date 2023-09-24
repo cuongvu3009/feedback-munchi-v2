@@ -23,7 +23,7 @@ interface ChartData {
   };
 }
 
-const mapEmojiToScore = (emoji: string, type: "service" | "order"): number => {
+const mapEmojiToScore = (emoji: string): number => {
   switch (emoji) {
     case "terrible":
       return 1;
@@ -54,16 +54,19 @@ const formatAverageScore = (value: number): string => {
 };
 
 const LineChartComponent: React.FC<LineChartProps> = ({ data, type }) => {
+  // Check if data is defined and not empty
+  if (!data || data.length === 0) {
+    // Handle the case where data is undefined or empty
+    return <div>No data available.</div>;
+  }
+
   // Group data by date and calculate average score based on the 'type'
   const chartData: ChartData = data.reduce((acc, entry) => {
     const date = formatDate(entry.createdAt as string);
     if (!acc[date]) {
       acc[date] = { date, totalScore: 0, count: 0 };
     }
-    const score =
-      type === "service"
-        ? mapEmojiToScore(entry.emojiService, type)
-        : mapEmojiToScore(entry.emojiOrder, type);
+    const score = mapEmojiToScore(entry.emoji);
     acc[date].totalScore += score;
     acc[date].count += 1;
     return acc;

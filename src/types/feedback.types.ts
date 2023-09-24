@@ -1,13 +1,12 @@
 export interface Feedback {
-  id?: string;
-  createdAt: string;
-  emojiService: string;
-  emojiOrder: string;
-  commentService: string;
-  commentOrder: string;
+  id: number;
+  emoji: any;
   businessSlug: string;
-  serviceTags: string[];
-  orderTags: string[];
+  comment: string;
+  tags: string;
+  createdAt: string;
+  updatedAt: string;
+  type: string;
 }
 
 export interface ButtonProps {

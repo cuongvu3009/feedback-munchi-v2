@@ -3,11 +3,10 @@ import React from "react";
 import styles from "./dashboardScore.module.css";
 
 interface DashboardScoreProps {
-  type: "service" | "order";
   data: Feedback[];
 }
 
-const mapEmojiToScore = (emoji: string, type: "service" | "order"): number => {
+const mapEmojiToScore = (emoji: string): number => {
   switch (emoji) {
     case "terrible":
       return 1;
@@ -24,17 +23,20 @@ const mapEmojiToScore = (emoji: string, type: "service" | "order"): number => {
   }
 };
 
-const calculateAverageScore = (data: Feedback[], type: "service" | "order") => {
+const calculateAverageScore = (data: Feedback[]) => {
   let totalScore = 0;
   let totalCount = 0;
 
-  data.forEach((entry) => {
-    const emoji = type === "service" ? entry.emojiService : entry.emojiOrder;
-    const score = mapEmojiToScore(emoji, type); // Implement your mapping function
+  if (data && data.length > 0) {
+    // Check if data is defined and not empty
+    data.forEach((entry) => {
+      const emoji = entry.emoji;
+      const score = mapEmojiToScore(emoji); // Implement your mapping function
 
-    totalScore += score;
-    totalCount++;
-  });
+      totalScore += score;
+      totalCount++;
+    });
+  }
 
   if (totalCount === 0) {
     return 0; // Avoid division by zero
@@ -43,20 +45,20 @@ const calculateAverageScore = (data: Feedback[], type: "service" | "order") => {
   return (totalScore / totalCount).toFixed(1); // Calculate and round to one decimal place
 };
 
-const calculateResponseCounts = (
-  data: Feedback[],
-  type: "service" | "order"
-) => {
+const calculateResponseCounts = (data: Feedback[]) => {
   const responseCounts: { [response: string]: number } = {};
 
-  data.forEach((entry) => {
-    const emoji = type === "service" ? entry.emojiService : entry.emojiOrder;
-    if (emoji in responseCounts) {
-      responseCounts[emoji]++;
-    } else {
-      responseCounts[emoji] = 1;
-    }
-  });
+  if (data && data.length > 0) {
+    // Check if data is defined and not empty
+    data.forEach((entry) => {
+      const emoji = entry.emoji;
+      if (emoji in responseCounts) {
+        responseCounts[emoji]++;
+      } else {
+        responseCounts[emoji] = 1;
+      }
+    });
+  }
 
   return responseCounts;
 };
@@ -85,13 +87,13 @@ const getEmojiLabel = (emoji: string) => {
   }
 };
 
-const DashboardScore: React.FC<DashboardScoreProps> = ({ type, data }) => {
-  const responseCounts = calculateResponseCounts(data, type);
-  const averageScore = calculateAverageScore(data, type);
+const DashboardScore: React.FC<DashboardScoreProps> = ({ data }) => {
+  const responseCounts = calculateResponseCounts(data);
+  const averageScore = calculateAverageScore(data);
 
   return (
     <div className={`${styles["dashboard-card"]}`}>
-      <h3>Average score {type}</h3>
+      <h3>Average score Service</h3>
       <div className={`${styles["dashboard-score"]}`}>
         <span className={styles.score}>{averageScore}</span>
       </div>
