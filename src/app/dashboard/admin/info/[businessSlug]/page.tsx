@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 
 import DashboardResponses from "@/app/dashboard/components/responses/DashboardResponses";
-import DashboardScore from "../../../components/score/DashboardScore";
+import DashboardScore from "@/app/dashboard/components/score/DashboardScore";
 import { Feedback } from "@/types/feedback.types";
 import FeedbackChart from "@/app/dashboard/components/chart/FeedbackChart";
 import { NextPage } from "next";
@@ -16,7 +16,8 @@ interface FeedbackReturn {
   serviceFeedback: Feedback[];
   orderFeedback: Feedback[];
 }
-export const DashboardPage: NextPage<{ params: { businessId: number } }> = ({
+
+const DashboardPage: NextPage<{ params: { businessId: number } }> = ({
   params,
 }) => {
   const [feedbacks, setFeedbacks] = useState<FeedbackReturn | undefined>(
@@ -36,13 +37,12 @@ export const DashboardPage: NextPage<{ params: { businessId: number } }> = ({
         setIsLoading(false);
       } catch (error) {
         console.error("There was an error fetching data", error);
-
         setIsLoading(false);
       }
     };
 
     fetchData();
-  }, []);
+  }, [getItem]);
 
   return (
     <>

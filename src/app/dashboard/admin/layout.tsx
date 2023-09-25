@@ -45,7 +45,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     };
 
     fetchData();
-  }, [businessId]);
+  }, [businessId, setItem, userIsLoggedIn]);
 
   return (
     <SidebarProvider>

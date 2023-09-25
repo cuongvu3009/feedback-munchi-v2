@@ -29,12 +29,12 @@ const FeedbackComment: React.FC<CommentProps> = ({ emoji }) => {
     if (storedComment && commentInputRef.current) {
       commentInputRef.current.value = storedComment;
     }
-  }, []);
+  }, [getItem]);
 
   useEffect(() => {
     removeItem("comment");
     setIsFormSubmitted(false);
-  }, [emoji]);
+  }, [emoji, removeItem]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

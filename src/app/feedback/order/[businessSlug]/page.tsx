@@ -13,7 +13,7 @@ import styles from "./feedbackOrder.module.css";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useRouter } from "next/navigation";
 
-export const FeedbackOrder: NextPage<{ params: { businessSlug: string } }> = ({
+const FeedbackOrder: NextPage<{ params: { businessSlug: string } }> = ({
   params,
 }) => {
   const router = useRouter();
@@ -104,3 +104,4 @@ export const FeedbackOrder: NextPage<{ params: { businessSlug: string } }> = ({
     </>
   );
 };
+export default FeedbackOrder;

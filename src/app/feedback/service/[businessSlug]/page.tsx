@@ -14,7 +14,7 @@ import styles from "./feedbackService.module.css";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useRouter } from "next/navigation";
 
-export const FeedbackService: NextPage<{
+const FeedbackService: NextPage<{
   params: { businessSlug: string };
 }> = ({ params }) => {
   const router = useRouter();
@@ -106,3 +106,5 @@ export const FeedbackService: NextPage<{
     </>
   );
 };
+
+export default FeedbackService;
