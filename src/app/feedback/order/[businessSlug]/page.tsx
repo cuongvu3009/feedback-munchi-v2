@@ -54,7 +54,7 @@ const FeedbackOrder: NextPage<{ params: { businessSlug: string } }> = ({
           isPositiveFeedbackOrder === true &&
           positiveFeedbackService == "true"
         ) {
-          router.push(`/feedback/success`);
+          router.push(`/feedback/success/${params.businessSlug}`);
         } else {
           router.push(`/feedback/end/${params.businessSlug}`);
         }

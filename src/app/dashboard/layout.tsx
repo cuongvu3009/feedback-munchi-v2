@@ -28,13 +28,11 @@ export default function DashboardLayout({
         if (businessId) {
           router.push(`/dashboard/admin/info/${businessId}`);
         } else {
-          router.push(`/dashboard/businessOption`);
+          router.push("/dashboard/businessOption");
         }
       } else {
         router.push("/dashboard");
       }
-    } else {
-      console.log("server side, no localstorage");
     }
   }, [userIsLoggedIn, router, businessId]);
 

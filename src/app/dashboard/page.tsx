@@ -8,6 +8,7 @@ import { User } from "@/types/auth.types";
 import axios from "axios";
 import styles from "./dashboardLogin.module.css";
 import { useAuthenticate } from "@/hooks/useAuthenticate";
+import { useRouter } from "next/navigation";
 
 interface ApiResponse {
   data: User | null; // Provide a default type of null for data
@@ -16,6 +17,7 @@ interface ApiResponse {
 }
 
 const Login = () => {
+  const router = useRouter();
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const { login } = useAuthenticate();
@@ -41,6 +43,7 @@ const Login = () => {
           },
         });
         login(result.data.result);
+        router.push("/dashboard/businessOption");
         setResponse({ data: result.data.result, loading: false, error: null });
       } catch (error: any) {
         setResponse({ data: null, loading: false, error });
