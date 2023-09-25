@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useRef, useState } from "react";
 
 import Button from "@/components/shared/Button";
@@ -8,7 +10,7 @@ interface CommentProps {
 }
 
 const FeedbackComment: React.FC<CommentProps> = ({ emoji }) => {
-  const { getItem, setItem, removeItem } = useLocalStorage();
+  const { getItem } = useLocalStorage();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const commentInputRef = useRef<HTMLInputElement>(null);
@@ -27,23 +29,18 @@ const FeedbackComment: React.FC<CommentProps> = ({ emoji }) => {
   useEffect(() => {
     const storedComment = getItem("comment");
     if (storedComment && commentInputRef.current) {
-      commentInputRef.current.value = storedComment;
+      commentInputRef.current.value = JSON.parse(storedComment);
     }
   }, [getItem]);
-
-  useEffect(() => {
-    removeItem("comment");
-    setIsFormSubmitted(false);
-  }, [emoji, removeItem]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const comment = commentInputRef.current?.value || "";
-    if (!comment.trim()) {
+    if (!comment.trim()!) {
       return;
     }
 
-    setItem("comment", comment);
+    localStorage.setItem("comment", JSON.stringify(comment));
 
     if (commentInputRef.current) {
       commentInputRef.current.value = "";
