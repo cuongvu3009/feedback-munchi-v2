@@ -1,80 +1,55 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-
 import DashboardResponses from "@/app/dashboard/components/responses/DashboardResponses";
 import DashboardScore from "@/app/dashboard/components/score/DashboardScore";
-import { Feedback } from "@/types/feedback.types";
 import FeedbackChart from "@/app/dashboard/components/chart/FeedbackChart";
 import { NextPage } from "next";
+import React from "react";
 import Spinner from "@/components/shared/Spinner";
-import { getFeedbackData } from "@/lib/getFeedbackData";
+import { fetcher } from "@/utils/fetcher";
 import styles from "./dashboardInfo.module.css";
-import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { useBusinessContext } from "@/context/BusinessContext";
+import useSWR from "swr";
 
-interface FeedbackReturn {
-  serviceFeedback: Feedback[];
-  orderFeedback: Feedback[];
-}
-
-const DashboardPage: NextPage<{ params: { businessId: number } }> = ({
+const DashboardPage: NextPage<{ params: { businessSlug: string } }> = ({
   params,
 }) => {
-  const [feedbacks, setFeedbacks] = useState<FeedbackReturn | undefined>(
-    undefined
+  const { data, error, isLoading } = useSWR(
+    `/api/feedback/${params.businessSlug}`,
+    fetcher
   );
-  const [isLoading, setIsLoading] = useState(false);
-  const { getItem } = useLocalStorage();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      try {
-        const storedBusiness = await getItem("business");
-        const businessData = JSON.parse(storedBusiness!);
-        const feedbacksData = await getFeedbackData(businessData?.slug);
-        setFeedbacks(feedbacksData);
-        setIsLoading(false);
-      } catch (error) {
-        console.error("There was an error fetching data", error);
-        setIsLoading(false);
-      }
-    };
+  const { businessId } = useBusinessContext();
 
-    fetchData();
-  }, [getItem]);
+  if (error) {
+    console.log(error);
+  }
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <>
-      {!isLoading ? (
-        <div className={`${styles["dashboard-info"]}`}>
-          <div className={`${styles["dashboard-content"]}`}>
-            <DashboardScore data={feedbacks?.serviceFeedback!} />
-            <DashboardScore data={feedbacks?.orderFeedback!} />
-            <DashboardResponses
-              data={feedbacks?.serviceFeedback!.concat(
-                feedbacks?.orderFeedback!
-              )}
-              businessId={params.businessId}
-            />
+      <div className={`${styles["dashboard-info"]}`}>
+        <div className={`${styles["dashboard-content"]}`}>
+          <DashboardScore data={data?.serviceFeedback!} />
+          <DashboardScore data={data?.orderFeedback!} />
+          <DashboardResponses
+            data={data?.serviceFeedback!.concat(data?.orderFeedback!)}
+            businessId={businessId as number}
+          />
+        </div>
+        <div className={`${styles["dashboard-chart"]}`}>
+          <div className={`${styles["chart"]}`}>
+            <h4>Service feedback</h4>
+            <FeedbackChart data={data?.serviceFeedback!} type="service" />
           </div>
-          <div className={`${styles["dashboard-chart"]}`}>
-            <div className={`${styles["chart"]}`}>
-              <h4>Service feedback</h4>
-              <FeedbackChart
-                data={feedbacks?.serviceFeedback!}
-                type="service"
-              />
-            </div>
-            <h4>Order feedback</h4>
-            <div className={`${styles["chart"]}`}>
-              <FeedbackChart data={feedbacks?.orderFeedback!} type="order" />
-            </div>
+          <h4>Order feedback</h4>
+          <div className={`${styles["chart"]}`}>
+            <FeedbackChart data={data?.orderFeedback!} type="order" />
           </div>
         </div>
-      ) : (
-        <Spinner />
-      )}
+      </div>
     </>
   );
 };

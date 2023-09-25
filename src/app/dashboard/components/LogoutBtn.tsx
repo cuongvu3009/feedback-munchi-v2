@@ -1,17 +1,19 @@
 import { GrLogout } from "react-icons/gr";
 import React from "react";
-import { useAuthenticate } from "@/hooks/useAuthenticate";
-import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { useAuthContext } from "@/context/AuthContext";
+import { useBusinessContext } from "@/context/BusinessContext";
+import { useRouter } from "next/navigation";
 
 const LogoutBtn = () => {
-  const { logout } = useAuthenticate();
-  const { removeItem } = useLocalStorage();
+  const { setBusiness, setBusinessId } = useBusinessContext();
+  const { setUser } = useAuthContext();
+  const router = useRouter();
 
   const handleLogout = () => {
-    logout();
-    removeItem("business");
-    removeItem("businessId");
-    removeItem("user");
+    setBusinessId(undefined);
+    setBusiness(undefined);
+    setUser(null);
+    router.push("/dashboard/login");
   };
 
   const buttonStyles = {

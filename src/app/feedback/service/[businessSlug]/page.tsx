@@ -29,16 +29,13 @@ const FeedbackService: NextPage<{
       setIsLoading(true);
       try {
         const restaurantData = await getBusinessBySlug(params.businessSlug);
-        localStorage.setItem(
-          "restaurant",
-          JSON.stringify(restaurantData.result)
-        );
+
         setRestaurant(restaurantData.result);
 
         setIsLoading(false);
       } catch (error) {
         console.error("There was an error fetching data", error);
-        localStorage.setItem("restaurant", "null");
+
         setIsLoading(false);
       }
     };

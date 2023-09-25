@@ -1,64 +1,35 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-
-import { BusinessProps } from "@/types/dashboard.types";
+import { API_BASE_URL } from "@/utils/constantAPI";
+import React from "react";
 import Sidebar from "@/app/dashboard/components/sidebar/Sidebar";
 import { SidebarProvider } from "@/context/SidebarContext";
 import Spinner from "@/components/shared/Spinner";
-import { getBusinessById } from "@/lib/getOneBusinessById";
+import { fetcher } from "@/utils/fetcher";
 import styles from "./dashboard.module.css";
-import { useAuthContext } from "@/context/AuthContext";
-import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { useBusinessContext } from "@/context/BusinessContext";
+import useSWR from "swr";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  const [business, setBusiness] = useState<BusinessProps | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const { setItem } = useLocalStorage();
-  const { userIsLoggedIn } = useAuthContext();
+  const { businessId } = useBusinessContext();
+  const { data, error, isLoading } = useSWR(
+    `${API_BASE_URL}/business/${businessId}?params=logo,slug,name`,
+    fetcher
+  );
 
-  let storedBusinessId = null;
-  let businessId: number | null = null;
-  if (typeof localStorage !== "undefined") {
-    storedBusinessId = localStorage.getItem("businessId");
-    businessId = storedBusinessId ? JSON.parse(storedBusinessId) : null;
+  if (error) {
+    console.log(error);
   }
-
-  useEffect(() => {
-    const fetchData = async () => {
-      // No fetching if no business
-      if (!userIsLoggedIn) {
-        return;
-      }
-
-      setIsLoading(true);
-      try {
-        const businessData = await getBusinessById(businessId!);
-        setBusiness(businessData);
-        setItem("business", JSON.stringify(businessData));
-        setIsLoading(false);
-      } catch (error) {
-        console.error("There was an error fetching data", error);
-        setBusiness(null);
-        setIsLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [businessId, setItem, userIsLoggedIn]);
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <SidebarProvider>
-      {isLoading ? (
-        <Spinner />
-      ) : business ? (
-        <div className={styles.dashboard}>
-          <Sidebar business={business} />
-          <>{children}</>
-        </div>
-      ) : (
-        <Spinner />
-      )}
+      <div className={styles.dashboard}>
+        <Sidebar business={data.result} />
+        <>{children}</>
+      </div>
     </SidebarProvider>
   );
 }

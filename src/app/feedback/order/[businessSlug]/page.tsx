@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import Button from "@/components/shared/Button";
 import Logo from "../../components/Logo";
@@ -9,6 +9,7 @@ import RatingOrder from "@/app/feedback/components/RatingOrder";
 import { Restaurant } from "@/types/feedback.types";
 import Spinner from "@/components/shared/Spinner";
 import TradeMark from "@/app/feedback/components/TradeMark";
+import { getBusinessBySlug } from "@/lib/getOneBusinessBySlug";
 import styles from "./feedbackOrder.module.css";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useRouter } from "next/navigation";
@@ -19,15 +20,28 @@ const FeedbackOrder: NextPage<{ params: { businessSlug: string } }> = ({
   const router = useRouter();
   const { getItem, removeItem } = useLocalStorage();
   const [isLoading, setIsLoading] = useState(false);
-  let storedRestaurant = null;
-  let initialRestaurant = null;
+  const [restaurant, setRestaurant] = useState<Restaurant | undefined>(
+    undefined
+  );
 
-  if (typeof localStorage !== "undefined") {
-    storedRestaurant = localStorage.getItem("restaurant");
-    initialRestaurant = storedRestaurant ? JSON.parse(storedRestaurant) : null;
-  }
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const restaurantData = await getBusinessBySlug(params.businessSlug);
 
-  const [restaurant, setRestaurant] = useState<Restaurant>(initialRestaurant);
+        setRestaurant(restaurantData.result);
+
+        setIsLoading(false);
+      } catch (error) {
+        console.error("There was an error fetching data", error);
+
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [params.businessSlug]);
 
   const handleSubmit = useCallback(async () => {
     try {

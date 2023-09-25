@@ -1,13 +1,22 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext } from "react";
+
+import { BusinessProps } from "@/types/dashboard.types";
+import { usePersistState } from "@/hooks/usePersistState";
 
 export interface BusinessContextProps {
   businessId: number | undefined;
   setBusinessId: (value: number | undefined) => void;
+  business: BusinessProps | undefined;
+  setBusiness: (value: BusinessProps | undefined) => void;
 }
 
 const BusinessContext = createContext<BusinessContextProps>({
   businessId: undefined,
   setBusinessId: function (value: number | undefined): void {
+    throw new Error("Function not implemented.");
+  },
+  business: undefined,
+  setBusiness: function (value: BusinessProps | undefined): void {
     throw new Error("Function not implemented.");
   },
 });
@@ -21,34 +30,16 @@ export const useBusinessContext = () => {
 };
 
 export const BusinessProvider = ({ children }: any) => {
-  const [businessId, setBusinessIdState] = useState<number | undefined>(() => {
-    // Check if localStorage is available before using it
-    if (typeof localStorage !== "undefined") {
-      const storedBusinessId = localStorage.getItem("businessId");
-      return storedBusinessId ? parseInt(storedBusinessId, 10) : undefined;
-    } else {
-      return undefined;
-    }
-  });
-
-  // Use useEffect to store the businessId in localStorage whenever it changes
-  useEffect(() => {
-    if (businessId !== undefined && typeof localStorage !== "undefined") {
-      localStorage.setItem("businessId", businessId.toString());
-    } else if (typeof localStorage !== "undefined") {
-      localStorage.removeItem("businessId");
-    }
-  }, [businessId]);
-
-  const setBusinessId = (value: number | undefined) => {
-    setBusinessIdState(value);
-  };
+  const [businessId, setBusinessId] = usePersistState("businessId", undefined);
+  const [business, setBusiness] = usePersistState("business", undefined);
 
   return (
     <BusinessContext.Provider
       value={{
         businessId,
         setBusinessId,
+        business,
+        setBusiness,
       }}
     >
       {children}

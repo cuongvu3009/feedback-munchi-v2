@@ -1,6 +1,5 @@
 import "./globals.css";
 
-import { AuthProvider } from "@/context/AuthContext";
 import { DM_Sans } from "next/font/google";
 import { FeedbackProvider } from "@/context/FeedbackContext";
 import type { Metadata } from "next";
@@ -20,9 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={sans.className}>
-        <FeedbackProvider>
-          <AuthProvider>{children}</AuthProvider>
-        </FeedbackProvider>
+        <FeedbackProvider>{children}</FeedbackProvider>
       </body>
     </html>
   );

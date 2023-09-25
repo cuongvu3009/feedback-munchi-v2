@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import LogoutBtn from "@/app/dashboard/components/LogoutBtn";
 import React from "react";
+import Spinner from "@/components/shared/Spinner";
 import TradeMark from "../../../feedback/components/TradeMark";
 import styles from "./sidebar.module.css";
 
@@ -16,7 +17,7 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ business }) => {
   if (!business) {
-    return "loading...";
+    return <Spinner />;
   }
   return (
     <div className={styles.sidebar}>

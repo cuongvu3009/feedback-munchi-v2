@@ -7,7 +7,8 @@ import munchi from "@/components/assets/munchiLogo.png";
 const TradeMark: React.FC = () => {
   return (
     <div className="munchi-logo">
-      <p>Powered by </p> <Image src={munchi} alt="munchi-logo" />
+      <p>Powered by </p>{" "}
+      <Image priority={true} src={munchi} alt="munchi-logo" />
     </div>
   );
 };
