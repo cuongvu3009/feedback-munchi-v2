@@ -17,8 +17,6 @@ export const useAuthContext = (): AuthContextType => {
 };
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  // const [user, setUser] = useState<User | null>(null);
-  // const userIsLoggedIn = !!user?.session.access_token;
   const [user, setUser] = usePersistState("user", null);
   const userIsLoggedIn = !!user?.session.access_token;
 
