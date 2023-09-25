@@ -26,12 +26,12 @@ export default function DashboardLayout({
 
       if (userIsLoggedIn) {
         if (businessId) {
-          router.push(`/dashboard/${businessId}/info`);
+          router.push(`/dashboard/admin/info/${businessId}`);
         } else {
           router.push(`/dashboard/businessOption`);
         }
       } else {
-        router.push("/dashboard/login");
+        router.push("/dashboard");
       }
     } else {
       console.log("server side, no localstorage");

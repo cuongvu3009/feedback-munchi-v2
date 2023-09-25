@@ -20,9 +20,15 @@ export default function FeedbackOrder({
   const router = useRouter();
   const { getItem, removeItem } = useLocalStorage();
   const [isLoading, setIsLoading] = useState(false);
-  let storedRestaurant = localStorage.getItem("restaurant");
-  let initalRestaurant = JSON.parse(storedRestaurant!);
-  const [restaurant, setRestaurant] = useState<Restaurant>(initalRestaurant);
+  let storedRestaurant = null;
+  let initialRestaurant = null;
+
+  if (typeof localStorage !== "undefined") {
+    storedRestaurant = localStorage.getItem("restaurant");
+    initialRestaurant = storedRestaurant ? JSON.parse(storedRestaurant) : null;
+  }
+
+  const [restaurant, setRestaurant] = useState<Restaurant>(initialRestaurant);
 
   const handleSubmit = useCallback(async () => {
     try {

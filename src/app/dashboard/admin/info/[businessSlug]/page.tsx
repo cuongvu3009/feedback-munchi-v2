@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 
 import DashboardResponses from "@/app/dashboard/components/responses/DashboardResponses";
-import DashboardScore from "../../components/score/DashboardScore";
+import DashboardScore from "../../../components/score/DashboardScore";
 import { Feedback } from "@/types/feedback.types";
 import FeedbackChart from "@/app/dashboard/components/chart/FeedbackChart";
 import Spinner from "@/components/shared/Spinner";

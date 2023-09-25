@@ -11,17 +11,19 @@ import styles from "./dashboard.module.css";
 import { useAuthContext } from "@/context/AuthContext";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
-export default function Layout({
-  children,
-  params,
-}: {
-  children: React.ReactNode;
-  params: { businessId: number };
-}) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   const [business, setBusiness] = useState<BusinessProps | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const { setItem } = useLocalStorage();
   const { userIsLoggedIn } = useAuthContext();
+
+  let storedBusinessId = null;
+  let businessId: number | null = null;
+  if (typeof localStorage !== "undefined") {
+    storedBusinessId = localStorage.getItem("businessId");
+    businessId = storedBusinessId ? JSON.parse(storedBusinessId) : null;
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       // No fetching if no business
@@ -31,7 +33,7 @@ export default function Layout({
 
       setIsLoading(true);
       try {
-        const businessData = await getBusinessById(params.businessId);
+        const businessData = await getBusinessById(businessId!);
         setBusiness(businessData);
         setItem("business", JSON.stringify(businessData));
         setIsLoading(false);
@@ -43,7 +45,7 @@ export default function Layout({
     };
 
     fetchData();
-  }, [params.businessId]);
+  }, [businessId]);
 
   return (
     <SidebarProvider>

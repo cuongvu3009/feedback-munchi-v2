@@ -1,10 +1,10 @@
 "use client";
 
 import { BusinessProps } from "@/types/dashboard.types";
-import ChangeBusinessBtn from "@/components/shared/ChangeBusinessBtn";
+import ChangeBusinessBtn from "@/app/dashboard/components/ChangeBusinessBtn";
 import Image from "next/image";
 import Link from "next/link";
-import LogoutBtn from "@/components/shared/LogoutBtn";
+import LogoutBtn from "@/app/dashboard/components/LogoutBtn";
 import React from "react";
 import TradeMark from "../../../feedback/components/TradeMark";
 import styles from "./sidebar.module.css";

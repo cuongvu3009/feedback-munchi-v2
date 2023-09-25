@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 
-import LogoutBtn from "@/components/shared/LogoutBtn";
+import LogoutBtn from "@/app/dashboard/components/LogoutBtn";
 import Spinner from "@/components/shared/Spinner";
 import TradeMark from "@/app/feedback/components/TradeMark";
 import getUserBusiness from "@/lib/getUserBusinesses";
@@ -25,7 +25,7 @@ const Page = () => {
     event.preventDefault();
 
     if (selectedBusiness !== null) {
-      router.push(`/dashboard/${selectedBusiness}/info`);
+      router.push(`/dashboard/admin/info/${selectedBusiness}`);
     }
   };
 

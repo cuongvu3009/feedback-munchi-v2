@@ -10,6 +10,8 @@ const LogoutBtn = () => {
   const handleLogout = () => {
     logout();
     removeItem("business");
+    removeItem("businessId");
+    removeItem("user");
   };
 
   const buttonStyles = {
