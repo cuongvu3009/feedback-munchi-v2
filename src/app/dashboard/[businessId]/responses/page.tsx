@@ -26,12 +26,9 @@ const Responses = ({ params }: { params: { businessId: number } }) => {
       <div className={`${styles["dashboard-card"]}`}>
         <h3>Responses</h3>
 
-        {/* {data.map((item) => {
+        {data.map((item) => {
           return (
-            <div
-              className={`${styles["flex-between"]}`}
-              key={item._id}
-            >
+            <div className={`${styles["flex-between"]}`} key={item._id}>
               <p>{getEmojiLabel(item.emoji_service)}</p>
               <p>
                 {item.tags_order.map((item) => item.replace(/["\[\]]/g, ""))}
@@ -39,7 +36,7 @@ const Responses = ({ params }: { params: { businessId: number } }) => {
               <p>{moment(item.createdAt).fromNow()}</p>
             </div>
           );
-        })} */}
+        })}
       </div>
     </div>
   );

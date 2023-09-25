@@ -51,7 +51,7 @@ const Tags: React.FC<TagsProps> = ({ emoji }) => {
                 className={
                   selectedTags.includes(tag)
                     ? "selected-button"
-                    : "unselected-button"
+                    : "unselected-tags"
                 }
               >
                 <input

@@ -22,16 +22,20 @@ export const useBusinessContext = () => {
 
 export const BusinessProvider = ({ children }: any) => {
   const [businessId, setBusinessIdState] = useState<number | undefined>(() => {
-    // Retrieve the businessId from localStorage on component initialization
-    const storedBusinessId = localStorage.getItem("businessId");
-    return storedBusinessId ? parseInt(storedBusinessId, 10) : undefined;
+    // Check if localStorage is available before using it
+    if (typeof localStorage !== "undefined") {
+      const storedBusinessId = localStorage.getItem("businessId");
+      return storedBusinessId ? parseInt(storedBusinessId, 10) : undefined;
+    } else {
+      return undefined;
+    }
   });
 
   // Use useEffect to store the businessId in localStorage whenever it changes
   useEffect(() => {
-    if (businessId !== undefined) {
+    if (businessId !== undefined && typeof localStorage !== "undefined") {
       localStorage.setItem("businessId", businessId.toString());
-    } else {
+    } else if (typeof localStorage !== "undefined") {
       localStorage.removeItem("businessId");
     }
   }, [businessId]);

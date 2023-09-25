@@ -34,7 +34,6 @@ export const DashboardPage = ({
         const businessData = JSON.parse(storedBusiness!);
         const feedbacksData = await getFeedbackData(businessData?.slug);
         setFeedbacks(feedbacksData);
-
         setIsLoading(false);
       } catch (error) {
         console.error("There was an error fetching data", error);
