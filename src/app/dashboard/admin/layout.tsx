@@ -11,8 +11,8 @@ import { useBusinessContext } from "@/context/BusinessContext";
 import useSWR from "swr";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  const { businessId } = useBusinessContext();
-  const { data, error, isLoading } = useSWR(
+  const { businessId, setBusiness } = useBusinessContext();
+  const { data, error } = useSWR(
     `${API_BASE_URL}/business/${businessId}?params=logo,slug,name`,
     fetcher
   );
@@ -20,8 +20,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   if (error) {
     console.log(error);
   }
-  if (isLoading) {
+
+  if (!data) {
+    // Data is still loading
     return <Spinner />;
+  }
+
+  // Data has been fetched, update the business context
+  if (data.result) {
+    setBusiness(data.result);
   }
 
   return (

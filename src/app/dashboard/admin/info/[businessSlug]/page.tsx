@@ -11,11 +11,11 @@ import styles from "./dashboardInfo.module.css";
 import { useBusinessContext } from "@/context/BusinessContext";
 import useSWR from "swr";
 
-const DashboardPage: NextPage<{ params: { businessSlug: string } }> = ({
-  params,
-}) => {
+const DashboardPage: NextPage = () => {
+  const { business } = useBusinessContext();
+
   const { data, error, isLoading } = useSWR(
-    `/api/feedback/${params.businessSlug}`,
+    `/api/feedback/${business?.slug}`,
     fetcher
   );
 
