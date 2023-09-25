@@ -35,11 +35,224 @@
   height: auto;
   margin-bottom: 2px;
 }
+
+.feedback-wrapper {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  justify-content: space-around;
+}
+
+.feedback {
+}
+
+.feedback-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.feedback-description {
+  text-align: center;
+  margin: 20px;
+}
+
+.feedback-wrapper {
+  padding-top: 20px;
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  border-radius: 50%;
+}
+.question {
+  font-size: 19px;
+  font-weight: 500;
+}
+.text {
+  font-size: 16px;
+}
+
+.restaurant-name {
+  font-weight: bold;
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+.emoji-text {
+  font-size: 14px;
+  text-align: center;
+  margin: 4px;
+}
+
+.tags-container {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+  margin: 10px;
+}
+
+.tags-container li {
+  margin: 5px;
+}
+
+.tags-container input[type="checkbox"] {
+  display: none;
+}
+
+.tags-container label {
+  display: inline-block;
+  padding: 5px 15px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.tags-container label.selected-button {
+  background-color: #ff3637;
+  color: #fff;
+}
+
+.tags-container label.unselected-tags {
+  background-color: #ffeded;
+  color: #ff3637;
+}
+
+.form-submitted {
+  background-color: red;
+  color: white;
+}
+
+.unselected-button {
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.emoji-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.rating {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.rating li {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.emoji-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.rating li label {
+  display: flex; /* Use flexbox */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s; /* Apply transitions */
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 20px;
+  width: 400px;
+}
+
+.popup-comment {
+  font-weight: bold;
+}
+
+.popup h2 {
+  margin: 0;
+  padding-bottom: 10px;
+}
+
+.popup input {
+  border: none;
+  width: 100%;
+  height: 100px;
+}
+
+.popup button {
+  padding: 5px 10px;
+  margin-right: 5px;
+}
+
+input[type="radio"]:disabled + label.unselected-button {
+  color: #9999;
+  color: #9999;
+  cursor: not-allowed;
+}
+
+.rating li:hover {
+  background: #ff6a95;
+  color: #fff;
+}
+
+[type="radio"] {
+  opacity: 0;
+}
+
+[type="radio"]:checked ~ label {
+  background: #fff;
+  color: #ff6a95;
+}
+
 @media (max-width: 768px) {
   .mobile {
     width: 100%;
     border: none;
     height: 100vh;
     margin: 0 auto;
+  }
+  .popup-container {
+    width: 100%;
   }
 }

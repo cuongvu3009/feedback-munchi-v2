@@ -3,7 +3,9 @@
 import { useCallback, useState } from "react";
 
 import Button from "@/components/shared/Button";
+import Logo from "../../components/Logo";
 import RatingOrder from "@/app/feedback/components/RatingOrder";
+import { Restaurant } from "@/types/feedback.types";
 import Spinner from "@/components/shared/Spinner";
 import TradeMark from "@/app/feedback/components/TradeMark";
 import styles from "./feedbackOrder.module.css";
@@ -18,6 +20,9 @@ export default function FeedbackOrder({
   const router = useRouter();
   const { getItem, removeItem } = useLocalStorage();
   const [isLoading, setIsLoading] = useState(false);
+  let storedRestaurant = localStorage.getItem("restaurant");
+  let initalRestaurant = JSON.parse(storedRestaurant!);
+  const [restaurant, setRestaurant] = useState<Restaurant>(initalRestaurant);
 
   const handleSubmit = useCallback(async () => {
     try {
@@ -46,7 +51,7 @@ export default function FeedbackOrder({
         ) {
           router.push(`/feedback/success`);
         } else {
-          router.push(`/feedback/end`);
+          router.push(`/feedback/end/${params.businessSlug}`);
         }
 
         const keysToRemove = [
@@ -55,6 +60,7 @@ export default function FeedbackOrder({
           "type",
           "tags",
           "positiveFeedbackService",
+          "restaurant",
         ];
         keysToRemove.forEach((key) => removeItem(key));
         setIsLoading(false);
@@ -71,6 +77,7 @@ export default function FeedbackOrder({
 
   return (
     <>
+      <Logo restaurant={restaurant} />
       <div className="feedback">
         <div className={`${styles["feedback-description"]}`}>
           <h3>

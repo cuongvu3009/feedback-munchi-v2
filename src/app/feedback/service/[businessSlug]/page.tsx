@@ -1,11 +1,14 @@
 "use client";
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import Button from "@/components/shared/Button";
+import Logo from "../../components/Logo";
 import RatingService from "@/app/feedback/components/RatingService";
+import { Restaurant } from "@/types/feedback.types";
 import Spinner from "@/components/shared/Spinner";
 import TradeMark from "@/app/feedback/components/TradeMark";
+import { getBusinessBySlug } from "@/lib/getOneBusinessBySlug";
 import styles from "./feedbackService.module.css";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useRouter } from "next/navigation";
@@ -18,6 +21,31 @@ export default function FeedbackService({
   const router = useRouter();
   const { getItem, removeItem, setItem } = useLocalStorage();
   const [isLoading, setIsLoading] = useState(false);
+  const [restaurant, setRestaurant] = useState<Restaurant | undefined>(
+    undefined
+  );
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const restaurantData = await getBusinessBySlug(params.businessSlug);
+        localStorage.setItem(
+          "restaurant",
+          JSON.stringify(restaurantData.result)
+        );
+        setRestaurant(restaurantData.result);
+
+        setIsLoading(false);
+      } catch (error) {
+        console.error("There was an error fetching data", error);
+        localStorage.setItem("restaurant", "null");
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [params.businessSlug]);
 
   const handleSubmit = useCallback(async () => {
     try {
@@ -40,7 +68,7 @@ export default function FeedbackService({
           getItem("emoji") !== "terrible" && getItem("emoji") !== "bad";
 
         setItem("positiveFeedbackService", isPositiveFeedback.toString());
-        router.push(`/feedback/${params.businessSlug}/order/`);
+        router.push(`/feedback/order/${params.businessSlug}/`);
 
         const keysToRemove = ["emoji", "comment", "type", "tags"];
         keysToRemove.forEach((key) => removeItem(key));
@@ -59,6 +87,7 @@ export default function FeedbackService({
 
   return (
     <>
+      <Logo restaurant={restaurant} />
       <div className="feedback">
         <div className={styles["feedback-description"]}>
           <h3 className={styles.question}>

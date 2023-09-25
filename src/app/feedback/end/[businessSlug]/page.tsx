@@ -25,7 +25,7 @@ const EndFeedBack = ({ params }: { params: { businessSlug: string } }) => {
           version="secondary"
           btnText="Submit another feedback"
           onClick={() =>
-            router.push(`/feedback/${params.businessSlug}/service/`)
+            router.push(`/feedback/service/${params.businessSlug}/`)
           }
         />
         <TradeMark />

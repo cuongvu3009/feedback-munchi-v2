@@ -71,7 +71,7 @@ const SuccessFeedback = ({ params }: { params: { businessSlug: string } }) => {
         <Button
           version="normal"
           btnText="No, thank you"
-          onClick={() => router.push(`/feedback/end`)}
+          onClick={() => router.push(`/feedback/end/${params.businessSlug}`)}
         />
         <TradeMark />
       </div>

@@ -12,7 +12,7 @@ export default function FeedbackLayout({
   return (
     <div className="mobile">
       <Title />
-      {children}
+      <div className="feedback-wrapper">{children}</div>
     </div>
   );
 }

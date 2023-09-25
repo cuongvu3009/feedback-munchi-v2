@@ -22,21 +22,21 @@ interface Restaurant {
   header: null | any;
 }
 interface RestaurantLogoProps {
-  restaurant: Restaurant;
+  restaurant: Restaurant | undefined;
 }
 
 const RestaurantLogo: React.FC<RestaurantLogoProps> = ({ restaurant }) => {
   return (
     <div className="logo-container">
       <Image
-        src={restaurant.logo}
-        alt={restaurant.name}
+        src={restaurant?.logo || ""}
+        alt={restaurant?.name || ""}
         className="logo"
         width={100}
         height={100}
       />
 
-      <div className="restaurant-name">{restaurant.name}</div>
+      <div className="restaurant-name">{restaurant?.name || ""}</div>
     </div>
   );
 };
