@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { API_BASE_URL } from "@/utils/constantAPI";
 import TradeMark from "@/app/feedback/components/TradeMark";
@@ -8,6 +8,7 @@ import { User } from "@/types/auth.types";
 import axios from "axios";
 import styles from "./dashboardLogin.module.css";
 import { useAuthContext } from "@/context/AuthContext";
+import { useBusinessContext } from "@/context/BusinessContext";
 import { useRouter } from "next/navigation";
 
 interface ApiResponse {
@@ -25,7 +26,8 @@ const Login = () => {
     loading: false,
     error: null,
   });
-  const { setUser } = useAuthContext();
+  const { userIsLoggedIn, setUser } = useAuthContext();
+  const { businessId } = useBusinessContext();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,6 +53,16 @@ const Login = () => {
       }
     }
   };
+
+  useEffect(() => {
+    if (userIsLoggedIn) {
+      if (businessId) {
+        router.push(`/dashboard/admin/info/${businessId}`);
+      } else {
+        router.push("/dashboard/businessOption");
+      }
+    }
+  }, [userIsLoggedIn, businessId, router]);
 
   return (
     <div className={styles.container}>
