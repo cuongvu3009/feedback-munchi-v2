@@ -1,6 +1,6 @@
 "use client";
 
-import moment from "moment";
+import { MdConstruction } from "react-icons/md";
 import styles from "./responses.module.css";
 
 const Responses = ({ params }: { params: { businessId: number } }) => {
@@ -26,7 +26,9 @@ const Responses = ({ params }: { params: { businessId: number } }) => {
       <div className={`${styles["dashboard-card"]}`}>
         <h3>Responses</h3>
 
-        {data.map((item) => {
+        <p>This page is under construction</p>
+        <MdConstruction />
+        {/* {data.map((item) => {
           return (
             <div className={`${styles["flex-between"]}`} key={item._id}>
               <p>{getEmojiLabel(item.emoji_service)}</p>
@@ -36,7 +38,7 @@ const Responses = ({ params }: { params: { businessId: number } }) => {
               <p>{moment(item.createdAt).fromNow()}</p>
             </div>
           );
-        })}
+        })} */}
       </div>
     </div>
   );
