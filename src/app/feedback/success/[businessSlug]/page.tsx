@@ -6,6 +6,7 @@ import Button from "@/components/shared/Button";
 import Emoji from "@/components/shared/Emoji";
 import FeedbackContext from "@/context/FeedbackContext";
 import { GrStatusGood } from "react-icons/gr";
+import { NextPage } from "next";
 import PaymentButton from "@/components/shared/PaymentButton";
 import TradeMark from "@/app/feedback/components/TradeMark";
 import { getLinkByTip } from "@/lib/getStripeLinkByTipAmount";
@@ -13,7 +14,9 @@ import { tipOptions } from "@/utils/tipOptions";
 import { useContext } from "react";
 import { useRouter } from "next/navigation";
 
-const SuccessFeedback = ({ params }: { params: { businessSlug: string } }) => {
+const SuccessFeedback: NextPage<{ params: { businessSlug: string } }> = ({
+  params,
+}) => {
   const router = useRouter();
   const { selectedTip, setSelectedTip } = useContext(FeedbackContext);
 

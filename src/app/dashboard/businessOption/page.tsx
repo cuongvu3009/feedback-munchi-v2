@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 
 import LogoutBtn from "@/app/dashboard/components/LogoutBtn";
+import { NextPage } from "next";
 import Spinner from "@/components/shared/Spinner";
 import TradeMark from "@/app/feedback/components/TradeMark";
 import getUserBusiness from "@/lib/getUserBusinesses";
@@ -14,7 +15,7 @@ interface BusinessProps {
   id: number;
   name: string;
 }
-const Page = () => {
+const Page: NextPage = () => {
   const [businesses, setBusinesses] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedBusiness, setSelectedBusiness] = useState<number | null>(null);

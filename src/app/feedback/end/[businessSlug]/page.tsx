@@ -3,11 +3,14 @@
 import "./endfeedback.css";
 
 import Button from "@/components/shared/Button";
+import { NextPage } from "next";
 import { PiHeartStraightLight } from "react-icons/pi";
 import TradeMark from "@/app/feedback/components/TradeMark";
 import { useRouter } from "next/navigation";
 
-const EndFeedBack = ({ params }: { params: { businessSlug: string } }) => {
+const EndFeedBack: NextPage<{ params: { businessSlug: string } }> = ({
+  params,
+}) => {
   const router = useRouter();
   return (
     <>

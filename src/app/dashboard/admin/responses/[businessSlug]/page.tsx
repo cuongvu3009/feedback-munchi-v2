@@ -1,9 +1,12 @@
 "use client";
 
 import { MdConstruction } from "react-icons/md";
+import { NextPage } from "next";
 import styles from "./responses.module.css";
 
-const Responses = ({ params }: { params: { businessId: number } }) => {
+const Responses: NextPage<{ params: { businessId: number } }> = ({
+  params,
+}) => {
   const getEmojiLabel = (emoji: string) => {
     switch (emoji) {
       case "terrible":

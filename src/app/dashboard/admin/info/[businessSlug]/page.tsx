@@ -6,6 +6,7 @@ import DashboardResponses from "@/app/dashboard/components/responses/DashboardRe
 import DashboardScore from "../../../components/score/DashboardScore";
 import { Feedback } from "@/types/feedback.types";
 import FeedbackChart from "@/app/dashboard/components/chart/FeedbackChart";
+import { NextPage } from "next";
 import Spinner from "@/components/shared/Spinner";
 import { getFeedbackData } from "@/lib/getFeedbackData";
 import styles from "./dashboardInfo.module.css";
@@ -15,10 +16,8 @@ interface FeedbackReturn {
   serviceFeedback: Feedback[];
   orderFeedback: Feedback[];
 }
-export const DashboardPage = ({
+export const DashboardPage: NextPage<{ params: { businessId: number } }> = ({
   params,
-}: {
-  params: { businessId: number };
 }) => {
   const [feedbacks, setFeedbacks] = useState<FeedbackReturn | undefined>(
     undefined

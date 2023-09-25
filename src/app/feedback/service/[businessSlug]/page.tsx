@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useState } from "react";
 
 import Button from "@/components/shared/Button";
 import Logo from "../../components/Logo";
+import { NextPage } from "next";
 import RatingService from "@/app/feedback/components/RatingService";
 import { Restaurant } from "@/types/feedback.types";
 import Spinner from "@/components/shared/Spinner";
@@ -13,11 +14,9 @@ import styles from "./feedbackService.module.css";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useRouter } from "next/navigation";
 
-export default function FeedbackService({
-  params,
-}: {
+export const FeedbackService: NextPage<{
   params: { businessSlug: string };
-}) {
+}> = ({ params }) => {
   const router = useRouter();
   const { getItem, removeItem, setItem } = useLocalStorage();
   const [isLoading, setIsLoading] = useState(false);
@@ -106,4 +105,4 @@ export default function FeedbackService({
       </div>
     </>
   );
-}
+};
