@@ -33,19 +33,19 @@ const Sidebar: React.FC<SidebarProps> = ({ business }) => {
           <h3>{business.name}</h3>
         </div>
         <Link
-          href={`/dashboard/info/${business.id}`}
+          href={`/dashboard/admin/info/${business.id}`}
           className={`${styles["sidebar-link"]}`}
         >
           Dashboard
         </Link>
         <Link
-          href={`/dashboard/responses/${business.id}`}
+          href={`/dashboard/admin/responses/${business.id}`}
           className={`${styles["sidebar-link"]}`}
         >
           Responses
         </Link>
         <Link
-          href={`/dashboard/settings/${business.id}`}
+          href={`/dashboard/admin/settings/${business.id}`}
           className={`${styles["sidebar-link"]}`}
         >
           Settings

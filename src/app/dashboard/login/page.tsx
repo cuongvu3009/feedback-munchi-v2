@@ -29,28 +29,33 @@ const Login = () => {
   const { userIsLoggedIn, setUser } = useAuthContext();
   const { businessId } = useBusinessContext();
 
+  const loginUser = async (email: string, password: string) => {
+    try {
+      const result = await axios({
+        method: "POST",
+        url: `${API_BASE_URL}/auth/`,
+        data: {
+          email,
+          password,
+        },
+      });
+
+      setUser(result.data.result);
+      router.push("/dashboard/businessOption");
+      setResponse({ data: result.data.result, loading: false, error: null });
+    } catch (error: any) {
+      setResponse({ data: null, loading: false, error });
+    }
+  };
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     const email = emailRef.current?.value;
     const password = passwordRef.current?.value;
 
     if (email && password) {
-      try {
-        const result = await axios({
-          method: "POST",
-          url: `${API_BASE_URL}/auth/`,
-          data: {
-            email,
-            password,
-          },
-        });
-
-        setUser(result.data.result);
-        router.push("/dashboard/businessOption");
-        setResponse({ data: result.data.result, loading: false, error: null });
-      } catch (error: any) {
-        setResponse({ data: null, loading: false, error });
-      }
+      setResponse({ data: null, loading: true, error: null });
+      await loginUser(email, password);
     }
   };
 

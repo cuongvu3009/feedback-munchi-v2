@@ -12,6 +12,8 @@ async function getUserBusinesses() {
     const userId = user.id;
     const access_token = user.session.access_token;
 
+    console.log(user);
+
     const response = await axios.get(
       `${API_BASE_URL}/users/${userId}?params=businesses`,
       {

@@ -26,8 +26,8 @@ const Page: NextPage = () => {
     event.preventDefault();
 
     if (selectedBusiness !== null) {
-      router.push(`/dashboard/admin/info/${selectedBusiness}`);
       setBusinessId(selectedBusiness);
+      router.push(`/dashboard/admin/info/${selectedBusiness}`);
     }
   };
 
@@ -38,7 +38,7 @@ const Page: NextPage = () => {
       try {
         const businessesData = await getUserBusiness();
         setBusinesses(businessesData);
-
+        console.log(businessesData);
         setIsLoading(false);
       } catch (error) {
         setIsLoading(false);
