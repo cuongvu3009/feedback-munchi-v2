@@ -8,6 +8,7 @@ import FeedbackContext from "@/context/FeedbackContext";
 import { GrStatusGood } from "react-icons/gr";
 import { NextPage } from "next";
 import PaymentButton from "@/components/shared/PaymentButton";
+import Title from "@/components/shared/Title";
 import TradeMark from "@/app/feedback/components/TradeMark";
 import { getLinkByTip } from "@/lib/getStripeLinkByTipAmount";
 import { tipOptions } from "@/utils/tipOptions";
@@ -26,6 +27,7 @@ const SuccessFeedback: NextPage<{ params: { businessSlug: string } }> = ({
 
   return (
     <>
+      <Title isBack={false} />
       <div className="success">
         <GrStatusGood size={100} />
         <h3>

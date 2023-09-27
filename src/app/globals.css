@@ -31,6 +31,11 @@ button {
   background-color: inherit;
 }
 
+button:disabled:hover {
+  cursor: not-allowed;
+  pointer-events: all !important;
+}
+
 body {
   font-size: 16px;
   margin: 0;

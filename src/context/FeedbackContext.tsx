@@ -5,15 +5,23 @@ import { createContext, useContext, useState } from "react";
 import { Feedback } from "../types/feedback.types";
 
 export interface FeedbackContextProps {
-  feedbacks: Feedback[];
-  isLoading: boolean;
+  emojiServiceContext: string | null;
+  setEmojiServiceContext: (value: string | null) => void;
+  emojiOrderContext: string | null;
+  setEmojiOrderContext: (value: string | null) => void;
   selectedTip: number | undefined;
   setSelectedTip: (value: number) => void;
 }
 
 const FeedbackContext = createContext<FeedbackContextProps>({
-  feedbacks: [],
-  isLoading: false,
+  emojiServiceContext: null,
+  setEmojiServiceContext: function (value: string | null): void {
+    throw new Error("Function not implemented.");
+  },
+  emojiOrderContext: null,
+  setEmojiOrderContext: function (value: string | null): void {
+    throw new Error("Function not implemented.");
+  },
   selectedTip: undefined,
   setSelectedTip: function (value: number): void {
     throw new Error("Function not implemented.");
@@ -27,16 +35,21 @@ export const useFeedbackContext = () => {
   return context;
 };
 export const FeedbackProvider = ({ children }: any) => {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  const [feedbacks, setFeedbacks] = useState<Feedback[]>([]);
+  const [emojiServiceContext, setEmojiServiceContext] = useState<string | null>(
+    null
+  );
+  const [emojiOrderContext, setEmojiOrderContext] = useState<string | null>(
+    null
+  );
   const [selectedTip, setSelectedTip] = useState<number | undefined>(undefined);
 
   return (
     <FeedbackContext.Provider
       value={{
-        isLoading,
-        feedbacks,
+        emojiServiceContext,
+        setEmojiServiceContext,
+        emojiOrderContext,
+        setEmojiOrderContext,
         selectedTip,
         setSelectedTip,
       }}

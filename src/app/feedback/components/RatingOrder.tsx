@@ -2,25 +2,29 @@ import React, { useState } from "react";
 
 import AwesomeSVG from "@/utils/emoji-svg/AwesomeSVG";
 import BadSVG from "@/utils/emoji-svg/BadSVG";
-import Comment from "./Comment";
+import Comment from "./FeedbackComment";
+import FeedbackComment from "./FeedbackComment";
+import FeedbackTags from "./FeedbackTags";
 import GoodSVG from "@/utils/emoji-svg/GoodSVG";
 import OkeySVG from "@/utils/emoji-svg/OkeySVG";
-import Tags from "./Tags";
+import Tags from "./FeedbackTags";
 import TerribleSVG from "@/utils/emoji-svg/TerribleSVG";
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 import { ratingOptions } from "../../../utils/ratingOptions";
+import { useFeedbackContext } from "@/context/FeedbackContext";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 const RatingOrder: React.FC = () => {
   const { setItem } = useLocalStorage();
-
+  const { setEmojiOrderContext } = useFeedbackContext();
   const [emojiOrder, setEmojiOrder] = useState<string | null>(null);
 
   const handleEmojiChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newEmoji = e.target.value;
     setEmojiOrder(newEmoji);
-    setItem("emoji", newEmoji);
-    setItem("type", "ORDER");
+    setEmojiOrderContext(newEmoji);
+    setItem("emojiOrder", newEmoji);
+    setItem("typeOrder", "ORDER");
   };
 
   return (
@@ -67,8 +71,11 @@ const RatingOrder: React.FC = () => {
 
       {emojiOrder !== null && (
         <>
-          <Tags emoji={emojiOrder} />
-          <Comment emoji={emojiOrder} />
+          <FeedbackTags storageKey="orderTags" emojiOrder={emojiOrder} />
+          <FeedbackComment
+            storageKey="commentOrder"
+            emojiService={emojiOrder}
+          />
         </>
       )}
     </>

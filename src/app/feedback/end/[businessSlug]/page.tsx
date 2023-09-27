@@ -5,6 +5,7 @@ import "./endfeedback.css";
 import Button from "@/components/shared/Button";
 import { NextPage } from "next";
 import { PiHeartStraightLight } from "react-icons/pi";
+import Title from "@/components/shared/Title";
 import TradeMark from "@/app/feedback/components/TradeMark";
 import { useRouter } from "next/navigation";
 
@@ -14,6 +15,7 @@ const EndFeedBack: NextPage<{ params: { businessSlug: string } }> = ({
   const router = useRouter();
   return (
     <>
+      <Title isBack={false} />
       <div className="end-feedback">
         <PiHeartStraightLight size={100} />
         <h3>

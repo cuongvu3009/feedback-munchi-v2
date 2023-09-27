@@ -6,11 +6,17 @@ import Button from "@/components/shared/Button";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 interface CommentProps {
-  emoji?: string | null;
+  storageKey: "commentService" | "commentOrder";
+  emojiService?: string | null;
+  emojiOrder?: string | null;
 }
 
-const FeedbackComment: React.FC<CommentProps> = ({ emoji }) => {
-  const { getItem } = useLocalStorage();
+const FeedbackComment: React.FC<CommentProps> = ({
+  storageKey,
+  emojiService,
+  emojiOrder,
+}) => {
+  const { getItem, setItem, removeItem } = useLocalStorage();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const commentInputRef = useRef<HTMLInputElement>(null);
@@ -27,20 +33,25 @@ const FeedbackComment: React.FC<CommentProps> = ({ emoji }) => {
   };
 
   useEffect(() => {
-    const storedComment = getItem("comment");
+    const storedComment = getItem(storageKey);
     if (storedComment && commentInputRef.current) {
-      commentInputRef.current.value = JSON.parse(storedComment);
+      commentInputRef.current.value = storedComment;
     }
-  }, [getItem]);
+  }, [storageKey]);
+
+  useEffect(() => {
+    removeItem(storageKey);
+    setIsFormSubmitted(false);
+  }, [emojiService, emojiOrder]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const comment = commentInputRef.current?.value || "";
-    if (!comment.trim()!) {
+    if (!comment.trim()) {
       return;
     }
 
-    localStorage.setItem("comment", JSON.stringify(comment));
+    setItem(storageKey, comment);
 
     if (commentInputRef.current) {
       commentInputRef.current.value = "";

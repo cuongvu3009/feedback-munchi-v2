@@ -1,32 +1,31 @@
 import prisma from "@/lib/prisma";
 
 export async function POST(req: Request, res: Response) {
-  const { businessSlug, emoji, comment, tags, type } = await req.json();
+  const payloads = await req.json();
 
   try {
-    // Validate required fields
-    if (
-      emoji === undefined ||
-      businessSlug === undefined ||
-      type === undefined
-    ) {
-      return Response.json({ error: "Missing required fields" });
+    // Validate required fields for each payload
+    for (const payload of payloads) {
+      const { emoji, businessSlug, type } = payload;
+
+      if (
+        emoji === undefined ||
+        businessSlug === undefined ||
+        type === undefined
+      ) {
+        return Response.json({ error: "Missing required fields" });
+      }
+
+      // Create a feedback record for each payload
+      await prisma.feedback.create({
+        data: payload,
+      });
     }
 
-    const response = await prisma.feedback.create({
-      data: {
-        businessSlug,
-        emoji,
-        comment,
-        tags,
-        type,
-      },
-    });
-
-    return Response.json(response); // Return the created feedback
+    return Response.json({ message: "Feedback created successfully" });
   } catch (error) {
     console.error("Error creating feedback:", error);
-    return Response.json(error);
+    return Response.json({ error: "Internal Server Error" });
   } finally {
     await prisma.$disconnect(); // Disconnect from the Prisma client
   }
