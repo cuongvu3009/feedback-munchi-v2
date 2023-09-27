@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 
 import { API_BASE_URL } from "@/utils/constantAPI";
 import Button from "@/components/shared/Button";
@@ -41,7 +41,7 @@ const FeedbackPage: NextPage<{
 
   const handleSubmit = useCallback(async () => {
     try {
-      // setIsSubmitLoading(true);
+      setIsSubmitLoading(true);
       const body = {
         businessSlug: params.businessSlug,
         emojiService: getItem("emojiService"),
@@ -83,7 +83,6 @@ const FeedbackPage: NextPage<{
           getItem("emojiOrder") !== "terrible" &&
           getItem("emojiOrder") !== "bad";
 
-        console.log(isPositiveFeedbackOrder);
         if (isPositiveFeedbackOrder === true) {
           router.push(`/feedback/success/${params.businessSlug}`);
         } else {
@@ -109,11 +108,20 @@ const FeedbackPage: NextPage<{
       console.log(error);
       setIsSubmitLoading(false);
     }
-  }, [getItem, params.businessSlug, removeItem, router]);
+  }, [
+    getItem,
+    params.businessSlug,
+    removeItem,
+    router,
+    setEmojiOrderContext,
+    setEmojiServiceContext,
+  ]);
 
   if (isLoading || isSubmitLoading) {
     return <Spinner />;
   }
+
+  console.log(emojiServiceContext);
 
   return (
     <>
@@ -144,31 +152,21 @@ const FeedbackPage: NextPage<{
 
       <div className="navigation">
         {params.section == "service" ? (
-          emojiServiceContext ? (
-            <Button onClick={handleNext} version="full" btnText="Next" />
-          ) : (
-            <Button
-              onClick={handleNext}
-              version="full"
-              btnText="Next"
-              isDisabled
-            />
-          )
-        ) : emojiOrderContext ? (
           <Button
-            onClick={handleSubmit}
+            onClick={handleNext}
             version="full"
-            btnText="Submit feedback"
+            btnText="Next"
+            isDisabled={emojiServiceContext == null}
           />
         ) : (
           <Button
             onClick={handleSubmit}
             version="full"
             btnText="Submit feedback"
-            isDisabled
+            isDisabled={emojiOrderContext == null}
           />
         )}
-
+        {error && <p style={{ color: "red" }}>Error: {error}</p>}
         <TradeMark />
       </div>
     </>
