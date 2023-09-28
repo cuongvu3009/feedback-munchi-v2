@@ -14,5 +14,5 @@ export const tipOptions = [
     value: 5,
     symbol: "😍",
   },
-  { text: "other", value: 99, symbol: " " },
+  // { text: "10€", value: 10, symbol: " " },
 ];

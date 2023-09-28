@@ -7,6 +7,7 @@ import Emoji from "@/components/shared/Emoji";
 import FeedbackContext from "@/context/FeedbackContext";
 import { GrStatusGood } from "react-icons/gr";
 import { NextPage } from "next";
+import OneTimePaymentCard from "../../components/PaymentCard";
 import PaymentButton from "@/components/shared/PaymentButton";
 import Title from "@/components/shared/Title";
 import TradeMark from "@/app/feedback/components/TradeMark";
@@ -64,15 +65,13 @@ const SuccessFeedback: NextPage<{ params: { businessSlug: string } }> = ({
       </div>
 
       <div className="navigation">
-        {selectedTip ? (
-          <PaymentButton
-            btnVersion="full"
-            btnText="Give tip"
-            paymentLink={getLinkByTip(selectedTip)}
+        {selectedTip && (
+          <OneTimePaymentCard
+            recipient={params.businessSlug}
+            amount={selectedTip}
           />
-        ) : (
-          <Button isDisabled={true} version="full" btnText="Give tip" />
         )}
+
         <Button
           version="normal"
           btnText="No, thank you"
