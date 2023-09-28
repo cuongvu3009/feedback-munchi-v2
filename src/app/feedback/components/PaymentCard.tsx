@@ -18,7 +18,7 @@ const OneTimePaymentCard = ({
 
     // Step 2: Define the data for one-time payment
     const body: CheckoutOneTimePaymentBody = {
-      paymentName: `Tip for ${recipient}`,
+      businessSlug: `${recipient}`,
       paymentDescription: `Tip for ${recipient}: ${amount}€`,
       amount: amount * 100,
     };

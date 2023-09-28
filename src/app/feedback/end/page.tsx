@@ -13,6 +13,7 @@ const EndFeedBack: NextPage<{ params: { businessSlug: string } }> = ({
   params,
 }) => {
   const router = useRouter();
+
   return (
     <>
       <Title isBack={false} />
@@ -26,13 +27,13 @@ const EndFeedBack: NextPage<{ params: { businessSlug: string } }> = ({
       </div>
 
       <div className="navigation">
-        {/* <Button
+        <Button
           version="secondary"
           btnText="Submit another feedback"
           onClick={() =>
             router.push(`/feedback/service/${params.businessSlug}/`)
           }
-        /> */}
+        />
         <TradeMark />
       </div>
     </>

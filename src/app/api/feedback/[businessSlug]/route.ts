@@ -2,7 +2,7 @@ import prisma from "@/lib/prisma";
 
 export async function GET(
   req: Request,
-  { params }: { params: { businessSlug: any } }
+  { params }: { params: { businessSlug: string } }
 ) {
   const businessSlug = params.businessSlug;
 

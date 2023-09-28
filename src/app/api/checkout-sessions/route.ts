@@ -4,18 +4,17 @@ import { stripe } from "@/lib/stripe";
 
 // data needed for checkout
 export interface CheckoutOneTimePaymentBody {
-  paymentName: string;
+  businessSlug: string;
   paymentDescription: string;
   amount: number;
 }
 
-// It will generate a Stripe Checkout session based on the data from the front end.
 export async function POST(req: Request) {
   const body = (await req.json()) as CheckoutOneTimePaymentBody;
   const origin = "http://localhost:3000";
 
   // Redirect URL after successful payment
-  const success_url = `${origin}/feedback/end?session_id={CHECKOUT_SESSION_ID}`;
+  const success_url = `${origin}/feedback/end?session_id={CHECKOUT_SESSION_ID}&businessSlug=${body.businessSlug}`;
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -27,7 +26,7 @@ export async function POST(req: Request) {
             currency: "eur",
             unit_amount: body.amount, // The total amount in cents
             product_data: {
-              name: body.paymentName,
+              name: body.businessSlug,
               description: body.paymentDescription,
             },
           },
