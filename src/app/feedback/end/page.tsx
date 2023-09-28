@@ -9,16 +9,34 @@ import { NextPage } from "next";
 import { PiHeartStraightLight } from "react-icons/pi";
 import Title from "@/components/shared/Title";
 import TradeMark from "@/app/feedback/components/TradeMark";
+import axios from "axios";
+import { formatUnixTimestamp } from "@/utils/formatUnixTimestamp";
+import { useEffect } from "react";
 
-const EndFeedBack: NextPage<{ params: { businessSlug: string } }> = ({
-  params,
-}) => {
+const EndFeedBack: NextPage = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const businessSlug = searchParams.get("businessSlug");
   const stripe_session_id = searchParams.get("session_id");
 
-  console.log(stripe_session_id);
+  useEffect(() => {
+    if (stripe_session_id) {
+      const storePayment = async () => {
+        const result = await axios.get(`/api/transaction/${stripe_session_id}`);
+        const paymentData = result.data.data[0];
+        if (paymentData) {
+          const restaurantName = paymentData.description;
+          const date = formatUnixTimestamp(paymentData.price.created);
+          const paymentAmount = paymentData.amount_total / 100;
+          const currency = paymentData.currency;
+          const paymentId = paymentData.id;
+
+          console.log(restaurantName, date, paymentAmount, currency, paymentId);
+        }
+      };
+      storePayment();
+    }
+  }, [stripe_session_id]);
 
   return (
     <>
