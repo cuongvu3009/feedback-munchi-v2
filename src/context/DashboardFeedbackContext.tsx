@@ -5,13 +5,19 @@ import { createContext, useContext, useState } from "react";
 import { Feedback } from "../types/feedback.types";
 
 export interface DashboardFeedbackContextProps {
-  feedbacks: Feedback[] | [];
-  setFeedbacks: (value: Feedback[] | []) => void;
+  serviceFeedbacks: Feedback[] | [];
+  setServiceFeedbacks: (value: Feedback[] | []) => void;
+  orderFeedbacks: Feedback[] | [];
+  setOrderFeedbacks: (value: Feedback[] | []) => void;
 }
 
 const DashboardFeedbackContext = createContext<DashboardFeedbackContextProps>({
-  feedbacks: [],
-  setFeedbacks: function (value: Feedback[] | []): void {
+  serviceFeedbacks: [],
+  setServiceFeedbacks: function (value: Feedback[] | []): void {
+    throw new Error("Function not implemented.");
+  },
+  orderFeedbacks: [],
+  setOrderFeedbacks: function (value: Feedback[] | []): void {
     throw new Error("Function not implemented.");
   },
 });
@@ -25,13 +31,16 @@ export const useDashboardFeedbackContext = () => {
   return context;
 };
 export const DashboardFeedbackProvider = ({ children }: any) => {
-  const [feedbacks, setFeedbacks] = useState<Feedback[] | []>([]);
+  const [serviceFeedbacks, setServiceFeedbacks] = useState<Feedback[] | []>([]);
+  const [orderFeedbacks, setOrderFeedbacks] = useState<Feedback[] | []>([]);
 
   return (
     <DashboardFeedbackContext.Provider
       value={{
-        feedbacks,
-        setFeedbacks,
+        serviceFeedbacks,
+        setServiceFeedbacks,
+        orderFeedbacks,
+        setOrderFeedbacks,
       }}
     >
       {children}

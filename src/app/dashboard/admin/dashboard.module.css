@@ -4,3 +4,8 @@
   overflow-x: hidden;
   margin: 0;
 }
+
+.children {
+  flex-grow: 1; /* Allow dashboard-info to grow and occupy the remaining space */
+  overflow-y: auto;
+}

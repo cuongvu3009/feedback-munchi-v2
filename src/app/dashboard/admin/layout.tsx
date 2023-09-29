@@ -37,7 +37,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <DashboardFeedbackProvider>
         <div className={styles.dashboard}>
           <Sidebar business={data.result} />
-          <>{children}</>
+          <div className={styles.children}>{children}</div>
         </div>
       </DashboardFeedbackProvider>
     </SidebarProvider>
