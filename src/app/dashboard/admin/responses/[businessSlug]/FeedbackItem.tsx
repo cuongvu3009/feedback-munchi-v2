@@ -8,6 +8,7 @@ import styles from "./feedbackItem.module.css";
 const FeedbackItem = ({ feedback }: { feedback: Feedback }) => {
   const { emoji, createdAt, tags, comment, type } = feedback;
   const formattedDate = moment(createdAt).format("MMMM D, YYYY, HH:mm:ss");
+
   const getEmojiLabel = (emoji: string) => {
     switch (emoji) {
       case "terrible":
