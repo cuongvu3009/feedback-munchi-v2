@@ -10,7 +10,6 @@ import { PiHeartStraightLight } from "react-icons/pi";
 import Title from "@/components/shared/Title";
 import TradeMark from "@/app/feedback/components/TradeMark";
 import axios from "axios";
-import { formatUnixTimestamp } from "@/utils/formatUnixTimestamp";
 import { useEffect } from "react";
 
 interface EndFeedbackPageProps {
