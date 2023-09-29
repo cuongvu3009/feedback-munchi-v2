@@ -7,8 +7,6 @@ import Button from "@/components/shared/Button";
 import Logo from "../../components/Logo";
 import { NextPage } from "next";
 import Rating from "../../components/Rating";
-import RatingOrder from "@/app/feedback/components/RatingOrder";
-import RatingService from "@/app/feedback/components/RatingService";
 import Spinner from "@/components/shared/Spinner";
 import Title from "@/components/shared/Title";
 import TradeMark from "@/app/feedback/components/TradeMark";
