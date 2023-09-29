@@ -10,7 +10,9 @@ import { PiHeartStraightLight } from "react-icons/pi";
 import Title from "@/components/shared/Title";
 import TradeMark from "@/app/feedback/components/TradeMark";
 import axios from "axios";
+import { postFetcher } from "@/utils/fetcher";
 import { useEffect } from "react";
+import useSWR from "swr";
 
 interface EndFeedbackPageProps {
   params: { businessSlug: string };
@@ -19,27 +21,20 @@ interface EndFeedbackPageProps {
 const EndFeedBack: NextPage<EndFeedbackPageProps> = ({ params }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const businessSlug = searchParams.get("businessSlug");
   const stripe_session_id = searchParams.get("session_id");
 
   useEffect(() => {
-    if (stripe_session_id) {
-      const storePayment = async () => {
-        const result = await axios.get(`/api/transaction/${stripe_session_id}`);
-        const paymentData = result.data.data[0];
-        if (paymentData) {
-          const restaurantName = paymentData.description;
-          const date = paymentData.price.created;
-          const paymentAmount = paymentData.amount_total / 100;
-          const currency = paymentData.currency;
-          const paymentId = paymentData.id;
-
-          console.log(restaurantName, date, paymentAmount, currency, paymentId);
-        }
-      };
-      storePayment();
-    }
-  }, [stripe_session_id]);
+    const storePayment = async () => {
+      if (stripe_session_id && params.businessSlug) {
+        const result = await axios.post(
+          `/api/transaction/${params.businessSlug}/${stripe_session_id}/`
+        );
+        console.log(result);
+      }
+    };
+    storePayment();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>

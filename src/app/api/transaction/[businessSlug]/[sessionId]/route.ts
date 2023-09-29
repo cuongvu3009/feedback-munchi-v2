@@ -3,14 +3,6 @@ import Stripe from "stripe";
 import prisma from "@/lib/prisma";
 import { stripe } from "@/lib/stripe";
 
-interface TransactionProps {
-  businessSlug: string;
-  createdAt: number;
-  paymentAmount: number;
-  currency: string;
-  paymentId: string;
-  stripeSessionId: string;
-}
 // store transaction to database
 export async function POST(
   req: Request,
@@ -19,6 +11,7 @@ export async function POST(
   try {
     const sessionId = params.sessionId;
 
+    //	get transaction data from stripe using sessionId
     const transactions = await stripe.checkout.sessions.listLineItems(
       sessionId
     );
@@ -29,6 +22,24 @@ export async function POST(
     const paymentAmount = transactionData[0].amount_total; //	in cents
     const currency = transactionData[0].currency;
     const paymentId = transactionData[0].id;
+
+    // Check if a transaction with the same paymentId or stripeSessionId already exists
+    const existingTransaction = await prisma.transaction.findFirst({
+      where: {
+        OR: [
+          { paymentId: paymentId }, // Assuming paymentId is unique
+          { stripeSessionId: sessionId }, // Assuming sessionId is unique
+        ],
+      },
+    });
+
+    // If an existing transaction is found, return an error response
+    if (existingTransaction) {
+      return Response.json(
+        { message: "Transaction already exists" },
+        { status: 400 }
+      );
+    }
 
     const createdTransaction = await prisma.transaction.create({
       data: {
