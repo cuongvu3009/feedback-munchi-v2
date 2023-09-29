@@ -29,9 +29,10 @@ const FeedbackItem = ({ feedback }: { feedback: Feedback }) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.feedbackItem}>
-        <div className={styles.emoji}>{getEmojiLabel(emoji)}</div>
+        <div className={styles.emoji}>
+          {getEmojiLabel(emoji)} ({type})
+        </div>
         <div className={styles.content}>
-          <h4>{type}</h4>
           <p>{formattedDate}</p>
           {tags ? <p>{tags}</p> : <p>No tags</p>}
           {comment ? <p>{comment}</p> : <p>No comment</p>}

@@ -12,12 +12,18 @@ export async function GET(
         businessSlug,
         type: "SERVICE",
       },
+      orderBy: {
+        createdAt: "asc",
+      },
     });
 
     const orderFeedback = await prisma.feedback.findMany({
       where: {
         businessSlug,
         type: "ORDER",
+      },
+      orderBy: {
+        createdAt: "asc",
       },
     });
 

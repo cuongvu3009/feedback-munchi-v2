@@ -1,5 +1,8 @@
 .dashboardContainer {
-  display: flex;
+  text-align: center;
+}
+
+.title {
 }
 
 .feedbackSection {

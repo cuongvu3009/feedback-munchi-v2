@@ -15,18 +15,28 @@ const Responses: NextPage<{ params: { businessId: number } }> = ({
   // Assuming you have serviceFeedbacks and orderFeedbacks as arrays of feedback objects
   const { serviceFeedbacks, orderFeedbacks } = useDashboardFeedbackContext();
 
+  // Combine the service and order feedbacks into a single array
+  const combinedFeedbacks = [];
+
+  // Interleave the service and order feedbacks
+  for (
+    let i = 0;
+    i < Math.max(serviceFeedbacks.length, orderFeedbacks.length);
+    i++
+  ) {
+    if (i < serviceFeedbacks.length) {
+      combinedFeedbacks.push(serviceFeedbacks[i]);
+    }
+    if (i < orderFeedbacks.length) {
+      combinedFeedbacks.push(orderFeedbacks[i]);
+    }
+  }
   return (
     <div className={styles.dashboardContainer}>
-      {/* Render serviceFeedbacks */}
+      <h1 className={styles.title}>Responses</h1>
+      {/* Render combined feedbacks */}
       <div className={styles.feedbackSection}>
-        {serviceFeedbacks.map((feedback: Feedback) => (
-          <FeedbackItem key={feedback.id} feedback={feedback} />
-        ))}
-      </div>
-
-      {/* Render orderFeedbacks */}
-      <div className={styles.feedbackSection}>
-        {orderFeedbacks.map((feedback: Feedback) => (
+        {combinedFeedbacks.map((feedback) => (
           <FeedbackItem key={feedback.id} feedback={feedback} />
         ))}
       </div>
