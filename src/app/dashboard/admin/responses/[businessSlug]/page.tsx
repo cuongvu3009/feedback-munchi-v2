@@ -1,8 +1,6 @@
 "use client";
 
-import { Feedback } from "@/types/feedback.types";
 import FeedbackItem from "./FeedbackItem"; // Import the FeedbackItem component
-import { MdConstruction } from "react-icons/md";
 import { NextPage } from "next";
 // Responses.js
 import React from "react";

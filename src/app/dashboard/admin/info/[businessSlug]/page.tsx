@@ -39,7 +39,7 @@ const DashboardPage: NextPage = () => {
         <DashboardScore data={data?.serviceFeedback!} />
         <DashboardScore data={data?.orderFeedback!} />
         <DashboardResponses
-          data={data?.serviceFeedback!.concat(data?.orderFeedback!)}
+          data={(data?.serviceFeedback ?? []).concat(data?.orderFeedback ?? [])}
           businessId={businessId as number}
         />
       </div>

@@ -30,18 +30,3 @@ export async function POST(req: Request, res: Response) {
     await prisma.$disconnect(); // Disconnect from the Prisma client
   }
 }
-
-export async function GET(req: Request) {
-  try {
-    const feedbacks = await prisma.feedback.findMany({
-      orderBy: {
-        createdAt: "asc",
-      },
-    });
-
-    return Response.json(feedbacks);
-  } catch (error) {
-    console.error("Error get feedbacks:", error);
-    return Response.json(error);
-  }
-}
