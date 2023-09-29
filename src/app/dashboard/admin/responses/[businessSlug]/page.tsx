@@ -17,18 +17,21 @@ const Responses: NextPage<{ params: { businessId: number } }> = ({
   const combinedFeedbacks = [];
 
   // Interleave the service and order feedbacks
-  for (
-    let i = 0;
-    i < Math.max(serviceFeedbacks.length, orderFeedbacks.length);
-    i++
-  ) {
-    if (i < serviceFeedbacks.length) {
-      combinedFeedbacks.push(serviceFeedbacks[i]);
-    }
-    if (i < orderFeedbacks.length) {
-      combinedFeedbacks.push(orderFeedbacks[i]);
+  if (serviceFeedbacks && orderFeedbacks) {
+    for (
+      let i = 0;
+      i < Math.max(serviceFeedbacks.length, orderFeedbacks.length);
+      i++
+    ) {
+      if (i < serviceFeedbacks.length) {
+        combinedFeedbacks.push(serviceFeedbacks[i]);
+      }
+      if (i < orderFeedbacks.length) {
+        combinedFeedbacks.push(orderFeedbacks[i]);
+      }
     }
   }
+
   return (
     <div className={styles.dashboardContainer}>
       <h1 className={styles.title}>Responses</h1>

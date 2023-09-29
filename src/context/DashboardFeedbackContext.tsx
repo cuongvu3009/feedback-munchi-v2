@@ -10,7 +10,6 @@ export interface DashboardFeedbackContextProps {
   setServiceFeedbacks: (value: Feedback[] | undefined) => void;
   orderFeedbacks: Feedback[] | undefined;
   setOrderFeedbacks: (value: Feedback[] | undefined) => void;
-  removePersistedData: () => void;
 }
 
 const DashboardFeedbackContext = createContext<DashboardFeedbackContextProps>({
@@ -18,7 +17,6 @@ const DashboardFeedbackContext = createContext<DashboardFeedbackContextProps>({
   setServiceFeedbacks: () => {}, // Implement this function as needed
   orderFeedbacks: undefined,
   setOrderFeedbacks: () => {}, // Implement this function as needed
-  removePersistedData: () => {},
 });
 
 export const useDashboardFeedbackContext = () => {
@@ -52,7 +50,6 @@ export const DashboardFeedbackProvider = ({ children }: any) => {
         setServiceFeedbacks,
         orderFeedbacks,
         setOrderFeedbacks,
-        removePersistedData,
       }}
     >
       {children}
