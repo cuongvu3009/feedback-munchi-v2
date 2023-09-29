@@ -31,5 +31,12 @@ enum Type {
   ORDER
 }
 
-
-
+model Transaction {
+  id          		Int        @id @default(autoincrement())
+	createdAt				DateTime
+	businessSlug		String
+	paymentAmount		Int				//	in cents
+	currency				String
+	paymentId				String
+	stripeSessionId	String
+}

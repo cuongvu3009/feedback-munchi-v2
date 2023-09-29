@@ -14,7 +14,7 @@ export async function POST(req: Request) {
   const origin = "http://localhost:3000";
 
   // Redirect URL after successful payment
-  const success_url = `${origin}/feedback/end?session_id={CHECKOUT_SESSION_ID}&businessSlug=${body.businessSlug}`;
+  const success_url = `${origin}/feedback/thank-you/${body.businessSlug}?session_id={CHECKOUT_SESSION_ID}`;
 
   try {
     const session = await stripe.checkout.sessions.create({

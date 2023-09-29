@@ -13,7 +13,11 @@ import axios from "axios";
 import { formatUnixTimestamp } from "@/utils/formatUnixTimestamp";
 import { useEffect } from "react";
 
-const EndFeedBack: NextPage = () => {
+interface EndFeedbackPageProps {
+  params: { businessSlug: string };
+}
+
+const EndFeedBack: NextPage<EndFeedbackPageProps> = ({ params }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const businessSlug = searchParams.get("businessSlug");
@@ -26,7 +30,7 @@ const EndFeedBack: NextPage = () => {
         const paymentData = result.data.data[0];
         if (paymentData) {
           const restaurantName = paymentData.description;
-          const date = formatUnixTimestamp(paymentData.price.created);
+          const date = paymentData.price.created;
           const paymentAmount = paymentData.amount_total / 100;
           const currency = paymentData.currency;
           const paymentId = paymentData.id;
@@ -54,7 +58,9 @@ const EndFeedBack: NextPage = () => {
         <Button
           version="secondary"
           btnText="Submit another feedback"
-          onClick={() => router.push(`/feedback/service/${businessSlug}/`)}
+          onClick={() =>
+            router.push(`/feedback/service/${params.businessSlug}/`)
+          }
         />
         <TradeMark />
       </div>

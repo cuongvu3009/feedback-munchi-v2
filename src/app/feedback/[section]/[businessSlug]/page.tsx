@@ -84,9 +84,9 @@ const FeedbackPage: NextPage<{
           getItem("emojiOrder") !== "bad";
 
         if (isPositiveFeedbackOrder === true) {
-          router.push(`/feedback/success/${params.businessSlug}`);
+          router.push(`/feedback/tip/${params.businessSlug}`);
         } else {
-          router.push(`/feedback/end/${params.businessSlug}`);
+          router.push(`/feedback/thank-you/${params.businessSlug}`);
         }
 
         const keysToRemove = [

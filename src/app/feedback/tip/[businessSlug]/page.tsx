@@ -73,7 +73,9 @@ const SuccessFeedback: NextPage<{ params: { businessSlug: string } }> = ({
         <Button
           version="normal"
           btnText="No, thank you"
-          onClick={() => router.push(`/feedback/end/${params.businessSlug}`)}
+          onClick={() =>
+            router.push(`/feedback/thank-you/${params.businessSlug}`)
+          }
         />
         <TradeMark />
       </div>
