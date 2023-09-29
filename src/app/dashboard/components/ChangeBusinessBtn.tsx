@@ -1,15 +1,20 @@
 import { IoMdReturnLeft } from "react-icons/io";
 import React from "react";
+import { useDashboardFeedbackContext } from "@/context/DashboardFeedbackContext";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useRouter } from "next/navigation";
 
 const ChangeBusinessBtn = () => {
   const { removeItem } = useLocalStorage();
+  const { setOrderFeedbacks, setServiceFeedbacks } =
+    useDashboardFeedbackContext();
   const router = useRouter();
 
   const handleChangeBusiness = () => {
     removeItem("business");
     removeItem("businessId");
+    setOrderFeedbacks([]);
+    setServiceFeedbacks([]);
     router.push("/dashboard/businessOption");
   };
 

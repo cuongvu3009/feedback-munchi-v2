@@ -3,6 +3,7 @@
 import { createContext, useContext, useState } from "react";
 
 import { Feedback } from "../types/feedback.types";
+import { usePersistState } from "@/hooks/usePersistState";
 
 export interface DashboardFeedbackContextProps {
   serviceFeedbacks: Feedback[] | [];
@@ -31,8 +32,14 @@ export const useDashboardFeedbackContext = () => {
   return context;
 };
 export const DashboardFeedbackProvider = ({ children }: any) => {
-  const [serviceFeedbacks, setServiceFeedbacks] = useState<Feedback[] | []>([]);
-  const [orderFeedbacks, setOrderFeedbacks] = useState<Feedback[] | []>([]);
+  const [serviceFeedbacks, setServiceFeedbacks] = usePersistState(
+    "serviceFeedbacks",
+    []
+  );
+  const [orderFeedbacks, setOrderFeedbacks] = usePersistState(
+    "orderFeedbacks",
+    []
+  );
 
   return (
     <DashboardFeedbackContext.Provider

@@ -2,17 +2,22 @@ import { GrLogout } from "react-icons/gr";
 import React from "react";
 import { useAuthContext } from "@/context/AuthContext";
 import { useBusinessContext } from "@/context/BusinessContext";
+import { useDashboardFeedbackContext } from "@/context/DashboardFeedbackContext";
 import { useRouter } from "next/navigation";
 
 const LogoutBtn = () => {
   const { setBusiness, setBusinessId } = useBusinessContext();
   const { setUser } = useAuthContext();
+  const { setOrderFeedbacks, setServiceFeedbacks } =
+    useDashboardFeedbackContext();
   const router = useRouter();
 
   const handleLogout = () => {
     setBusinessId(undefined);
     setBusiness(undefined);
     setUser(null);
+    setOrderFeedbacks([]);
+    setServiceFeedbacks([]);
     router.push("/dashboard/login");
   };
 
