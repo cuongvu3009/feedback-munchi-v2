@@ -39,8 +39,8 @@ const FeedbackPage: NextPage<{
   };
 
   const handleSubmit = useCallback(async () => {
+    setIsSubmitLoading(true);
     try {
-      setIsSubmitLoading(true);
       const body = {
         businessSlug: params.businessSlug,
         emojiService: getItem("emojiService"),
@@ -123,8 +123,6 @@ const FeedbackPage: NextPage<{
   if (isLoading || isSubmitLoading) {
     return <Spinner />;
   }
-
-  console.log(emojiServiceContext);
 
   return (
     <>

@@ -35,10 +35,7 @@ export async function POST(
 
     // If an existing transaction is found, return an error response
     if (existingTransaction) {
-      return Response.json(
-        { message: "Transaction already exists" },
-        { status: 400 }
-      );
+      return Response.json({ message: "Transaction already exists" });
     }
 
     const createdTransaction = await prisma.transaction.create({
