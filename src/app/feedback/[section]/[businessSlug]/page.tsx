@@ -70,6 +70,12 @@ const FeedbackPage: NextPage<{
         tags: body.orderTags,
       };
 
+      const isPositiveFeedbackOrder =
+        body.emojiService !== "terrible" &&
+        body.emojiService !== "bad" &&
+        body.emojiOrder !== "terrible" &&
+        body.emojiOrder !== "bad";
+
       const result = await fetch(`/api/feedback`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -77,13 +83,11 @@ const FeedbackPage: NextPage<{
       });
 
       if (result) {
-        const isPositiveFeedbackOrder =
-          getItem("emojiService") !== "terrible" &&
-          getItem("emojiService") !== "bad" &&
-          getItem("emojiOrder") !== "terrible" &&
-          getItem("emojiOrder") !== "bad";
-
-        if (isPositiveFeedbackOrder === true) {
+        if (
+          isPositiveFeedbackOrder === true &&
+          body.emojiOrder &&
+          body.emojiService
+        ) {
           router.push(`/feedback/tip/${params.businessSlug}`);
         } else {
           router.push(`/feedback/thank-you/${params.businessSlug}`);
