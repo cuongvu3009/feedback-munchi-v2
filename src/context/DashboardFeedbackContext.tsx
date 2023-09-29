@@ -6,22 +6,21 @@ import { Feedback } from "../types/feedback.types";
 import { usePersistState } from "@/hooks/usePersistState";
 
 export interface DashboardFeedbackContextProps {
-  serviceFeedbacks: Feedback[] | [];
-  setServiceFeedbacks: (value: Feedback[] | []) => void;
-  orderFeedbacks: Feedback[] | [];
-  setOrderFeedbacks: (value: Feedback[] | []) => void;
+  serviceFeedbacks: Feedback[] | undefined;
+  setServiceFeedbacks: (value: Feedback[] | undefined) => void;
+  orderFeedbacks: Feedback[] | undefined;
+  setOrderFeedbacks: (value: Feedback[] | undefined) => void;
+  removePersistedData: () => void;
 }
 
 const DashboardFeedbackContext = createContext<DashboardFeedbackContextProps>({
-  serviceFeedbacks: [],
-  setServiceFeedbacks: function (value: Feedback[] | []): void {
-    throw new Error("Function not implemented.");
-  },
-  orderFeedbacks: [],
-  setOrderFeedbacks: function (value: Feedback[] | []): void {
-    throw new Error("Function not implemented.");
-  },
+  serviceFeedbacks: undefined,
+  setServiceFeedbacks: () => {}, // Implement this function as needed
+  orderFeedbacks: undefined,
+  setOrderFeedbacks: () => {}, // Implement this function as needed
+  removePersistedData: () => {},
 });
+
 export const useDashboardFeedbackContext = () => {
   const context = useContext(DashboardFeedbackContext);
   if (!context) {
@@ -34,12 +33,17 @@ export const useDashboardFeedbackContext = () => {
 export const DashboardFeedbackProvider = ({ children }: any) => {
   const [serviceFeedbacks, setServiceFeedbacks] = usePersistState(
     "serviceFeedbacks",
-    []
+    undefined
   );
   const [orderFeedbacks, setOrderFeedbacks] = usePersistState(
     "orderFeedbacks",
-    []
+    undefined
   );
+
+  const removePersistedData = () => {
+    setServiceFeedbacks([]);
+    setOrderFeedbacks([]);
+  };
 
   return (
     <DashboardFeedbackContext.Provider
@@ -48,6 +52,7 @@ export const DashboardFeedbackProvider = ({ children }: any) => {
         setServiceFeedbacks,
         orderFeedbacks,
         setOrderFeedbacks,
+        removePersistedData,
       }}
     >
       {children}

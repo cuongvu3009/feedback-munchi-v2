@@ -13,8 +13,10 @@ const ChangeBusinessBtn = () => {
   const handleChangeBusiness = () => {
     removeItem("business");
     removeItem("businessId");
-    setOrderFeedbacks([]);
-    setServiceFeedbacks([]);
+    removeItem("orderFeedbacks");
+    removeItem("serviceFeedbacks");
+    setOrderFeedbacks(undefined);
+    setServiceFeedbacks(undefined);
     router.push("/dashboard/businessOption");
   };
 

@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useCallback, useState } from "react";
-import { getFetcher, postFetcher } from "@/utils/fetcher";
 
 import { API_BASE_URL } from "@/utils/constantAPI";
 import Button from "@/components/shared/Button";
@@ -11,6 +10,7 @@ import Rating from "../../components/Rating";
 import Spinner from "@/components/shared/Spinner";
 import Title from "@/components/shared/Title";
 import TradeMark from "@/app/feedback/components/TradeMark";
+import { getFetcher } from "@/utils/fetcher";
 import styles from "./feedbackPage.module.css";
 import { useFeedbackContext } from "@/context/FeedbackContext";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
@@ -128,7 +128,7 @@ const FeedbackPage: NextPage<{
         <Title isBack={true} />
       )}
 
-      <Logo restaurant={data.result} />
+      <Logo restaurant={data?.result} />
       <div className="feedback">
         <div className={styles["feedback-description"]}>
           <h3 className={styles.question}>

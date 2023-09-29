@@ -3,9 +3,11 @@ import React from "react";
 import { useAuthContext } from "@/context/AuthContext";
 import { useBusinessContext } from "@/context/BusinessContext";
 import { useDashboardFeedbackContext } from "@/context/DashboardFeedbackContext";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useRouter } from "next/navigation";
 
 const LogoutBtn = () => {
+  const { removeItem } = useLocalStorage();
   const { setBusiness, setBusinessId } = useBusinessContext();
   const { setUser } = useAuthContext();
   const { setOrderFeedbacks, setServiceFeedbacks } =
@@ -16,8 +18,10 @@ const LogoutBtn = () => {
     setBusinessId(undefined);
     setBusiness(undefined);
     setUser(null);
-    setOrderFeedbacks([]);
-    setServiceFeedbacks([]);
+    setOrderFeedbacks(undefined);
+    setServiceFeedbacks(undefined);
+    removeItem("orderFeedbacks");
+    removeItem("serviceFeedbacks");
     router.push("/dashboard/login");
   };
 

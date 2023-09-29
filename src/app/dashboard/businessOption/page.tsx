@@ -38,7 +38,6 @@ const Page: NextPage = () => {
       try {
         const businessesData = await getUserBusiness();
         setBusinesses(businessesData);
-        console.log(businessesData);
         setIsLoading(false);
       } catch (error) {
         setIsLoading(false);
