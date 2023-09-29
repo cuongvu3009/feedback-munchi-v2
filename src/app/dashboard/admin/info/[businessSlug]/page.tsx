@@ -6,7 +6,7 @@ import FeedbackChart from "@/app/dashboard/components/chart/FeedbackChart";
 import { NextPage } from "next";
 import React from "react";
 import Spinner from "@/components/shared/Spinner";
-import { fetcher } from "@/utils/fetcher";
+import { getFetcher } from "@/utils/fetcher";
 import styles from "./dashboardInfo.module.css";
 import { useBusinessContext } from "@/context/BusinessContext";
 import useSWR from "swr";
@@ -16,7 +16,7 @@ const DashboardPage: NextPage = () => {
 
   const { data, error, isLoading } = useSWR(
     `/api/feedback/${business?.slug}`,
-    fetcher
+    getFetcher
   );
 
   const { businessId } = useBusinessContext();
