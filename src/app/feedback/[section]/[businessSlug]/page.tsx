@@ -6,6 +6,7 @@ import { API_BASE_URL } from "@/utils/constantAPI";
 import Button from "@/components/shared/Button";
 import Logo from "../../components/Logo";
 import { NextPage } from "next";
+import Rating from "../../components/Rating";
 import RatingOrder from "@/app/feedback/components/RatingOrder";
 import RatingService from "@/app/feedback/components/RatingService";
 import Spinner from "@/components/shared/Spinner";
@@ -151,7 +152,11 @@ const FeedbackPage: NextPage<{
               : "Your feedback helps us improve our products."}
           </p>
         </div>
-        {params.section == "service" ? <RatingService /> : <RatingOrder />}
+        {params.section == "service" ? (
+          <Rating type="SERVICE" />
+        ) : (
+          <Rating type="ORDER" />
+        )}
       </div>
 
       <div className="navigation">
