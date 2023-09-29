@@ -20,7 +20,7 @@ const DashboardResponses: React.FC<DashboardResponseProps> = ({
   const router = useRouter();
 
   const handleBtnClick = () => {
-    router.push(`/dashboard/${businessId}/responses`);
+    router.push(`/dashboard/admin/responses/${businessId}/`);
   };
 
   const getEmojiLabel = (emoji: string) => {

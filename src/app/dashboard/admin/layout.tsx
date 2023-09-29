@@ -1,6 +1,7 @@
 "use client";
 
 import { API_BASE_URL } from "@/utils/constantAPI";
+import { DashboardFeedbackProvider } from "@/context/DashboardFeedbackContext";
 import React from "react";
 import Sidebar from "@/app/dashboard/components/sidebar/Sidebar";
 import { SidebarProvider } from "@/context/SidebarContext";
@@ -33,10 +34,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <SidebarProvider>
-      <div className={styles.dashboard}>
-        <Sidebar business={data.result} />
-        <>{children}</>
-      </div>
+      <DashboardFeedbackProvider>
+        <div className={styles.dashboard}>
+          <Sidebar business={data.result} />
+          <>{children}</>
+        </div>
+      </DashboardFeedbackProvider>
     </SidebarProvider>
   );
 }

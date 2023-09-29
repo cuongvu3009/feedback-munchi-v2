@@ -2,8 +2,6 @@
 
 import { createContext, useContext, useState } from "react";
 
-import { Feedback } from "../types/feedback.types";
-
 export interface FeedbackContextProps {
   emojiServiceContext: string | null;
   setEmojiServiceContext: (value: string | null) => void;
@@ -30,7 +28,9 @@ const FeedbackContext = createContext<FeedbackContextProps>({
 export const useFeedbackContext = () => {
   const context = useContext(FeedbackContext);
   if (!context) {
-    throw new Error("useAuth must be used within an FeedbackProvider");
+    throw new Error(
+      "useFeedbackContext must be used within an FeedbackProvider"
+    );
   }
   return context;
 };
