@@ -1,0 +1,29 @@
+.dashboardContainer {
+  padding: 20px;
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.feedbackTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.feedbackTable th,
+.feedbackTable td {
+  padding: 8px 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.feedbackTable th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.feedbackTable tbody tr:hover {
+  background-color: #ddd;
+}

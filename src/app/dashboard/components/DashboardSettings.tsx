@@ -5,7 +5,9 @@ import { NextPage } from "next";
 import React from "react";
 import styles from "./settings.module.css";
 
-const Settings: NextPage<{ params: { businessId: number } }> = ({ params }) => {
+const DashboardSettings: NextPage<{ params: { businessId: number } }> = ({
+  params,
+}) => {
   return (
     <div className="">
       <div className={`${styles["dashboard-card"]}`}>
@@ -18,4 +20,4 @@ const Settings: NextPage<{ params: { businessId: number } }> = ({ params }) => {
   );
 };
 
-export default Settings;
+export default DashboardSettings;

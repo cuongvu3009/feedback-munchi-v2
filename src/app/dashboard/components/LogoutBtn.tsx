@@ -20,8 +20,7 @@ const LogoutBtn = () => {
     setUser(null);
     setOrderFeedbacks(undefined);
     setServiceFeedbacks(undefined);
-    removeItem("orderFeedbacks");
-    removeItem("serviceFeedbacks");
+
     router.push("/dashboard/login");
   };
 

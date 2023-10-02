@@ -33,7 +33,8 @@
   cursor: pointer;
 }
 
-.sidebar-link {
+.sidebar-link,
+.disabled-link {
   display: block;
   color: #000;
   text-decoration: none;
@@ -44,6 +45,11 @@
 .sidebar-link:hover {
   background-color: #fff;
   width: 100%;
+}
+
+.disabled-link {
+  cursor: not-allowed;
+  color: gray;
 }
 
 .logout-button {

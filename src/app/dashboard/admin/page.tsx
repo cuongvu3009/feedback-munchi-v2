@@ -12,7 +12,7 @@ import { useBusinessContext } from "@/context/BusinessContext";
 import { useDashboardFeedbackContext } from "@/context/DashboardFeedbackContext";
 import useSWR from "swr";
 
-const DashboardPage: NextPage = () => {
+const DashboardInfo: NextPage = () => {
   const { business, businessId } = useBusinessContext();
   const { setOrderFeedbacks, setServiceFeedbacks } =
     useDashboardFeedbackContext();
@@ -57,4 +57,4 @@ const DashboardPage: NextPage = () => {
   );
 };
 
-export default DashboardPage;
+export default DashboardInfo;

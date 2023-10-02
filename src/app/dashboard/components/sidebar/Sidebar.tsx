@@ -16,40 +16,68 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ business }) => {
-  if (!business) {
-    return <Spinner />;
-  }
   return (
     <div className={styles.sidebar}>
       <div className={`${styles["sidebar-top"]}`}>
         <div className={`${styles["logo-container"]}`}>
-          <Image
-            src={business.logo}
-            width={60}
-            height={60}
-            alt={business.name}
-            className={styles.logo}
-          />
-          <h3>{business.name}</h3>
+          {business ? (
+            <>
+              <Image
+                src={business.logo}
+                width={60}
+                height={60}
+                alt={business.name}
+                className={styles.logo}
+              />
+              <h3>{business.name}</h3>
+            </>
+          ) : (
+            <>Please choose venues</>
+          )}
         </div>
-        <Link
-          href={`/dashboard/admin/info/${business.id}`}
-          className={`${styles["sidebar-link"]}`}
-        >
-          Dashboard
-        </Link>
-        <Link
-          href={`/dashboard/admin/responses/${business.id}`}
-          className={`${styles["sidebar-link"]}`}
-        >
-          Responses
-        </Link>
-        <Link
-          href={`/dashboard/admin/settings/${business.id}`}
-          className={`${styles["sidebar-link"]}`}
-        >
-          Settings
-        </Link>
+        {business ? (
+          <>
+            <Link
+              href={`/dashboard/admin/info/${business.id}`}
+              className={`${styles["sidebar-link"]}`}
+            >
+              Dashboard
+            </Link>
+            <Link
+              href={`/dashboard/admin/responses/${business.id}`}
+              className={`${styles["sidebar-link"]}`}
+            >
+              Responses
+            </Link>
+            <Link
+              href={`/dashboard/admin/settings/${business.id}`}
+              className={`${styles["sidebar-link"]}`}
+            >
+              Settings
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link
+              href={`/dashboard/admin`}
+              className={`${styles["disabled-link"]}`}
+            >
+              Dashboard
+            </Link>
+            <Link
+              href={`/dashboard/admin`}
+              className={`${styles["disabled-link"]}`}
+            >
+              Responses
+            </Link>
+            <Link
+              href={`/dashboard/admin`}
+              className={`${styles["disabled-link"]}`}
+            >
+              Settings
+            </Link>
+          </>
+        )}
       </div>
 
       <div className={`${styles["sidebar-bottom"]}`}>

@@ -9,3 +9,19 @@
   flex-grow: 1; /* Allow dashboard-info to grow and occupy the remaining space */
   overflow-y: auto;
 }
+
+.header {
+  display: flex;
+  align-items: center;
+  margin: 20px;
+}
+
+.title {
+  flex-grow: 2;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.businessSelection {
+  flex: 1;
+}
