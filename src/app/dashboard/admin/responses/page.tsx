@@ -53,8 +53,8 @@ const DashboardResponses = () => {
           <tr>
             <th>Emoji</th>
             <th>Type</th>
-            <th>Tags</th>
-            <th>Comment</th>
+            <th>Additional comments</th>
+            {/* <th>Comment</th> */}
             <th>Created At</th>
           </tr>
         </thead>
@@ -63,14 +63,18 @@ const DashboardResponses = () => {
             let feedbackTags = JSON.parse(feedback.tags);
             return (
               <tr key={feedback.id}>
-                <td>{getEmojiLabel(feedback.emoji)}</td>
-                <td>{feedback.type}</td>
                 <td>
+                  <b>{getEmojiLabel(feedback.emoji)}</b>
+                </td>
+                <td>{feedback.type}</td>
+                <td className={styles.tagsContainer}>
                   {feedbackTags.map((item: string) => (
-                    <p key={feedback.id + item}>{item}</p>
+                    <p key={feedback.id + item} className={styles.tags}>
+                      {item}
+                    </p>
                   )) || "No tags"}
                 </td>
-                <td>{feedback.comment || "No comment"}</td>
+                {/* <td>{feedback.comment || "No comment"}</td> */}
                 <td>{moment(feedback.createdAt).fromNow()}</td>
               </tr>
             );

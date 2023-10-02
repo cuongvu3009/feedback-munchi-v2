@@ -39,7 +39,6 @@ const DashboardResponses: React.FC<DashboardResponseProps> = ({
         return emoji;
     }
   };
-
   // Check if data is defined and an array before using slice
   const slicedData = data ? data.slice(0, feedbackLimit) : [];
 
@@ -59,7 +58,7 @@ const DashboardResponses: React.FC<DashboardResponseProps> = ({
         );
       })}
 
-      {feedbackLimit >= 7 && (
+      {feedbackLimit >= 7 && data?.length && (
         <Button
           btnText="See All"
           version="secondary"
