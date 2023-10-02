@@ -1,7 +1,6 @@
 "use client";
 
-import { FiEye, FiEyeOff } from "react-icons/fi";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { API_BASE_URL } from "@/utils/constantAPI";
 import TradeMark from "@/app/feedback/components/TradeMark";
@@ -26,11 +25,17 @@ const Login = () => {
     loading: false,
     error: null,
   });
-  const { setUser } = useAuthContext();
+  const { userIsLoggedIn, setUser } = useAuthContext();
   const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
   const togglePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
+
+  useEffect(() => {
+    if (userIsLoggedIn) {
+      router.push("/dashboard/admin");
+    }
+  }, [router, userIsLoggedIn]);
 
   const loginUser = async (email: string, password: string) => {
     try {

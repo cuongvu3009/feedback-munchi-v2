@@ -1,21 +1,32 @@
 "use client";
 
+import React, { useEffect } from "react";
+
 import DashboardResponses from "@/app/dashboard/components/responses/DashboardResponses";
 import DashboardScore from "@/app/dashboard/components/score/DashboardScore";
 import FeedbackChart from "@/app/dashboard/components/chart/FeedbackChart";
 import { NextPage } from "next";
-import React from "react";
 import Spinner from "@/components/shared/Spinner";
 import { getFetcher } from "@/utils/fetcher";
 import styles from "./dashboardInfo.module.css";
+import { useAuthContext } from "@/context/AuthContext";
 import { useBusinessContext } from "@/context/BusinessContext";
 import { useDashboardFeedbackContext } from "@/context/DashboardFeedbackContext";
+import { useRouter } from "next/navigation";
 import useSWR from "swr";
 
 const DashboardInfo: NextPage = () => {
   const { business, businessId } = useBusinessContext();
   const { setOrderFeedbacks, setServiceFeedbacks } =
     useDashboardFeedbackContext();
+  const { userIsLoggedIn } = useAuthContext();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!userIsLoggedIn) {
+      router.push("/dashboard/login");
+    }
+  }, [router, userIsLoggedIn]);
 
   const { data, error, isLoading } = useSWR(
     `/api/feedback/${business?.slug}`,
