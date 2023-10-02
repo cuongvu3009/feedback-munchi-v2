@@ -28,7 +28,7 @@ const BusinessSelection: React.FC<BusinessSelectionProps> = ({
       const fetchUserBusiness = async () => {
         const result = await getBusinessById(selectedBusiness);
         setBusiness(result);
-        setBusinessId(result.id);
+        setBusinessId(result?.id);
       };
 
       fetchUserBusiness();
