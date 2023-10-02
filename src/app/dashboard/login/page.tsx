@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import { API_BASE_URL } from "@/utils/constantAPI";
+import Spinner from "@/components/shared/Spinner";
 import TradeMark from "@/app/feedback/components/TradeMark";
 import { User } from "@/types/auth.types";
 import axios from "axios";
@@ -67,6 +68,10 @@ const Login = () => {
 
     router.push(`/dashboard/admin/`);
   };
+
+  if (response.error) {
+    console.log(response.error);
+  }
 
   return (
     <div className={styles.container}>

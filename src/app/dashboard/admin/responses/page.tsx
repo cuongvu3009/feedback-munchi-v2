@@ -1,6 +1,11 @@
 "use client";
 
+import AwesomeSVG from "@/utils/emoji-svg/AwesomeSVG";
+import BadSVG from "@/utils/emoji-svg/BadSVG";
+import GoodSVG from "@/utils/emoji-svg/GoodSVG";
+import OkeySVG from "@/utils/emoji-svg/OkeySVG";
 import React from "react";
+import TerribleSVG from "@/utils/emoji-svg/TerribleSVG";
 import moment from "moment";
 import styles from "./responses.module.css";
 import { useDashboardFeedbackContext } from "@/context/DashboardFeedbackContext";
@@ -30,15 +35,51 @@ const DashboardResponses = () => {
   const getEmojiLabel = (emoji: string) => {
     switch (emoji) {
       case "terrible":
-        return "😠 Terrible";
+        return (
+          <span className={styles.emojiContainer}>
+            <div className={styles.emoji}>
+              <TerribleSVG size={30} />
+            </div>
+            <p>Terrible</p>
+          </span>
+        );
       case "bad":
-        return "🙁 Bad";
+        return (
+          <span className={styles.emojiContainer}>
+            <div className={styles.emoji}>
+              {" "}
+              <BadSVG size={30} />
+            </div>
+            <p>Bad</p>
+          </span>
+        );
       case "okey":
-        return "🙂Okey";
+        return (
+          <span className={styles.emojiContainer}>
+            <div className={styles.emoji}>
+              <OkeySVG size={30} />
+            </div>
+            <p>Okey</p>
+          </span>
+        );
       case "good":
-        return "😄 Good";
+        return (
+          <span className={styles.emojiContainer}>
+            <div className={styles.emoji}>
+              <GoodSVG size={30} />
+            </div>
+            <p>Good</p>
+          </span>
+        );
       case "awesome":
-        return "😍 Awesome";
+        return (
+          <span className={styles.emojiContainer}>
+            <div className={styles.emoji}>
+              <AwesomeSVG size={30} />
+            </div>
+            <p>Awesome</p>
+          </span>
+        );
       default:
         return emoji;
     }
@@ -46,16 +87,15 @@ const DashboardResponses = () => {
 
   return (
     <div className={styles.dashboardContainer}>
-      <h1 className={styles.title}>Responses</h1>
       {/* Render combined feedbacks in a table */}
       <table className={styles.feedbackTable}>
         <thead>
           <tr>
-            <th>Emoji</th>
+            <th>Rating</th>
             <th>Type</th>
             <th>Additional comments</th>
             {/* <th>Comment</th> */}
-            <th>Created At</th>
+            <th>Submitted At</th>
           </tr>
         </thead>
         <tbody>
