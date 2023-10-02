@@ -41,7 +41,7 @@ const BusinessSelection: React.FC<BusinessSelectionProps> = ({
       <form>
         <select onChange={handleChange} value={selectedBusiness || ""}>
           <option value="">
-            {business?.name ? <b>{business.name}</b> : <b>Select venues</b>}
+            {business?.name ? business.name : "Select venues"}
           </option>
           {businesses.map((business: BusinessProps) => (
             <option key={business.id} value={business.id}>
