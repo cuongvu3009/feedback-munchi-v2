@@ -25,12 +25,19 @@
 .input {
   width: 100%;
   padding: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   border: 1px solid #ccc;
   border-radius: 3px;
   font-size: 16px;
 }
 
+.passwordShow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin-bottom: 20px;
+}
 .button {
   width: 100%;
   padding: 10px;

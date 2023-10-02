@@ -1,5 +1,6 @@
 "use client";
 
+import { FiEye, FiEyeOff } from "react-icons/fi";
 import React, { useRef, useState } from "react";
 
 import { API_BASE_URL } from "@/utils/constantAPI";
@@ -26,6 +27,10 @@ const Login = () => {
     error: null,
   });
   const { setUser } = useAuthContext();
+  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
 
   const loginUser = async (email: string, password: string) => {
     try {
@@ -73,11 +78,21 @@ const Login = () => {
         <label className={styles.label}>Password</label>
         <input
           className={styles.input}
-          type="password"
+          type={showPassword ? "text" : "password"}
           placeholder="your password here..."
           ref={passwordRef}
           required
         />
+
+        <label className={styles.passwordShow}>
+          <p>Show Password</p>
+          <input
+            type="checkbox"
+            checked={showPassword}
+            onChange={togglePasswordVisibility}
+          />
+        </label>
+
         <button
           className={styles.button}
           type="submit"
