@@ -80,7 +80,6 @@ const Sidebar: React.FC<SidebarProps> = ({ business }) => {
       </div>
 
       <div className={`${styles["sidebar-bottom"]}`}>
-        <ChangeBusinessBtn />
         <LogoutBtn />
         <TradeMark />
       </div>
