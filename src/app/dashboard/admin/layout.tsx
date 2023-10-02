@@ -9,7 +9,9 @@ import { SidebarProvider } from "@/context/SidebarContext";
 import Spinner from "@/components/shared/Spinner";
 import getUserBusinesses from "@/lib/getUserBusinesses";
 import styles from "./dashboard.module.css";
+import { useAuthContext } from "@/context/AuthContext";
 import { useBusinessContext } from "@/context/BusinessContext";
+import { useRouter } from "next/navigation";
 
 interface BusinessProps {
   id: number;
@@ -20,6 +22,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const { business } = useBusinessContext();
   const [isLoading, setIsLoading] = useState(false);
   const [businesses, setBusinesses] = useState<BusinessProps[]>([]);
+
+  const { userIsLoggedIn } = useAuthContext();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!userIsLoggedIn) {
+      router.push("/dashboard/login");
+    }
+  }, [router, userIsLoggedIn]);
 
   useEffect(() => {
     const fetchData = async () => {

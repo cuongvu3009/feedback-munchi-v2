@@ -9,24 +9,14 @@ import { NextPage } from "next";
 import Spinner from "@/components/shared/Spinner";
 import { getFetcher } from "@/utils/fetcher";
 import styles from "./dashboardInfo.module.css";
-import { useAuthContext } from "@/context/AuthContext";
 import { useBusinessContext } from "@/context/BusinessContext";
 import { useDashboardFeedbackContext } from "@/context/DashboardFeedbackContext";
-import { useRouter } from "next/navigation";
 import useSWR from "swr";
 
 const DashboardInfo: NextPage = () => {
   const { business, businessId } = useBusinessContext();
   const { setOrderFeedbacks, setServiceFeedbacks } =
     useDashboardFeedbackContext();
-  const { userIsLoggedIn } = useAuthContext();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!userIsLoggedIn) {
-      router.push("/dashboard/login");
-    }
-  }, [router, userIsLoggedIn]);
 
   const { data, error, isLoading } = useSWR(
     `/api/feedback/${business?.slug}`,
