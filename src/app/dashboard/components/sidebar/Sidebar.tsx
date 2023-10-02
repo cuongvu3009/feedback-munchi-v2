@@ -6,7 +6,6 @@ import Image from "next/image";
 import Link from "next/link";
 import LogoutBtn from "@/app/dashboard/components/LogoutBtn";
 import React from "react";
-import Spinner from "@/components/shared/Spinner";
 import TradeMark from "../../../feedback/components/TradeMark";
 import styles from "./sidebar.module.css";
 
