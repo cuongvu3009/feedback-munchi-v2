@@ -1,14 +1,11 @@
 "use client";
 
-import { NextPage } from "next";
 import React from "react";
 import moment from "moment";
 import styles from "./responses.module.css";
 import { useDashboardFeedbackContext } from "@/context/DashboardFeedbackContext";
 
-const DashboardResponses: NextPage<{ params: { businessId: number } }> = ({
-  params,
-}) => {
+const DashboardResponses = () => {
   const { serviceFeedbacks, orderFeedbacks } = useDashboardFeedbackContext();
 
   // Combine the service and order feedbacks into a single array

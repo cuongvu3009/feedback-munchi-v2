@@ -1,7 +1,6 @@
 "use client";
 
 import { BusinessProps } from "@/types/dashboard.types";
-import ChangeBusinessBtn from "@/app/dashboard/components/ChangeBusinessBtn";
 import Image from "next/image";
 import Link from "next/link";
 import LogoutBtn from "@/app/dashboard/components/LogoutBtn";
@@ -37,19 +36,19 @@ const Sidebar: React.FC<SidebarProps> = ({ business }) => {
         {business ? (
           <>
             <Link
-              href={`/dashboard/admin/info/${business.id}`}
+              href={`/dashboard/admin`}
               className={`${styles["sidebar-link"]}`}
             >
               Dashboard
             </Link>
             <Link
-              href={`/dashboard/admin/responses/${business.id}`}
+              href={`/dashboard/admin/responses`}
               className={`${styles["sidebar-link"]}`}
             >
               Responses
             </Link>
             <Link
-              href={`/dashboard/admin/settings/${business.id}`}
+              href={`/dashboard/admin/settings`}
               className={`${styles["sidebar-link"]}`}
             >
               Settings
