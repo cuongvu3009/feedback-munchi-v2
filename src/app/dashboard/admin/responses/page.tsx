@@ -108,7 +108,7 @@ const DashboardResponses = () => {
                 </td>
                 <td>{feedback.type}</td>
                 <td className={styles.tagsContainer}>
-                  {feedbackTags.map((item: string) => (
+                  {feedbackTags?.map((item: string) => (
                     <p key={feedback.id + item} className={styles.tags}>
                       {item}
                     </p>
