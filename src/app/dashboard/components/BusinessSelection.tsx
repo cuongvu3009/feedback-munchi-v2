@@ -2,10 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 
-import Spinner from "@/components/shared/Spinner";
 import { getBusinessById } from "@/lib/getOneBusinessById";
 import { useBusinessContext } from "@/context/BusinessContext";
-import { useRouter } from "next/navigation";
 
 interface BusinessProps {
   id: number;
@@ -20,10 +18,9 @@ const BusinessSelection: React.FC<BusinessSelectionProps> = ({
   businesses,
 }) => {
   const [selectedBusiness, setSelectedBusiness] = useState<number | null>(null);
-  const { setBusiness, setBusinessId } = useBusinessContext();
+  const { business, setBusiness, setBusinessId } = useBusinessContext();
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedBusiness(Number(event.target.value));
-    console.log(Number(event.target.value));
   };
 
   useEffect(() => {
@@ -42,7 +39,9 @@ const BusinessSelection: React.FC<BusinessSelectionProps> = ({
     <div>
       <form>
         <select onChange={handleChange} value={selectedBusiness || ""}>
-          <option value="">Select venues</option>
+          <option value="">
+            {business?.name ? business.name : "Select venues"}
+          </option>
           {businesses.map((business: BusinessProps) => (
             <option key={business.id} value={business.id}>
               {business.name}
