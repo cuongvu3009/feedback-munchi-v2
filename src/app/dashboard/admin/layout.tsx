@@ -48,7 +48,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <Sidebar business={business} />
           <div className={styles.children}>
             <div className={styles.header}>
-              <div className={styles.title}>Feedback</div>
               <div className={styles.businessSelection}>
                 <BusinessSelection businesses={businesses} />
               </div>

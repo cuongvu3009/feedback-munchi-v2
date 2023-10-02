@@ -13,15 +13,11 @@
 .header {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   margin: 20px;
 }
 
-.title {
-  flex-grow: 2;
-  font-size: 25px;
-  font-weight: bold;
-}
-
 .businessSelection {
-  flex: 1;
+  font-weight: bold;
+  width: fit-content;
 }
