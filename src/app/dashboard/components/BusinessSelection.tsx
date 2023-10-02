@@ -33,7 +33,8 @@ const BusinessSelection: React.FC<BusinessSelectionProps> = ({
 
       fetchUserBusiness();
     }
-  }, [selectedBusiness, setBusiness, setBusinessId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedBusiness]);
 
   return (
     <div>
