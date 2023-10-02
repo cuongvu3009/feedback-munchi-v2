@@ -53,7 +53,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <BusinessSelection businesses={businesses} />
               </div>
             </div>
-            {children}
+            {businesses && business && children}
           </div>
         </div>
       </DashboardFeedbackProvider>
