@@ -11,7 +11,7 @@ export interface CheckoutOneTimePaymentBody {
 
 export async function POST(req: Request) {
   const body = (await req.json()) as CheckoutOneTimePaymentBody;
-  const origin = "http://localhost:3000";
+  const origin = process.env.ORIGIN_URL;
 
   // Redirect URL after successful payment
   const success_url = `${origin}/feedback/thank-you/${body.businessSlug}?session_id={CHECKOUT_SESSION_ID}`;
