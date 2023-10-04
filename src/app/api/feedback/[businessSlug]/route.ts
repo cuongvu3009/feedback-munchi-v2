@@ -13,7 +13,7 @@ export async function GET(
         type: "SERVICE",
       },
       orderBy: {
-        createdAt: "asc",
+        createdAt: "desc",
       },
     });
 
@@ -23,7 +23,7 @@ export async function GET(
         type: "ORDER",
       },
       orderBy: {
-        createdAt: "asc",
+        createdAt: "desc",
       },
     });
 

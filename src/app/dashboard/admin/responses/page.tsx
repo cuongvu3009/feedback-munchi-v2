@@ -47,7 +47,6 @@ const DashboardResponses = () => {
         return (
           <span className={styles.emojiContainer}>
             <div className={styles.emoji}>
-              {" "}
               <BadSVG size={30} />
             </div>
             <p>Bad</p>

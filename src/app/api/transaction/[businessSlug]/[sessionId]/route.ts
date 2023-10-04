@@ -67,6 +67,9 @@ export async function GET(
     const businessSlug = params.businessSlug;
     const restaurantTransactions = prisma.transaction.findMany({
       where: { businessSlug },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
     return Response.json(restaurantTransactions);
   } catch (error) {

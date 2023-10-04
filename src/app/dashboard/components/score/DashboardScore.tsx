@@ -90,6 +90,7 @@ const getEmojiLabel = (emoji: string) => {
 const DashboardScore: React.FC<DashboardScoreProps> = ({ data }) => {
   const responseCounts = calculateResponseCounts(data);
   const averageScore = calculateAverageScore(data);
+  console.log(responseCounts["awesome"]);
 
   return (
     <div className={`${styles["dashboard-card"]}`}>
@@ -99,12 +100,30 @@ const DashboardScore: React.FC<DashboardScoreProps> = ({ data }) => {
       </div>
 
       <div className={`${styles["dashboard-answers"]}`}>
-        {Object.entries(responseCounts).map(([response, count]) => (
-          <div className={`${styles["flex-between"]}`} key={response}>
-            <p>Answered &quot;{getEmojiLabel(response)}&quot;</p>
-            <p>{count}</p>
-          </div>
-        ))}
+        <div className={`${styles["flex-between"]}`}>
+          <p>Answered &quot;{getEmojiLabel("awesome")}&quot;</p>
+          <p>{responseCounts["awesome"] ? responseCounts["awesome"] : 0}</p>
+        </div>
+
+        <div className={`${styles["flex-between"]}`}>
+          <p>Answered &quot;{getEmojiLabel("good")}&quot;</p>
+          <p>{responseCounts["good"] ? responseCounts["good"] : 0}</p>
+        </div>
+
+        <div className={`${styles["flex-between"]}`}>
+          <p>Answered &quot;{getEmojiLabel("okey")}&quot;</p>
+          <p>{responseCounts["okey"] ? responseCounts["okey"] : 0}</p>
+        </div>
+
+        <div className={`${styles["flex-between"]}`}>
+          <p>Answered &quot;{getEmojiLabel("bad")}&quot;</p>
+          <p>{responseCounts["bad"] ? responseCounts["bad"] : 0}</p>
+        </div>
+
+        <div className={`${styles["flex-between"]}`}>
+          <p>Answered &quot;{getEmojiLabel("terrible")}&quot;</p>
+          <p>{responseCounts["terrible"] ? responseCounts["terrible"] : 0}</p>
+        </div>
 
         <div className={`${styles["flex-between"]}`}>
           <p>
