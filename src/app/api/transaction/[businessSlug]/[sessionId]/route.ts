@@ -17,6 +17,11 @@ export async function POST(
     );
     const transactionData = transactions.data;
 
+    // Check if required fields are present in transactionData
+    if (!transactionData[0]) {
+      return Response.json({ message: "Transaction data is missing" });
+    }
+
     const createdAt = transactionData[0].price?.created;
     const restaurantName = transactionData[0].description;
     const paymentAmount = transactionData[0].amount_total; //	in cents
