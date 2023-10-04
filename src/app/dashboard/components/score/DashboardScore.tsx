@@ -90,7 +90,6 @@ const getEmojiLabel = (emoji: string) => {
 const DashboardScore: React.FC<DashboardScoreProps> = ({ data }) => {
   const responseCounts = calculateResponseCounts(data);
   const averageScore = calculateAverageScore(data);
-  console.log(responseCounts["awesome"]);
 
   return (
     <div className={`${styles["dashboard-card"]}`}>

@@ -37,7 +37,6 @@ const FeedbackPage: NextPage<{
   // This useEffect hook redirects to the service page to make sure service rated
   useEffect(() => {
     if (!emojiServiceContext) {
-      console.log(emojiServiceContext);
       router.push(`/feedback/service/${params.businessSlug}`);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

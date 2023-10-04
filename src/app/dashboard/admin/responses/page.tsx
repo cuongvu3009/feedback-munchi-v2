@@ -2,6 +2,7 @@
 
 import AwesomeSVG from "@/utils/emoji-svg/AwesomeSVG";
 import BadSVG from "@/utils/emoji-svg/BadSVG";
+import { Feedback } from "@/types/feedback.types";
 import GoodSVG from "@/utils/emoji-svg/GoodSVG";
 import OkeySVG from "@/utils/emoji-svg/OkeySVG";
 import React from "react";
@@ -14,7 +15,7 @@ const DashboardResponses = () => {
   const { serviceFeedbacks, orderFeedbacks } = useDashboardFeedbackContext();
 
   // Combine the service and order feedbacks into a single array
-  const combinedFeedbacks = [];
+  const combinedFeedbacks: Feedback[] = [];
 
   // Interleave the service and order feedbacks
   if (serviceFeedbacks && orderFeedbacks) {
