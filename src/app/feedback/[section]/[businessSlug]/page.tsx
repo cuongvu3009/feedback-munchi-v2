@@ -116,7 +116,11 @@ const FeedbackPage: NextPage<{
     setEmojiServiceContext,
   ]);
 
-  if (isLoading && isSubmitLoading) {
+  if (isLoading) {
+    return <Spinner />;
+  }
+
+  if (isSubmitLoading) {
     return <Spinner />;
   }
 
