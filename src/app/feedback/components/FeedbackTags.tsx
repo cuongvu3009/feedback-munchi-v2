@@ -47,6 +47,7 @@ const FeedbackTags: React.FC<FeedbackTagsProps> = ({
   useEffect(() => {
     setTags([]);
     removeItem(storageKey);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [storageKey, emojiService, emojiOrder]);
 
   const mappedTags = getTagsForEmoji();

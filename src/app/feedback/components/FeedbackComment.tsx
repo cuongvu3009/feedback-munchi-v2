@@ -37,11 +37,13 @@ const FeedbackComment: React.FC<CommentProps> = ({
     if (storedComment && commentInputRef.current) {
       commentInputRef.current.value = storedComment;
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [storageKey]);
 
   useEffect(() => {
     removeItem(storageKey);
     setIsFormSubmitted(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [emojiService, emojiOrder]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

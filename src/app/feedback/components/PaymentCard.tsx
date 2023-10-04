@@ -31,7 +31,6 @@ const OneTimePaymentCard = ({
         "content-type": "application/json",
       },
     });
-    console.log(result);
 
     // Step 4: Get the data and redirect to checkout using the sessionId
     const data = (await result.json()) as Stripe.Checkout.Session;
