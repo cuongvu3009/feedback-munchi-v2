@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import { API_BASE_URL } from "@/utils/constantAPI";
 import Button from "@/components/shared/Button";
@@ -33,6 +33,15 @@ const FeedbackPage: NextPage<{
     `${API_BASE_URL}/business/${params.businessSlug}?params=logo,slug,name`,
     getFetcher
   );
+
+  // This useEffect hook redirects to the service page to make sure service rated
+  useEffect(() => {
+    if (!emojiServiceContext) {
+      console.log(emojiServiceContext);
+      router.push(`/feedback/service/${params.businessSlug}`);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleNext = () => {
     router.push(`/feedback/order/${params.businessSlug}/`);
