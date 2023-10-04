@@ -1,11 +1,13 @@
 "use client";
 
+import { IoChevronBackOutline, IoChevronForwardOutline } from "react-icons/io5";
+import React, { useState } from "react";
+
 import AwesomeSVG from "@/utils/emoji-svg/AwesomeSVG";
 import BadSVG from "@/utils/emoji-svg/BadSVG";
 import { Feedback } from "@/types/feedback.types";
 import GoodSVG from "@/utils/emoji-svg/GoodSVG";
 import OkeySVG from "@/utils/emoji-svg/OkeySVG";
-import React from "react";
 import TerribleSVG from "@/utils/emoji-svg/TerribleSVG";
 import moment from "moment";
 import styles from "./responses.module.css";
@@ -13,6 +15,10 @@ import { useDashboardFeedbackContext } from "@/context/DashboardFeedbackContext"
 
 const DashboardResponses = () => {
   const { serviceFeedbacks, orderFeedbacks } = useDashboardFeedbackContext();
+
+  // Pagination for feedbacks
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   // Combine the service and order feedbacks into a single array
   const combinedFeedbacks: Feedback[] = [];
@@ -32,6 +38,25 @@ const DashboardResponses = () => {
       }
     }
   }
+
+  const paginateData = (data: Feedback[]) => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return data.slice(startIndex, endIndex);
+  };
+  const paginatedFeedback = paginateData(combinedFeedbacks);
+
+  const nextPage = () => {
+    if (currentPage < Math.ceil(combinedFeedbacks.length / itemsPerPage)) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
 
   const getEmojiLabel = (emoji: string) => {
     switch (emoji) {
@@ -99,7 +124,7 @@ const DashboardResponses = () => {
           </tr>
         </thead>
         <tbody>
-          {combinedFeedbacks.map((feedback) => {
+          {paginatedFeedback.map((feedback) => {
             let feedbackTags = JSON.parse(feedback.tags);
             return (
               <tr key={feedback.id}>
@@ -121,6 +146,28 @@ const DashboardResponses = () => {
           })}
         </tbody>
       </table>
+
+      {/* Pagination controls */}
+      <div className={styles.pagination}>
+        {currentPage !== 1 && (
+          <button onClick={prevPage}>
+            {" "}
+            <IoChevronBackOutline />
+          </button>
+        )}
+
+        <span>
+          {currentPage} - {Math.ceil(combinedFeedbacks.length / itemsPerPage)}
+        </span>
+        <button
+          onClick={nextPage}
+          disabled={
+            currentPage === Math.ceil(combinedFeedbacks.length / itemsPerPage)
+          }
+        >
+          <IoChevronForwardOutline />
+        </button>
+      </div>
     </div>
   );
 };
