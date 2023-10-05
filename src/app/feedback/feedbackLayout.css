@@ -257,6 +257,6 @@ input[type="radio"]:disabled + label.unselected-button {
     margin: 0 auto;
   }
   .popup-container {
-    width: 100%;
+    width: 90%;
   }
 }
