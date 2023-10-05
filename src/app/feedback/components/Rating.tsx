@@ -13,7 +13,7 @@ import { useFeedbackContext } from "@/context/FeedbackContext";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 interface RatingProps {
-  type: "SERVICE" | "ORDER";
+  type: String;
 }
 
 const Rating: React.FC<RatingProps> = ({ type }) => {

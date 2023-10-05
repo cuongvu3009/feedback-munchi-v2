@@ -2,11 +2,17 @@
 
 import { createContext, useContext, useState } from "react";
 
+interface RatingItem {
+  type: string;
+  emoji: string;
+}
 export interface FeedbackContextProps {
   emojiServiceContext: string | null;
   setEmojiServiceContext: (value: string | null) => void;
   emojiOrderContext: string | null;
   setEmojiOrderContext: (value: string | null) => void;
+  rating: RatingItem[];
+  setRating: (value: RatingItem[]) => void;
   selectedTip: number | undefined;
   setSelectedTip: (value: number) => void;
 }
@@ -18,6 +24,10 @@ const FeedbackContext = createContext<FeedbackContextProps>({
   },
   emojiOrderContext: null,
   setEmojiOrderContext: function (value: string | null): void {
+    throw new Error("Function not implemented.");
+  },
+  rating: [],
+  setRating: function (value: RatingItem[]): void {
     throw new Error("Function not implemented.");
   },
   selectedTip: undefined,
@@ -41,6 +51,7 @@ export const FeedbackProvider = ({ children }: any) => {
   const [emojiOrderContext, setEmojiOrderContext] = useState<string | null>(
     null
   );
+  const [rating, setRating] = useState<RatingItem[]>([]);
   const [selectedTip, setSelectedTip] = useState<number | undefined>(undefined);
 
   return (
@@ -50,6 +61,8 @@ export const FeedbackProvider = ({ children }: any) => {
         setEmojiServiceContext,
         emojiOrderContext,
         setEmojiOrderContext,
+        rating,
+        setRating,
         selectedTip,
         setSelectedTip,
       }}

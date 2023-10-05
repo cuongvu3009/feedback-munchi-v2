@@ -156,11 +156,7 @@ const FeedbackPage: NextPage<{
               : "Your feedback helps us improve our products."}
           </p>
         </div>
-        {params.section == "service" ? (
-          <Rating type="SERVICE" />
-        ) : (
-          <Rating type="ORDER" />
-        )}
+        <Rating type={params.section} />
       </div>
 
       <div className="navigation">
