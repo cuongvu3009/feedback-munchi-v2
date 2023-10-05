@@ -209,6 +209,21 @@
   width: 400px;
 }
 
+.popup-container textarea {
+  width: 100%; /* Make the textarea take up the full width of its container */
+  padding: 10px; /* Add padding for spacing within the textarea */
+  border: 1px solid #ccc; /* Add a border for a visible textarea boundary */
+  border-radius: 4px; /* Add rounded corners for aesthetics */
+  resize: vertical; /* Allow vertical resizing of the textarea */
+  font-size: 16px; /* Adjust the font size as needed */
+  line-height: 1.5; /* Adjust the line height as needed */
+  min-height: 100px; /* Set a minimum height to prevent it from being too small */
+}
+
+.popup-container textarea::placeholder {
+  color: #999; /* Change the placeholder text color */
+}
+
 .popup-comment {
   font-weight: bold;
 }
