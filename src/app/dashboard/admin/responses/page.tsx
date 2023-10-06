@@ -120,7 +120,6 @@ const DashboardResponses = () => {
             <th>Rating</th>
             <th>Type</th>
             <th>Additional comments</th>
-            {/* <th>Comment</th> */}
             <th>Submitted At</th>
           </tr>
         </thead>
@@ -154,7 +153,6 @@ const DashboardResponses = () => {
       <div className={styles.pagination}>
         {currentPage !== 1 && (
           <button onClick={prevPage}>
-            {" "}
             <IoChevronBackOutline />
           </button>
         )}

@@ -22,8 +22,9 @@ interface RatingItem {
   comment?: string;
   tags?: string[];
 }
+
 const Rating: React.FC<RatingProps> = ({ type, businessSlug }) => {
-  const { rating, addOrUpdateRatingItem } = useFeedbackContext();
+  const { addOrUpdateRatingItem } = useFeedbackContext();
   const [emoji, setEmoji] = useState<string | null>(null);
 
   const handleEmojiChange = (e: React.ChangeEvent<HTMLInputElement>) => {
