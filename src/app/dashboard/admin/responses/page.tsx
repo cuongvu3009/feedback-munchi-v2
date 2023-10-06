@@ -15,6 +15,7 @@ import { useDashboardFeedbackContext } from "@/context/DashboardFeedbackContext"
 
 const DashboardResponses = () => {
   const { serviceFeedbacks, orderFeedbacks } = useDashboardFeedbackContext();
+  console.log(serviceFeedbacks);
 
   // Pagination for feedbacks
   const [currentPage, setCurrentPage] = useState(1);
@@ -125,7 +126,6 @@ const DashboardResponses = () => {
         </thead>
         <tbody>
           {paginatedFeedback.map((feedback) => {
-            let feedbackTags = JSON.parse(feedback.tags);
             return (
               <tr key={feedback.id}>
                 <td>
@@ -133,13 +133,16 @@ const DashboardResponses = () => {
                 </td>
                 <td>{feedback.type}</td>
                 <td className={styles.tagsContainer}>
-                  {feedbackTags?.map((item: string) => (
-                    <p key={feedback.id + item} className={styles.tags}>
-                      {item}
-                    </p>
-                  )) || "No tags"}
+                  {Array.isArray(feedback.tags) && feedback.tags.length > 0 ? (
+                    feedback.tags.map((item: string) => (
+                      <p key={feedback.id + item} className={styles.tags}>
+                        {item}
+                      </p>
+                    ))
+                  ) : (
+                    <p>No Tag</p>
+                  )}
                 </td>
-                {/* <td>{feedback.comment || "No comment"}</td> */}
                 <td>{moment(feedback.createdAt).fromNow()}</td>
               </tr>
             );
