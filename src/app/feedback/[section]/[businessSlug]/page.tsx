@@ -14,22 +14,8 @@ import axios from "axios";
 import { getFetcher } from "@/utils/fetcher";
 import styles from "./feedbackPage.module.css";
 import { useFeedbackContext } from "@/context/FeedbackContext";
-import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useRouter } from "next/navigation";
 import useSWR from "swr";
-
-type FlowItem = {
-  service?: {
-    name: string;
-    question: string;
-    subQuestion: string;
-  };
-  order?: {
-    name: string;
-    question: string;
-    subQuestion: string;
-  };
-};
 
 const flow = [
   {
@@ -50,9 +36,9 @@ const FeedbackPage: NextPage<{
   params: { businessSlug: string; section: string };
 }> = ({ params }) => {
   const router = useRouter();
-  const { getItem, removeItem } = useLocalStorage();
   const [isSubmitLoading, setIsSubmitLoading] = useState(false);
-  const { rating } = useFeedbackContext();
+  const { rating, resetContextState } = useFeedbackContext();
+  const [postErr, setPostErr] = useState("");
   const { data, error, isLoading } = useSWR(
     `${API_BASE_URL}/business/${params.businessSlug}?params=logo,slug,name`,
     getFetcher
@@ -81,27 +67,48 @@ const FeedbackPage: NextPage<{
   };
 
   const handleSubmit = useCallback(async () => {
+    setIsSubmitLoading(true);
 
-    const result = await axios.post("/api/feedback", rating, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    console.log(result);
+    try {
+      const result = await axios.post("/api/feedback", rating, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-		// redirect based on feedback emoji
-		// clean up after submit feedback
-  }, [rating]);
+      if (result.status == 200) {
+        // redirect based on feedback emoji
+        let hasBadOrTerribleEmoji = false;
+        // Check if any item has an emoji of "bad" or "terrible"
+        for (const item of rating) {
+          if (item.emoji === "bad" || item.emoji === "terrible") {
+            hasBadOrTerribleEmoji = true;
+            break; // No need to continue checking if we found one
+          }
+        }
+        // Redirect based on the result
+        if (hasBadOrTerribleEmoji) {
+          router.push(`/feedback/thank-you/${params.businessSlug}`);
+        } else {
+          router.push(`/feedback/tip/${params.businessSlug}`);
+        }
 
- 
+        // clean up after submit feedback
+        resetContextState();
+      }
+    } catch (error: string | unknown) {
+      console.log(error);
+      setPostErr(error as string);
+    }
+  }, [params.businessSlug, rating, resetContextState, router]);
 
-  // if (isLoading) {
-  //   return <Spinner />;
-  // }
+  if (isLoading) {
+    return <Spinner />;
+  }
 
-  // if (isSubmitLoading) {
-  //   return <Spinner />;
-  // }
+  if (isSubmitLoading) {
+    return <Spinner />;
+  }
 
   const handleDisabledBtn = () => {
     const currentRating = rating.find((item) => item.type == params.section);
@@ -154,7 +161,11 @@ const FeedbackPage: NextPage<{
             isDisabled={handleDisabledBtn()}
           />
         )}
-        {error && <p style={{ color: "red" }}>Error: {error}</p>}
+        {error && <p style={{ color: "red" }}>Error: {error} </p>}
+        {postErr && (
+          <p style={{ color: "red" }}>Error sending feedback: {postErr} </p>
+        )}
+
         <TradeMark />
       </div>
     </>
