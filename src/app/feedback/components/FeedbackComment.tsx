@@ -3,18 +3,18 @@
 import React, { useState } from "react";
 
 import Button from "@/components/shared/Button";
-import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { useFeedbackContext } from "@/context/FeedbackContext";
 
 interface CommentProps {
-  storageKey: string;
+  type: string;
+  emoji: string;
 }
 
-const FeedbackComment: React.FC<CommentProps> = ({ storageKey }) => {
-  const { setItem } = useLocalStorage();
+const FeedbackComment: React.FC<CommentProps> = ({ type, emoji }) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   let [comment, setComment] = useState("");
-
+  const { addOrUpdateRatingItem } = useFeedbackContext();
   const openPopup = () => {
     setIsPopupOpen(true);
   };
@@ -33,7 +33,12 @@ const FeedbackComment: React.FC<CommentProps> = ({ storageKey }) => {
       return;
     }
 
-    setItem(storageKey, comment);
+    const newRatingItem = {
+      type,
+      emoji,
+      comment,
+    };
+    addOrUpdateRatingItem(newRatingItem);
 
     closePopup();
 

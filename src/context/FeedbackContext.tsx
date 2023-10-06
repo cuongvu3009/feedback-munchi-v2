@@ -75,7 +75,7 @@ export const FeedbackProvider = ({ children }: any) => {
   //   // other properties...
   // };
   // To add comment for example, addOrUpdateRatingItem(newRatingItem, comment);
-  const addOrUpdateRatingItem = (newRatingItem: RatingItem) => {
+	const addOrUpdateRatingItem = (newRatingItem: RatingItem) => {
     setRating((prevRating) => {
       // Check if a RatingItem with the same type already exists
       const existingIndex = prevRating.findIndex(
@@ -83,17 +83,17 @@ export const FeedbackProvider = ({ children }: any) => {
       );
 
       if (existingIndex !== -1) {
-        // If it exists, update the existing item or remove it based on your logic
-        // For example, here we are replacing the existing item with the new one
+        // If it exists, update the existing item while preserving other properties
         const updatedRating = [...prevRating];
+        const existingItem = prevRating[existingIndex];
         updatedRating[existingIndex] = {
-          ...newRatingItem,
-          tags: newRatingItem.tags,
-        }; // Add or update tags
+          ...existingItem,
+          ...newRatingItem, // Merge the newRatingItem with existingItem
+        };
         return updatedRating;
       } else {
         // If it doesn't exist, add the newRatingItem to the array
-        return [...prevRating, { ...newRatingItem, tags: newRatingItem.tags }]; // Add tags
+        return [...prevRating, newRatingItem];
       }
     });
   };

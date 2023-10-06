@@ -7,17 +7,17 @@ import { tagsQuestion } from "@/utils/tagsQuestion";
 import { useFeedbackContext } from "@/context/FeedbackContext";
 
 interface FeedbackTagsProps {
-  storageKey: string;
+  type: string;
   emoji: string;
 }
 
-const FeedbackTags: React.FC<FeedbackTagsProps> = ({ storageKey, emoji }) => {
+const FeedbackTags: React.FC<FeedbackTagsProps> = ({ type, emoji }) => {
   const { addOrUpdateRatingItem } = useFeedbackContext();
   const [tags, setTags] = useState<string[]>([]);
 
   // Function to map emojiOrder to tags
   const getTagsForEmoji = () => {
-    if (storageKey && emoji) {
+    if (type && emoji) {
       return defaultTags[emoji] || [];
     }
   };
@@ -32,7 +32,7 @@ const FeedbackTags: React.FC<FeedbackTagsProps> = ({ storageKey, emoji }) => {
     // Update the state and store it in local storage
     setTags(updatedTags);
     const newRatingItem = {
-      type: storageKey,
+      type,
       emoji,
       tags: updatedTags,
     };

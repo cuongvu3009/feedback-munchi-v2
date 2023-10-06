@@ -85,12 +85,9 @@ const Rating: React.FC<RatingProps> = ({ type }) => {
 
       {emoji !== null && (
         <>
-          <FeedbackTags storageKey={type} emoji={emoji} />
+          <FeedbackTags type={type} emoji={emoji} />
 
-          {/* <FeedbackComment
-            storageKey={type === "SERVICE" ? "commentService" : "commentOrder"}
-            emojiService={emoji}
-          /> */}
+          <FeedbackComment type={type} emoji={emoji} />
         </>
       )}
     </>
