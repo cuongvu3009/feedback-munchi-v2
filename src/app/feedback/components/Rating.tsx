@@ -10,7 +10,6 @@ import TerribleSVG from "@/utils/emoji-svg/TerribleSVG";
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 import { ratingOptions } from "@/utils/ratingOptions";
 import { useFeedbackContext } from "@/context/FeedbackContext";
-import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 interface RatingProps {
   type: string;
