@@ -17,6 +17,36 @@ import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useRouter } from "next/navigation";
 import useSWR from "swr";
 
+type FlowItem = {
+  service?: {
+    name: string;
+    question: string;
+    subQuestion: string;
+  };
+  order?: {
+    name: string;
+    question: string;
+    subQuestion: string;
+  };
+};
+
+const flow = [
+  {
+    service: {
+      name: "SERVICE",
+      question: "How was your experience?",
+      subQuestion: "Your feedback helps us improve our service.",
+    },
+  },
+  {
+    order: {
+      name: "ORDER",
+      question: "How was your order?",
+      subQuestion: "Your feedback helps us improve our products.",
+    },
+  },
+];
+
 const FeedbackPage: NextPage<{
   params: { businessSlug: string; section: string };
 }> = ({ params }) => {
@@ -46,91 +76,91 @@ const FeedbackPage: NextPage<{
     router.push(`/feedback/order/${params.businessSlug}/`);
   };
 
-  const handleSubmit = useCallback(async () => {
-    setIsSubmitLoading(true);
-    try {
-      const body = {
-        businessSlug: params.businessSlug,
-        emojiService: getItem("emojiService"),
-        serviceTags: getItem("serviceTags"),
-        commentService: getItem("commentService"),
-        typeService: getItem("typeService"),
-        emojiOrder: getItem("emojiOrder"),
-        typeOrder: getItem("typeOrder"),
-        orderTags: getItem("orderTags"),
-        commentOrder: getItem("commentOrder"),
-      };
+  // const handleSubmit = useCallback(async () => {
+  //   setIsSubmitLoading(true);
+  //   try {
+  //     const body = {
+  //       businessSlug: params.businessSlug,
+  //       emojiService: getItem("emojiService"),
+  //       serviceTags: getItem("serviceTags"),
+  //       commentService: getItem("commentService"),
+  //       typeService: getItem("typeService"),
+  //       emojiOrder: getItem("emojiOrder"),
+  //       typeOrder: getItem("typeOrder"),
+  //       orderTags: getItem("orderTags"),
+  //       commentOrder: getItem("commentOrder"),
+  //     };
 
-      const payload1 = {
-        emoji: body.emojiService,
-        businessSlug: body.businessSlug,
-        type: body.typeService, // Replace with the correct variable or value
-        comment: body.commentService,
-        tags: body.serviceTags,
-      };
+  //     const payload1 = {
+  //       emoji: body.emojiService,
+  //       businessSlug: body.businessSlug,
+  //       type: body.typeService, // Replace with the correct variable or value
+  //       comment: body.commentService,
+  //       tags: body.serviceTags,
+  //     };
 
-      const payload2 = {
-        emoji: body.emojiOrder,
-        businessSlug: body.businessSlug,
-        type: body.typeOrder, // Replace with the correct variable or value
-        comment: body.commentOrder,
-        tags: body.orderTags,
-      };
+  //     const payload2 = {
+  //       emoji: body.emojiOrder,
+  //       businessSlug: body.businessSlug,
+  //       type: body.typeOrder, // Replace with the correct variable or value
+  //       comment: body.commentOrder,
+  //       tags: body.orderTags,
+  //     };
 
-      const result = await fetch(`/api/feedback`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify([payload1, payload2]), // Send an array of payloads
-      });
+  //     const result = await fetch(`/api/feedback`, {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify([payload1, payload2]), // Send an array of payloads
+  //     });
 
-      if (result && getItem("emojiService") && getItem("emojiOrder")) {
-        const isPositiveFeedbackOrder =
-          body.emojiService !== "terrible" &&
-          body.emojiService !== "bad" &&
-          body.emojiOrder !== "terrible" &&
-          body.emojiOrder !== "bad";
+  //     if (result && getItem("emojiService") && getItem("emojiOrder")) {
+  //       const isPositiveFeedbackOrder =
+  //         body.emojiService !== "terrible" &&
+  //         body.emojiService !== "bad" &&
+  //         body.emojiOrder !== "terrible" &&
+  //         body.emojiOrder !== "bad";
 
-        if (isPositiveFeedbackOrder === true) {
-          router.push(`/feedback/tip/${params.businessSlug}`);
-        } else {
-          router.push(`/feedback/thank-you/${params.businessSlug}`);
-        }
+  //       if (isPositiveFeedbackOrder === true) {
+  //         router.push(`/feedback/tip/${params.businessSlug}`);
+  //       } else {
+  //         router.push(`/feedback/thank-you/${params.businessSlug}`);
+  //       }
 
-        const keysToRemove = [
-          "emojiService",
-          "typeService",
-          "serviceTags",
-          "commentService",
-          "emojiOrder",
-          "typeOrder",
-          "orderTags",
-          "commentOrder",
-        ];
-        keysToRemove.forEach((key) => removeItem(key));
-        setEmojiOrderContext(null);
-        setEmojiServiceContext(null);
-        setIsSubmitLoading(false);
-      }
-    } catch (error) {
-      console.log(error);
-      setIsSubmitLoading(false);
-    }
-  }, [
-    getItem,
-    params.businessSlug,
-    removeItem,
-    router,
-    setEmojiOrderContext,
-    setEmojiServiceContext,
-  ]);
+  //       const keysToRemove = [
+  //         "emojiService",
+  //         "typeService",
+  //         "serviceTags",
+  //         "commentService",
+  //         "emojiOrder",
+  //         "typeOrder",
+  //         "orderTags",
+  //         "commentOrder",
+  //       ];
+  //       keysToRemove.forEach((key) => removeItem(key));
+  //       setEmojiOrderContext(null);
+  //       setEmojiServiceContext(null);
+  //       setIsSubmitLoading(false);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //     setIsSubmitLoading(false);
+  //   }
+  // }, [
+  //   getItem,
+  //   params.businessSlug,
+  //   removeItem,
+  //   router,
+  //   setEmojiOrderContext,
+  //   setEmojiServiceContext,
+  // ]);
 
-  if (isLoading) {
-    return <Spinner />;
-  }
+  // if (isLoading) {
+  //   return <Spinner />;
+  // }
 
-  if (isSubmitLoading) {
-    return <Spinner />;
-  }
+  // if (isSubmitLoading) {
+  //   return <Spinner />;
+  // }
 
   return (
     <>
@@ -169,7 +199,7 @@ const FeedbackPage: NextPage<{
           />
         ) : (
           <Button
-            onClick={handleSubmit}
+            // onClick={handleSubmit}
             version="full"
             btnText="Submit feedback"
             isDisabled={emojiOrderContext == null}

@@ -1,31 +1,23 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 interface RatingItem {
   type: string;
   emoji: string;
+  comment?: string;
+  tags?: string[];
 }
+
 export interface FeedbackContextProps {
-  emojiServiceContext: string | null;
-  setEmojiServiceContext: (value: string | null) => void;
-  emojiOrderContext: string | null;
-  setEmojiOrderContext: (value: string | null) => void;
   rating: RatingItem[];
   setRating: (value: RatingItem[]) => void;
   selectedTip: number | undefined;
   setSelectedTip: (value: number) => void;
+  isTip: boolean;
 }
 
 const FeedbackContext = createContext<FeedbackContextProps>({
-  emojiServiceContext: null,
-  setEmojiServiceContext: function (value: string | null): void {
-    throw new Error("Function not implemented.");
-  },
-  emojiOrderContext: null,
-  setEmojiOrderContext: function (value: string | null): void {
-    throw new Error("Function not implemented.");
-  },
   rating: [],
   setRating: function (value: RatingItem[]): void {
     throw new Error("Function not implemented.");
@@ -34,41 +26,45 @@ const FeedbackContext = createContext<FeedbackContextProps>({
   setSelectedTip: function (value: number): void {
     throw new Error("Function not implemented.");
   },
+  isTip: false,
 });
+
 export const useFeedbackContext = () => {
   const context = useContext(FeedbackContext);
   if (!context) {
     throw new Error(
-      "useFeedbackContext must be used within an FeedbackProvider"
+      "useFeedbackContext must be used within a FeedbackProvider"
     );
   }
   return context;
 };
+
 export const FeedbackProvider = ({ children }: any) => {
-  const [emojiServiceContext, setEmojiServiceContext] = useState<string | null>(
-    null
-  );
-  const [emojiOrderContext, setEmojiOrderContext] = useState<string | null>(
-    null
-  );
   const [rating, setRating] = useState<RatingItem[]>([]);
   const [selectedTip, setSelectedTip] = useState<number | undefined>(undefined);
+  const [isTip, setIsTip] = useState(false);
+
+  // Check if all elements in the rating array are "bad", "terrible"
+  useEffect(() => {
+    const allRatingsAreTip = rating.some(
+      (item) => item.emoji === "bad" || item.emoji === "terrible"
+    );
+    setIsTip(!allRatingsAreTip);
+  }, [rating]);
 
   return (
     <FeedbackContext.Provider
       value={{
-        emojiServiceContext,
-        setEmojiServiceContext,
-        emojiOrderContext,
-        setEmojiOrderContext,
         rating,
         setRating,
         selectedTip,
         setSelectedTip,
+        isTip,
       }}
     >
       {children}
     </FeedbackContext.Provider>
   );
 };
+
 export default FeedbackContext;
