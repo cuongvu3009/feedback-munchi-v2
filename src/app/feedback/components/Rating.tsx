@@ -13,27 +13,30 @@ import { useFeedbackContext } from "@/context/FeedbackContext";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 interface RatingProps {
-  type: String;
+  type: string;
 }
-
+interface RatingItem {
+  type: string;
+  emoji: string;
+  comment?: string;
+  tags?: string[];
+}
 const Rating: React.FC<RatingProps> = ({ type }) => {
-  const { setItem } = useLocalStorage();
-  const { setEmojiServiceContext, setEmojiOrderContext } = useFeedbackContext();
+  const { rating, setRating } = useFeedbackContext();
   const [emoji, setEmoji] = useState<string | null>(null);
 
   const handleEmojiChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newEmoji = e.target.value;
     setEmoji(newEmoji);
 
-    if (type === "SERVICE") {
-      setEmojiServiceContext(newEmoji);
-      setItem("emojiService", newEmoji);
-      setItem("typeService", "SERVICE");
-    } else if (type === "ORDER") {
-      setEmojiOrderContext(newEmoji);
-      setItem("emojiOrder", newEmoji);
-      setItem("typeOrder", "ORDER");
-    }
+    // Create a new rating object with the selected type and emoji
+    const newRatingItem: RatingItem = {
+      type,
+      emoji: newEmoji,
+    };
+
+    // Use the setRating function to update the rating state
+    setRating((prevRating) => [...prevRating, newRatingItem]);
   };
 
   return (
@@ -81,7 +84,7 @@ const Rating: React.FC<RatingProps> = ({ type }) => {
         })}
       </ul>
 
-      {emoji !== null && (
+      {/* {emoji !== null && (
         <>
           {type === "SERVICE" ? (
             <FeedbackTags storageKey="serviceTags" emojiService={emoji} />
@@ -93,7 +96,7 @@ const Rating: React.FC<RatingProps> = ({ type }) => {
             emojiService={emoji}
           />
         </>
-      )}
+      )} */}
     </>
   );
 };

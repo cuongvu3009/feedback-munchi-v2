@@ -11,7 +11,7 @@ interface RatingItem {
 
 export interface FeedbackContextProps {
   rating: RatingItem[];
-  setRating: (value: RatingItem[]) => void;
+  setRating: React.Dispatch<React.SetStateAction<RatingItem[]>>;
   selectedTip: number | undefined;
   setSelectedTip: (value: number) => void;
   isTip: boolean;
@@ -19,9 +19,7 @@ export interface FeedbackContextProps {
 
 const FeedbackContext = createContext<FeedbackContextProps>({
   rating: [],
-  setRating: function (value: RatingItem[]): void {
-    throw new Error("Function not implemented.");
-  },
+  setRating: (value) => [], // Initialize with an empty array
   selectedTip: undefined,
   setSelectedTip: function (value: number): void {
     throw new Error("Function not implemented.");
