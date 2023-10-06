@@ -68,18 +68,18 @@ const DashboardInfo: NextPage = () => {
         </div>
       )}
 
-      {/* {data && (
+      {serviceFeedbacksData && orderFeedbacksData && (
         <div className={`${styles["dashboard-chart"]}`}>
           <div className={`${styles["chart"]}`}>
             <h4>Service feedback</h4>
-            <FeedbackChart data={data?.serviceFeedback!} type="service" />
+            <FeedbackChart data={serviceFeedbacksData} type="service" />
           </div>
           <h4>Order feedback</h4>
           <div className={`${styles["chart"]}`}>
-            <FeedbackChart data={data?.orderFeedback!} type="order" />
+            <FeedbackChart data={orderFeedbacksData} type="order" />
           </div>
         </div>
-      )} */}
+      )}
     </div>
   );
 };
