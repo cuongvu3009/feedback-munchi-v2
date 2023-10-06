@@ -13,14 +13,16 @@ import { useFeedbackContext } from "@/context/FeedbackContext";
 
 interface RatingProps {
   type: string;
+  businessSlug: string;
 }
 interface RatingItem {
   type: string;
   emoji: string;
+  businessSlug: string;
   comment?: string;
   tags?: string[];
 }
-const Rating: React.FC<RatingProps> = ({ type }) => {
+const Rating: React.FC<RatingProps> = ({ type, businessSlug }) => {
   const { rating, addOrUpdateRatingItem } = useFeedbackContext();
   const [emoji, setEmoji] = useState<string | null>(null);
 
@@ -31,6 +33,7 @@ const Rating: React.FC<RatingProps> = ({ type }) => {
     // Create a new rating object with the selected type and emoji
     const newRatingItem: RatingItem = {
       type,
+      businessSlug,
       emoji: newEmoji,
     };
 

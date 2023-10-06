@@ -10,6 +10,7 @@ import Rating from "../../components/Rating";
 import Spinner from "@/components/shared/Spinner";
 import Title from "@/components/shared/Title";
 import TradeMark from "@/app/feedback/components/TradeMark";
+import axios from "axios";
 import { getFetcher } from "@/utils/fetcher";
 import styles from "./feedbackPage.module.css";
 import { useFeedbackContext } from "@/context/FeedbackContext";
@@ -33,16 +34,6 @@ type FlowItem = {
 const flow = [
   {
     name: "service",
-    question: "How was your experience?",
-    subQuestion: "Your feedback helps us improve our service.",
-  },
-  {
-    name: "delivery",
-    question: "How was your experience?",
-    subQuestion: "Your feedback helps us improve our service.",
-  },
-  {
-    name: "fwf",
     question: "How was your experience?",
     subQuestion: "Your feedback helps us improve our service.",
   },
@@ -89,6 +80,15 @@ const FeedbackPage: NextPage<{
     }
   };
 
+  const handleSubmit = useCallback(async () => {
+    const result = await axios.post("/api/feedback", rating, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    console.log(result);
+  }, [rating]);
+
   // const handleSubmit = useCallback(async () => {
   //   setIsSubmitLoading(true);
   //   try {
@@ -120,11 +120,11 @@ const FeedbackPage: NextPage<{
   //       tags: body.orderTags,
   //     };
 
-  //     const result = await fetch(`/api/feedback`, {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify([payload1, payload2]), // Send an array of payloads
-  //     });
+  // const result = await fetch(`/api/feedback`, {
+  //   method: "POST",
+  //   headers: { "Content-Type": "application/json" },
+  //   body: JSON.stringify([payload1, payload2]), // Send an array of payloads
+  // });
 
   //     if (result && getItem("emojiService") && getItem("emojiOrder")) {
   //       const isPositiveFeedbackOrder =
@@ -159,12 +159,7 @@ const FeedbackPage: NextPage<{
   //     setIsSubmitLoading(false);
   //   }
   // }, [
-  //   getItem,
-  //   params.businessSlug,
-  //   removeItem,
-  //   router,
-  //   setEmojiOrderContext,
-  //   setEmojiServiceContext,
+
   // ]);
 
   // if (isLoading) {
@@ -207,7 +202,7 @@ const FeedbackPage: NextPage<{
               </div>
             ))}
         </div>
-        <Rating type={params.section} />
+        <Rating type={params.section} businessSlug={params.businessSlug} />
       </div>
 
       <div className="navigation">
@@ -220,10 +215,10 @@ const FeedbackPage: NextPage<{
           />
         ) : (
           <Button
-            // onClick={handleSubmit}
+            onClick={handleSubmit}
             version="full"
             btnText="Submit feedback"
-            // isDisabled={emojiOrderContext == null}
+            isDisabled={handleDisabledBtn()}
           />
         )}
         {error && <p style={{ color: "red" }}>Error: {error}</p>}
