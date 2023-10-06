@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import Button from "@/components/shared/Button";
 import { useFeedbackContext } from "@/context/FeedbackContext";
@@ -13,8 +13,10 @@ interface CommentProps {
 const FeedbackComment: React.FC<CommentProps> = ({ type, emoji }) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
-  let [comment, setComment] = useState("");
+  const commentRef = useRef<string>("");
+
   const { addOrUpdateRatingItem } = useFeedbackContext();
+
   const openPopup = () => {
     setIsPopupOpen(true);
   };
@@ -24,19 +26,19 @@ const FeedbackComment: React.FC<CommentProps> = ({ type, emoji }) => {
   };
 
   const handleCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setComment(e.target.value);
+    commentRef.current = e.target.value;
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!comment.trim()) {
+    if (!commentRef.current.trim()) {
       return;
     }
 
     const newRatingItem = {
       type,
       emoji,
-      comment,
+      comment: commentRef.current, // Use the ref value
     };
     addOrUpdateRatingItem(newRatingItem);
 
@@ -66,7 +68,7 @@ const FeedbackComment: React.FC<CommentProps> = ({ type, emoji }) => {
 
             <textarea
               placeholder="Your comment here..."
-              value={comment}
+              defaultValue={commentRef.current} // Use defaultValue to initialize the textarea
               onChange={handleCommentChange}
             ></textarea>
             <Button type="submit" version="primary" btnText="Save" />
