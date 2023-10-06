@@ -56,8 +56,8 @@ const DashboardInfo: NextPage = () => {
 
       {serviceFeedbacksData && orderFeedbacksData && (
         <div className={`${styles["dashboard-content"]}`}>
-          <DashboardScore data={serviceFeedbacksData} />
-          <DashboardScore data={orderFeedbacksData} />
+          <DashboardScore data={serviceFeedbacksData} type="Service" />
+          <DashboardScore data={orderFeedbacksData} type="Order" />
           <DashboardResponses
             data={serviceFeedbacksData.concat(orderFeedbacksData)}
             businessId={businessId as number}

@@ -4,6 +4,7 @@ import styles from "./dashboardScore.module.css";
 
 interface DashboardScoreProps {
   data: Feedback[];
+  type: string;
 }
 
 const mapEmojiToScore = (emoji: string): number => {
@@ -87,13 +88,13 @@ const getEmojiLabel = (emoji: string) => {
   }
 };
 
-const DashboardScore: React.FC<DashboardScoreProps> = ({ data }) => {
+const DashboardScore: React.FC<DashboardScoreProps> = ({ data, type }) => {
   const responseCounts = calculateResponseCounts(data);
   const averageScore = calculateAverageScore(data);
 
   return (
     <div className={`${styles["dashboard-card"]}`}>
-      <h3>Average score Service</h3>
+      <h3>Average score {type}</h3>
       <div className={`${styles["dashboard-score"]}`}>
         <span className={styles.score}>{averageScore}</span>
       </div>
