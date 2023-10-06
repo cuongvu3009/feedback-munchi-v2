@@ -17,44 +17,58 @@ const DashboardInfo: NextPage = () => {
   const { setOrderFeedbacks, setServiceFeedbacks } =
     useDashboardFeedbackContext();
 
-  const { data, error, isLoading } = useSWR(
-    `/api/feedback/${business?.slug}`,
-    getFetcher
-  );
+  const {
+    data: serviceFeedbacks,
+    error: serviceFeedbackErr,
+    isLoading: serviceFeedbackLoading,
+  } = useSWR(`/api/feedback/${business?.slug}/service`, getFetcher);
+  const {
+    data: orderFeedbacks,
+    error: orderFeedbacksErr,
+    isLoading: orderFeedbacksLoading,
+  } = useSWR(`/api/feedback/${business?.slug}/order`, getFetcher);
 
-  if (data) {
-    setOrderFeedbacks(data.orderFeedback);
-    setServiceFeedbacks(data.serviceFeedback);
+  let serviceFeedbacksData = serviceFeedbacks?.feedbacks;
+  let orderFeedbacksData = orderFeedbacks?.feedbacks;
+
+  if (serviceFeedbacksData) {
+    setServiceFeedbacks(serviceFeedbacksData);
   }
 
-  if (isLoading) {
+  if (orderFeedbacksData) {
+    setOrderFeedbacks(orderFeedbacksData);
+  }
+
+  if (serviceFeedbackLoading || orderFeedbacksLoading) {
     return <Spinner />;
   }
 
   return (
     <div className={`${styles["dashboard-info"]}`}>
-      {isLoading && <Spinner />}
-
-      {error && (
+      {serviceFeedbackErr && (
         <div className={styles.error}>
-          <p>Error loading data: {error.message}</p>
+          <p>Error loading data: {serviceFeedbackErr.message}</p>
         </div>
       )}
 
-      {data && (
+      {orderFeedbacksErr && (
+        <div className={styles.error}>
+          <p>Error loading data: {orderFeedbacksErr.message}</p>
+        </div>
+      )}
+
+      {serviceFeedbacksData && orderFeedbacksData && (
         <div className={`${styles["dashboard-content"]}`}>
-          <DashboardScore data={data?.serviceFeedback!} />
-          <DashboardScore data={data?.orderFeedback!} />
+          <DashboardScore data={serviceFeedbacksData} />
+          <DashboardScore data={orderFeedbacksData} />
           <DashboardResponses
-            data={(data?.serviceFeedback ?? []).concat(
-              data?.orderFeedback ?? []
-            )}
+            data={serviceFeedbacksData.concat(orderFeedbacksData)}
             businessId={businessId as number}
           />
         </div>
       )}
 
-      {data && (
+      {/* {data && (
         <div className={`${styles["dashboard-chart"]}`}>
           <div className={`${styles["chart"]}`}>
             <h4>Service feedback</h4>
@@ -65,7 +79,7 @@ const DashboardInfo: NextPage = () => {
             <FeedbackChart data={data?.orderFeedback!} type="order" />
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };
