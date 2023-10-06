@@ -37,11 +37,23 @@ const flow = [
     subQuestion: "Your feedback helps us improve our service.",
   },
   {
+    name: "delivery",
+    question: "How was your experience?",
+    subQuestion: "Your feedback helps us improve our service.",
+  },
+  {
+    name: "fwf",
+    question: "How was your experience?",
+    subQuestion: "Your feedback helps us improve our service.",
+  },
+  {
     name: "order",
     question: "How was your order?",
     subQuestion: "Your feedback helps us improve our products.",
   },
 ];
+const lastFlowItem = flow[flow.length - 1]; // Get the last item in the flow array
+console.log(lastFlowItem);
 
 const FeedbackPage: NextPage<{
   params: { businessSlug: string; section: string };
@@ -63,9 +75,22 @@ const FeedbackPage: NextPage<{
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, []);
 
-  // const handleNext = () => {
-  //   router.push(`/feedback/order/${params.businessSlug}/`);
-  // };
+  const handleNext = () => {
+    // Find the current section in the flow
+    const currentFlowIndex = flow.findIndex(
+      (item) => item.name === params.section
+    );
+
+    if (currentFlowIndex !== -1 && currentFlowIndex < flow.length - 1) {
+      // If the current section is found and there is a next item in the flow
+      const nextFlowItem = flow[currentFlowIndex + 1];
+      router.push(`/feedback/${nextFlowItem.name}/${params.businessSlug}/`);
+    } else {
+      // Handle the case where there is no next item or the current section is not found
+      // You can add your logic here, such as redirecting to a different page
+      console.error("Invalid section or no next item in the flow.");
+    }
+  };
 
   // const handleSubmit = useCallback(async () => {
   //   setIsSubmitLoading(true);
@@ -179,21 +204,21 @@ const FeedbackPage: NextPage<{
       </div>
 
       <div className="navigation">
-        {/* {params.section == "service" ? (
+        {params.section !== lastFlowItem.name ? (
           <Button
             onClick={handleNext}
             version="full"
             btnText="Next"
-            isDisabled={emojiServiceContext == null}
+            // isDisabled={emojiServiceContext == null}
           />
         ) : (
           <Button
             // onClick={handleSubmit}
             version="full"
             btnText="Submit feedback"
-            isDisabled={emojiOrderContext == null}
+            // isDisabled={emojiOrderContext == null}
           />
-        )} */}
+        )}
         {error && <p style={{ color: "red" }}>Error: {error}</p>}
         <TradeMark />
       </div>
