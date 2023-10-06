@@ -15,6 +15,7 @@ export interface FeedbackContextProps {
   setSelectedTip: (value: number) => void;
   isTip: boolean;
   addOrUpdateRatingItem: (value: RatingItem) => void;
+  resetContextState: () => void;
 }
 
 const FeedbackContext = createContext<FeedbackContextProps>({
@@ -26,6 +27,9 @@ const FeedbackContext = createContext<FeedbackContextProps>({
   },
   isTip: false,
   addOrUpdateRatingItem: function (value: RatingItem): void {
+    throw new Error("Function not implemented.");
+  },
+  resetContextState: function (): void {
     throw new Error("Function not implemented.");
   },
 });
@@ -41,9 +45,15 @@ export const useFeedbackContext = () => {
 };
 
 export const FeedbackProvider = ({ children }: any) => {
-  const [rating, setRating] = useState<RatingItem[]>([]);
-  const [selectedTip, setSelectedTip] = useState<number | undefined>(undefined);
-  const [isTip, setIsTip] = useState(false);
+  const initialRating: RatingItem[] = [];
+  const initialSelectedTip: number | undefined = undefined;
+  const initialIsTip: boolean = false;
+
+  const [rating, setRating] = useState<RatingItem[]>(initialRating);
+  const [selectedTip, setSelectedTip] = useState<number | undefined>(
+    initialSelectedTip
+  );
+  const [isTip, setIsTip] = useState(initialIsTip);
 
   // Load the rating data from localStorage when the component mounts
   useEffect(() => {
@@ -78,6 +88,13 @@ export const FeedbackProvider = ({ children }: any) => {
     });
   };
 
+  // Reset the context state to its initial values
+  const resetContextState = () => {
+    setRating(initialRating);
+    setSelectedTip(initialSelectedTip);
+    setIsTip(initialIsTip);
+  };
+
   // Check if all elements in the rating array are "okey", "good", or "awesome"
   useEffect(() => {
     const allRatingsAreTip = rating.some(
@@ -94,6 +111,7 @@ export const FeedbackProvider = ({ children }: any) => {
         setSelectedTip,
         isTip,
         addOrUpdateRatingItem,
+        resetContextState,
       }}
     >
       {children}
