@@ -52,8 +52,8 @@ const flow = [
     subQuestion: "Your feedback helps us improve our products.",
   },
 ];
-const lastFlowItem = flow[flow.length - 1]; // Get the last item in the flow array
-console.log(lastFlowItem);
+const firstFlowItem = flow[0];
+const lastFlowItem = flow[flow.length - 1];
 
 const FeedbackPage: NextPage<{
   params: { businessSlug: string; section: string };
@@ -67,13 +67,14 @@ const FeedbackPage: NextPage<{
     getFetcher
   );
 
-  // This useEffect hook redirects to the service page to make sure service rated
-  // useEffect(() => {
-  //   if (!emojiServiceContext) {
-  //     router.push(`/feedback/service/${params.businessSlug}`);
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+  // This useEffect hook redirects to the first page to make sure first page rated
+  useEffect(() => {
+    const firstRating = rating.find((item) => item.type == firstFlowItem.name);
+    if (!firstRating) {
+      router.push(`/feedback/${firstFlowItem.name}/${params.businessSlug}`);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleNext = () => {
     // Find the current section in the flow
@@ -85,10 +86,6 @@ const FeedbackPage: NextPage<{
       // If the current section is found and there is a next item in the flow
       const nextFlowItem = flow[currentFlowIndex + 1];
       router.push(`/feedback/${nextFlowItem.name}/${params.businessSlug}/`);
-    } else {
-      // Handle the case where there is no next item or the current section is not found
-      // You can add your logic here, such as redirecting to a different page
-      console.error("Invalid section or no next item in the flow.");
     }
   };
 
