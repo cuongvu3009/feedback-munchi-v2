@@ -20,16 +20,10 @@ model Feedback {
   tags         String?
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
-
-  // Define a foreign key relationship to the Type model
-  type         Type       
+  type         String       
 }
 
-// Define your Type model to represent feedback types
-enum Type {
-  SERVICE
-  ORDER
-}
+
 
 model Transaction {
   id          		Int        @id @default(autoincrement())
