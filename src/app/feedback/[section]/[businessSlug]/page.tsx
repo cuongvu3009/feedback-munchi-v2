@@ -32,18 +32,14 @@ type FlowItem = {
 
 const flow = [
   {
-    service: {
-      name: "SERVICE",
-      question: "How was your experience?",
-      subQuestion: "Your feedback helps us improve our service.",
-    },
+    name: "service",
+    question: "How was your experience?",
+    subQuestion: "Your feedback helps us improve our service.",
   },
   {
-    order: {
-      name: "ORDER",
-      question: "How was your order?",
-      subQuestion: "Your feedback helps us improve our products.",
-    },
+    name: "order",
+    question: "How was your order?",
+    subQuestion: "Your feedback helps us improve our products.",
   },
 ];
 
@@ -53,28 +49,23 @@ const FeedbackPage: NextPage<{
   const router = useRouter();
   const { getItem, removeItem } = useLocalStorage();
   const [isSubmitLoading, setIsSubmitLoading] = useState(false);
-  const {
-    emojiOrderContext,
-    emojiServiceContext,
-    setEmojiOrderContext,
-    setEmojiServiceContext,
-  } = useFeedbackContext();
+  const { rating, setRating } = useFeedbackContext();
   const { data, error, isLoading } = useSWR(
     `${API_BASE_URL}/business/${params.businessSlug}?params=logo,slug,name`,
     getFetcher
   );
 
   // This useEffect hook redirects to the service page to make sure service rated
-  useEffect(() => {
-    if (!emojiServiceContext) {
-      router.push(`/feedback/service/${params.businessSlug}`);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   if (!emojiServiceContext) {
+  //     router.push(`/feedback/service/${params.businessSlug}`);
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
-  const handleNext = () => {
-    router.push(`/feedback/order/${params.businessSlug}/`);
-  };
+  // const handleNext = () => {
+  //   router.push(`/feedback/order/${params.businessSlug}/`);
+  // };
 
   // const handleSubmit = useCallback(async () => {
   //   setIsSubmitLoading(true);
@@ -173,24 +164,22 @@ const FeedbackPage: NextPage<{
       <Logo restaurant={data?.result} />
       <div className="feedback">
         <div className={styles["feedback-description"]}>
-          <h3 className={styles.question}>
-            <b>
-              {params.section == "service"
-                ? "How was your experience?"
-                : "How was your order?"}
-            </b>
-          </h3>
-          <p className={styles.text}>
-            {params.section == "service"
-              ? "Your feedback helps us improve our service."
-              : "Your feedback helps us improve our products."}
-          </p>
+          {flow
+            .filter((item) => item.name === params.section)
+            .map((item, index) => (
+              <div key={index}>
+                <h3 className={styles.question}>
+                  <b>{item.question}</b>
+                </h3>
+                <p className={styles.text}>{item.subQuestion}</p>
+              </div>
+            ))}
         </div>
         <Rating type={params.section} />
       </div>
 
       <div className="navigation">
-        {params.section == "service" ? (
+        {/* {params.section == "service" ? (
           <Button
             onClick={handleNext}
             version="full"
@@ -204,7 +193,7 @@ const FeedbackPage: NextPage<{
             btnText="Submit feedback"
             isDisabled={emojiOrderContext == null}
           />
-        )}
+        )} */}
         {error && <p style={{ color: "red" }}>Error: {error}</p>}
         <TradeMark />
       </div>
