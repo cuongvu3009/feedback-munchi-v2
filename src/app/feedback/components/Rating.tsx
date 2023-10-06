@@ -21,7 +21,7 @@ interface RatingItem {
   tags?: string[];
 }
 const Rating: React.FC<RatingProps> = ({ type }) => {
-  const { rating, setRating } = useFeedbackContext();
+  const { rating, addOrUpdateRatingItem } = useFeedbackContext();
   const [emoji, setEmoji] = useState<string | null>(null);
 
   const handleEmojiChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,7 +35,7 @@ const Rating: React.FC<RatingProps> = ({ type }) => {
     };
 
     // Use the setRating function to update the rating state
-    setRating((prevRating) => [...prevRating, newRatingItem]);
+    addOrUpdateRatingItem(newRatingItem);
   };
 
   return (

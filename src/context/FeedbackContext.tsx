@@ -45,6 +45,19 @@ export const FeedbackProvider = ({ children }: any) => {
   const [selectedTip, setSelectedTip] = useState<number | undefined>(undefined);
   const [isTip, setIsTip] = useState(false);
 
+  // Load the rating data from localStorage when the component mounts
+  useEffect(() => {
+    const storedRating = localStorage.getItem("rating");
+    if (storedRating) {
+      setRating(JSON.parse(storedRating));
+    }
+  }, []);
+
+  // Save the rating data to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("rating", JSON.stringify(rating));
+  }, [rating]);
+
   const addOrUpdateRatingItem = (newRatingItem: RatingItem) => {
     setRating((prevRating) => {
       // Check if a RatingItem with the same type already exists
