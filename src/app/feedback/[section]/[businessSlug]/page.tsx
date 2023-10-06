@@ -175,6 +175,16 @@ const FeedbackPage: NextPage<{
   //   return <Spinner />;
   // }
 
+  const handleDisabledBtn = () => {
+    const currentRating = rating.find((item) => item.type == params.section);
+    const currentEmoji = currentRating?.emoji;
+    if (currentEmoji == null) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <>
       {params.section == "service" ? (
@@ -206,7 +216,7 @@ const FeedbackPage: NextPage<{
             onClick={handleNext}
             version="full"
             btnText="Next"
-            // isDisabled={emojiServiceContext == null}
+            isDisabled={handleDisabledBtn()}
           />
         ) : (
           <Button
