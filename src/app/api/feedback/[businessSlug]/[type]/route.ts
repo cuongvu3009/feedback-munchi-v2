@@ -1,4 +1,3 @@
-import { parse } from "querystring";
 import prisma from "@/lib/prisma";
 
 export async function GET(
