@@ -81,86 +81,19 @@ const FeedbackPage: NextPage<{
   };
 
   const handleSubmit = useCallback(async () => {
+
     const result = await axios.post("/api/feedback", rating, {
       headers: {
         "Content-Type": "application/json",
       },
     });
     console.log(result);
+
+		// redirect based on feedback emoji
+		// clean up after submit feedback
   }, [rating]);
 
-  // const handleSubmit = useCallback(async () => {
-  //   setIsSubmitLoading(true);
-  //   try {
-  //     const body = {
-  //       businessSlug: params.businessSlug,
-  //       emojiService: getItem("emojiService"),
-  //       serviceTags: getItem("serviceTags"),
-  //       commentService: getItem("commentService"),
-  //       typeService: getItem("typeService"),
-  //       emojiOrder: getItem("emojiOrder"),
-  //       typeOrder: getItem("typeOrder"),
-  //       orderTags: getItem("orderTags"),
-  //       commentOrder: getItem("commentOrder"),
-  //     };
-
-  //     const payload1 = {
-  //       emoji: body.emojiService,
-  //       businessSlug: body.businessSlug,
-  //       type: body.typeService, // Replace with the correct variable or value
-  //       comment: body.commentService,
-  //       tags: body.serviceTags,
-  //     };
-
-  //     const payload2 = {
-  //       emoji: body.emojiOrder,
-  //       businessSlug: body.businessSlug,
-  //       type: body.typeOrder, // Replace with the correct variable or value
-  //       comment: body.commentOrder,
-  //       tags: body.orderTags,
-  //     };
-
-  // const result = await fetch(`/api/feedback`, {
-  //   method: "POST",
-  //   headers: { "Content-Type": "application/json" },
-  //   body: JSON.stringify([payload1, payload2]), // Send an array of payloads
-  // });
-
-  //     if (result && getItem("emojiService") && getItem("emojiOrder")) {
-  //       const isPositiveFeedbackOrder =
-  //         body.emojiService !== "terrible" &&
-  //         body.emojiService !== "bad" &&
-  //         body.emojiOrder !== "terrible" &&
-  //         body.emojiOrder !== "bad";
-
-  //       if (isPositiveFeedbackOrder === true) {
-  //         router.push(`/feedback/tip/${params.businessSlug}`);
-  //       } else {
-  //         router.push(`/feedback/thank-you/${params.businessSlug}`);
-  //       }
-
-  //       const keysToRemove = [
-  //         "emojiService",
-  //         "typeService",
-  //         "serviceTags",
-  //         "commentService",
-  //         "emojiOrder",
-  //         "typeOrder",
-  //         "orderTags",
-  //         "commentOrder",
-  //       ];
-  //       keysToRemove.forEach((key) => removeItem(key));
-  //       setEmojiOrderContext(null);
-  //       setEmojiServiceContext(null);
-  //       setIsSubmitLoading(false);
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //     setIsSubmitLoading(false);
-  //   }
-  // }, [
-
-  // ]);
+ 
 
   // if (isLoading) {
   //   return <Spinner />;

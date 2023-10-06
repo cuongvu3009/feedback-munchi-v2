@@ -13,15 +13,16 @@ datasource db {
 
 // Define your Feedback model
 model Feedback {
-  id           Int        @id @default(autoincrement())
-  emoji        String        
+  id           Int       @id @default(autoincrement())
+  emoji        String
   businessSlug String
   comment      String?
-  tags         String?
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
-  type         String       
+  tags         String[]  
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  type         String
 }
+
 
 
 

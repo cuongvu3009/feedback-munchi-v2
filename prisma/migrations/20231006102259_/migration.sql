@@ -4,7 +4,7 @@ CREATE TABLE "Feedback" (
     "emoji" TEXT NOT NULL,
     "businessSlug" TEXT NOT NULL,
     "comment" TEXT,
-    "tags" TEXT,
+    "tags" TEXT[],
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "type" TEXT NOT NULL,
