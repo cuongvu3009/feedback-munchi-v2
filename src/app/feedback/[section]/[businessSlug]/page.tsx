@@ -49,7 +49,7 @@ const FeedbackPage: NextPage<{
   const router = useRouter();
   const { getItem, removeItem } = useLocalStorage();
   const [isSubmitLoading, setIsSubmitLoading] = useState(false);
-  const { rating, setRating } = useFeedbackContext();
+  const { rating } = useFeedbackContext();
   const { data, error, isLoading } = useSWR(
     `${API_BASE_URL}/business/${params.businessSlug}?params=logo,slug,name`,
     getFetcher

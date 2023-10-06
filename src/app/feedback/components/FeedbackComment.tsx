@@ -6,16 +6,10 @@ import Button from "@/components/shared/Button";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 interface CommentProps {
-  storageKey: "commentService" | "commentOrder";
-  emojiService?: string | null;
-  emojiOrder?: string | null;
+  storageKey: string;
 }
 
-const FeedbackComment: React.FC<CommentProps> = ({
-  storageKey,
-  emojiService,
-  emojiOrder,
-}) => {
+const FeedbackComment: React.FC<CommentProps> = ({ storageKey }) => {
   const { setItem } = useLocalStorage();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);

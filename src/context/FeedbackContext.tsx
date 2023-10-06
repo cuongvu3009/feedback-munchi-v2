@@ -68,6 +68,13 @@ export const FeedbackProvider = ({ children }: any) => {
     localStorage.setItem("rating", JSON.stringify(rating));
   }, [rating]);
 
+  // Example usage of addOrUpdateRatingItem:
+  // const newRatingItem = {
+  //   type: "example",
+  //   emoji: "good",
+  //   // other properties...
+  // };
+  // To add comment for example, addOrUpdateRatingItem(newRatingItem, comment);
   const addOrUpdateRatingItem = (newRatingItem: RatingItem) => {
     setRating((prevRating) => {
       // Check if a RatingItem with the same type already exists
@@ -79,11 +86,14 @@ export const FeedbackProvider = ({ children }: any) => {
         // If it exists, update the existing item or remove it based on your logic
         // For example, here we are replacing the existing item with the new one
         const updatedRating = [...prevRating];
-        updatedRating[existingIndex] = newRatingItem;
+        updatedRating[existingIndex] = {
+          ...newRatingItem,
+          tags: newRatingItem.tags,
+        }; // Add or update tags
         return updatedRating;
       } else {
         // If it doesn't exist, add the newRatingItem to the array
-        return [...prevRating, newRatingItem];
+        return [...prevRating, { ...newRatingItem, tags: newRatingItem.tags }]; // Add tags
       }
     });
   };

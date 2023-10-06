@@ -1,72 +1,59 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { defaultTags } from "@/utils/defaultTags";
 import { tagsQuestion } from "@/utils/tagsQuestion";
-import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { useFeedbackContext } from "@/context/FeedbackContext";
 
 interface FeedbackTagsProps {
-  storageKey: "serviceTags" | "orderTags";
-  emojiService?: string | null;
-  emojiOrder?: string | null;
+  storageKey: string;
+  emoji: string;
 }
 
-const FeedbackTags: React.FC<FeedbackTagsProps> = ({
-  storageKey,
-  emojiService,
-  emojiOrder,
-}) => {
-  const { removeItem, setItem } = useLocalStorage();
+const FeedbackTags: React.FC<FeedbackTagsProps> = ({ storageKey, emoji }) => {
+  const { addOrUpdateRatingItem } = useFeedbackContext();
   const [tags, setTags] = useState<string[]>([]);
 
   // Function to map emojiOrder to tags
   const getTagsForEmoji = () => {
-    if (storageKey === "serviceTags" && emojiService) {
-      return defaultTags[emojiService] || [];
-    } else if (storageKey === "orderTags" && emojiOrder) {
-      return defaultTags[emojiOrder] || [];
-    } else {
-      return [];
+    if (storageKey && emoji) {
+      return defaultTags[emoji] || [];
     }
   };
 
   // Function to handle tag selection
   const handleTagSelection = (tag: string) => {
     // Toggle the tag in the orderTags array
-    const updatedOrderTags = tags.includes(tag)
+    const updatedTags = tags.includes(tag)
       ? tags.filter((selectedTag) => selectedTag !== tag)
       : [...tags, tag];
 
     // Update the state and store it in local storage
-    setTags(updatedOrderTags);
-    setItem(storageKey, JSON.stringify(updatedOrderTags));
+    setTags(updatedTags);
+    const newRatingItem = {
+      type: storageKey,
+      emoji,
+      tags: updatedTags,
+    };
+    addOrUpdateRatingItem(newRatingItem);
   };
-
-  // Use useEffect to reset tags when storageKey changes
-  useEffect(() => {
-    setTags([]);
-    removeItem(storageKey);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [storageKey, emojiService, emojiOrder]);
 
   const mappedTags = getTagsForEmoji();
 
   return (
     <div className="tags">
-      {tagsQuestion[emojiService as string] && (
+      {tagsQuestion[emoji as string] && (
         <div>
           <h3 className="question">
-            <b>{tagsQuestion[emojiService as string]["question_1"]}</b>
+            <b>{tagsQuestion[emoji as string]["question_1"]}</b>
           </h3>
-          <p className="text">
-            {tagsQuestion[emojiService as string]["question_2"]}
-          </p>
+          <p className="text">{tagsQuestion[emoji as string]["question_2"]}</p>
         </div>
       )}
 
       <div className="tags-container">
-        {mappedTags.map((tag, index) => (
+        {mappedTags?.map((tag, index) => (
           <li key={index}>
             <label
               className={
