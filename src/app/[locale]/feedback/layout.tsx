@@ -5,7 +5,6 @@ import "./feedbackLayout.css";
 import { ReactNode, useEffect, useState } from "react";
 
 import { NextIntlClientProvider } from "next-intl";
-import { notFound } from "next/navigation";
 
 export function generateStaticParams() {
   return [{ locale: "en" }, { locale: "fi" }, { locale: "es" }];
@@ -13,40 +12,37 @@ export function generateStaticParams() {
 
 export default function LocaleLayout({
   children,
-  params: { locale },
+  params: { locale: propLocale }, // Rename prop.locale to avoid naming conflicts
 }: {
   children: ReactNode;
   params: { locale: string };
 }) {
-  const [messages, setMessages] = useState({}); // Initialize with an empty object
+  const [locale, setLocale] = useState(propLocale); // Initialize with the prop value
+  const [messages, setMessages] = useState(undefined);
 
-  // Function to handle language change
   const handleLanguageChange = (event: any) => {
     const newLocale = event.target.value;
-    // Dynamically import the translation JSON file based on the selected locale
+    setLocale(newLocale); // Update the selected locale
     import(`../../../../translation/${newLocale}.json`)
       .then((module) => {
-        // Set the messages when the module is loaded
         setMessages(module.default);
       })
       .catch((error) => {
-        notFound(); // Handle error appropriately
+        console.error(error);
       });
   };
 
   useEffect(() => {
     // Load initial translation messages based on the selected locale
-    handleLanguageChange({ target: { value: locale } });
-  }, [locale]);
+    handleLanguageChange({ target: { value: propLocale } });
+  }, [propLocale]);
 
-  // Define a list of available languages
   const availableLanguages = [
     { locale: "en", label: "English" },
     { locale: "fi", label: "Finnish" },
     { locale: "es", label: "Estonian" },
   ];
 
-  // Render the component with the loaded messages and language selector
   return (
     <html lang={locale}>
       <body>
