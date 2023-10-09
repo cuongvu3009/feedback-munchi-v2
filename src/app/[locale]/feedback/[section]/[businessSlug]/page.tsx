@@ -9,7 +9,7 @@ import { NextPage } from "next";
 import Rating from "../../components/Rating";
 import Spinner from "@/components/shared/Spinner";
 import Title from "@/components/shared/Title";
-import TradeMark from "@/app/feedback/components/TradeMark";
+import TradeMark from "@/app/[locale]/feedback/components/TradeMark";
 import axios from "axios";
 import { getFetcher } from "@/utils/fetcher";
 import styles from "./feedbackPage.module.css";
@@ -44,14 +44,14 @@ const FeedbackPage: NextPage<{
     getFetcher
   );
 
-  // This useEffect hook redirects to the first page to make sure first page rated
-  useEffect(() => {
-    const firstRating = rating.find((item) => item.type == firstFlowItem.name);
-    if (!firstRating) {
-      router.push(`/feedback/${firstFlowItem.name}/${params.businessSlug}`);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // // This useEffect hook redirects to the first page to make sure first page rated
+  // useEffect(() => {
+  //   const firstRating = rating.find((item) => item.type == firstFlowItem.name);
+  //   if (!firstRating) {
+  //     router.push(`/feedback/${firstFlowItem.name}/${params.businessSlug}`);
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   const handleNext = () => {
     // Find the current section in the flow
