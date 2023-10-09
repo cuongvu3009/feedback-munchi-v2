@@ -15,7 +15,6 @@ import { useDashboardFeedbackContext } from "@/context/DashboardFeedbackContext"
 
 const DashboardResponses = () => {
   const { serviceFeedbacks, orderFeedbacks } = useDashboardFeedbackContext();
-  console.log(serviceFeedbacks);
 
   // Pagination for feedbacks
   const [currentPage, setCurrentPage] = useState(1);
