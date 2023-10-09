@@ -48,7 +48,6 @@ export default function LocaleLayout({
       <body>
         <div className="mobile">
           <div className="language-selector">
-            <label htmlFor="languageSelect">Choose a language:</label>
             <select
               id="languageSelect"
               onChange={handleLanguageChange}

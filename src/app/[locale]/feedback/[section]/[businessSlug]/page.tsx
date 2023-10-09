@@ -108,7 +108,7 @@ const FeedbackPage: NextPage<{
       console.log(error);
       setPostErr(error as string);
     }
-  }, [params.businessSlug, rating, resetContextState, router]);
+  }, [params.businessSlug, params.locale, rating, resetContextState, router]);
 
   if (isLoading) {
     return <Spinner />;
