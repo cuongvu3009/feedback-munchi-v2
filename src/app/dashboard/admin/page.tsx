@@ -51,17 +51,14 @@ const DashboardInfo: NextPage = () => {
   return (
     <div className={`${styles["dashboard-info"]}`}>
       {(serviceFeedbackLoading || orderFeedbacksLoading) && <Spinner />}
-      {serviceFeedbackErr && (
+      {serviceFeedbackErr || orderFeedbacksErr ? (
         <div className={styles.error}>
-          <p>Error loading data: {serviceFeedbackErr.message}</p>
+          <p>
+            Error loading data:
+            {serviceFeedbackErr?.message || orderFeedbacksErr?.message}
+          </p>
         </div>
-      )}
-
-      {orderFeedbacksErr && (
-        <div className={styles.error}>
-          <p>Error loading data: {orderFeedbacksErr.message}</p>
-        </div>
-      )}
+      ) : null}
 
       {serviceFeedbacksData && orderFeedbacksData && (
         <div className={`${styles["dashboard-content"]}`}>
