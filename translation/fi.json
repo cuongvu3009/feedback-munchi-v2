@@ -46,5 +46,11 @@
     "Do you want to support us?": "Haluatko tukea meitä?",
     "Leave a tip for our hard working team!": "Jätä vinkki ahkeralle tiimillemme!",
     "No, thank you": "Ei kiitos"
+  },
+  "Thankyou": {
+    "Thank you!": "Kiitos!",
+    "Your feedback helps": "Palautteesi auttaa",
+    "us improve our service": "parannamme palveluamme.",
+    "submitAnotherBtn": "Lähetä toinen palaute"
   }
 }

@@ -46,5 +46,11 @@
     "Do you want to support us?": "Do you want to support us?",
     "Leave a tip for our hard working team!": "Leave a tip for our hard working team!",
     "No, thank you": "No, thank you"
+  },
+  "Thankyou": {
+    "Thank you!": "Thank you!",
+    "Your feedback helps": "Your feedback helps",
+    "us improve our service": "us improve our service.",
+    "submitAnotherBtn": "Submit another feedback"
   }
 }

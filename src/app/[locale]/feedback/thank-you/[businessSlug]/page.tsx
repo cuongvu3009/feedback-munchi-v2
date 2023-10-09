@@ -11,15 +11,17 @@ import Title from "@/app/[locale]/feedback/components/Title";
 import TradeMark from "@/app/[locale]/feedback/components/TradeMark";
 import axios from "axios";
 import { useEffect } from "react";
+import { useTranslations } from "next-intl";
 
 interface EndFeedbackPageProps {
-  params: { businessSlug: string };
+  params: { businessSlug: string; locale: string };
 }
 
 const EndFeedBack: NextPage<EndFeedbackPageProps> = ({ params }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const stripe_session_id = searchParams.get("session_id");
+  const t = useTranslations("Thankyou");
 
   useEffect(() => {
     const storePayment = async () => {
@@ -40,18 +42,20 @@ const EndFeedBack: NextPage<EndFeedbackPageProps> = ({ params }) => {
       <div className="end-feedback">
         <PiHeartStraightLight size={100} />
         <h3>
-          <b>Thank you!</b>
+          <b>{t("Thank you!")}</b>
         </h3>
-        <p>Your feedback helps</p>
-        <p>us improve our service.</p>
+        <p>{t("Your feedback helps")}</p>
+        <p>{t("us improve our service")}</p>
       </div>
 
       <div className="navigation">
         <Button
           version="secondary"
-          btnText="Submit another feedback"
+          btnText={t("submitAnotherBtn")}
           onClick={() =>
-            router.push(`/feedback/service/${params.businessSlug}/`)
+            router.push(
+              `/${params.locale}/feedback/service/${params.businessSlug}/`
+            )
           }
         />
         <TradeMark />
