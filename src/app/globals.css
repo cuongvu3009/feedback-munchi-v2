@@ -97,6 +97,7 @@ img {
 .btn-secondary:checked {
   color: #fff;
   background-color: #ff3637;
+  padding: 10px;
 }
 
 .btn:disabled {
