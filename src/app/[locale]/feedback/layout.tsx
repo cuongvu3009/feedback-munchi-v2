@@ -39,7 +39,7 @@ export default function LocaleLayout({
 
   const availableLanguages = [
     { locale: "en", label: "English" },
-    { locale: "fi", label: "Finnish" },
+    { locale: "fi", label: "Suomi" },
     { locale: "es", label: "Estonian" },
   ];
 
