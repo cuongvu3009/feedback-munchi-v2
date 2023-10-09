@@ -51,7 +51,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   if (isLoading) {
     return <Spinner />;
   }
-
   return (
     <SidebarProvider>
       <DashboardFeedbackProvider>
