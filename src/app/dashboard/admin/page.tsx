@@ -39,9 +39,18 @@ const DashboardInfo: NextPage = () => {
     setOrderFeedbacks(orderFeedbacksData);
   }
 
+  if (!business) {
+    return (
+      <div className={`${styles["dashboard-info"]}`}>
+        <p>
+          <b>No business found! </b>
+        </p>
+      </div>
+    );
+  }
   return (
     <div className={`${styles["dashboard-info"]}`}>
-      {serviceFeedbackLoading && orderFeedbacksLoading && <Spinner />}
+      {(serviceFeedbackLoading || orderFeedbacksLoading) && <Spinner />}
       {serviceFeedbackErr && (
         <div className={styles.error}>
           <p>Error loading data: {serviceFeedbackErr.message}</p>

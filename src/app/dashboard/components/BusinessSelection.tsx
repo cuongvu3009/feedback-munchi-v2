@@ -18,7 +18,7 @@ const BusinessSelection: React.FC<BusinessSelectionProps> = ({
   businesses,
 }) => {
   const [selectedBusiness, setSelectedBusiness] = useState<number | null>(null);
-  const { business, setBusiness, setBusinessId } = useBusinessContext();
+  const { setBusiness, setBusinessId } = useBusinessContext();
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedBusiness(Number(event.target.value));
   };
