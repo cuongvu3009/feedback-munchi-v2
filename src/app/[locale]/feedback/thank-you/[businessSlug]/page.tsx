@@ -8,11 +8,9 @@ import Button from "@/components/shared/Button";
 import { NextPage } from "next";
 import { PiHeartStraightLight } from "react-icons/pi";
 import Title from "@/app/[locale]/feedback/components/Title";
-import TradeMark from "@/app/feedback/components/TradeMark";
+import TradeMark from "@/app/[locale]/feedback/components/TradeMark";
 import axios from "axios";
-import { postFetcher } from "@/utils/fetcher";
 import { useEffect } from "react";
-import useSWR from "swr";
 
 interface EndFeedbackPageProps {
   params: { businessSlug: string };

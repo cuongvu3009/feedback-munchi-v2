@@ -39,5 +39,12 @@
     "placeHolder": "Kommenttisi täällä...",
     "saveBtn": "Tallentaa",
     "cancelBtn": "Peruuttaa"
+  },
+  "Tip": {
+    "Thank you!": "Kiitos!",
+    "Your feedback helps us improve our service": "Palautteesi auttaa meitä parantamaan palveluamme.",
+    "Do you want to support us?": "Haluatko tukea meitä?",
+    "Leave a tip for our hard working team!": "Jätä vinkki ahkeralle tiimillemme!",
+    "No, thank you": "Ei kiitos"
   }
 }

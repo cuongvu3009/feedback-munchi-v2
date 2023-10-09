@@ -39,5 +39,12 @@
     "placeHolder": "Your comment here...",
     "saveBtn": "Save",
     "cancelBtn": "Cancel"
+  },
+  "Tip": {
+    "Thank you!": "Thank you!",
+    "Your feedback helps us improve our service.": "Your feedback helps us improve our service.",
+    "Do you want to support us?": "Do you want to support us?",
+    "Leave a tip for our hard working team!": "Leave a tip for our hard working team!",
+    "No, thank you": "No, thank you"
   }
 }
