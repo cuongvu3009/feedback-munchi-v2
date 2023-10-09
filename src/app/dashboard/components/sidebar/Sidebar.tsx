@@ -24,7 +24,6 @@ const Sidebar: React.FC<SidebarProps> = ({ business }) => {
   const handleViewSidebar = () => {
     setSideBarOpen(!sidebarOpen);
   };
-  console.log(sidebarOpen);
 
   return (
     <>
