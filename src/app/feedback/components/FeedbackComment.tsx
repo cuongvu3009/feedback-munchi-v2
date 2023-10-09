@@ -27,6 +27,8 @@ const FeedbackComment: React.FC<CommentProps> = ({ type, emoji }) => {
 
   const handleCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     commentRef.current = e.target.value;
+    // Update the state to reflect changes in the textarea
+    setIsFormSubmitted(false); // Reset the form submitted state
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
