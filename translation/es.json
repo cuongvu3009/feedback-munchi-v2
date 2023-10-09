@@ -1,5 +1,19 @@
 {
   "Index": {
-    "title": "hello in estonian"
+    "title": "Tere, Maailm!"
+  },
+  "Feedback": {
+    "title": "Tagasiside",
+    "questionService": "Kuidas teie kogemus oli?",
+    "subQuestionService": "Teie tagasiside aitab meil teenust täiustada.",
+    "questionOrder": "Kuidas teie tellimus läks?",
+    "subQuestionOrder": "Teie tagasiside aitab meil oma tooteid täiustada.",
+    "nextBtn": "Edasi",
+    "submitBtn": "Esitage tagasisidet",
+    "good": "Hea",
+    "bad": "Halb",
+    "terrible": "Kohutav",
+    "okey": "Okei",
+    "awesome": "Vinge"
   }
 }

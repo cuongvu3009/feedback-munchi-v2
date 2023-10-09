@@ -8,7 +8,7 @@ import FeedbackContext from "@/context/FeedbackContext";
 import { GrStatusGood } from "react-icons/gr";
 import { NextPage } from "next";
 import OneTimePaymentCard from "../../components/PaymentCard";
-import Title from "@/components/shared/Title";
+import Title from "@/app/[locale]/feedback/components/Title";
 import TradeMark from "@/app/feedback/components/TradeMark";
 import { tipOptions } from "@/utils/tipOptions";
 import { useContext } from "react";

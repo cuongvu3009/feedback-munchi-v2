@@ -1,5 +1,19 @@
 {
   "Index": {
-    "title": "Hello in Finnish!"
+    "title": "Hei maailma!"
+  },
+  "Feedback": {
+    "title": "Palaute",
+    "questionService": "Millainen oli kokemuksesi?",
+    "subQuestionService": "Palautteesi auttaa meitä parantamaan palveluamme.",
+    "questionOrder": "Miten tilauksesi meni?",
+    "subQuestionOrder": "Palautteesi auttaa meitä parantamaan tuotteitamme.",
+    "nextBtn": "Seuraava",
+    "submitBtn": "Antaa palautetta",
+    "good": "Hyvä",
+    "bad": "Huono",
+    "terrible": "Kauhea",
+    "okey": "Okei",
+    "awesome": "Mahtava"
   }
 }

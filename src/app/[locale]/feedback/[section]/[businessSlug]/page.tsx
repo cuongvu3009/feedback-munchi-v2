@@ -8,7 +8,7 @@ import Logo from "../../components/Logo";
 import { NextPage } from "next";
 import Rating from "../../components/Rating";
 import Spinner from "@/components/shared/Spinner";
-import Title from "@/components/shared/Title";
+import Title from "@/app/[locale]/feedback/components/Title";
 import TradeMark from "@/app/[locale]/feedback/components/TradeMark";
 import axios from "axios";
 import { getFetcher } from "@/utils/fetcher";
@@ -16,21 +16,7 @@ import styles from "./feedbackPage.module.css";
 import { useFeedbackContext } from "@/context/FeedbackContext";
 import { useRouter } from "next/navigation";
 import useSWR from "swr";
-
-const flow = [
-  {
-    name: "service",
-    question: "How was your experience?",
-    subQuestion: "Your feedback helps us improve our service.",
-  },
-  {
-    name: "order",
-    question: "How was your order?",
-    subQuestion: "Your feedback helps us improve our products.",
-  },
-];
-const firstFlowItem = flow[0];
-const lastFlowItem = flow[flow.length - 1];
+import { useTranslations } from "next-intl";
 
 const FeedbackPage: NextPage<{
   params: { businessSlug: string; section: string };
@@ -43,15 +29,31 @@ const FeedbackPage: NextPage<{
     `${API_BASE_URL}/business/${params.businessSlug}?params=logo,slug,name`,
     getFetcher
   );
+  const t = useTranslations("Feedback");
 
-  // // This useEffect hook redirects to the first page to make sure first page rated
-  // useEffect(() => {
-  //   const firstRating = rating.find((item) => item.type == firstFlowItem.name);
-  //   if (!firstRating) {
-  //     router.push(`/feedback/${firstFlowItem.name}/${params.businessSlug}`);
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+  const flow = [
+    {
+      name: "service",
+      question: t("questionService"),
+      subQuestion: "",
+    },
+    {
+      name: "order",
+      question: "",
+      subQuestion: "",
+    },
+  ];
+  const firstFlowItem = flow[0];
+  const lastFlowItem = flow[flow.length - 1];
+
+  // This useEffect hook redirects to the first page to make sure first page rated
+  useEffect(() => {
+    const firstRating = rating.find((item) => item.type == firstFlowItem.name);
+    if (!firstRating) {
+      router.push(`/en/feedback/${firstFlowItem.name}/${params.businessSlug}`);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleNext = () => {
     // Find the current section in the flow
@@ -150,14 +152,14 @@ const FeedbackPage: NextPage<{
           <Button
             onClick={handleNext}
             version="full"
-            btnText="Next"
+            btnText={t("nextBtn")}
             isDisabled={handleDisabledBtn()}
           />
         ) : (
           <Button
             onClick={handleSubmit}
             version="full"
-            btnText="Submit feedback"
+            btnText={t("submitBtn")}
             isDisabled={handleDisabledBtn()}
           />
         )}

@@ -7,7 +7,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Button from "@/components/shared/Button";
 import { NextPage } from "next";
 import { PiHeartStraightLight } from "react-icons/pi";
-import Title from "@/components/shared/Title";
+import Title from "@/app/[locale]/feedback/components/Title";
 import TradeMark from "@/app/feedback/components/TradeMark";
 import axios from "axios";
 import { postFetcher } from "@/utils/fetcher";

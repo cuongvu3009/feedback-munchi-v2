@@ -1,5 +1,19 @@
 {
   "Index": {
     "title": "Hello world!"
+  },
+  "Feedback": {
+    "title": "Feedback",
+    "questionService": "How was your experience?",
+    "subQuestionService": "Your feedback helps us improve our service.",
+    "questionOrder": "How was your order?",
+    "subQuestionOrder": "Your feedback helps us improve our products.",
+    "nextBtn": "Next",
+    "submitBtn": "Submit Feedback",
+    "good": "Good",
+    "bad": "Bad",
+    "terrible": "Terrible",
+    "okey": "Okey",
+    "awesome": "Awesome"
   }
 }
