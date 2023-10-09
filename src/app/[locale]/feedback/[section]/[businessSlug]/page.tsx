@@ -19,7 +19,7 @@ import useSWR from "swr";
 import { useTranslations } from "next-intl";
 
 const FeedbackPage: NextPage<{
-  params: { businessSlug: string; section: string };
+  params: { businessSlug: string; section: string; locale: string };
 }> = ({ params }) => {
   const router = useRouter();
   const [isSubmitLoading, setIsSubmitLoading] = useState(false);
@@ -50,7 +50,9 @@ const FeedbackPage: NextPage<{
   useEffect(() => {
     const firstRating = rating.find((item) => item.type == firstFlowItem.name);
     if (!firstRating) {
-      router.push(`/en/feedback/${firstFlowItem.name}/${params.businessSlug}`);
+      router.push(
+        `/${params.locale}/feedback/${firstFlowItem.name}/${params.businessSlug}`
+      );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -64,7 +66,9 @@ const FeedbackPage: NextPage<{
     if (currentFlowIndex !== -1 && currentFlowIndex < flow.length - 1) {
       // If the current section is found and there is a next item in the flow
       const nextFlowItem = flow[currentFlowIndex + 1];
-      router.push(`/feedback/${nextFlowItem.name}/${params.businessSlug}/`);
+      router.push(
+        `/${params.locale}/feedback/${nextFlowItem.name}/${params.businessSlug}/`
+      );
     }
   };
 
@@ -90,9 +94,11 @@ const FeedbackPage: NextPage<{
         }
         // Redirect based on the result
         if (hasBadOrTerribleEmoji) {
-          router.push(`/feedback/thank-you/${params.businessSlug}`);
+          router.push(
+            `/${params.locale}/feedback/thank-you/${params.businessSlug}`
+          );
         } else {
-          router.push(`/feedback/tip/${params.businessSlug}`);
+          router.push(`/${params.locale}/feedback/tip/${params.businessSlug}`);
         }
 
         // clean up after submit feedback

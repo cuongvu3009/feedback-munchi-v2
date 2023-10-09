@@ -15,5 +15,29 @@
     "terrible": "Kauhea",
     "okey": "Okei",
     "awesome": "Mahtava"
+  },
+  "Tags": {
+    "What went terrible?": "Mis oli kohutav?",
+    "What make you feel terrible?": "Mis paneb sind end kohutavalt tundma?",
+    "What went bad?": "Mis halvasti läks?",
+    "What make you feel bad?": "Mis paneb sind end halvasti tundma?",
+    "What went okey?": "Mis läks hästi?",
+    "What make you feel okey?": "Mis paneb sind end hästi tundma?",
+    "What went good?": "Mis läks hästi?",
+    "What make you feel good?": "Mis paneb sind end hästi tundma?",
+    "What went awesome?": "Mis oli vinge?",
+    "What make you feel awesome?": "Mis paneb sind end suurepäraselt tundma?",
+    "Service": "Palvelu",
+    "Waiting time": "Odotusaika",
+    "Professionalism": "Ammattimaisuus",
+    "Positiveness": "Positiivisuus",
+    "Atmosphere": "Tunnelma"
+  },
+  "Comment": {
+    "addComentBtn": "+ Lisää kommentti ravintolasta",
+    "commentTitle": "Lisää kommentti ravintolasta",
+    "placeHolder": "Kommenttisi täällä...",
+    "saveBtn": "Tallentaa",
+    "cancelBtn": "Peruuttaa"
   }
 }

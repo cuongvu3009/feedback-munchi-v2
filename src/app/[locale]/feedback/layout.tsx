@@ -18,7 +18,7 @@ export default function LocaleLayout({
   params: { locale: string };
 }) {
   const [locale, setLocale] = useState(propLocale); // Initialize with the prop value
-  const [messages, setMessages] = useState(undefined);
+  const [messages, setMessages] = useState({}); // Initialize with an empty object
 
   const handleLanguageChange = (event: any) => {
     const newLocale = event.target.value;

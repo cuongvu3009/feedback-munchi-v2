@@ -15,5 +15,29 @@
     "terrible": "Terrible",
     "okey": "Okey",
     "awesome": "Awesome"
+  },
+  "Tags": {
+    "What went terrible?": "What went terrible?",
+    "What make you feel terrible?": "What make you feel terrible?",
+    "What went bad?": "What went bad?",
+    "What make you feel bad?": "What make you feel bad?",
+    "What went okey?": "What went okey?",
+    "What make you feel okey?": "What make you feel okey?",
+    "What went good?": "What went good?",
+    "What make you feel good?": "What make you feel good?",
+    "What went awesome?": "What went awesome?",
+    "What make you feel awesome?": "What make you feel awesome?",
+    "Service": "Service",
+    "Waiting time": "Waiting time",
+    "Professionalism": "Professionalism",
+    "Positiveness": "Positiveness",
+    "Atmosphere": "Atmosphere"
+  },
+  "Comment": {
+    "addComentBtn": "+ Add a comment for the restaurant",
+    "commentTitle": "Add a comment for the restaurant",
+    "placeHolder": "Your comment here...",
+    "saveBtn": "Save",
+    "cancelBtn": "Cancel"
   }
 }
