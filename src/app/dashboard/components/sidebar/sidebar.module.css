@@ -12,12 +12,14 @@
 
 .hideSidebar {
   position: absolute;
-  left: -16.5vw;
+  left: -100vw;
   transition: left 0.5s ease-in-out;
 }
 
 .sidebarToggle {
+  height: 100vh;
   background-color: green;
+  color: green;
 }
 
 .sidebar-top {
@@ -87,4 +89,14 @@
 
 .content.shift {
   margin-left: 250px;
+}
+
+@media (max-width: 850px) {
+  .sidebar {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  .hideSidebar {
+    left: -900px;
+  }
 }
