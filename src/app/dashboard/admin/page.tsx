@@ -1,5 +1,6 @@
 "use client";
 
+import DashboardResponses from "../components/responses/DashboardResponses";
 import DashboardScore from "@/app/dashboard/components/score/DashboardScore";
 import { NextPage } from "next";
 import React from "react";
@@ -26,11 +27,10 @@ const DashboardInfo: NextPage = () => {
         <div className={`${styles["dashboard-content"]}`}>
           <DashboardScore type="service" businessSlug={business?.slug} />
           <DashboardScore type="order" businessSlug={business?.slug} />
-          {/* <DashboardScore data={orderFeedbacksData} /> */}
           {/* <DashboardResponses
 							data={serviceFeedbacksData.concat(orderFeedbacksData)}
 							businessId={businessId as number}
-						/> */}
+						/>  */}
         </div>
 
         {/* {serviceFeedbacksData && orderFeedbacksData && (
