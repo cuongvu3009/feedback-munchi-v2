@@ -1,9 +1,12 @@
-import { Feedback } from "@/types/feedback.types";
 import React from "react";
+import Spinner from "@/components/shared/Spinner";
+import { getFetcher } from "@/utils/fetcher";
 import styles from "./dashboardScore.module.css";
+import useSWR from "swr";
 
 interface DashboardScoreProps {
-  data: Feedback[];
+  type: string;
+  businessSlug: string;
 }
 
 const getEmojiLabel = (emoji: string) => {
@@ -23,48 +26,45 @@ const getEmojiLabel = (emoji: string) => {
   }
 };
 
-const DashboardScore: React.FC<DashboardScoreProps> = ({ data }) => {
-  const responseCounts = calculateResponseCounts(data);
-  const averageScore = calculateAverageScore(data);
+const DashboardScore: React.FC<DashboardScoreProps> = ({
+  type,
+  businessSlug,
+}) => {
+  const { data, error, isValidating } = useSWR(
+    `/api/feedback/${businessSlug}/${type}/count`,
+    getFetcher
+  );
+
+  if (error) {
+    return <div>Error loading data.</div>;
+  }
+
+  if (isValidating || !data) {
+    return <Spinner />;
+  }
+
+  const { emojiCounts, averageScore, totalFeedback } = data;
 
   return (
     <div className={`${styles["dashboard-card"]}`}>
-      <h3>Average score Service</h3>
+      <h3>Average score {type}</h3>
       <div className={`${styles["dashboard-score"]}`}>
         <span className={styles.score}>{averageScore}</span>
       </div>
 
       <div className={`${styles["dashboard-answers"]}`}>
-        <div className={`${styles["flex-between"]}`}>
-          <p>Answered &quot;{getEmojiLabel("awesome")}&quot;</p>
-          <p>{responseCounts["awesome"] ? responseCounts["awesome"] : 0}</p>
-        </div>
-
-        <div className={`${styles["flex-between"]}`}>
-          <p>Answered &quot;{getEmojiLabel("good")}&quot;</p>
-          <p>{responseCounts["good"] ? responseCounts["good"] : 0}</p>
-        </div>
-
-        <div className={`${styles["flex-between"]}`}>
-          <p>Answered &quot;{getEmojiLabel("okey")}&quot;</p>
-          <p>{responseCounts["okey"] ? responseCounts["okey"] : 0}</p>
-        </div>
-
-        <div className={`${styles["flex-between"]}`}>
-          <p>Answered &quot;{getEmojiLabel("bad")}&quot;</p>
-          <p>{responseCounts["bad"] ? responseCounts["bad"] : 0}</p>
-        </div>
-
-        <div className={`${styles["flex-between"]}`}>
-          <p>Answered &quot;{getEmojiLabel("terrible")}&quot;</p>
-          <p>{responseCounts["terrible"] ? responseCounts["terrible"] : 0}</p>
-        </div>
+        {["awesome", "good", "okey", "bad", "terrible"].map((emoji) => (
+          <div key={emoji} className={`${styles["flex-between"]}`}>
+            <p>Answered &quot;{getEmojiLabel(emoji)}&quot;</p>
+            <p>{emojiCounts[emoji] || 0}</p>
+          </div>
+        ))}
 
         <div className={`${styles["flex-between"]}`}>
           <p>
             <b>Total response</b>
           </p>
-          <p>{getTotalResponses(responseCounts)}</p>
+          <p>{totalFeedback}</p>
         </div>
       </div>
     </div>
