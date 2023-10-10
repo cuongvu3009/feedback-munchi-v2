@@ -14,6 +14,15 @@ export async function GET(
   const skip = (+page - 1) * +itemsPerPage;
 
   try {
+    const allFeedbacks = await prisma.feedback.findMany({
+      where: {
+        businessSlug,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
     const feedbacks = await prisma.feedback.findMany({
       where: {
         businessSlug,
@@ -27,6 +36,7 @@ export async function GET(
 
     return Response.json({
       feedbacks,
+      allFeedbacksCount: allFeedbacks.length,
     });
   } catch (error) {
     console.error("Error get feedbacks:", error);

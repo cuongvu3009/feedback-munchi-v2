@@ -1,5 +1,3 @@
-// emojiUtils.js
-
 import AwesomeSVG from "@/utils/emoji-svg/AwesomeSVG";
 import BadSVG from "@/utils/emoji-svg/BadSVG";
 import GoodSVG from "@/utils/emoji-svg/GoodSVG";
@@ -8,7 +6,10 @@ import React from "react";
 import TerribleSVG from "@/utils/emoji-svg/TerribleSVG";
 import styles from "./emojiLabel.module.css";
 
-export const EmojiLabel = (emoji: string) => {
+interface EmojiLabelProps {
+  emoji: string;
+}
+const EmojiLabel: React.FC<EmojiLabelProps> = ({ emoji }) => {
   switch (emoji) {
     case "terrible":
       return (
@@ -59,3 +60,5 @@ export const EmojiLabel = (emoji: string) => {
       return emoji;
   }
 };
+
+export default EmojiLabel;

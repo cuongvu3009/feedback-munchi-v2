@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 
 import BusinessSelection from "../components/BusinessSelection";
-import { DashboardFeedbackProvider } from "@/context/DashboardFeedbackContext";
 import Sidebar from "@/app/dashboard/components/sidebar/Sidebar";
 import { SidebarProvider } from "@/context/SidebarContext";
 import Spinner from "@/components/shared/Spinner";
@@ -54,19 +53,17 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <SidebarProvider>
-      <DashboardFeedbackProvider>
-        <div className={styles.dashboard}>
-          <Sidebar business={business} />
-          <div className={styles.children}>
-            <div className={styles.header}>
-              <div className={styles.businessSelection}>
-                <BusinessSelection businesses={businesses} />
-              </div>
+      <div className={styles.dashboard}>
+        <Sidebar business={business} />
+        <div className={styles.children}>
+          <div className={styles.header}>
+            <div className={styles.businessSelection}>
+              <BusinessSelection businesses={businesses} />
             </div>
-            {businesses && business && children}
           </div>
+          {businesses && business && children}
         </div>
-      </DashboardFeedbackProvider>
+      </div>
     </SidebarProvider>
   );
 }
