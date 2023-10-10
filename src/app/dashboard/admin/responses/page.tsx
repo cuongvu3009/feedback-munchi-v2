@@ -1,9 +1,11 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { IoChevronBackOutline, IoChevronForwardOutline } from "react-icons/io5";
+import React, { useState } from "react";
 
 import EmojiLabel from "@/app/dashboard/components/emojiLabel/EmojiLabel";
 import { Feedback } from "@/types/feedback.types";
+import Spinner from "@/components/shared/Spinner";
 import { getFetcher } from "@/utils/fetcher";
 import moment from "moment";
 import styles from "./responses.module.css";
@@ -19,18 +21,28 @@ const DashboardResponses = () => {
     getFetcher
   );
 
-  useEffect(() => {
-    // Reset to the first page whenever itemsPerPage changes
-    setCurrentPage(1);
-  }, [itemsPerPage]);
-
-  const totalPages = Math.ceil(data?.totalItems / itemsPerPage);
+  const totalFeedbacks = data?.allFeedbacksCount || 0;
+  const totalPages = Math.ceil(totalFeedbacks / itemsPerPage);
 
   const handlePageChange = (newPage: number) => {
-    if (newPage >= 1 && newPage <= totalPages) {
-      setCurrentPage(newPage);
-    }
+    setCurrentPage(newPage);
   };
+
+  // Loading state
+  if (isValidating) {
+    return <Spinner />;
+  }
+
+  if (!data) {
+    return <div className={styles.error}>No Data found from the database!</div>;
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <div className={styles.error}>Error loading data: {error.message}</div>
+    );
+  }
 
   return (
     <div className={styles.dashboardContainer}>
@@ -77,30 +89,24 @@ const DashboardResponses = () => {
       {/* Pagination controls */}
       <div className={styles.pagination}>
         <button
-          onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
+          onClick={() => handlePageChange(currentPage - 1)}
         >
-          Previous
+          <IoChevronBackOutline />
         </button>
-        {Array.from({ length: totalPages }, (_, index) => (
-          <button
-            key={index}
-            onClick={() => handlePageChange(index + 1)}
-            className={currentPage === index + 1 ? styles.activePage : ""}
-          >
-            {index + 1}
-          </button>
-        ))}
+        <span>
+          {currentPage} - {totalPages}
+        </span>
         <button
-          onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
+          onClick={() => handlePageChange(currentPage + 1)}
         >
-          Next
+          <IoChevronForwardOutline />
         </button>
       </div>
 
       {/* Items per page selector */}
-      <div className={styles.itemsPerPageSelector}>
+      {/* <div className={styles.itemsPerPageSelector}>
         <span>Show items per page: </span>
         <select
           onChange={(e) => setItemsPerPage(+e.target.value)}
@@ -110,7 +116,7 @@ const DashboardResponses = () => {
           <option value={20}>20</option>
           <option value={30}>30</option>
         </select>
-      </div>
+      </div> */}
     </div>
   );
 };
