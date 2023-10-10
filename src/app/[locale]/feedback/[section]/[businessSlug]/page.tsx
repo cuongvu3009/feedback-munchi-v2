@@ -35,12 +35,12 @@ const FeedbackPage: NextPage<{
     {
       name: "service",
       question: t("questionService"),
-      subQuestion: "",
+      subQuestion: t("subQuestionService"),
     },
     {
       name: "order",
-      question: "",
-      subQuestion: "",
+      question: t("questionOrder"),
+      subQuestion: t("subQuestionOrder"),
     },
   ];
   const firstFlowItem = flow[0];

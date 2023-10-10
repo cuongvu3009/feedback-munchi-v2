@@ -80,7 +80,9 @@ const Rating: React.FC<RatingProps> = ({ type, businessSlug }) => {
                   {/* Render the corresponding SVG component */}
                 </label>
               </li>
-              <h3 className="emoji-text">{t(`${option.value}`)}</h3>
+              <h3 className="emoji-text">
+                {option.value && t(`${option.value}`)}
+              </h3>
             </div>
           );
         })}

@@ -5,6 +5,7 @@ import "./feedbackLayout.css";
 import { ReactNode, useEffect, useState } from "react";
 
 import { NextIntlClientProvider } from "next-intl";
+import engTranslation from "../../../../translation/en.json";
 
 export function generateStaticParams() {
   return [{ locale: "en" }, { locale: "fi" }, { locale: "es" }];
@@ -18,7 +19,7 @@ export default function LocaleLayout({
   params: { locale: string };
 }) {
   const [locale, setLocale] = useState(propLocale); // Initialize with the prop value
-  const [messages, setMessages] = useState({}); // Initialize with an empty object
+  const [messages, setMessages] = useState(engTranslation); // Initialize with an english as default
 
   const handleLanguageChange = (event: any) => {
     const newLocale = event.target.value;
