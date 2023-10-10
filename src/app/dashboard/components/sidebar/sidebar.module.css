@@ -1,0 +1,102 @@
+.sidebar {
+  transition: left 0.5s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 16vw;
+  padding: 10px;
+  height: 100vh;
+  background-color: #e8eaee;
+  align-items: center;
+}
+
+.hideSidebar {
+  position: absolute;
+  left: -100vw;
+  transition: left 0.5s ease-in-out;
+}
+
+.sidebarToggle {
+  height: 100vh;
+  background-color: green;
+  color: green;
+}
+
+.sidebar-top {
+}
+
+.sidebar-bottom {
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.logo {
+  border-radius: 50%;
+  background-color: inherit;
+  margin: 15px 0;
+}
+
+.menu-button {
+  background-color: #333;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.sidebar-link,
+.disabled-link {
+  display: block;
+  color: #000;
+  text-decoration: none;
+  padding: 10px 20px;
+  transition: background-color 0.2s ease;
+}
+
+.sidebar-link:hover {
+  background-color: #fff;
+  width: 100%;
+}
+
+.disabled-link {
+  cursor: not-allowed;
+  color: gray;
+}
+
+.logout-button {
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.logout-button:hover {
+  background-color: #555;
+}
+
+/* Add this to Sidebar.css */
+.content {
+  margin-left: 0;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.content.shift {
+  margin-left: 250px;
+}
+
+@media (max-width: 850px) {
+  .sidebar {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  .hideSidebar {
+    left: -900px;
+  }
+}

@@ -1,13 +1,24 @@
-import { createContext, useContext, useEffect, useState } from "react";
+"use client";
+
+import { createContext, useContext } from "react";
+
+import { BusinessProps } from "@/types/dashboard.types";
+import { usePersistState } from "@/hooks/usePersistState";
 
 export interface BusinessContextProps {
   businessId: number | undefined;
   setBusinessId: (value: number | undefined) => void;
+  business: BusinessProps | undefined;
+  setBusiness: (value: BusinessProps | undefined) => void;
 }
 
 const BusinessContext = createContext<BusinessContextProps>({
   businessId: undefined,
   setBusinessId: function (value: number | undefined): void {
+    throw new Error("Function not implemented.");
+  },
+  business: undefined,
+  setBusiness: function (value: BusinessProps | undefined): void {
     throw new Error("Function not implemented.");
   },
 });
@@ -21,30 +32,16 @@ export const useBusinessContext = () => {
 };
 
 export const BusinessProvider = ({ children }: any) => {
-  const [businessId, setBusinessIdState] = useState<number | undefined>(() => {
-    // Retrieve the businessId from localStorage on component initialization
-    const storedBusinessId = localStorage.getItem("businessId");
-    return storedBusinessId ? parseInt(storedBusinessId, 10) : undefined;
-  });
-
-  // Use useEffect to store the businessId in localStorage whenever it changes
-  useEffect(() => {
-    if (businessId !== undefined) {
-      localStorage.setItem("businessId", businessId.toString());
-    } else {
-      localStorage.removeItem("businessId");
-    }
-  }, [businessId]);
-
-  const setBusinessId = (value: number | undefined) => {
-    setBusinessIdState(value);
-  };
+  const [businessId, setBusinessId] = usePersistState("businessId", undefined);
+  const [business, setBusiness] = usePersistState("business", undefined);
 
   return (
     <BusinessContext.Provider
       value={{
         businessId,
         setBusinessId,
+        business,
+        setBusiness,
       }}
     >
       {children}

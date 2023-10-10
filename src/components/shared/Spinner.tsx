@@ -5,6 +5,7 @@ import spinner from "../assets/spinner.gif";
 const Spinner: React.FC = () => {
   return (
     <Image
+      priority={true}
       src={spinner}
       alt="Loading..."
       style={{ width: "20px", margin: "auto", display: "block" }}

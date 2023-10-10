@@ -1,57 +1,32 @@
 import prisma from "@/lib/prisma";
 
 export async function POST(req: Request, res: Response) {
-  const {
-    businessSlug,
-    emojiService,
-    commentService,
-    serviceTags,
-    emojiOrder,
-    commentOrder,
-    orderTags,
-  } = await req.json();
+  const payloads = await req.json();
 
   try {
-    // Create the feedback entry without serviceTags and orderTags
-    const addFeedback = await prisma.feedback.create({
-      data: {
-        businessSlug,
-        commentService,
-        emojiService,
-        emojiOrder,
-        commentOrder,
-      },
-    });
+    // Validate required fields for each payload
+    for (const payload of payloads) {
+      const { emoji, businessSlug, type } = payload;
 
-    // Create ServiceTag records and associate them with the feedback entry
-    const feedbackId = addFeedback.id;
-    // Create ServiceTag and OrderTag records concurrently and associate them with the feedback entry
-    await Promise.all([
-      prisma.serviceTag.create({
-        data: {
-          value: serviceTags,
-          feedbacks: {
-            connect: {
-              id: feedbackId,
-            },
-          },
-        },
-      }),
-      prisma.orderTag.create({
-        data: {
-          value: orderTags,
-          feedbacks: {
-            connect: {
-              id: feedbackId,
-            },
-          },
-        },
-      }),
-    ]);
+      if (
+        emoji === undefined ||
+        businessSlug === undefined ||
+        type === undefined
+      ) {
+        return Response.json({ error: "Missing required fields" });
+      }
 
-    return Response.json("Feedback created");
+      // Create a feedback record for each payload
+      await prisma.feedback.create({
+        data: payload,
+      });
+    }
+
+    return Response.json({ message: "Feedback created successfully" });
   } catch (error) {
     console.error("Error creating feedback:", error);
-    return Response.json(error);
+    return Response.json({ error: "Internal Server Error" });
+  } finally {
+    await prisma.$disconnect(); // Disconnect from the Prisma client
   }
 }

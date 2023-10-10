@@ -1,0 +1,23 @@
+.dashboard-info {
+  display: flex;
+  flex-direction: column;
+}
+.dashboard-content {
+  padding: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.dashboard-chart {
+  margin: 20px;
+  text-align: center;
+}
+
+@media (max-width: 800px) {
+  .dashboard-content {
+    flex-wrap: wrap;
+  }
+  .flex {
+    flex-direction: column;
+  }
+}
