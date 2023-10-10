@@ -7,7 +7,6 @@ import FeedbackTags from "./FeedbackTags";
 import GoodSVG from "@/utils/emoji-svg/GoodSVG";
 import OkeySVG from "@/utils/emoji-svg/OkeySVG";
 import TerribleSVG from "@/utils/emoji-svg/TerribleSVG";
-import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 import { ratingOptions } from "@/utils/ratingOptions";
 import { useFeedbackContext } from "@/context/FeedbackContext";
 import { useTranslations } from "next-intl";

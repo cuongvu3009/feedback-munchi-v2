@@ -29,7 +29,6 @@ const EndFeedBack: NextPage<EndFeedbackPageProps> = ({ params }) => {
         const result = await axios.post(
           `/api/transaction/${params.businessSlug}/${stripe_session_id}/`
         );
-        console.log(result);
       }
     };
     storePayment();

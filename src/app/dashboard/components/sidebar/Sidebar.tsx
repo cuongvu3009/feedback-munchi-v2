@@ -10,7 +10,7 @@ import { BusinessProps } from "@/types/dashboard.types";
 import Image from "next/image";
 import Link from "next/link";
 import LogoutBtn from "@/app/dashboard/components/LogoutBtn";
-import TradeMark from "@/app/[locale]/feedback/components/TradeMark";
+import TradeMark from "@/app/feedback/components/TradeMark";
 import styles from "./sidebar.module.css";
 
 interface SidebarProps {
