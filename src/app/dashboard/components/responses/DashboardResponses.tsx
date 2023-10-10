@@ -1,27 +1,28 @@
-"use client";
-
 import Button from "@/components/shared/Button";
 import { Feedback } from "@/types/feedback.types";
 import React from "react";
+import Spinner from "@/components/shared/Spinner";
+import { getFetcher } from "@/utils/fetcher";
 import moment from "moment";
 import styles from "./dashboardResponses.module.css";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import useSWR from "swr";
 
 interface DashboardResponseProps {
-  data: Feedback[] | undefined;
-  businessId: number;
+  businessSlug: string;
 }
-const DashboardResponses: React.FC<DashboardResponseProps> = ({
-  data,
-  businessId,
-}) => {
-  const [feedbackLimit, setFeedbackLimit] = useState<number>(7);
-  const router = useRouter();
 
-  const handleBtnClick = () => {
-    router.push(`/dashboard/admin/responses/`);
-  };
+const DashboardResponses: React.FC<DashboardResponseProps> = ({
+  businessSlug,
+}) => {
+  const router = useRouter();
+  const [itemsPerPage, setItemsPerPage] = React.useState(10);
+  const [page, setPage] = React.useState(1);
+
+  const { data, error, isValidating } = useSWR(
+    `/api/feedback/${businessSlug}?page=${page}&itemsPerPage=${itemsPerPage}`,
+    getFetcher
+  );
 
   const getEmojiLabel = (emoji: string) => {
     switch (emoji) {
@@ -39,32 +40,34 @@ const DashboardResponses: React.FC<DashboardResponseProps> = ({
         return emoji;
     }
   };
-  // Check if data is defined and an array before using slice
-  const slicedData = data ? data.slice(0, feedbackLimit) : [];
+
+  const handleBtnClick = () => {
+    router.push(`/dashboard/admin/responses/`);
+  };
+
+  if (error) {
+    return <div>Error loading data...</div>;
+  }
+
+  if (isValidating) {
+    return <Spinner />;
+  }
 
   return (
     <div className={`${styles["dashboard-card"]}`}>
       <h3>Responses</h3>
 
-      {slicedData.slice(0, feedbackLimit).map((item) => {
-        return (
-          <div
-            className={`${styles["flex-between"]}`}
-            key={item.id + item.businessSlug + item.createdAt}
-          >
-            <p>{getEmojiLabel(item.emoji)}</p>
-            <p>{moment(item.createdAt).fromNow()}</p>
-          </div>
-        );
-      })}
+      {data?.feedbacks?.map((item: Feedback) => (
+        <div
+          className={styles["flex-between"]}
+          key={item.id + item.businessSlug + item.createdAt}
+        >
+          <p>{getEmojiLabel(item.emoji)}</p>
+          <p>{moment(item.createdAt).fromNow()}</p>
+        </div>
+      ))}
 
-      {feedbackLimit >= 7 && data?.length && (
-        <Button
-          btnText="See All"
-          version="secondary"
-          onClick={handleBtnClick}
-        />
-      )}
+      <Button btnText="See All" version="secondary" onClick={handleBtnClick} />
     </div>
   );
 };
