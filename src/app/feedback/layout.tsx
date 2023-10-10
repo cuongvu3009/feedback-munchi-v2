@@ -5,26 +5,22 @@ import "./feedbackLayout.css";
 import { ReactNode, useEffect, useState } from "react";
 
 import { NextIntlClientProvider } from "next-intl";
-import engTranslation from "../../../../translation/en.json";
+import engTranslation from "../../../translation/en.json";
+import { useLocale } from "@/context/LocaleContext";
 
 export function generateStaticParams() {
   return [{ locale: "en" }, { locale: "fi" }, { locale: "es" }];
 }
 
-export default function LocaleLayout({
-  children,
-  params: { locale: propLocale }, // Rename prop.locale to avoid naming conflicts
-}: {
-  children: ReactNode;
-  params: { locale: string };
-}) {
-  const [locale, setLocale] = useState(propLocale); // Initialize with the prop value
-  const [messages, setMessages] = useState(engTranslation); // Initialize with an english as default
+export default function LocaleLayout({ children }: { children: ReactNode }) {
+  const [messages, setMessages] = useState(engTranslation); // 1: Initialize with an english as default
+  const { locale, setLocale } = useLocale();
 
   const handleLanguageChange = (event: any) => {
     const newLocale = event.target.value;
-    setLocale(newLocale); // Update the selected locale
-    import(`../../../../translation/${newLocale}.json`)
+    setLocale(newLocale); // 2: Update the selected locale
+    // 3: Import locale translation package JSON
+    import(`../../../translation/${newLocale}.json`)
       .then((module) => {
         setMessages(module.default);
       })
@@ -33,11 +29,6 @@ export default function LocaleLayout({
       });
   };
 
-  useEffect(() => {
-    // Load initial translation messages based on the selected locale
-    handleLanguageChange({ target: { value: propLocale } });
-  }, [propLocale]);
-
   const availableLanguages = [
     { locale: "en", label: "English" },
     { locale: "fi", label: "Suomi" },
@@ -45,6 +36,7 @@ export default function LocaleLayout({
   ];
 
   return (
+    // 4: locale is now stored in contextAPI which later be used for redirecting
     <html lang={locale}>
       <body>
         <div className="mobile">

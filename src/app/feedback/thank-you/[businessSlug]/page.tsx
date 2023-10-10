@@ -7,14 +7,14 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Button from "@/components/shared/Button";
 import { NextPage } from "next";
 import { PiHeartStraightLight } from "react-icons/pi";
-import Title from "@/app/[locale]/feedback/components/Title";
-import TradeMark from "@/app/[locale]/feedback/components/TradeMark";
+import Title from "@/app/feedback/components/Title";
+import TradeMark from "@/app/feedback/components/TradeMark";
 import axios from "axios";
 import { useEffect } from "react";
 import { useTranslations } from "next-intl";
 
 interface EndFeedbackPageProps {
-  params: { businessSlug: string; locale: string };
+  params: { businessSlug: string };
 }
 
 const EndFeedBack: NextPage<EndFeedbackPageProps> = ({ params }) => {
@@ -53,9 +53,7 @@ const EndFeedBack: NextPage<EndFeedbackPageProps> = ({ params }) => {
           version="secondary"
           btnText={t("submitAnotherBtn")}
           onClick={() =>
-            router.push(
-              `/${params.locale}/feedback/service/${params.businessSlug}/`
-            )
+            router.push(`/feedback/service/${params.businessSlug}/`)
           }
         />
         <TradeMark />

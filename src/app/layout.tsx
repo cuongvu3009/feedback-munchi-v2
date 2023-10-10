@@ -4,6 +4,7 @@ import { AuthProvider } from "@/context/AuthContext";
 import { BusinessProvider } from "@/context/BusinessContext";
 import { DM_Sans } from "next/font/google";
 import { FeedbackProvider } from "@/context/FeedbackContext";
+import { LocaleProvider } from "@/context/LocaleContext";
 import type { Metadata } from "next";
 
 const sans = DM_Sans({ subsets: ["latin"] });
@@ -21,11 +22,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={sans.className}>
-        <FeedbackProvider>
-          <AuthProvider>
-            <BusinessProvider>{children}</BusinessProvider>
-          </AuthProvider>
-        </FeedbackProvider>
+        <LocaleProvider>
+          <FeedbackProvider>
+            <AuthProvider>
+              <BusinessProvider>{children}</BusinessProvider>
+            </AuthProvider>
+          </FeedbackProvider>
+        </LocaleProvider>
       </body>
     </html>
   );

@@ -8,8 +8,8 @@ import Logo from "../../components/Logo";
 import { NextPage } from "next";
 import Rating from "../../components/Rating";
 import Spinner from "@/components/shared/Spinner";
-import Title from "@/app/[locale]/feedback/components/Title";
-import TradeMark from "@/app/[locale]/feedback/components/TradeMark";
+import Title from "@/app/feedback/components/Title";
+import TradeMark from "@/app/feedback/components/TradeMark";
 import axios from "axios";
 import { getFetcher } from "@/utils/fetcher";
 import styles from "./feedbackPage.module.css";
@@ -19,7 +19,7 @@ import useSWR from "swr";
 import { useTranslations } from "next-intl";
 
 const FeedbackPage: NextPage<{
-  params: { businessSlug: string; section: string; locale: string };
+  params: { businessSlug: string; section: string };
 }> = ({ params }) => {
   const router = useRouter();
   const [isSubmitLoading, setIsSubmitLoading] = useState(false);
@@ -30,7 +30,6 @@ const FeedbackPage: NextPage<{
     getFetcher
   );
   const t = useTranslations("Feedback");
-
   const flow = [
     {
       name: "service",
@@ -50,9 +49,7 @@ const FeedbackPage: NextPage<{
   useEffect(() => {
     const firstRating = rating.find((item) => item.type == firstFlowItem.name);
     if (!firstRating) {
-      router.push(
-        `/${params.locale}/feedback/${firstFlowItem.name}/${params.businessSlug}`
-      );
+      router.push(`/feedback/${firstFlowItem.name}/${params.businessSlug}`);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -66,9 +63,7 @@ const FeedbackPage: NextPage<{
     if (currentFlowIndex !== -1 && currentFlowIndex < flow.length - 1) {
       // If the current section is found and there is a next item in the flow
       const nextFlowItem = flow[currentFlowIndex + 1];
-      router.push(
-        `/${params.locale}/feedback/${nextFlowItem.name}/${params.businessSlug}/`
-      );
+      router.push(`/feedback/${nextFlowItem.name}/${params.businessSlug}/`);
     }
   };
 
@@ -94,11 +89,9 @@ const FeedbackPage: NextPage<{
         }
         // Redirect based on the result
         if (hasBadOrTerribleEmoji) {
-          router.push(
-            `/${params.locale}/feedback/thank-you/${params.businessSlug}`
-          );
+          router.push(`/feedback/thank-you/${params.businessSlug}`);
         } else {
-          router.push(`/${params.locale}/feedback/tip/${params.businessSlug}`);
+          router.push(`/feedback/tip/${params.businessSlug}`);
         }
 
         // clean up after submit feedback
@@ -108,7 +101,7 @@ const FeedbackPage: NextPage<{
       console.log(error);
       setPostErr(error as string);
     }
-  }, [params.businessSlug, params.locale, rating, resetContextState, router]);
+  }, [params.businessSlug, rating, resetContextState, router]);
 
   if (isLoading) {
     return <Spinner />;

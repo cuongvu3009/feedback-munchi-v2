@@ -8,15 +8,15 @@ import FeedbackContext from "@/context/FeedbackContext";
 import { GrStatusGood } from "react-icons/gr";
 import { NextPage } from "next";
 import OneTimePaymentCard from "../../components/PaymentCard";
-import Title from "@/app/[locale]/feedback/components/Title";
-import TradeMark from "@/app/[locale]/feedback/components/TradeMark";
+import Title from "@/app/feedback/components/Title";
+import TradeMark from "@/app/feedback/components/TradeMark";
 import { tipOptions } from "@/utils/tipOptions";
 import { useContext } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 const SuccessFeedback: NextPage<{
-  params: { businessSlug: string; locale: string };
+  params: { businessSlug: string };
 }> = ({ params }) => {
   const router = useRouter();
   const { selectedTip, setSelectedTip } = useContext(FeedbackContext);
@@ -76,9 +76,7 @@ const SuccessFeedback: NextPage<{
           version="normal"
           btnText={t("No, thank you")}
           onClick={() =>
-            router.push(
-              `/${params.locale}/feedback/thank-you/${params.businessSlug}`
-            )
+            router.push(`/feedback/thank-you/${params.businessSlug}`)
           }
         />
         <TradeMark />
