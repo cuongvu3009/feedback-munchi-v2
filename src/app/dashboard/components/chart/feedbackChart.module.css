@@ -3,8 +3,12 @@
   max-width: 100%;
   text-align: center;
   border: 1px groove #f3f3f3;
+  margin: 10px 0;
 }
 
+.chart-container h4 {
+  margin: 10px;
+}
 .recharts-x-axis-label {
   text-anchor: middle;
   transform: translateX(0);

@@ -2,16 +2,14 @@
 
 import DashboardResponses from "../components/responses/DashboardResponses";
 import DashboardScore from "@/app/dashboard/components/score/DashboardScore";
+import FeedbackChart from "../components/chart/FeedbackChart";
 import { NextPage } from "next";
 import React from "react";
 import styles from "./dashboardInfo.module.css";
 import { useBusinessContext } from "@/context/BusinessContext";
-import { useDashboardFeedbackContext } from "@/context/DashboardFeedbackContext";
 
 const DashboardInfo: NextPage = () => {
-  const { business, businessId } = useBusinessContext();
-  const { setOrderFeedbacks, setServiceFeedbacks } =
-    useDashboardFeedbackContext();
+  const { business } = useBusinessContext();
 
   if (!business) {
     return (
@@ -28,24 +26,12 @@ const DashboardInfo: NextPage = () => {
           <DashboardScore type="service" businessSlug={business?.slug} />
           <DashboardScore type="order" businessSlug={business?.slug} />
           <DashboardResponses businessSlug={business?.slug} />
-          {/* <DashboardResponses
-							data={serviceFeedbacksData.concat(orderFeedbacksData)}
-							businessId={businessId as number}
-						/>  */}
         </div>
 
-        {/* {serviceFeedbacksData && orderFeedbacksData && (
-					<div className={`${styles["dashboard-chart"]}`}>
-						<div className={`${styles["chart"]}`}>
-							<h4>Service feedback</h4>
-							<FeedbackChart data={serviceFeedbacksData} type="service" />
-						</div>
-						<h4>Order feedback</h4>
-						<div className={`${styles["chart"]}`}>
-							<FeedbackChart data={orderFeedbacksData} type="order" />
-						</div>
-					</div>
-				)} */}
+        <div className={`${styles["dashboard-chart"]}`}>
+          <FeedbackChart type="service" businessSlug={business?.slug} />
+          <FeedbackChart type="order" businessSlug={business?.slug} />
+        </div>
       </div>
     );
   }

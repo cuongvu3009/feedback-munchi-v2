@@ -9,10 +9,15 @@ import {
 } from "recharts";
 
 import { Feedback } from "@/types/feedback.types";
+import Spinner from "@/components/shared/Spinner";
+import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
+import { getFetcher } from "@/utils/fetcher";
+import styles from "./feedbackChart.module.css";
+import useSWR from "swr";
 
 interface LineChartProps {
-  data: Feedback[];
-  type: "service" | "order";
+  businessSlug: string;
+  type: string;
 }
 
 interface ChartData {
@@ -36,7 +41,7 @@ const mapEmojiToScore = (emoji: string): number => {
     case "awesome":
       return 5;
     default:
-      return 0; // Handle unknown values as needed
+      return 0;
   }
 };
 
@@ -53,24 +58,43 @@ const formatAverageScore = (value: number): string => {
   return value.toFixed(1);
 };
 
-const LineChartComponent: React.FC<LineChartProps> = ({ data, type }) => {
-  // Check if data is defined and not empty
-  if (!data || data.length === 0) {
-    // Handle the case where data is undefined or empty
+const LineChartComponent: React.FC<LineChartProps> = ({
+  type,
+  businessSlug,
+}) => {
+  const { data, error, isValidating } = useSWR(
+    `/api/feedback/${businessSlug}/${type}`,
+    getFetcher
+  );
+
+  // Handle loading state
+  if (isValidating) {
+    return <Spinner />;
+  }
+
+  // Handle error state
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  // Check if data is available and has the 'feedbacks' property
+  if (!data || !data.feedbacks) {
     return <div>No data available.</div>;
   }
 
-  // Group data by date and calculate average score based on the 'type'
-  const chartData: ChartData = data.reduce((acc, entry) => {
-    const date = formatDate(entry.createdAt as string);
-    if (!acc[date]) {
-      acc[date] = { date, totalScore: 0, count: 0 };
-    }
-    const score = mapEmojiToScore(entry.emoji);
-    acc[date].totalScore += score;
-    acc[date].count += 1;
-    return acc;
-  }, {} as ChartData);
+  const chartData: ChartData = data.feedbacks.reduce(
+    (acc: ChartData, entry: Feedback) => {
+      const date = formatDate(entry.createdAt);
+      if (!acc[date]) {
+        acc[date] = { date, totalScore: 0, count: 0 };
+      }
+      const score = mapEmojiToScore(entry.emoji);
+      acc[date].totalScore += score;
+      acc[date].count += 1;
+      return acc;
+    },
+    {} as ChartData
+  );
 
   // Convert grouped data into an array and sort it by date
   const finalChartData = Object.values(chartData)
@@ -81,16 +105,19 @@ const LineChartComponent: React.FC<LineChartProps> = ({ data, type }) => {
     .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
   return (
-    <ResponsiveContainer width="100%" height={300}>
-      <LineChart data={finalChartData}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="date" />
-        <YAxis domain={[1, 5]} ticks={[1, 2, 3, 4, 5]} />
-        {/* Adjust the domain and ticks */}
-        <Tooltip formatter={(value: number) => formatAverageScore(value)} />
-        <Line type="monotone" dataKey="averageScore" stroke="#8884d8" />
-      </LineChart>
-    </ResponsiveContainer>
+    <div className={`${styles["chart-container"]}`}>
+      <h4>{capitalizeFirstLetter(type)} feedback</h4>
+      <ResponsiveContainer width="100%" height={300}>
+        <LineChart data={finalChartData}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="date" />
+          <YAxis domain={[1, 5]} ticks={[1, 2, 3, 4, 5]} />
+          {/* Adjust the domain and ticks */}
+          <Tooltip formatter={(value: number) => formatAverageScore(value)} />
+          <Line type="monotone" dataKey="averageScore" stroke="#8884d8" />
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
   );
 };
 
