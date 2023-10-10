@@ -16,7 +16,7 @@ const DashboardResponses: React.FC<DashboardResponseProps> = ({
   data,
   businessId,
 }) => {
-  const [feedbackLimit, setFeedbackLimit] = useState<number>(7);
+  const [feedbackLimit, setFeedbackLimit] = useState<number>(10);
   const router = useRouter();
 
   const handleBtnClick = () => {

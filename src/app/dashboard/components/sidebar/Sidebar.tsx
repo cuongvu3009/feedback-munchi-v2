@@ -10,7 +10,7 @@ import { BusinessProps } from "@/types/dashboard.types";
 import Image from "next/image";
 import Link from "next/link";
 import LogoutBtn from "@/app/dashboard/components/LogoutBtn";
-import TradeMark from "../../../feedback/components/TradeMark";
+import TradeMark from "@/app/[locale]/feedback/components/TradeMark";
 import styles from "./sidebar.module.css";
 
 interface SidebarProps {
@@ -19,7 +19,7 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ business }) => {
-  const [sidebarOpen, setSideBarOpen] = useState(false);
+  const [sidebarOpen, setSideBarOpen] = useState(true);
 
   const handleViewSidebar = () => {
     setSideBarOpen(!sidebarOpen);
