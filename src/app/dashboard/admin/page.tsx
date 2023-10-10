@@ -39,20 +39,26 @@ const DashboardInfo: NextPage = () => {
     setOrderFeedbacks(orderFeedbacksData);
   }
 
+  if (!business) {
+    return (
+      <div className={`${styles["dashboard-info"]}`}>
+        <p>
+          <b>No business found! </b>
+        </p>
+      </div>
+    );
+  }
   return (
     <div className={`${styles["dashboard-info"]}`}>
-      {serviceFeedbackLoading && orderFeedbacksLoading && <Spinner />}
-      {serviceFeedbackErr && (
+      {(serviceFeedbackLoading || orderFeedbacksLoading) && <Spinner />}
+      {serviceFeedbackErr || orderFeedbacksErr ? (
         <div className={styles.error}>
-          <p>Error loading data: {serviceFeedbackErr.message}</p>
+          <p>
+            Error loading data:
+            {serviceFeedbackErr?.message || orderFeedbacksErr?.message}
+          </p>
         </div>
-      )}
-
-      {orderFeedbacksErr && (
-        <div className={styles.error}>
-          <p>Error loading data: {orderFeedbacksErr.message}</p>
-        </div>
-      )}
+      ) : null}
 
       {serviceFeedbacksData && orderFeedbacksData && (
         <div className={`${styles["dashboard-content"]}`}>
