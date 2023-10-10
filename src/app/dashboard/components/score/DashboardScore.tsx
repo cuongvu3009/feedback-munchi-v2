@@ -2,6 +2,10 @@ import { Feedback } from "@/types/feedback.types";
 import React from "react";
 import styles from "./dashboardScore.module.css";
 
+interface DashboardScoreProps {
+  data: Feedback[];
+}
+
 const getEmojiLabel = (emoji: string) => {
   switch (emoji) {
     case "terrible":
@@ -19,34 +23,10 @@ const getEmojiLabel = (emoji: string) => {
   }
 };
 
-// const calculateResponseCounts = (data: Feedback[]) => {
-//   const responseCounts: { [response: string]: number } = {};
-
-//   if (data && data.length > 0) {
-//     // Check if data is defined and not empty
-//     data.forEach((entry) => {
-//       const emoji = entry.emoji;
-//       if (emoji in responseCounts) {
-//         responseCounts[emoji]++;
-//       } else {
-//         responseCounts[emoji] = 1;
-//       }
-//     });
-//   }
-
-//   return responseCounts;
-// };
-// const getTotalResponses = (responseCounts: {
-//   [response: string]: number;
-// }) => {
-//   return Object.values(responseCounts).reduce(
-//     (total, count) => total + count,
-//     0
-//   );
-// };
-// const responseCounts = calculateResponseCounts(feedbacks as never);
-
 const DashboardScore: React.FC<DashboardScoreProps> = ({ data }) => {
+  const responseCounts = calculateResponseCounts(data);
+  const averageScore = calculateAverageScore(data);
+
   return (
     <div className={`${styles["dashboard-card"]}`}>
       <h3>Average score Service</h3>
