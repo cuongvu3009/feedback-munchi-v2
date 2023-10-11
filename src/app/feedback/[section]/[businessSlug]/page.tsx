@@ -118,7 +118,7 @@ const FeedbackPage: NextPage<{
 
   return (
     <>
-      {params.section == "service" ? (
+      {params.section == firstFlowItem.name ? (
         <Title isBack={false} />
       ) : (
         <Title isBack={true} />
