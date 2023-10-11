@@ -161,7 +161,6 @@ const FeedbackPage: NextPage<{
         {postErr && (
           <p style={{ color: "red" }}>Error sending feedback: {postErr} </p>
         )}
-
         <TradeMark />
       </div>
     </>

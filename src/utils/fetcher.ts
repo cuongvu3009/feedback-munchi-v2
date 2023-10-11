@@ -20,12 +20,6 @@ export const postFetcher = async (
       },
     });
 
-    if (response.status !== 200) {
-      throw new Error(
-        `Network response was not ok. Status: ${response.status}`
-      );
-    }
-
     return response.data;
   } catch (error: any) {
     throw new Error(`Failed to post data to ${url}: ${error.message}`);
