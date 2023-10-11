@@ -1,20 +1,33 @@
-export const getFetcher = (url: string) => fetch(url).then((res) => res.json());
+import axios from "axios";
 
-export const postFetcher = async <T>(
-  url: string,
-  options: RequestInit | undefined
-): Promise<T> => {
-  const response = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    ...options,
-  });
-
-  if (!response.ok) {
-    throw new Error("Network response was not ok");
+export const getFetcher = async (url: string) => {
+  try {
+    const response = await axios.get(url);
+    return response.data;
+  } catch (error: any) {
+    throw new Error(`Failed to fetch data from ${url}: ${error.message}`);
   }
+};
 
-  return response.json();
+export const postFetcher = async (
+  url: string,
+  payload: RequestInit | undefined
+) => {
+  try {
+    const response = await axios.post(url, payload, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.status !== 200) {
+      throw new Error(
+        `Network response was not ok. Status: ${response.status}`
+      );
+    }
+
+    return response.data;
+  } catch (error: any) {
+    throw new Error(`Failed to post data to ${url}: ${error.message}`);
+  }
 };
