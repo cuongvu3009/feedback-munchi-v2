@@ -1,16 +1,5 @@
 import prisma from "@/lib/prisma";
 
-export interface Feedback {
-  id: number;
-  emoji: string;
-  businessSlug: string;
-  comment: string | null;
-  tags: string[];
-  createdAt: string;
-  updatedAt: string;
-  type: string;
-}
-
 export async function GET(
   req: Request,
   { params }: { params: { businessSlug: string; type: string } }
