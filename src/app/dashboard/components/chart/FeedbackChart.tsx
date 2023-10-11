@@ -73,7 +73,8 @@ const LineChartComponent: React.FC<LineChartProps> = ({
 
   // Handle error state
   if (error) {
-    return <div>Error: {error.message}</div>;
+    console.log(error);
+    return <div>Error loading chart data!</div>;
   }
 
   // Check if data is available and has the 'feedbacks' property

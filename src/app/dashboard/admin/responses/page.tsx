@@ -39,8 +39,9 @@ const DashboardResponses = () => {
 
   // Error state
   if (error) {
+    console.log(error);
     return (
-      <div className={styles.error}>Error loading data: {error.message}</div>
+      <div className={styles.error}>Error loading feedback responses data!</div>
     );
   }
 

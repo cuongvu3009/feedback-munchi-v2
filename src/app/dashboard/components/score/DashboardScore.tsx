@@ -36,7 +36,8 @@ const DashboardScore: React.FC<DashboardScoreProps> = ({
   );
 
   if (error) {
-    return <div>Error loading data.</div>;
+    console.log(error);
+    return <div>Error loading score data!</div>;
   }
 
   if (isValidating || !data) {

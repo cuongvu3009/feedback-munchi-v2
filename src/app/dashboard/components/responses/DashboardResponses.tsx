@@ -46,7 +46,8 @@ const DashboardResponses: React.FC<DashboardResponseProps> = ({
   };
 
   if (error) {
-    return <div>Error loading data...</div>;
+    console.log(error);
+    return <div>Error loading reponses data!</div>;
   }
 
   if (isValidating) {
