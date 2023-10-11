@@ -2,7 +2,7 @@
 
 import "./feedbackLayout.css";
 
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useState } from "react";
 
 import { NextIntlClientProvider } from "next-intl";
 import engTranslation from "../../../translation/en.json";
@@ -37,27 +37,24 @@ export default function LocaleLayout({ children }: { children: ReactNode }) {
 
   return (
     // 4: locale is now stored in contextAPI which later be used for redirecting
-    <html lang={locale}>
-      <body>
-        <div className="mobile">
-          <div className="language-selector">
-            <select
-              id="languageSelect"
-              onChange={handleLanguageChange}
-              value={locale}
-            >
-              {availableLanguages.map((langOption) => (
-                <option key={langOption.locale} value={langOption.locale}>
-                  {langOption.label}
-                </option>
-              ))}
-            </select>
-          </div>
-          <NextIntlClientProvider locale={locale} messages={messages}>
-            {children}
-          </NextIntlClientProvider>
+    <NextIntlClientProvider locale={locale} messages={messages}>
+      <div className="mobile">
+        <div className="language-selector">
+          <select
+            id="languageSelect"
+            onChange={handleLanguageChange}
+            value={locale}
+          >
+            {availableLanguages.map((langOption) => (
+              <option key={langOption.locale} value={langOption.locale}>
+                {langOption.label}
+              </option>
+            ))}
+          </select>
         </div>
-      </body>
-    </html>
+
+        {children}
+      </div>
+    </NextIntlClientProvider>
   );
 }
