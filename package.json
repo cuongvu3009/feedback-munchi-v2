@@ -22,7 +22,7 @@
     "eslint-config-next": "13.4.19",
     "jsonwebtoken": "^9.0.2",
     "moment": "^2.29.4",
-    "next": "13.4.19",
+    "next": "^13.5.4",
     "next-intl": "^2.20.2",
     "ordering-api-sdk": "github:sergioaok/ordering-api-sdk",
     "postcss": "8.4.29",
