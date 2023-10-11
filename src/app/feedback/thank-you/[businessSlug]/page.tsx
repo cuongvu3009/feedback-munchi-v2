@@ -8,25 +8,24 @@ import Button from "@/components/shared/Button";
 import { NextPage } from "next";
 import { PiHeartStraightLight } from "react-icons/pi";
 import { ThankyoukPageProps } from "@/types/feedback.types";
-import Title from "@/components/shared/Title";
+import Title from "@/app/feedback/components/Title";
 import TradeMark from "@/app/feedback/components/TradeMark";
 import axios from "axios";
-import { postFetcher } from "@/utils/fetcher";
 import { useEffect } from "react";
-import useSWR from "swr";
+import { useTranslations } from "next-intl";
 
 const EndFeedBack: NextPage<ThankyoukPageProps> = ({ params }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const stripe_session_id = searchParams.get("session_id");
+  const t = useTranslations("Thankyou");
 
   useEffect(() => {
     const storePayment = async () => {
       if (stripe_session_id && params.businessSlug) {
-        const result = await axios.post(
+        await axios.post(
           `/api/transaction/${params.businessSlug}/${stripe_session_id}/`
         );
-        console.log(result);
       }
     };
     storePayment();
@@ -39,16 +38,16 @@ const EndFeedBack: NextPage<ThankyoukPageProps> = ({ params }) => {
       <div className="end-feedback">
         <PiHeartStraightLight size={100} />
         <h3>
-          <b>Thank you!</b>
+          <b>{t("Thank you!")}</b>
         </h3>
-        <p>Your feedback helps</p>
-        <p>us improve our service.</p>
+        <p>{t("Your feedback helps")}</p>
+        <p>{t("us improve our service")}</p>
       </div>
 
       <div className="navigation">
         <Button
           version="secondary"
-          btnText="Submit another feedback"
+          btnText={t("submitAnotherBtn")}
           onClick={() =>
             router.push(`/feedback/service/${params.businessSlug}/`)
           }

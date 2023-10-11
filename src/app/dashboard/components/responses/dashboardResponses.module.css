@@ -1,6 +1,6 @@
 .dashboard-card {
   height: fit-content;
-  padding: 10px;
+  padding: 4.5px;
   width: 100%;
   border: 1px groove #f3f3f3;
   text-align: center;
@@ -11,4 +11,5 @@
   justify-content: space-between;
   padding: 0;
   align-items: center;
+  gap: 4px;
 }

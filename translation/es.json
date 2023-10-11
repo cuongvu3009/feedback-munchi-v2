@@ -1,0 +1,56 @@
+{
+  "Index": {
+    "title": "Tere, Maailm!"
+  },
+  "Feedback": {
+    "title": "Tagasiside",
+    "questionService": "Kuidas teie kogemus oli?",
+    "subQuestionService": "Teie tagasiside aitab meil teenust täiustada.",
+    "questionOrder": "Kuidas teie tellimus läks?",
+    "subQuestionOrder": "Teie tagasiside aitab meil oma tooteid täiustada.",
+    "nextBtn": "Edasi",
+    "submitBtn": "Esitage tagasisidet",
+    "good": "Hea",
+    "bad": "Halb",
+    "terrible": "Kohutav",
+    "okey": "Okei",
+    "awesome": "Vinge"
+  },
+  "Tags": {
+    "What went terrible?": "What went terrible?",
+    "What make you feel terrible?": "What make you feel terrible?",
+    "What went bad?": "What went bad?",
+    "What make you feel bad?": "What make you feel bad?",
+    "What went okey?": "What went okey?",
+    "What make you feel okey?": "What make you feel okey?",
+    "What went good?": "What went good?",
+    "What make you feel good?": "What make you feel good?",
+    "What went awesome?": "What went awesome?",
+    "What make you feel awesome?": "What make you feel awesome?",
+    "Service": "Service",
+    "Waiting time": "Waiting time",
+    "Professionalism": "Professionalism",
+    "Positiveness": "Positiveness",
+    "Atmosphere": "Atmosphere"
+  },
+  "Comment": {
+    "addComentBtn": "+ Lisage restorani kommentaar",
+    "commentTitle": "Lisage restorani kommentaar",
+    "placeHolder": "Your comment here...",
+    "saveBtn": "Save",
+    "cancelBtn": "Cancel"
+  },
+  "Tip": {
+    "Thank you!": "Thank you!",
+    "Your feedback helps us improve our service.": "Your feedback helps us improve our service.",
+    "Do you want to support us?": "Do you want to support us?",
+    "Leave a tip for our hard working team!": "Leave a tip for our hard working team!",
+    "No, thank you": "No, thank you"
+  },
+  "Thankyou": {
+    "Thank you!": "Thank you!",
+    "Your feedback helps": "Your feedback helps",
+    "us improve our service.": "us improve our service.",
+    "submitAnotherBtn": "Submit another feedback"
+  }
+}

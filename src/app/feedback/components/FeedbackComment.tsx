@@ -5,11 +5,13 @@ import React, { useRef, useState } from "react";
 import Button from "@/components/shared/Button";
 import { CommentProps } from "@/types/feedback.types";
 import { useFeedbackContext } from "@/context/FeedbackContext";
+import { useTranslations } from "next-intl";
 
 const FeedbackComment: React.FC<CommentProps> = ({ type, emoji }) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const commentRef = useRef<string>("");
+  const t = useTranslations("Comment");
 
   const { addOrUpdateRatingItem } = useFeedbackContext();
 
@@ -23,6 +25,8 @@ const FeedbackComment: React.FC<CommentProps> = ({ type, emoji }) => {
 
   const handleCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     commentRef.current = e.target.value;
+    // Update the state to reflect changes in the textarea
+    setIsFormSubmitted(false); // Reset the form submitted state
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -53,22 +57,26 @@ const FeedbackComment: React.FC<CommentProps> = ({ type, emoji }) => {
             }`}
             onClick={openPopup}
           >
-            + Add a comment for the restaurant
+            {t("addComentBtn")}
           </div>
         </div>
       </div>
       {isPopupOpen && (
         <div className="popup">
           <form className="popup-container" onSubmit={handleSubmit}>
-            <h3 className="popup-comment">Add a comment for the restaurant</h3>
+            <h3 className="popup-comment">{t("commentTitle")}</h3>
 
             <textarea
-              placeholder="Your comment here..."
+              placeholder={t("placeHolder")}
               defaultValue={commentRef.current} // Use defaultValue to initialize the textarea
               onChange={handleCommentChange}
             ></textarea>
-            <Button type="submit" version="primary" btnText="Save" />
-            <Button onClick={closePopup} version="secondary" btnText="Cancel" />
+            <Button type="submit" version="primary" btnText={t("saveBtn")} />
+            <Button
+              onClick={closePopup}
+              version="secondary"
+              btnText={t("cancelBtn")}
+            />
           </form>
         </div>
       )}

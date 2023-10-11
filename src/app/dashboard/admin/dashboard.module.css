@@ -21,3 +21,9 @@
   font-weight: bold;
   width: fit-content;
 }
+
+@media (max-width: 800px) {
+  .children {
+    width: 0;
+  }
+}

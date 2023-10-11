@@ -6,6 +6,13 @@
   flex-direction: column;
   justify-content: space-between;
   text-align: center;
+  position: relative;
+}
+
+.language-selector {
+  position: absolute;
+  right: 0;
+  top: 5px;
 }
 
 .feedback-title {
@@ -41,6 +48,7 @@
 
 .munchi-logo {
   display: flex; /* Use flexbox to align items horizontally */
+  flex-wrap: wrap;
   align-items: center; /* Vertically center items */
   justify-content: center;
   margin: 20px;

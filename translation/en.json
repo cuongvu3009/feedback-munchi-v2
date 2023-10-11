@@ -1,0 +1,56 @@
+{
+  "Index": {
+    "title": "Hello world!"
+  },
+  "Feedback": {
+    "title": "Feedback",
+    "questionService": "How was your experience?",
+    "subQuestionService": "Your feedback helps us improve our service.",
+    "questionOrder": "How was your order?",
+    "subQuestionOrder": "Your feedback helps us improve our products.",
+    "nextBtn": "Next",
+    "submitBtn": "Submit Feedback",
+    "good": "Good",
+    "bad": "Bad",
+    "terrible": "Terrible",
+    "okey": "Okey",
+    "awesome": "Awesome"
+  },
+  "Tags": {
+    "What went terrible?": "What went terrible?",
+    "What make you feel terrible?": "What make you feel terrible?",
+    "What went bad?": "What went bad?",
+    "What make you feel bad?": "What make you feel bad?",
+    "What went okey?": "What went okey?",
+    "What make you feel okey?": "What make you feel okey?",
+    "What went good?": "What went good?",
+    "What make you feel good?": "What make you feel good?",
+    "What went awesome?": "What went awesome?",
+    "What make you feel awesome?": "What make you feel awesome?",
+    "Service": "Service",
+    "Waiting time": "Waiting time",
+    "Professionalism": "Professionalism",
+    "Positiveness": "Positiveness",
+    "Atmosphere": "Atmosphere"
+  },
+  "Comment": {
+    "addComentBtn": "+ Add a comment for the restaurant",
+    "commentTitle": "Add a comment for the restaurant",
+    "placeHolder": "Your comment here...",
+    "saveBtn": "Save",
+    "cancelBtn": "Cancel"
+  },
+  "Tip": {
+    "Thank you!": "Thank you!",
+    "Your feedback helps us improve our service": "Your feedback helps us improve our service.",
+    "Do you want to support us?": "Do you want to support us?",
+    "Leave a tip for our hard working team!": "Leave a tip for our hard working team!",
+    "No, thank you": "No, thank you"
+  },
+  "Thankyou": {
+    "Thank you!": "Thank you!",
+    "Your feedback helps": "Your feedback helps",
+    "us improve our service": "us improve our service.",
+    "submitAnotherBtn": "Submit another feedback"
+  }
+}

@@ -53,3 +53,16 @@
   width: fit-content;
   border-radius: 50px;
 }
+
+.emojiContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.emoji {
+  padding: 10px;
+  border-radius: 15px;
+  transition: opacity 0.3s ease;
+  background: #f3f3f5;
+}

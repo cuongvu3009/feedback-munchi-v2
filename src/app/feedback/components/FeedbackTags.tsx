@@ -6,10 +6,12 @@ import { FeedbackTagsProps } from "@/types/feedback.types";
 import { defaultTags } from "@/utils/defaultTags";
 import { tagsQuestion } from "@/utils/tagsQuestion";
 import { useFeedbackContext } from "@/context/FeedbackContext";
+import { useTranslations } from "next-intl";
 
 const FeedbackTags: React.FC<FeedbackTagsProps> = ({ type, emoji }) => {
   const { addOrUpdateRatingItem } = useFeedbackContext();
   const [tags, setTags] = useState<string[]>([]);
+  const t = useTranslations("Tags");
 
   // Function to map emojiOrder to tags
   const getTagsForEmoji = () => {
@@ -42,9 +44,12 @@ const FeedbackTags: React.FC<FeedbackTagsProps> = ({ type, emoji }) => {
       {tagsQuestion[emoji as string] && (
         <div>
           <h3 className="question">
-            <b>{tagsQuestion[emoji as string]["question_1"]}</b>
+            {/* <b>{tagsQuestion[emoji as string]["question_1"]}</b> */}
+            <b>{t(tagsQuestion[emoji as string]["question_1"])}</b>
           </h3>
-          <p className="text">{tagsQuestion[emoji as string]["question_2"]}</p>
+          <p className="text">
+            {t(tagsQuestion[emoji as string]["question_2"])}
+          </p>
         </div>
       )}
 
@@ -61,7 +66,7 @@ const FeedbackTags: React.FC<FeedbackTagsProps> = ({ type, emoji }) => {
                 checked={tags.includes(tag)}
                 onChange={() => handleTagSelection(tag)}
               />
-              {tag}
+              {t(tag)}
             </label>
           </li>
         ))}

@@ -1,3 +1,5 @@
+"use client";
+
 import { RatingItem, RatingProps } from "@/types/feedback.types";
 import React, { useState } from "react";
 
@@ -8,13 +10,14 @@ import FeedbackTags from "./FeedbackTags";
 import GoodSVG from "@/utils/emoji-svg/GoodSVG";
 import OkeySVG from "@/utils/emoji-svg/OkeySVG";
 import TerribleSVG from "@/utils/emoji-svg/TerribleSVG";
-import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 import { ratingOptions } from "@/utils/ratingOptions";
 import { useFeedbackContext } from "@/context/FeedbackContext";
+import { useTranslations } from "next-intl";
 
 const Rating: React.FC<RatingProps> = ({ type, businessSlug }) => {
-  const { rating, addOrUpdateRatingItem } = useFeedbackContext();
+  const { addOrUpdateRatingItem } = useFeedbackContext();
   const [emoji, setEmoji] = useState<string | null>(null);
+  const t = useTranslations("Feedback");
 
   const handleEmojiChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newEmoji = e.target.value;
@@ -43,7 +46,6 @@ const Rating: React.FC<RatingProps> = ({ type, businessSlug }) => {
             good: <GoodSVG size={50} />,
             awesome: <AwesomeSVG size={50} />,
           }[option.value];
-
           return (
             <div className="emoji-wrapper" key={`rating-${index + 1}`}>
               <li key={`rating-${index + 1}`}>
@@ -69,7 +71,7 @@ const Rating: React.FC<RatingProps> = ({ type, businessSlug }) => {
                 </label>
               </li>
               <h3 className="emoji-text">
-                {capitalizeFirstLetter(option.value)}
+                {option.value && t(`${option.value}`)}
               </h3>
             </div>
           );

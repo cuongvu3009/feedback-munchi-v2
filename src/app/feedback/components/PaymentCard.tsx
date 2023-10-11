@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckoutOneTimePaymentBody } from "@/app/api/checkout-sessions/route";
+import { CheckoutOneTimePaymentBody } from "@/types/api.types";
 import Stripe from "stripe";
 import { loadStripe } from "@stripe/stripe-js";
 

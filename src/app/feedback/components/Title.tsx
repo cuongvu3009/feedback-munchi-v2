@@ -1,5 +1,6 @@
 import { BiArrowBack } from "react-icons/bi";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 interface TitleProps {
   isBack: boolean;
@@ -7,6 +8,7 @@ interface TitleProps {
 
 const Title: React.FC<TitleProps> = ({ isBack }) => {
   const router = useRouter();
+  const t = useTranslations("Feedback");
 
   return (
     <div className="feedback-title">
@@ -14,7 +16,7 @@ const Title: React.FC<TitleProps> = ({ isBack }) => {
         {isBack ? <BiArrowBack size={25} /> : ""}
       </button>
       <h1>
-        <b>Feedback</b>
+        <b>{t("title")}</b>
       </h1>
       <p></p>
     </div>

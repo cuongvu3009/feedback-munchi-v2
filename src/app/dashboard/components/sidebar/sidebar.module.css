@@ -1,13 +1,27 @@
 .sidebar {
-  width: 250px;
-  padding: 10px;
-  height: 100vh;
-  background-color: #e8eaee;
+  transition: left 0.5s ease-in-out;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 16vw;
+  padding: 10px;
+  height: 100vh;
+  background-color: #e8eaee;
   align-items: center;
 }
+
+.hideSidebar {
+  position: absolute;
+  left: -100vw;
+  transition: left 0.5s ease-in-out;
+}
+
+.sidebarToggle {
+  height: 100vh;
+  background-color: green;
+  color: green;
+}
+
 .sidebar-top {
 }
 
@@ -23,6 +37,7 @@
 .logo {
   border-radius: 50%;
   background-color: inherit;
+  margin: 15px 0;
 }
 
 .menu-button {
@@ -74,4 +89,14 @@
 
 .content.shift {
   margin-left: 250px;
+}
+
+@media (max-width: 850px) {
+  .sidebar {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  .hideSidebar {
+    left: -900px;
+  }
 }

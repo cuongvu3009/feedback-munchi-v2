@@ -8,17 +8,19 @@ import FeedbackContext from "@/context/FeedbackContext";
 import { GrStatusGood } from "react-icons/gr";
 import { NextPage } from "next";
 import OneTimePaymentCard from "../../components/PaymentCard";
-import Title from "@/components/shared/Title";
+import Title from "@/app/feedback/components/Title";
 import TradeMark from "@/app/feedback/components/TradeMark";
 import { tipOptions } from "@/utils/tipOptions";
 import { useContext } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
-const SuccessFeedback: NextPage<{ params: { businessSlug: string } }> = ({
-  params,
-}) => {
+const SuccessFeedback: NextPage<{
+  params: { businessSlug: string };
+}> = ({ params }) => {
   const router = useRouter();
   const { selectedTip, setSelectedTip } = useContext(FeedbackContext);
+  const t = useTranslations("Tip");
 
   const handleChange = (e: any) => {
     setSelectedTip(+e.target.value);
@@ -30,16 +32,16 @@ const SuccessFeedback: NextPage<{ params: { businessSlug: string } }> = ({
       <div className="success">
         <GrStatusGood size={100} />
         <h3>
-          <b>Thank you!</b>
+          <b>{t("Thank you!")}</b>
         </h3>
-        <p>Your feedback helps us improve our service.</p>
+        <p>{t("Your feedback helps us improve our service")}</p>
       </div>
 
       <div className="support">
         <p>
-          <b>Do you want to support us?</b>
+          <b>{t("Do you want to support us?")}</b>
         </p>
-        <p>Leave a tip for our hard working team!</p>
+        <p>{t("Leave a tip for our hard working team!")}</p>
 
         <ul className="tip">
           {tipOptions.map((option, index) => (
@@ -72,7 +74,7 @@ const SuccessFeedback: NextPage<{ params: { businessSlug: string } }> = ({
 
         <Button
           version="normal"
-          btnText="No, thank you"
+          btnText={t("No, thank you")}
           onClick={() =>
             router.push(`/feedback/thank-you/${params.businessSlug}`)
           }
