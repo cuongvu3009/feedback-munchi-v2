@@ -5,6 +5,7 @@ import Spinner from "@/components/shared/Spinner";
 import { getFetcher } from "@/utils/fetcher";
 import moment from "moment";
 import styles from "./dashboardResponses.module.css";
+import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import useSWR from "swr";
 
@@ -46,7 +47,7 @@ const DashboardResponses: React.FC<DashboardResponseProps> = ({
   };
 
   if (error) {
-    console.log(error);
+    toast.error(error.message);
     return <div>Error loading reponses data!</div>;
   }
 

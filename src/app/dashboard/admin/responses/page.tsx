@@ -9,6 +9,7 @@ import Spinner from "@/components/shared/Spinner";
 import { getFetcher } from "@/utils/fetcher";
 import moment from "moment";
 import styles from "./responses.module.css";
+import { toast } from "react-toastify";
 import { useBusinessContext } from "@/context/BusinessContext";
 import useSWR from "swr";
 
@@ -34,12 +35,13 @@ const DashboardResponses = () => {
   }
 
   if (!data) {
+    toast.error("No Data found from the database!");
     return <div className={styles.error}>No Data found from the database!</div>;
   }
 
   // Error state
   if (error) {
-    console.log(error);
+    toast.error(error.message);
     return (
       <div className={styles.error}>Error loading feedback responses data!</div>
     );

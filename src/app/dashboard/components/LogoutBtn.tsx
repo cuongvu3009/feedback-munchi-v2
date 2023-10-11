@@ -1,5 +1,6 @@
 import { GrLogout } from "react-icons/gr";
 import React from "react";
+import { toast } from "react-toastify";
 import { useAuthContext } from "@/context/AuthContext";
 import { useBusinessContext } from "@/context/BusinessContext";
 import { useRouter } from "next/navigation";
@@ -16,6 +17,7 @@ const LogoutBtn = () => {
     setUser(null);
 
     router.push("/dashboard/login");
+    toast.success("Log out successful!");
   };
 
   const buttonStyles = {

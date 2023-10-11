@@ -13,6 +13,7 @@ import TradeMark from "@/app/feedback/components/TradeMark";
 import axios from "axios";
 import { getFetcher } from "@/utils/fetcher";
 import styles from "./feedbackPage.module.css";
+import { toast } from "react-toastify";
 import { useFeedbackContext } from "@/context/FeedbackContext";
 import { useRouter } from "next/navigation";
 import useSWR from "swr";
@@ -86,6 +87,7 @@ const FeedbackPage: NextPage<{
             break; // No need to continue checking if we found one
           }
         }
+        toast.success("Feedback created!");
         // Redirect based on the result
         if (hasBadOrTerribleEmoji) {
           router.push(`/feedback/thank-you/${params.businessSlug}`);
@@ -96,8 +98,8 @@ const FeedbackPage: NextPage<{
         // clean up after submit feedback
         resetContextState();
       }
-    } catch (error: string | unknown) {
-      console.log(error);
+    } catch (error: any) {
+      toast.error(error.message as string);
       setPostErr(error as string);
     }
   }, [params.businessSlug, rating, resetContextState, router]);

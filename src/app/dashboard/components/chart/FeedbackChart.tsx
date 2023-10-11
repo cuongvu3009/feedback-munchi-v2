@@ -13,6 +13,7 @@ import Spinner from "@/components/shared/Spinner";
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 import { getFetcher } from "@/utils/fetcher";
 import styles from "./feedbackChart.module.css";
+import { toast } from "react-toastify";
 import useSWR from "swr";
 
 interface LineChartProps {
@@ -73,7 +74,7 @@ const LineChartComponent: React.FC<LineChartProps> = ({
 
   // Handle error state
   if (error) {
-    console.log(error);
+    toast.error(error.message);
     return <div>Error loading chart data!</div>;
   }
 

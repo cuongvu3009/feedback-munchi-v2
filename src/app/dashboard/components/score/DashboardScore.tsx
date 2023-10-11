@@ -2,6 +2,7 @@ import React from "react";
 import Spinner from "@/components/shared/Spinner";
 import { getFetcher } from "@/utils/fetcher";
 import styles from "./dashboardScore.module.css";
+import { toast } from "react-toastify";
 import useSWR from "swr";
 
 interface DashboardScoreProps {
@@ -36,7 +37,7 @@ const DashboardScore: React.FC<DashboardScoreProps> = ({
   );
 
   if (error) {
-    console.log(error);
+    toast.error(error.message);
     return <div>Error loading score data!</div>;
   }
 
