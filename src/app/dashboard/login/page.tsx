@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 
 import { API_BASE_URL } from "@/utils/constantAPI";
 import Spinner from "@/components/shared/Spinner";
@@ -63,15 +64,30 @@ const Login = () => {
 
     if (email && password) {
       setResponse({ data: null, loading: true, error: null });
-      await loginUser(email, password);
+
+      try {
+        const result = await axios({
+          method: "POST",
+          url: `${API_BASE_URL}/auth/`,
+          data: {
+            email,
+            password,
+          },
+        });
+
+        setUser(result.data.result);
+        setResponse({ data: result.data.result, loading: false, error: null });
+
+        toast.success("Login successful!");
+      } catch (error: any) {
+        setResponse({ data: null, loading: false, error });
+
+        toast.error(error.message);
+      }
+
+      router.push(`/dashboard/admin/`);
     }
-
-    router.push(`/dashboard/admin/`);
   };
-
-  if (response.error) {
-    console.log(response.error);
-  }
 
   return (
     <div className={styles.container}>
@@ -108,12 +124,8 @@ const Login = () => {
           type="submit"
           disabled={response.loading}
         >
-          {response.loading ? "Logging in..." : "Login"}
+          {response.loading ? <Spinner /> : "Login"}
         </button>
-        {response.error && (
-          <p className={styles.error}>Login failed. Please try again.</p>
-        )}
-        {response.data && <p className={styles.success}>Login successful!</p>}
       </form>
       <TradeMark />
     </div>

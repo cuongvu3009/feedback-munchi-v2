@@ -29,6 +29,7 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.11.0",
     "react-query": "^3.39.3",
+    "react-toastify": "^9.1.3",
     "recharts": "^2.8.0",
     "store": "^2.0.12",
     "stripe": "^13.7.0",
