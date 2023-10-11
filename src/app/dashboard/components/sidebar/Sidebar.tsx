@@ -55,6 +55,12 @@ const Sidebar: React.FC<SidebarProps> = ({ business }) => {
                 Responses
               </Link>
               <Link
+                href={`/dashboard/admin/tips`}
+                className={`${styles["sidebar-link"]}`}
+              >
+                Tips
+              </Link>
+              <Link
                 href={`/dashboard/admin/settings`}
                 className={`${styles["sidebar-link"]}`}
               >

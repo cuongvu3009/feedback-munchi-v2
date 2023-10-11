@@ -1,5 +1,15 @@
 import { User } from "@/types/auth.types";
 
+export interface Transaction {
+  id: number;
+  createdAt: string;
+  businessSlug: string;
+  paymentAmount: number;
+  currency: string;
+  paymentId: string;
+  stripeSessionId: string;
+}
+
 export interface BusinessProps {
   slug: string;
   logo: string;
