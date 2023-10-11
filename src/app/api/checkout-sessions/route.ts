@@ -1,13 +1,7 @@
+import { CheckoutOneTimePaymentBody } from "@/types/api.types";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 import { stripe } from "@/lib/stripe";
-
-// data needed for checkout
-export interface CheckoutOneTimePaymentBody {
-  businessSlug: string;
-  paymentDescription: string;
-  amount: number;
-}
 
 export async function POST(req: Request) {
   const body = (await req.json()) as CheckoutOneTimePaymentBody;
