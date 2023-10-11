@@ -7,6 +7,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Button from "@/components/shared/Button";
 import { NextPage } from "next";
 import { PiHeartStraightLight } from "react-icons/pi";
+import { ThankyoukPageProps } from "@/types/feedback.types";
 import Title from "@/components/shared/Title";
 import TradeMark from "@/app/feedback/components/TradeMark";
 import axios from "axios";
@@ -14,11 +15,7 @@ import { postFetcher } from "@/utils/fetcher";
 import { useEffect } from "react";
 import useSWR from "swr";
 
-interface EndFeedbackPageProps {
-  params: { businessSlug: string };
-}
-
-const EndFeedBack: NextPage<EndFeedbackPageProps> = ({ params }) => {
+const EndFeedBack: NextPage<ThankyoukPageProps> = ({ params }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const stripe_session_id = searchParams.get("session_id");

@@ -3,12 +3,8 @@
 import React, { useRef, useState } from "react";
 
 import Button from "@/components/shared/Button";
+import { CommentProps } from "@/types/feedback.types";
 import { useFeedbackContext } from "@/context/FeedbackContext";
-
-interface CommentProps {
-  type: string;
-  emoji: string;
-}
 
 const FeedbackComment: React.FC<CommentProps> = ({ type, emoji }) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);

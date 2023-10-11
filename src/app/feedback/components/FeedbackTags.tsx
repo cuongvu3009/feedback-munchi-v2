@@ -2,14 +2,10 @@
 
 import React, { useState } from "react";
 
+import { FeedbackTagsProps } from "@/types/feedback.types";
 import { defaultTags } from "@/utils/defaultTags";
 import { tagsQuestion } from "@/utils/tagsQuestion";
 import { useFeedbackContext } from "@/context/FeedbackContext";
-
-interface FeedbackTagsProps {
-  type: string;
-  emoji: string;
-}
 
 const FeedbackTags: React.FC<FeedbackTagsProps> = ({ type, emoji }) => {
   const { addOrUpdateRatingItem } = useFeedbackContext();

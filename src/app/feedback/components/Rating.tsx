@@ -1,3 +1,4 @@
+import { RatingItem, RatingProps } from "@/types/feedback.types";
 import React, { useState } from "react";
 
 import AwesomeSVG from "@/utils/emoji-svg/AwesomeSVG";
@@ -11,17 +12,6 @@ import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 import { ratingOptions } from "@/utils/ratingOptions";
 import { useFeedbackContext } from "@/context/FeedbackContext";
 
-interface RatingProps {
-  type: string;
-  businessSlug: string;
-}
-interface RatingItem {
-  type: string;
-  emoji: string;
-  businessSlug: string;
-  comment?: string;
-  tags?: string[];
-}
 const Rating: React.FC<RatingProps> = ({ type, businessSlug }) => {
   const { rating, addOrUpdateRatingItem } = useFeedbackContext();
   const [emoji, setEmoji] = useState<string | null>(null);
