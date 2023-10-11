@@ -1,17 +1,12 @@
 "use client";
 
-import { BusinessProps } from "@/types/dashboard.types";
 import Image from "next/image";
 import Link from "next/link";
 import LogoutBtn from "@/app/dashboard/components/LogoutBtn";
 import React from "react";
+import { SidebarProps } from "@/types/dashboard.types";
 import TradeMark from "../../../feedback/components/TradeMark";
 import styles from "./sidebar.module.css";
-
-interface SidebarProps {
-  business?: BusinessProps;
-  businessId?: number;
-}
 
 const Sidebar: React.FC<SidebarProps> = ({ business }) => {
   return (

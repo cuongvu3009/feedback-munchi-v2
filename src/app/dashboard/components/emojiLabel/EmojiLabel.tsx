@@ -1,14 +1,12 @@
 import AwesomeSVG from "@/utils/emoji-svg/AwesomeSVG";
 import BadSVG from "@/utils/emoji-svg/BadSVG";
+import { EmojiLabelProps } from "@/types/dashboard.types";
 import GoodSVG from "@/utils/emoji-svg/GoodSVG";
 import OkeySVG from "@/utils/emoji-svg/OkeySVG";
 import React from "react";
 import TerribleSVG from "@/utils/emoji-svg/TerribleSVG";
 import styles from "./emojiLabel.module.css";
 
-interface EmojiLabelProps {
-  emoji: string;
-}
 const EmojiLabel: React.FC<EmojiLabelProps> = ({ emoji }) => {
   switch (emoji) {
     case "terrible":

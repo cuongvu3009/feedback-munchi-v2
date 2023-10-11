@@ -7,6 +7,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { ChartData, LineChartProps } from "@/types/dashboard.types";
 
 import { Feedback } from "@/types/feedback.types";
 import Spinner from "@/components/shared/Spinner";
@@ -15,19 +16,6 @@ import { getFetcher } from "@/utils/fetcher";
 import styles from "./feedbackChart.module.css";
 import { toast } from "react-toastify";
 import useSWR from "swr";
-
-interface LineChartProps {
-  businessSlug: string;
-  type: string;
-}
-
-interface ChartData {
-  [date: string]: {
-    date: string;
-    totalScore: number;
-    count: number;
-  };
-}
 
 const mapEmojiToScore = (emoji: string): number => {
   switch (emoji) {

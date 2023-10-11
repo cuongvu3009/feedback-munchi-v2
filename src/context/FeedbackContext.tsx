@@ -2,19 +2,20 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 
-interface RatingItem {
+interface RatingContextItem {
   type: string;
   emoji: string;
   comment?: string;
   tags?: string[];
 }
 
+
 export interface FeedbackContextProps {
-  rating: RatingItem[];
+  rating: RatingContextItem[];
   selectedTip: number | undefined;
   setSelectedTip: (value: number) => void;
   isTip: boolean;
-  addOrUpdateRatingItem: (value: RatingItem) => void;
+  addOrUpdateRatingItem: (value: RatingContextItem) => void;
   resetContextState: () => void;
 }
 
@@ -26,7 +27,7 @@ const FeedbackContext = createContext<FeedbackContextProps>({
     throw new Error("Function not implemented.");
   },
   isTip: false,
-  addOrUpdateRatingItem: function (value: RatingItem): void {
+  addOrUpdateRatingItem: function (value: RatingContextItem): void {
     throw new Error("Function not implemented.");
   },
   resetContextState: function (): void {
@@ -45,11 +46,11 @@ export const useFeedbackContext = () => {
 };
 
 export const FeedbackProvider = ({ children }: any) => {
-  const initialRating: RatingItem[] = [];
+  const initialRating: RatingContextItem[] = [];
   const initialSelectedTip: number | undefined = undefined;
   const initialIsTip: boolean = false;
 
-  const [rating, setRating] = useState<RatingItem[]>(initialRating);
+  const [rating, setRating] = useState<RatingContextItem[]>(initialRating);
   const [selectedTip, setSelectedTip] = useState<number | undefined>(
     initialSelectedTip
   );
@@ -75,7 +76,7 @@ export const FeedbackProvider = ({ children }: any) => {
   //   // other properties...
   // };
   // To add comment for example, addOrUpdateRatingItem(newRatingItem, comment);
-	const addOrUpdateRatingItem = (newRatingItem: RatingItem) => {
+	const addOrUpdateRatingItem = (newRatingItem: RatingContextItem) => {
     setRating((prevRating) => {
       // Check if a RatingItem with the same type already exists
       const existingIndex = prevRating.findIndex(

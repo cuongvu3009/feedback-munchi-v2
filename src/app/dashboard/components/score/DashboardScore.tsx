@@ -1,14 +1,10 @@
+import { DashboardScoreProps } from "@/types/dashboard.types";
 import React from "react";
 import Spinner from "@/components/shared/Spinner";
 import { getFetcher } from "@/utils/fetcher";
 import styles from "./dashboardScore.module.css";
 import { toast } from "react-toastify";
 import useSWR from "swr";
-
-interface DashboardScoreProps {
-  type: string;
-  businessSlug: string;
-}
 
 const getEmojiLabel = (emoji: string) => {
   switch (emoji) {

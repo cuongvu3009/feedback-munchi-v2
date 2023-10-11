@@ -1,4 +1,5 @@
 import Button from "@/components/shared/Button";
+import { DashboardResponseProps } from "@/types/dashboard.types";
 import { Feedback } from "@/types/feedback.types";
 import React from "react";
 import Spinner from "@/components/shared/Spinner";
@@ -8,10 +9,6 @@ import styles from "./dashboardResponses.module.css";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import useSWR from "swr";
-
-interface DashboardResponseProps {
-  businessSlug: string;
-}
 
 const DashboardResponses: React.FC<DashboardResponseProps> = ({
   businessSlug,

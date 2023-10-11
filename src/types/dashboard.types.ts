@@ -1,3 +1,5 @@
+import { User } from "@/types/auth.types";
+
 export interface BusinessProps {
   slug: string;
   logo: string;
@@ -29,4 +31,41 @@ export interface BusinessProps {
     administrator_id: number;
     enabled: boolean;
   };
+}
+
+export interface LineChartProps {
+  businessSlug: string;
+  type: string;
+}
+
+export interface ChartData {
+  [date: string]: {
+    date: string;
+    totalScore: number;
+    count: number;
+  };
+}
+
+export interface EmojiLabelProps {
+  emoji: string;
+}
+
+export interface DashboardResponseProps {
+  businessSlug: string;
+}
+
+export interface DashboardScoreProps {
+  type: string;
+  businessSlug: string;
+}
+
+export interface SidebarProps {
+  business?: BusinessProps;
+  businessId?: number;
+}
+
+export interface ApiResponseLogin {
+  data: User | null;
+  loading: boolean;
+  error: Error | null;
 }

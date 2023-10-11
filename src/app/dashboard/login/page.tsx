@@ -1,28 +1,22 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
 
 import { API_BASE_URL } from "@/utils/constantAPI";
+import { ApiResponseLogin } from "@/types/dashboard.types";
 import Spinner from "@/components/shared/Spinner";
 import TradeMark from "@/app/feedback/components/TradeMark";
-import { User } from "@/types/auth.types";
 import axios from "axios";
 import styles from "./dashboardLogin.module.css";
+import { toast } from "react-toastify";
 import { useAuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
-
-interface ApiResponse {
-  data: User | null; // Provide a default type of null for data
-  loading: boolean;
-  error: Error | null;
-}
 
 const Login = () => {
   const router = useRouter();
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
-  const [response, setResponse] = useState<ApiResponse>({
+  const [response, setResponse] = useState<ApiResponseLogin>({
     data: null,
     loading: false,
     error: null,
