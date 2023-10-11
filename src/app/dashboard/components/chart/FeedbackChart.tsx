@@ -46,12 +46,11 @@ const mapEmojiToScore = (emoji: string): number => {
 };
 
 const formatDate = (dateString: string): string => {
-  const options: Intl.DateTimeFormatOptions = {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  };
-  return new Date(dateString).toLocaleDateString(undefined, options);
+  const date = new Date(dateString);
+  const day = date.getDate().toString().padStart(2, "0");
+  const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Month is zero-based, so add 1
+  const year = date.getFullYear();
+  return `${day}/${month}/${year}`;
 };
 
 const formatAverageScore = (value: number): string => {
