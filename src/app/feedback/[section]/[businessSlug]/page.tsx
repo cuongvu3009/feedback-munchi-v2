@@ -102,15 +102,11 @@ const FeedbackPage: NextPage<{
     }
   }, [params.businessSlug, rating, resetContextState, router]);
 
-  if (isLoading) {
+  if (isLoading || isSubmitLoading) {
     return <Spinner />;
   }
 
-  if (isSubmitLoading) {
-    return <Spinner />;
-  }
-
-  const handleDisabledBtn = () => {
+  const checkDisabledBtn = () => {
     const currentRating = rating.find((item) => item.type == params.section);
     const currentEmoji = currentRating?.emoji;
     if (currentEmoji == null) {
@@ -151,14 +147,14 @@ const FeedbackPage: NextPage<{
             onClick={handleNext}
             version="full"
             btnText="Next"
-            isDisabled={handleDisabledBtn()}
+            isDisabled={checkDisabledBtn()}
           />
         ) : (
           <Button
             onClick={handleSubmit}
             version="full"
             btnText="Submit feedback"
-            isDisabled={handleDisabledBtn()}
+            isDisabled={checkDisabledBtn()}
           />
         )}
         {error && <p style={{ color: "red" }}>Error: {error} </p>}
