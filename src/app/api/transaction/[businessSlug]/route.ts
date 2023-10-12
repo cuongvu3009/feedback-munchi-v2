@@ -1,18 +1,6 @@
+import { TotalAmountOfTips, Transaction } from "@/types/api.types";
+
 import prisma from "@/lib/prisma";
-
-interface Transaction {
-  id: number;
-  createdAt: Date;
-  businessSlug: string;
-  paymentAmount: number;
-  currency: string;
-  paymentId: string;
-  stripeSessionId: string;
-}
-
-interface TotalAmountOfTips {
-  [currency: string]: number;
-}
 
 function calculateTotalAmountOfTips(transactions: Transaction[]) {
   const totalAmountOfTips: TotalAmountOfTips = {};
