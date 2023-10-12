@@ -86,7 +86,7 @@ const DashboardResponses = () => {
         <thead>
           <tr>
             <th>Rating</th>
-            <th>Additional comments</th>
+            <th className={styles.bigScreenOnly}>Additional comments</th>
             <th>Submitted At</th>
             <th>Details</th>
           </tr>
@@ -103,7 +103,9 @@ const DashboardResponses = () => {
                   </b>
                 </td>
 
-                <td className={styles.tagsContainer}>
+                <td
+                  className={`${styles.tagsContainer} ${styles.bigScreenOnly}`}
+                >
                   {Array.isArray(feedback.tags) && feedback.tags.length > 0 ? (
                     feedback.tags.map((item: string) => (
                       <p key={feedback.id + item} className={styles.tags}>
@@ -141,7 +143,7 @@ const DashboardResponses = () => {
                     </span>
                   </li>
                   <li>
-                    <label>Tags: </label>
+                    <label>Additional comments: </label>
                     <span>
                       {Array.isArray(currentFeedbackData.tags) &&
                       currentFeedbackData.tags.length > 0

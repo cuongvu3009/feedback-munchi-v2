@@ -101,3 +101,9 @@
 .popup-container label {
   font-weight: bold;
 }
+
+@media (max-width: 768px) {
+  .bigScreenOnly {
+    display: none;
+  }
+}
