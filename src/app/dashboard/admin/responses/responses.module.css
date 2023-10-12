@@ -25,6 +25,11 @@
   border-radius: 50px;
 }
 
+.buttonContainer {
+  padding: 0;
+  width: fit-content;
+}
+
 .feedbackTable tbody tr:hover {
   background-color: #ddd;
 }

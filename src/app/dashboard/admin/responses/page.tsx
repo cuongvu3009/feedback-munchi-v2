@@ -3,8 +3,10 @@
 import { IoChevronBackOutline, IoChevronForwardOutline } from "react-icons/io5";
 import React, { useState } from "react";
 
+import Button from "@/components/shared/Button";
 import EmojiLabel from "@/app/dashboard/components/emojiLabel/EmojiLabel";
 import { Feedback } from "@/types/feedback.types";
+import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 import Spinner from "@/components/shared/Spinner";
 import { getFetcher } from "@/utils/fetcher";
 import moment from "moment";
@@ -15,6 +17,10 @@ import useSWR from "swr";
 
 const DashboardResponses = () => {
   const { business } = useBusinessContext();
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [currentFeedbackId, setCurrentFeedbackId] = useState<number | null>(
+    null
+  );
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const { data, error, isValidating } = useSWR(
@@ -47,6 +53,15 @@ const DashboardResponses = () => {
     );
   }
 
+  const openPopup = (id: number) => {
+    setCurrentFeedbackId(id);
+    setIsPopupOpen(true);
+  };
+
+  const closePopup = () => {
+    setIsPopupOpen(false);
+  };
+
   return (
     <div className={styles.dashboardContainer}>
       <table className={styles.feedbackTable}>
@@ -54,9 +69,10 @@ const DashboardResponses = () => {
         <thead>
           <tr>
             <th>Rating</th>
-            <th>Type</th>
+
             <th>Additional comments</th>
             <th>Submitted At</th>
+            <th>Details</th>
           </tr>
         </thead>
 
@@ -70,7 +86,7 @@ const DashboardResponses = () => {
                     <EmojiLabel emoji={feedback.emoji} />
                   </b>
                 </td>
-                <td>{feedback.type}</td>
+
                 <td className={styles.tagsContainer}>
                   {Array.isArray(feedback.tags) && feedback.tags.length > 0 ? (
                     feedback.tags.map((item: string) => (
@@ -83,11 +99,25 @@ const DashboardResponses = () => {
                   )}
                 </td>
                 <td>{moment(feedback.createdAt).fromNow()}</td>
+                <td className={styles.buttonContainer}>
+                  <button onClick={() => openPopup(feedback.id)}>
+                    <MdOutlineKeyboardDoubleArrowRight size={30} />
+                  </button>
+                </td>
               </tr>
             );
           })}
         </tbody>
       </table>
+
+      {isPopupOpen && (
+        <div className="popup">
+          <div className="popup-container">
+            {currentFeedbackId}
+            <Button btnText="close" version="secondary" onClick={closePopup} />
+          </div>
+        </div>
+      )}
 
       {/* Pagination controls */}
       <div className={styles.pagination}>
@@ -107,19 +137,6 @@ const DashboardResponses = () => {
           <IoChevronForwardOutline />
         </button>
       </div>
-
-      {/* Items per page selector */}
-      {/* <div className={styles.itemsPerPageSelector}>
-        <span>Show items per page: </span>
-        <select
-          onChange={(e) => setItemsPerPage(+e.target.value)}
-          value={itemsPerPage}
-        >
-          <option value={10}>10</option>
-          <option value={20}>20</option>
-          <option value={30}>30</option>
-        </select>
-      </div> */}
     </div>
   );
 };
