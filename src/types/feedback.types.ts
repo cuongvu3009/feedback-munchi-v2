@@ -3,7 +3,7 @@ export interface Feedback {
   emoji: any;
   businessSlug: string;
   comment: string;
-  tags: string;
+  tags: string[];
   createdAt: string;
   updatedAt: string;
   type: string;

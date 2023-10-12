@@ -1,13 +1,14 @@
 "use client";
 
 import { IoChevronBackOutline, IoChevronForwardOutline } from "react-icons/io5";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Button from "@/components/shared/Button";
 import EmojiLabel from "@/app/dashboard/components/emojiLabel/EmojiLabel";
 import { Feedback } from "@/types/feedback.types";
 import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 import Spinner from "@/components/shared/Spinner";
+import axios from "axios";
 import { getFetcher } from "@/utils/fetcher";
 import moment from "moment";
 import styles from "./responses.module.css";
@@ -21,12 +22,26 @@ const DashboardResponses = () => {
   const [currentFeedbackId, setCurrentFeedbackId] = useState<number | null>(
     null
   );
+  const [currentFeedbackData, setCurrentFeedbackData] =
+    useState<Feedback | null>(null);
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const { data, error, isValidating } = useSWR(
     `/api/feedback/${business?.slug}?page=${currentPage}&itemsPerPage=${itemsPerPage}`,
     getFetcher
   );
+
+  useEffect(() => {
+    const fetchSingleFeedback = async () => {
+      if (currentFeedbackId) {
+        const result = await axios.get(
+          `/api/feedback/${business?.slug}/findbyid/${currentFeedbackId}`
+        );
+        setCurrentFeedbackData(result.data.feedback);
+      }
+    };
+    fetchSingleFeedback();
+  }, [business?.slug, currentFeedbackId]);
 
   const totalFeedbacks = data?.allFeedbacksCount || 0;
   const totalPages = Math.ceil(totalFeedbacks / itemsPerPage);
@@ -59,6 +74,8 @@ const DashboardResponses = () => {
   };
 
   const closePopup = () => {
+    setCurrentFeedbackId(null);
+    setCurrentFeedbackData(null);
     setIsPopupOpen(false);
   };
 
@@ -69,7 +86,6 @@ const DashboardResponses = () => {
         <thead>
           <tr>
             <th>Rating</th>
-
             <th>Additional comments</th>
             <th>Submitted At</th>
             <th>Details</th>
@@ -113,8 +129,62 @@ const DashboardResponses = () => {
       {isPopupOpen && (
         <div className="popup">
           <div className="popup-container">
-            {currentFeedbackId}
-            <Button btnText="close" version="secondary" onClick={closePopup} />
+            {currentFeedbackData ? (
+              <>
+                <ul key={currentFeedbackData.id}>
+                  <li>
+                    <label>Comment: </label>
+                    <span
+                      className={
+                        currentFeedbackData.comment
+                          ? styles.comment
+                          : "no-comment"
+                      }
+                    >
+                      {currentFeedbackData.comment
+                        ? currentFeedbackData.comment
+                        : "No comment"}
+                    </span>
+                  </li>
+                  <li>
+                    <label>Tags: </label>
+                    <span
+                      className={
+                        Array.isArray(currentFeedbackData.tags) &&
+                        currentFeedbackData.tags.length > 0
+                          ? styles.tags
+                          : "no-tags"
+                      }
+                    >
+                      {Array.isArray(currentFeedbackData.tags) &&
+                      currentFeedbackData.tags.length > 0
+                        ? currentFeedbackData.tags.join(",")
+                        : "No tags"}
+                    </span>
+                  </li>
+                  <li>
+                    <label>Type: </label>
+                    <span>{currentFeedbackData.type}</span>
+                  </li>
+                  <li>
+                    <label>Created at: </label>
+                    <span className={styles.createdAt}>
+                      {moment(currentFeedbackData.createdAt).format(
+                        "DD/MM/YYYY - H:mm"
+                      )}
+                    </span>
+                  </li>
+                </ul>
+
+                <Button
+                  btnText="Close"
+                  version="secondary"
+                  onClick={closePopup}
+                />
+              </>
+            ) : (
+              <Spinner />
+            )}
           </div>
         </div>
       )}
