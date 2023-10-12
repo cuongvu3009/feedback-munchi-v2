@@ -127,20 +127,14 @@ const DashboardResponses = () => {
       </table>
 
       {isPopupOpen && (
-        <div className="popup">
-          <div className="popup-container">
+        <div className={styles.popup}>
+          <div className={`${styles["popup-container"]}`}>
             {currentFeedbackData ? (
               <>
                 <ul key={currentFeedbackData.id}>
                   <li>
                     <label>Comment: </label>
-                    <span
-                      className={
-                        currentFeedbackData.comment
-                          ? styles.comment
-                          : "no-comment"
-                      }
-                    >
+                    <span>
                       {currentFeedbackData.comment
                         ? currentFeedbackData.comment
                         : "No comment"}
@@ -148,14 +142,7 @@ const DashboardResponses = () => {
                   </li>
                   <li>
                     <label>Tags: </label>
-                    <span
-                      className={
-                        Array.isArray(currentFeedbackData.tags) &&
-                        currentFeedbackData.tags.length > 0
-                          ? styles.tags
-                          : "no-tags"
-                      }
-                    >
+                    <span>
                       {Array.isArray(currentFeedbackData.tags) &&
                       currentFeedbackData.tags.length > 0
                         ? currentFeedbackData.tags.join(",")
@@ -168,7 +155,7 @@ const DashboardResponses = () => {
                   </li>
                   <li>
                     <label>Created at: </label>
-                    <span className={styles.createdAt}>
+                    <span>
                       {moment(currentFeedbackData.createdAt).format(
                         "DD/MM/YYYY - H:mm"
                       )}
