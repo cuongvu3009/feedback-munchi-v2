@@ -1,13 +1,14 @@
 /* tips.module.css */
 .dashboardContainer {
   background-color: #f8f8f8;
+  margin: 0 auto;
+  width: 100%;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .feedbackTable {
-  width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
 }
@@ -43,7 +44,6 @@
   font-weight: bold;
 }
 
-/* tips.module.css */
 .dashboardContainer {
   font-family: Arial, sans-serif;
   background-color: #f0f0f0;
@@ -101,4 +101,10 @@
 .tipAmountCell,
 .paymentIdCell {
   padding: 10px;
+}
+
+@media (max-width: 850px) {
+  .dashboardContainer {
+    width: fit-content;
+  }
 }
