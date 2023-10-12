@@ -31,6 +31,7 @@ const DashboardTips = () => {
     toast.error(error.message);
     return <div className={styles.error}>Error loading transaction data!</div>;
   }
+  console.log(data);
 
   return (
     <div className={styles.dashboardContainer}>
