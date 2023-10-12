@@ -42,3 +42,63 @@
   color: #ff4545;
   font-weight: bold;
 }
+
+/* tips.module.css */
+.dashboardContainer {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+.totalContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.totalHeading {
+  font-size: 20px;
+}
+
+.total {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.totalItem {
+  margin-right: 20px;
+}
+
+.totalAmount {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.currency {
+  color: #007bff; /* Blue color for currency */
+}
+
+.feedbackTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tableHeader {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  text-align: left;
+}
+
+.tableRow:nth-child(even) {
+  background-color: #f7f7f7;
+}
+
+.dateCell,
+.tipAmountCell,
+.paymentIdCell {
+  padding: 10px;
+}

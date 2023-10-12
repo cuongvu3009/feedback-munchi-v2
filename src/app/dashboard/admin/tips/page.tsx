@@ -12,7 +12,6 @@ import useSWR from "swr";
 
 const DashboardTips = () => {
   const { business } = useBusinessContext();
-
   const { data, error, isValidating } = useSWR(
     `/api/transaction/${business?.slug}`,
     getFetcher
@@ -31,11 +30,23 @@ const DashboardTips = () => {
     toast.error(error.message);
     return <div className={styles.error}>Error loading transaction data!</div>;
   }
-  console.log(data);
 
   return (
     <div className={styles.dashboardContainer}>
-      <h1 className={styles.pageTitle}>Tip record</h1>
+      <div className={styles.totalContainer}>
+        <h2 className={styles.totalHeading}>Total Tips</h2>
+        <div className={styles.total}>
+          {Object.entries(data.totalAmountOfTips).map(([currency, amount]) => (
+            <div key={currency} className={styles.totalItem}>
+              <h3 className={styles.totalAmount}>
+                {/* Must divide 100 because amount is in cents */}
+                {Number(amount) / 100}
+                <span className={styles.currency}>{currency}</span>
+              </h3>
+            </div>
+          ))}
+        </div>
+      </div>
       <table className={styles.feedbackTable}>
         <thead>
           <tr>
@@ -45,13 +56,16 @@ const DashboardTips = () => {
           </tr>
         </thead>
         <tbody>
-          {data.transaction.map((transaction: Transaction) => (
+          {data.transactions.map((transaction: Transaction) => (
             <tr key={transaction.id}>
-              <td>{moment(transaction.createdAt).format("MMM D, YYYY")}</td>
-              <td>
-                {transaction.paymentAmount / 100} {transaction.currency}
+              <td className={styles.dateCell}>
+                {moment(transaction.createdAt).format("MMM D, YYYY")}
               </td>
-              <td>{transaction.paymentId}</td>
+              <td className={styles.tipAmountCell}>
+                {transaction.paymentAmount / 100}{" "}
+                <span className={styles.currency}>{transaction.currency}</span>
+              </td>
+              <td className={styles.paymentIdCell}>{transaction.paymentId}</td>
             </tr>
           ))}
         </tbody>
