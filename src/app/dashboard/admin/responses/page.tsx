@@ -145,7 +145,7 @@ const DashboardResponses = () => {
                     <span>
                       {Array.isArray(currentFeedbackData.tags) &&
                       currentFeedbackData.tags.length > 0
-                        ? currentFeedbackData.tags.join(",")
+                        ? currentFeedbackData.tags.join(", ")
                         : "No tags"}
                     </span>
                   </li>
@@ -162,12 +162,13 @@ const DashboardResponses = () => {
                     </span>
                   </li>
                 </ul>
-
-                <Button
-                  btnText="Close"
-                  version="secondary"
-                  onClick={closePopup}
-                />
+                <div className={styles.closeBtn}>
+                  <Button
+                    btnText="Close"
+                    version="secondary"
+                    onClick={closePopup}
+                  />
+                </div>
               </>
             ) : (
               <Spinner />

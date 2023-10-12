@@ -86,16 +86,18 @@
 
 .popup-container {
   display: flex;
-  flex-wrap: wrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   background-color: #fff;
   padding: 20px;
-  border-radius: 20px;
+  border-radius: 10px;
   max-width: 90%;
   max-height: 90%;
   overflow-y: auto;
   overflow-x: auto;
-  margin: 0 auto;
+}
+
+.popup-container label {
+  font-weight: bold;
 }
