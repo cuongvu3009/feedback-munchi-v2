@@ -1,8 +1,8 @@
 "use client";
 
-import DashboardResponses from "../components/responses/DashboardResponses";
+import DashboardResponses from "./components/responses/DashboardResponses";
 import DashboardScore from "@/app/dashboard/components/score/DashboardScore";
-import FeedbackChart from "../components/chart/FeedbackChart";
+import FeedbackChart from "./components/chart/FeedbackChart";
 import { NextPage } from "next";
 import React from "react";
 import styles from "./dashboardInfo.module.css";

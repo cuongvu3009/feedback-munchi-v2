@@ -44,38 +44,34 @@ const Sidebar: React.FC<SidebarProps> = ({ business }) => {
           {business ? (
             <>
               <Link
-                href={`/dashboard/admin`}
+                href={`/dashboard`}
                 // className={`${styles["sidebar-link"]}`}
                 className={`${styles["sidebar-link"]} ${
-                  pathName == "/dashboard/admin" ? styles.activeLink : ""
+                  pathName == "/dashboard" ? styles.activeLink : ""
                 }`}
               >
                 Dashboard
               </Link>
               <Link
-                href={`/dashboard/admin/responses`}
+                href={`/dashboard/responses`}
                 className={`${styles["sidebar-link"]} ${
-                  pathName == "/dashboard/admin/responses"
-                    ? styles.activeLink
-                    : ""
+                  pathName == "/dashboard/responses" ? styles.activeLink : ""
                 }`}
               >
                 Responses
               </Link>
               <Link
-                href={`/dashboard/admin/tips`}
+                href={`/dashboard/tips`}
                 className={`${styles["sidebar-link"]} ${
-                  pathName == "/dashboard/admin/tips" ? styles.activeLink : ""
+                  pathName == "/dashboard/tips" ? styles.activeLink : ""
                 }`}
               >
                 Tips
               </Link>
               <Link
-                href={`/dashboard/admin/settings`}
+                href={`/dashboard/settings`}
                 className={`${styles["sidebar-link"]} ${
-                  pathName == "/dashboard/admin/settings"
-                    ? styles.activeLink
-                    : ""
+                  pathName == "/dashboard/settings" ? styles.activeLink : ""
                 }`}
               >
                 Settings
@@ -84,19 +80,19 @@ const Sidebar: React.FC<SidebarProps> = ({ business }) => {
           ) : (
             <>
               <Link
-                href={`/dashboard/admin`}
+                href={`/dashboard`}
                 className={`${styles["disabled-link"]}`}
               >
                 Dashboard
               </Link>
               <Link
-                href={`/dashboard/admin`}
+                href={`/dashboard`}
                 className={`${styles["disabled-link"]}`}
               >
                 Responses
               </Link>
               <Link
-                href={`/dashboard/admin`}
+                href={`/dashboard`}
                 className={`${styles["disabled-link"]}`}
               >
                 Settings

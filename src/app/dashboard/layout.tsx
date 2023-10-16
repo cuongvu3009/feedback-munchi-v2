@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 import { API_BASE_URL } from "@/utils/constantAPI";
 import { ApiResponseLogin } from "@/types/dashboard.types";
-import BusinessSelection from "../components/BusinessSelection";
+import BusinessSelection from "./components/BusinessSelection";
 import Cookies from "js-cookie";
 import Sidebar from "@/app/dashboard/components/sidebar/Sidebar";
 import { SidebarProvider } from "@/context/SidebarContext";
@@ -22,7 +22,7 @@ interface BusinessProps {
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const { business } = useBusinessContext();
-  const [isLoading, setIsLoading] = useState(false); // Set initial isLoading to false
+  const [isLoading, setIsLoading] = useState(false);
   const [businesses, setBusinesses] = useState<BusinessProps[]>([]);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -53,14 +53,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             }
           );
           setBusinesses(businessesData.data.result.businesses);
+          setIsLoading(false); // Set isLoading to false when user data is fetched
         } catch (error) {
-          setIsLoading(false);
+          setIsLoading(false); // Set isLoading to false in case of an error
         }
       };
 
       fetchData();
     } else {
-      setIsLoading(false);
+      setIsLoading(false); // Set isLoading to false when no user data is found
     }
   }, []);
 
