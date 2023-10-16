@@ -41,15 +41,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             }
           );
           setBusinesses(businessesData.data.result.businesses);
-          setIsLoading(false); // Set isLoading to false when user data is fetched
+          setIsLoading(false);
         } catch (error) {
-          setIsLoading(false); // Set isLoading to false in case of an error
+          setIsLoading(false);
         }
       };
 
       fetchData();
     } else {
-      setIsLoading(false); // Set isLoading to false when no user data is found
+      setIsLoading(false);
     }
   }, []);
 
