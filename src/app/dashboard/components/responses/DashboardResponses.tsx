@@ -14,8 +14,8 @@ const DashboardResponses: React.FC<DashboardResponseProps> = ({
   businessSlug,
 }) => {
   const router = useRouter();
-  const [itemsPerPage, setItemsPerPage] = React.useState(10);
-  const [page, setPage] = React.useState(1);
+  const [itemsPerPage] = React.useState(10);
+  const [page] = React.useState(1);
 
   const { data, error, isValidating } = useSWR(
     `/api/feedback/${businessSlug}?page=${page}&itemsPerPage=${itemsPerPage}`,

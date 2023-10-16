@@ -27,14 +27,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (userCookie) {
-      setIsUser(true);
-    }
-  }, [userCookie]);
-
-  useEffect(() => {
-    if (userCookie) {
       const user = JSON.parse(userCookie);
-
+      setIsUser(true);
       const fetchData = async () => {
         try {
           const businessesData = await axios.get(
