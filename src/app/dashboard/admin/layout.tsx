@@ -87,7 +87,29 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     fetchData();
   }, []);
 
-  if (!userIsLoggedIn) {
+  if (isLoading) {
+    <div className={styles.dashboard}>
+      <Spinner />
+    </div>;
+  }
+
+  if (userIsLoggedIn) {
+    return (
+      <SidebarProvider>
+        <div className={styles.dashboard}>
+          <Sidebar business={business} />
+          <div className={styles.children}>
+            <div className={styles.header}>
+              <div className={styles.businessSelection}>
+                <BusinessSelection businesses={businesses} />
+              </div>
+            </div>
+            {businesses && business && children}
+          </div>
+        </div>
+      </SidebarProvider>
+    );
+  } else {
     return (
       <div className={styles.container}>
         <h2>Dashboard Manager</h2>
@@ -128,22 +150,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </form>
         <TradeMark />
       </div>
-    );
-  } else {
-    return (
-      <SidebarProvider>
-        <div className={styles.dashboard}>
-          <Sidebar business={business} />
-          <div className={styles.children}>
-            <div className={styles.header}>
-              <div className={styles.businessSelection}>
-                <BusinessSelection businesses={businesses} />
-              </div>
-            </div>
-            {businesses && business && children}
-          </div>
-        </div>
-      </SidebarProvider>
     );
   }
 }

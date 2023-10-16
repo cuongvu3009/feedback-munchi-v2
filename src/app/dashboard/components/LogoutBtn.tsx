@@ -3,20 +3,16 @@ import React from "react";
 import { toast } from "react-toastify";
 import { useAuthContext } from "@/context/AuthContext";
 import { useBusinessContext } from "@/context/BusinessContext";
-import { useRouter } from "next/navigation";
 
 const LogoutBtn = () => {
   const { setBusiness, setBusinessId } = useBusinessContext();
   const { setUser } = useAuthContext();
-
-  const router = useRouter();
 
   const handleLogout = () => {
     setBusinessId(undefined);
     setBusiness(undefined);
     setUser(null);
 
-    router.push("/dashboard/login");
     toast.success("Log out successful!");
   };
 
