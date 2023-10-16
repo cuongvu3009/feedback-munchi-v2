@@ -40,7 +40,7 @@ const DashboardResponses: React.FC<DashboardResponseProps> = ({
   };
 
   const handleBtnClick = () => {
-    router.push(`/dashboard/admin/responses/`);
+    router.push(`/dashboard/responses/`);
   };
 
   if (error) {
