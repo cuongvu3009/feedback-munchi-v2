@@ -2,14 +2,15 @@ import React, { useRef, useState } from "react";
 
 import { API_BASE_URL } from "@/utils/constantAPI";
 import { ApiResponseLogin } from "@/types/dashboard.types";
-import Cookies from "js-cookie";
 import Spinner from "@/components/shared/Spinner";
 import TradeMark from "@/app/feedback/components/TradeMark";
 import axios from "axios";
 import styles from "./login.module.css";
 import { toast } from "react-toastify";
+import { useCookies } from "react-cookie";
 
 const Login: React.FC = () => {
+  const [, setCookie] = useCookies(["user"]);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const [response, setResponse] = useState<ApiResponseLogin>({
@@ -40,7 +41,13 @@ const Login: React.FC = () => {
           },
         });
 
-        Cookies.set("user", JSON.stringify(result.data.result), { expires: 3 });
+        // Calculate the expiration date (e.g., 3000 seconds from now)
+        const expirationDate = new Date();
+        expirationDate.setSeconds(expirationDate.getSeconds() + 3000);
+        setCookie("user", JSON.stringify(result.data.result), {
+          expires: expirationDate,
+        });
+
         setResponse({ data: result.data.result, loading: false, error: null });
         toast.success("Login successful!");
         window.location.reload();
