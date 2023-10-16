@@ -91,7 +91,7 @@ const LineChartComponent: React.FC<LineChartProps> = ({
       date: entry.date,
       averageScore: entry.totalScore / entry.count,
     }))
-    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    .reverse();
 
   return (
     <div className={`${styles["chart-container"]}`}>
