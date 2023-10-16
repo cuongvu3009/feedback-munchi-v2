@@ -1,19 +1,19 @@
+import Cookies from "js-cookie";
 import { GrLogout } from "react-icons/gr";
 import React from "react";
 import { toast } from "react-toastify";
-import { useAuthContext } from "@/context/AuthContext";
 import { useBusinessContext } from "@/context/BusinessContext";
 
 const LogoutBtn = () => {
   const { setBusiness, setBusinessId } = useBusinessContext();
-  const { setUser } = useAuthContext();
 
   const handleLogout = () => {
     setBusinessId(undefined);
     setBusiness(undefined);
-    setUser(null);
-
+    // setUser(null);
+    Cookies.remove("user");
     toast.success("Log out successful!");
+    window.location.reload();
   };
 
   const buttonStyles = {

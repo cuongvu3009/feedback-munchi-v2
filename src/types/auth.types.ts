@@ -77,12 +77,6 @@ export interface User {
   loyalty_level: string | null;
 }
 
-export interface AuthContextType {
-  user: User | null;
-  setUser: (user: User | null) => void;
-  userIsLoggedIn: boolean;
-}
-
 export interface AuthProviderProps {
   children: ReactNode;
 }

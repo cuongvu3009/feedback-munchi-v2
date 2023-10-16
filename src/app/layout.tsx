@@ -1,7 +1,6 @@
 import "./globals.css";
 import "react-toastify/dist/ReactToastify.css";
 
-import { AuthProvider } from "@/context/AuthContext";
 import { BusinessProvider } from "@/context/BusinessContext";
 import { DM_Sans } from "next/font/google";
 import { FeedbackProvider } from "@/context/FeedbackContext";
@@ -26,23 +25,21 @@ export default function RootLayout({
       <body className={sans.className}>
         <LocaleProvider>
           <FeedbackProvider>
-            <AuthProvider>
-              <BusinessProvider>
-                {children}
-                <ToastContainer
-                  position="bottom-center"
-                  autoClose={1000}
-                  hideProgressBar={false}
-                  newestOnTop={false}
-                  closeOnClick
-                  rtl={false}
-                  pauseOnFocusLoss
-                  draggable
-                  pauseOnHover
-                  theme="light"
-                />
-              </BusinessProvider>
-            </AuthProvider>
+            <BusinessProvider>
+              {children}
+              <ToastContainer
+                position="bottom-center"
+                autoClose={1000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+              />
+            </BusinessProvider>
           </FeedbackProvider>
         </LocaleProvider>
       </body>

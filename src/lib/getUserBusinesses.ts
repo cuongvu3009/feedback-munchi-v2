@@ -1,17 +1,14 @@
 import { API_BASE_URL } from "@/utils/constantAPI";
 import axios from "axios";
 
-async function getUserBusinesses() {
-  const storedUser = localStorage.getItem("user");
-
-  if (!storedUser) {
-    throw new Error("User data not found in local storage");
-  }
+async function getUserBusinesses({
+  userId,
+  access_token,
+}: {
+  userId: number;
+  access_token: string;
+}) {
   try {
-    const user = JSON.parse(storedUser);
-    const userId = user.id;
-    const access_token = user.session.access_token;
-
     const response = await axios.get(
       `${API_BASE_URL}/users/${userId}?params=businesses`,
       {
