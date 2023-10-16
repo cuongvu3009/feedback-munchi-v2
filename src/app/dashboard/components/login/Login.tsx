@@ -1,11 +1,11 @@
 import React, { useRef, useState } from "react";
+import { getCookie, setCookie } from "cookies-next";
 
 import { API_BASE_URL } from "@/utils/constantAPI";
 import { ApiResponseLogin } from "@/types/dashboard.types";
 import Spinner from "@/components/shared/Spinner";
 import TradeMark from "@/app/feedback/components/TradeMark";
 import axios from "axios";
-import { setCookie } from "cookies-next";
 import styles from "./login.module.css";
 import { toast } from "react-toastify";
 
@@ -21,6 +21,7 @@ const Login: React.FC = () => {
   const togglePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
+  const userCookie = getCookie("user");
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();

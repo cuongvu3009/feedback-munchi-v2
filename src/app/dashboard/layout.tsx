@@ -20,13 +20,18 @@ interface BusinessProps {
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const { business } = useBusinessContext();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [businesses, setBusinesses] = useState<BusinessProps[]>([]);
-
   const [isUser, setIsUser] = useState(false);
+  const userCookie = getCookie("user");
 
   useEffect(() => {
-    const userCookie = getCookie("user");
+    if (userCookie) {
+      setIsUser(true);
+    }
+  }, [userCookie]);
+
+  useEffect(() => {
     if (userCookie) {
       const user = JSON.parse(userCookie);
 
@@ -42,7 +47,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           );
           setBusinesses(businessesData.data.result.businesses);
           setIsLoading(false);
-          setIsUser(true);
         } catch (error) {
           setIsLoading(false);
         }
@@ -52,12 +56,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     } else {
       setIsLoading(false);
     }
-  }, []);
+  }, [userCookie]);
 
   if (isLoading) {
-    <div className={styles.dashboard}>
-      <Spinner />
-    </div>;
+    return (
+      <div className={styles.dashboard}>
+        <Spinner />
+      </div>
+    );
   }
 
   return (
