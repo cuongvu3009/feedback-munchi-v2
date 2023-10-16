@@ -9,9 +9,9 @@ import Sidebar from "@/app/dashboard/components/sidebar/Sidebar";
 import { SidebarProvider } from "@/context/SidebarContext";
 import Spinner from "@/components/shared/Spinner";
 import axios from "axios";
+import { getCookie } from "cookies-next";
 import styles from "./dashboard.module.css";
 import { useBusinessContext } from "@/context/BusinessContext";
-import { useCookies } from "react-cookie";
 
 interface BusinessProps {
   id: number;
@@ -22,22 +22,27 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const { business } = useBusinessContext();
   const [isLoading, setIsLoading] = useState(false);
   const [businesses, setBusinesses] = useState<BusinessProps[]>([]);
-  const [cookies] = useCookies(["user"]);
+
+  const [isUser, setIsUser] = useState(false);
 
   useEffect(() => {
-    if (cookies.user) {
+    const userCookie = getCookie("user");
+    if (userCookie) {
+      const user = JSON.parse(userCookie);
+
       const fetchData = async () => {
         try {
           const businessesData = await axios.get(
-            `${API_BASE_URL}/users/${cookies.user.id}?params=businesses`,
+            `${API_BASE_URL}/users/${user.id}?params=businesses`,
             {
               headers: {
-                Authorization: `Bearer ${cookies.user.session.access_token}`,
+                Authorization: `Bearer ${user.session.access_token}`,
               },
             }
           );
           setBusinesses(businessesData.data.result.businesses);
           setIsLoading(false);
+          setIsUser(true);
         } catch (error) {
           setIsLoading(false);
         }
@@ -47,34 +52,30 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     } else {
       setIsLoading(false);
     }
-  }, [cookies.user]);
+  }, []);
 
   if (isLoading) {
-    return (
-      <div className={styles.dashboard}>
-        <Spinner />
-      </div>
-    );
+    <div className={styles.dashboard}>
+      <Spinner />
+    </div>;
   }
 
   return (
     <>
-      {cookies.user ? (
-        <>
-          <SidebarProvider>
-            <div className={styles.dashboard}>
-              <Sidebar business={business} />
-              <div className={styles.children}>
-                <div className={styles.header}>
-                  <div className={styles.businessSelection}>
-                    <BusinessSelection businesses={businesses} />
-                  </div>
+      {isUser ? (
+        <SidebarProvider>
+          <div className={styles.dashboard}>
+            <Sidebar business={business} />
+            <div className={styles.children}>
+              <div className={styles.header}>
+                <div className={styles.businessSelection}>
+                  <BusinessSelection businesses={businesses} />
                 </div>
-                {children}
               </div>
+              {businesses && business && children}
             </div>
-          </SidebarProvider>
-        </>
+          </div>
+        </SidebarProvider>
       ) : (
         <Login />
       )}

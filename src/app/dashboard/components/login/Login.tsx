@@ -5,12 +5,11 @@ import { ApiResponseLogin } from "@/types/dashboard.types";
 import Spinner from "@/components/shared/Spinner";
 import TradeMark from "@/app/feedback/components/TradeMark";
 import axios from "axios";
+import { setCookie } from "cookies-next";
 import styles from "./login.module.css";
 import { toast } from "react-toastify";
-import { useCookies } from "react-cookie";
 
 const Login: React.FC = () => {
-  const [, setCookie] = useCookies(["user"]);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const [response, setResponse] = useState<ApiResponseLogin>({
@@ -41,11 +40,8 @@ const Login: React.FC = () => {
           },
         });
 
-        // Calculate the expiration date (e.g., 3000 seconds from now)
-        const expirationDate = new Date();
-        expirationDate.setSeconds(expirationDate.getSeconds() + 3000);
         setCookie("user", JSON.stringify(result.data.result), {
-          expires: expirationDate,
+          maxAge: 60 * 6 * 24, // in seconds
         });
 
         setResponse({ data: result.data.result, loading: false, error: null });
