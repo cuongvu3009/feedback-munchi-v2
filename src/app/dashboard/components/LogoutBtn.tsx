@@ -12,7 +12,9 @@ const LogoutBtn = () => {
     deleteCookie("user");
 
     toast.success("Log out successful!");
-    window.location.reload();
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
   };
 
   const buttonStyles = {
