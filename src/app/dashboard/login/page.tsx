@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 
 const Login = () => {
   const router = useRouter();
+  const { userIsLoggedIn } = useAuthContext();
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const [response, setResponse] = useState<ApiResponseLogin>({
@@ -21,35 +22,20 @@ const Login = () => {
     loading: false,
     error: null,
   });
-  const { userIsLoggedIn, setUser } = useAuthContext();
+  const { setUser } = useAuthContext();
   const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
   const togglePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (userIsLoggedIn) {
       router.push("/dashboard/admin");
+    } else {
+      setIsLoading(false);
     }
   }, [router, userIsLoggedIn]);
-
-  const loginUser = async (email: string, password: string) => {
-    try {
-      const result = await axios({
-        method: "POST",
-        url: `${API_BASE_URL}/auth/`,
-        data: {
-          email,
-          password,
-        },
-      });
-
-      setUser(result.data.result);
-      setResponse({ data: result.data.result, loading: false, error: null });
-    } catch (error: any) {
-      setResponse({ data: null, loading: false, error });
-    }
-  };
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -82,6 +68,12 @@ const Login = () => {
       router.push(`/dashboard/admin/`);
     }
   };
+
+  if (isLoading) {
+    <div className={styles.container}>
+      <Spinner />
+    </div>;
+  }
 
   return (
     <div className={styles.container}>

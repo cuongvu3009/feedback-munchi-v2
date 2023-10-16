@@ -19,7 +19,7 @@ interface BusinessProps {
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const { business } = useBusinessContext();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [businesses, setBusinesses] = useState<BusinessProps[]>([]);
 
   const { userIsLoggedIn } = useAuthContext();
@@ -28,13 +28,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (!userIsLoggedIn) {
       router.push("/dashboard/login");
+    } else {
+      setIsLoading(false);
     }
   }, [router, userIsLoggedIn]);
 
   useEffect(() => {
     const fetchData = async () => {
-      setIsLoading(true);
-
       try {
         const businessesData = await getUserBusinesses();
         setBusinesses(businessesData);
@@ -48,7 +48,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   }, []);
 
   if (isLoading) {
-    return <Spinner />;
+    return (
+      <div className={styles.dashboard}>
+        <Spinner />
+      </div>
+    );
   }
   return (
     <SidebarProvider>
